@@ -1,0 +1,117 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Droid Scanner</title>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div class="toptext"> Droid Scanner </div>
+        <a href="{% url 'home' %}">Home</a>
+        <a href="{% url 'about' %}">About</a>
+        <a href="{% url 'index' %}">Services</a>
+        <div class="dropdown">
+            <button class="dropbtn">More</button>
+            <div class="dropdown-content">
+                <a href="https://www.wecompress.com/en/">Link 1</a>
+                <a href="#link2">Link 2</a>
+                <a href="#link3">Link 3</a>
+            </div>
+        </div>
+        <a href="{% url 'contact' %}">Contact</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Upload APK Section -->
+        <div class="upload-container">
+            <h2>Upload APK File</h2>
+            <form id="uploadForm" action="/" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="file-input-container">
+                    <label for="fileInput" class="btn-upload">Choose File</label>
+                    <input type="file" class="file-input" id="fileInput" name="file">
+                </div>
+                <div class="file-name" id="fileName">No file selected</div>
+                <button type="submit">Upload</button>
+            </form>
+            <p>Max file size: 50MB</p>
+        </div>
+
+        <!-- Connect Device Section -->
+        <div class="upload-container">
+            <h2>Connect Your Device</h2>
+            <form id="connectDeviceForm" action="/connect-device/" method="POST">
+                {% csrf_token %}
+                <div id="deviceStatus">
+                    <button type="button" onclick="checkDevice()">Check Device Connection</button>
+                    <p id="deviceMessage" style="color: white; margin-top: 10px;"></p>
+                </div>
+                <div id="packageList" style="display: none;">
+                    <label for="packageSelect" style="color: white;">Select a Package:</label>
+                    <select id="packageSelect" name="package_name">
+                        <!-- Package options will be populated dynamically -->
+                    </select>
+                    <button type="button" onclick="extractApk()">Extract APK</button>
+                </div>
+            </form>
+            <p>Ensure USB Debugging is enabled on your device.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Droid Scanner. All Rights Reserved.</p>
+    </footer>
+
+    <!-- JavaScript for Device Connection -->
+    <script>
+        function checkDevice() {
+            fetch("/check-device/")
+                .then(response => response.json())
+                .then(data => {
+                    const deviceMessage = document.getElementById("deviceMessage");
+                    const packageList = document.getElementById("packageList");
+
+                    if (data.success && data.devices.length > 0) {
+                        deviceMessage.textContent = "Device connected! Fetching packages...";
+                        fetch("/list-packages/")
+                            .then(response => response.json())
+                            .then(packageData => {
+                                if (packageData.success) {
+                                    const packageSelect = document.getElementById("packageSelect");
+                                    packageSelect.innerHTML = ""; // Clear previous options
+                                    packageData.packages.forEach(pkg => {
+                                        const option = document.createElement("option");
+                                        option.value = pkg;
+                                        option.textContent = pkg;
+                                        packageSelect.appendChild(option);
+                                    });
+                                    packageList.style.display = "block";
+                                } else {
+                                    deviceMessage.textContent = "Failed to fetch packages.";
+                                }
+                            });
+                    } else {
+                        deviceMessage.textContent = "No device connected. Please connect your device.";
+                        packageList.style.display = "none";
+                    }
+                });
+        }
+        
+        function extractApk() {
+            const packageName = document.getElementById("packageSelect").value;
+            fetch(`/extract-apk/?package_name=${packageName}`)
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.success ? "APK extracted successfully!" : `Error: ${data.error}`);
+                });
+        }
+    </script>
+</body>
+</html>
