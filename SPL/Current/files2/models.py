@@ -10,7 +10,11 @@ class UploadedFile(models.Model):
 
 
 class AppFeatures(models.Model):
+<<<<<<< HEAD
     package_name = models.CharField(max_length=255)
+=======
+    package_name = models.CharField(max_length=255, unique=True)
+>>>>>>> 36e88cf14490d3cc63be65fdc055e08730501fd7
     # Permissions
     SEND_SMS = models.BooleanField(default=False)
     READ_PHONE_STATE = models.BooleanField(default=False)
@@ -149,5 +153,8 @@ class AppFeatures(models.Model):
     SET_WALLPAPER = models.BooleanField(default=False)
     BATTERY_LOW = models.BooleanField(default=False)
     ACTION_POWER_CONNECTED = models.BooleanField(default=False)
+<<<<<<< HEAD
     prediction=models.CharField(max_length=255,default='B')
+=======
+>>>>>>> 36e88cf14490d3cc63be65fdc055e08730501fd7
 

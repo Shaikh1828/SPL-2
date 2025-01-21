@@ -102,7 +102,10 @@ def upload_file(request):
             features= permissions+intents
             update_database(uploaded_file.file.name, features)
             # Display the extracted features
+<<<<<<< HEAD
             analyze_last_apk(request)
+=======
+>>>>>>> 36e88cf14490d3cc63be65fdc055e08730501fd7
             return render(request, 'result.html', {
                 # 'manifest_content': result,
                 'permissions': permissions,
@@ -214,6 +217,7 @@ def extract_apk(request):
         manifest_path = extract_manifest(local_base_apk_path, "E:\\5th Sem\\SPL-2\\SPL-2\\SPL\\Current\\New")
         permissions = extract_permissions(manifest_path)
         intents = extract_intents(manifest_path)
+<<<<<<< HEAD
         file_name = os.path.basename(local_base_apk_path)
         update_database(package_name, permissions+intents)
         print("Permissions-",permissions)
@@ -226,10 +230,20 @@ def extract_apk(request):
             'permissions': permissions,
             'intents': intents,
             'Classification':Prediction
+=======
+        print("Permissions-",permissions)
+        print()
+        print("Intents",intents)
+        # Return analysis results to the user
+        return render(request, 'result.html', {
+            'permissions': permissions,
+            'intents': intents
+>>>>>>> 36e88cf14490d3cc63be65fdc055e08730501fd7
         })
     except Exception as e:
         return JsonResponse({"success": False, "error": str(e)})
 
+<<<<<<< HEAD
 from django.http import JsonResponse
 from .models import AppFeatures
 import joblib
@@ -310,3 +324,53 @@ def analyze_last_apk(request):
 
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+=======
+
+# def extract_apk(request):
+#     """Extract the APK of a specified package and analyze its contents."""
+#     package_name = request.GET.get("package_name")
+#     if not package_name:
+#         return JsonResponse({"success": False, "error": "Package name is required."})
+
+#     try:
+#         # Run the adb command to get APK paths
+#         result = subprocess.run(
+#             ["adb", "shell", "pm", "path", package_name],
+#             capture_output=True, text=True, check=True
+#         )
+
+#         # Split the result into lines and process each line
+#         apk_paths = result.stdout.splitlines()
+#         base_apk_path = None
+
+#         for apk_path in apk_paths:
+#             if apk_path.endswith("base.apk"):
+#                 base_apk_path = apk_path
+#                 break  # Stop after finding the first APK path (you can customize this logic)
+
+#         if not base_apk_path:
+#             return JsonResponse({"success": False, "error": "Base APK not found."})
+
+#         base_apk_path = base_apk_path.strip().split(":")[-1]
+#         # Pull the base APK to the local machine
+#         local_base_apk_path = f"./extracted_apks/{package_name}-base.apk"
+#         subprocess.run(
+#             ["adb", "pull", base_apk_path, local_base_apk_path],
+#             check=True
+#         )
+#         if base_apk_path:
+#             manifest_path = extract_manifest(local_base_apk_path, "E:\\5th Sem\\SPL-2\\SPL-2\\SPL\\Current\\New")
+#             permissions = extract_permissions(manifest_path)
+#             intents = extract_intents(manifest_path)
+
+#             # Return analysis results to the user
+#             return render(request, 'result.html', {
+#                 'permissions': permissions,
+#                 'intents': intents
+#             })
+
+#         return JsonResponse({"success": False, "error": "No APKs to analyze."})
+
+#     except subprocess.CalledProcessError as e:
+#         return JsonResponse({"success": False, "error": e.stderr})
+>>>>>>> 36e88cf14490d3cc63be65fdc055e08730501fd7
