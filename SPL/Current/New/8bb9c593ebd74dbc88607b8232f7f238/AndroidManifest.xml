@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="35" android:compileSdkVersionCodename="VanillaIceCream" package="com.google.ar.lens" platformBuildVersionCode="35" platformBuildVersionName="VanillaIceCream">
+    <uses-feature android:glEsVersion="0x00030000" android:required="true"/>
+    <uses-feature android:name="android.hardware.camera" android:required="true"/>
+    <uses-feature android:name="android.hardware.wifi" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.ar" android:required="false"/>
+    <queries>
+        <package android:name="com.google.android.googlequicksearchbox"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.avengers"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.bandmoji"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.blocks"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.childish"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.citymoji"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.fantasymoji"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.foodmoji"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.japanese_phrases"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.locomoji"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.lovemoji"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.metronome"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.petmoji"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.pointmoji"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.spark"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.sportmoji"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.star_wars"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.stranger_things"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.weathermoji"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.winter_games"/>
+        <package android:name="com.google.vr.apps.ornament.content.stickers.word_art"/>
+        <package android:name="com.google.android.apps.maps"/>
+        <package android:name="com.google.ar.core"/>
+        <package android:name="com.android.vending"/>
+        <intent>
+            <action android:name="com.google.android.play.core.install.BIND_INSTALL_SERVICE"/>
+        </intent>
+    </queries>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <permission android:name="com.google.ar.lens.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <application android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:debuggable="false" android:extractNativeLibs="false" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:name="com.google.vr.apps.ornament.app.OemStickersApplication" android:taskAffinity="" android:theme="@style/FuncamAppTheme" android:usesCleartextTraffic="false">
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:excludeFromRecents="true" android:exported="true" android:name="com.google.vr.apps.ornament.app.lens.LensLauncherActivity" android:noHistory="true" android:resizeableActivity="false">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/jpeg"/>
+                <data android:mimeType="image/png"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenSize" android:exported="true" android:name="com.google.vr.apps.ornament.app.MainActivity" android:resizeableActivity="false" android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <service android:exported="true" android:label="Directory job service" android:name="com.google.vr.apps.ornament.app.cache.CacheJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <meta-data android:name="com.google.ar.core" android:value="optional"/>
+        <provider android:authorities="com.google.vr.apps.ornament.app.lens.StickersAvailabilityProvider" android:exported="true" android:grantUriPermissions="true" android:name="com.google.vr.apps.ornament.app.lens.StickersAvailabilityProvider"/>
+        <service android:enabled="false" android:exported="false" android:name="com.google.android.libraries.phenotype.registration.PhenotypeMetadataHolderService" android:process="">
+            <intent-filter>
+                <action android:name="com.google.android.libraries.phenotype.registration.PhenotypeMetadataHolderService"/>
+            </intent-filter>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.libraries.consentverifier" android:resource="@raw/com_google_android_libraries_consentverifier_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.registration.binarypb:com.google.android.libraries.consentverifier" android:resource="@raw/com_google_android_libraries_consentverifier_registration_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.gms.measurement" android:resource="@raw/com_google_android_gms_measurement_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.gms.ulr" android:resource="@raw/com_google_android_gms_ulr_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.gms.usagereporting" android:resource="@raw/com_google_android_gms_usagereporting_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.registration.binarypb:com.google.vr.apps.ornament" android:resource="@raw/com_google_vr_apps_ornament_registration_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.libraries.performance.primes" android:resource="@raw/com_google_android_libraries_performance_primes_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.registration.binarypb:com.google.android.libraries.performance.primes" android:resource="@raw/com_google_android_libraries_performance_primes_registration_info"/>
+        </service>
+        <meta-data android:name="com.google.android.gms.phenotype.registration.xml:com.google.android.libraries.consentverifier" android:resource="@xml/com_google_android_libraries_consentverifier_phenotype"/>
+        <meta-data android:name="com.google.android.gms.phenotype.registration.xml:com.google.vr.apps.ornament" android:resource="@xml/com_google_vr_apps_ornament_phenotype"/>
+        <meta-data android:name="com.google.android.gms.phenotype.registration.xml:com.google.android.libraries.performance.primes" android:resource="@xml/com_google_android_libraries_performance_primes_phenotype"/>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementReceiver"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementService"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:exported="false" android:name="com.google.firebase.components.ComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.google.android.libraries.hats20.SurveyPromptActivity" android:theme="@style/HatsLibPromptTheme" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="false" android:name="com.google.android.libraries.hats20.ShowSurveyActivity" android:theme="@style/TransparentActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <receiver android:exported="false" android:name="com.google.android.libraries.performance.primes.transmitter.LifeboatReceiver" android:process=":primes_lifeboat"/>
+        <receiver android:exported="true" android:name="com.google.android.libraries.phenotype.client.stable.AccountRemovedBroadcastReceiver" android:process="">
+            <intent-filter>
+                <action android:name="android.accounts.action.ACCOUNT_REMOVED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.google.android.libraries.phenotype.client.stable.PhenotypeUpdateBackgroundBroadcastReceiver" android:permission="com.google.android.gms.permission.PHENOTYPE_UPDATE_BROADCAST" android:process="">
+            <intent-filter>
+                <action android:name="com.google.android.gms.phenotype.UPDATE"/>
+            </intent-filter>
+        </receiver>
+        <activity android:exported="true" android:label="@string/preferences_license_title" android:name="com.google.android.libraries.social.licenses.LicenseMenuActivity" android:theme="@style/Theme.AppCompat.DayNight"/>
+        <activity android:exported="false" android:label="@string/preferences_license_title" android:name="com.google.android.libraries.social.licenses.LicenseActivity" android:theme="@style/Theme.AppCompat.DayNight"/>
+        <meta-data android:name="com.google.ar.core.min_apk_version" android:value="240350000"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:excludeFromRecents="true" android:exported="false" android:launchMode="singleTop" android:name="com.google.ar.core.InstallActivity" android:theme="@android:style/Theme.Material.Light.Dialog.Alert"/>
+        <uses-library android:name="android.ext.adservices" android:required="false"/>
+        <service android:enabled="false" android:exported="false" android:name="com.google.android.build.data.PropertiesServiceHolder" android:process="">
+            <intent-filter>
+                <action android:name="com.google.android.build.data.Properties"/>
+            </intent-filter>
+            <meta-data android:name="com.google.android.build.data.properties" android:resource="@raw/build_data"/>
+        </service>
+    </application>
+</manifest>

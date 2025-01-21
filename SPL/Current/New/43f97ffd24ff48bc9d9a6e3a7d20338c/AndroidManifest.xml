@@ -1,0 +1,1566 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13" android:sharedUserId="com.microsoft.office" package="com.microsoft.office.officehubrow" platformBuildVersionCode="33" platformBuildVersionName="13">
+    <permission android:name="com.microsoft.office.officemobile.permission.CONTENT_WRITE" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_LENS" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_CENTER_PUSH" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.OFFICEMOBILE_PACKAGE_REPLACED" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_MY_NETWORK" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_EXTERNAL_EVENT" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_GAMIFICATION" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.NEEDS_ATTENTION" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.MOS_NOTIFICATION" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_DESIGNER" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.SYSTEM_TIME_CHANGED" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_COUNTER_BASED_SIGN_IN_EXP" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_DAY_BASED_SIGN_IN_EXP" android:protectionLevel="signature"/>
+    <permission android:name="com.microsoft.office.officemobile.permission.SCD_NOTIFICATION" android:protectionLevel="signature"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_VIDEO"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_LENS"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_CENTER_PUSH"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.OFFICEMOBILE_PACKAGE_REPLACED"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_MY_NETWORK"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_EXTERNAL_EVENT"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_GAMIFICATION"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.NEEDS_ATTENTION"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.MOS_NOTIFICATION"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_MEETING_INSIGHT"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_DESIGNER"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.SYSTEM_TIME_CHANGED"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_COUNTER_BASED_SIGN_IN_EXP"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.NOTIFICATION_DAY_BASED_SIGN_IN_EXP"/>
+    <uses-permission android:name="com.microsoft.office.officemobile.permission.SCD_NOTIFICATION"/>
+    <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <queries>
+        <intent>
+            <action android:name="android.intent.action.OPEN_DOCUMENT"/>
+            <category android:name="android.intent.category.OPENABLE"/>
+            <data android:mimeType="*/*"/>
+        </intent>
+        <intent>
+            <action android:name="android.media.action.VIDEO_CAPTURE"/>
+        </intent>
+        <package android:name="com.azure.authenticator"/>
+        <package android:name="com.microsoft.identity.testuserapp"/>
+        <package android:name="com.microsoft.windowsintune.companyportal"/>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:scheme="https"/>
+        </intent>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService"/>
+        </intent>
+        <package android:name="com.facebook.katana"/>
+        <intent>
+            <action android:name="android.media.browse.MediaBrowserService"/>
+        </intent>
+        <package android:name="com.yahoo.mobile.client.android.mail"/>
+        <package android:name="com.microsoft.office.outlook"/>
+        <package android:name="com.google.android.gm"/>
+        <package android:name="org.thoughtcrime.securesms"/>
+        <package android:name="jp.naver.line.android"/>
+        <package android:name="com.tencent.mm"/>
+        <package android:name="com.viber.voip"/>
+        <package android:name="com.skype.raider"/>
+        <package android:name="com.microsoft.teams"/>
+        <package android:name="org.telegram.messenger"/>
+        <package android:name="com.whatsapp"/>
+        <package android:name="com.facebook.orca"/>
+        <intent>
+            <action android:name="android.intent.action.SEND"/>
+            <data android:mimeType="*/*"/>
+        </intent>
+        <package android:name="com.linkedin.android"/>
+        <package android:name="com.instagram.android"/>
+        <intent>
+            <action android:name="android.intent.action.SEND"/>
+        </intent>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE"/>
+        </intent>
+        <intent>
+            <action android:name="com.android.vending.billing.InAppBillingService.BIND"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.EDIT"/>
+        </intent>
+    </queries>
+    <queries>
+        <package android:name="com.microsoft.appmanager"/>
+        <package android:name="com.microsoft.teams"/>
+        <package android:name="com.microsoft.office.outlook"/>
+        <package android:name="com.microsoft.stream"/>
+        <package android:name="com.microsoft.whiteboard.publicpreview"/>
+        <package android:name="com.microsoft.lists.public"/>
+        <package android:name="com.microsoft.planner"/>
+        <package android:name="com.microsoft.emmx"/>
+        <package android:name="com.microsoft.sharepoint"/>
+        <package android:name="com.microsoft.flow"/>
+        <package android:name="com.skype.raider"/>
+        <package android:name="com.yammer.v1"/>
+        <package android:name="com.microsoft.onenote"/>
+        <package android:name="com.microsoft.skydrive"/>
+        <package android:name="com.microsoft.familysafety"/>
+        <package android:name="com.microsoft.amp.apps.bingnews"/>
+        <package android:name="com.microsoft.msapps"/>
+        <package android:name="com.microsoft.office.officehubrow"/>
+        <package android:name="com.microsoft.office.officehubrow.internal"/>
+        <package android:name="com.microsoft.office.word"/>
+        <package android:name="com.microsoft.office.word.internal"/>
+        <package android:name="com.microsoft.office.excel"/>
+        <package android:name="com.microsoft.office.excel.internal"/>
+        <package android:name="com.microsoft.office.powerpoint"/>
+        <package android:name="com.microsoft.office.powerpoint.internal"/>
+        <package android:name="com.microsoft.office.onenote"/>
+        <package android:name="com.microsoft.office.onenote.internal"/>
+    </queries>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
+    <instrumentation android:name="android.test.InstrumentationTestRunner" android:targetPackage="com.microsoft.office.msohttp.tests"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <supports-screens android:largeScreens="true" android:xlargeScreens="true"/>
+    <uses-permission android:name="android.permission.GET_PACKAGE_SIZE"/>
+    <uses-permission android:name="android.permission.CAMERA" android:required="true"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+    <uses-permission android:name="com.android.vending.BILLING"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE"/>
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-feature android:name="android.hardware.usb.host" android:required="false"/>
+    <uses-feature android:name="android.hardware.nfc" android:required="false"/>
+    <application android:allowBackup="false" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="true" android:hardwareAccelerated="true" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:largeHeap="true" android:name="com.microsoft.office.officemobile.OfficeMobileApplication" android:networkSecurityConfig="@xml/network_security_config" android:requestLegacyExternalStorage="true" android:resizeableActivity="true" android:roundIcon="@mipmap/ic_officemobile_round" android:supportsRtl="true" android:testOnly="false" android:theme="@style/AppTheme">
+        <meta-data android:name="com.microsoft.accounts.accountType" android:value="com.microsoft.office"/>
+        <meta-data android:name="com.microsoft.accounts.accountLabel" android:value="Microsoft 365"/>
+        <meta-data android:name="com.microsoft.applications.telemetry.tenantToken" android:value=""/>
+        <meta-data android:name="com.microsoft.applications.telemetry.enableAutoUserSession" android:value="false"/>
+        <meta-data android:name="appStore" android:value="GP"/>
+        <meta-data android:name="appType" android:value="full"/>
+        <meta-data android:name="devapk" android:value="false"/>
+        <meta-data android:name="bundleapk" android:value="false"/>
+        <meta-data android:name="officemobile" android:value="1"/>
+        <meta-data android:name="firebase_analytics_collection_deactivated" android:value="true"/>
+        <meta-data android:name="firebase_analytics_collection_enabled" android:value="false"/>
+        <meta-data android:name="com.microsoft.office.officemobile.ServiceUtils.Thumbnail.OfficeMobileGlideModule" android:value="GlideModule"/>
+        <meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="ocr,ica"/>
+        <activity android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.ShareNearby.ShareNearbyActivity" android:theme="@style/OfficeMobileAppTheme"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:name="com.microsoft.office.officemobile.media.video.OnePlayerActivity" android:theme="@style/OfficeMobileAppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.sharepoint.com"/>
+                <data android:host="*.sharepoint.de"/>
+                <data android:host="*.sharepoint-df.com"/>
+                <data android:pathPattern="/.*.pdf"/>
+                <data android:pathPattern="/.*..*.pdf"/>
+                <data android:pathPattern="/.*..*..*.pdf"/>
+                <data android:pathPattern="/.*..*..*..*.pdf"/>
+                <data android:pathPattern="/.*..*..*..*..*.pdf"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.pdf"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.sharepoint.com"/>
+                <data android:host="*.sharepoint.de"/>
+                <data android:host="*.sharepoint-df.com"/>
+                <data android:pathPattern="/.*.fluid"/>
+                <data android:pathPattern="/.*..*.fluid"/>
+                <data android:pathPattern="/.*..*..*.fluid"/>
+                <data android:pathPattern="/.*..*..*..*.fluid"/>
+                <data android:pathPattern="/.*..*..*..*..*.fluid"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.fluid"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.sharepoint.com"/>
+                <data android:host="*.sharepoint.de"/>
+                <data android:host="*.sharepoint-df.com"/>
+                <data android:pathPrefix="/:b:"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.sharepoint.com"/>
+                <data android:host="*.sharepoint.de"/>
+                <data android:host="*.sharepoint-df.com"/>
+                <data android:pathPrefix="/:fl:"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="1drv.ms"/>
+                <data android:pathPrefix="/b"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.safelinks.protection.outlook.com"/>
+                <data android:pathPrefix="/ap/b-59584e83"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.safelinks.protection.outlook.com"/>
+                <data android:pathPrefix="/ap/fl-59584e83"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="ms-officemobile"/>
+            </intent-filter>
+        </activity>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:label="@string/idsOpenOfficeFromImage" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.OpenImageActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.ScreenshotToContentAliasActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.openuniversalprintsecurerelease" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter android:autoVerify="true" android:label="@string/idsPrintSecureReleaseShortcut">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="print.print.microsoft.com"/>
+                <data android:host="print.print-next.microsoft.com"/>
+                <data android:host="print.print-ppe.microsoft.com"/>
+                <data android:pathPrefix="/securerelease"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.PdfToWordAliasActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter android:label="@string/doc_action_convert_pdf_to_word">
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/pdf"/>
+                <data android:mimeType="application/x-pdf"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.SignPdfAliasActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter android:label="@string/idsActionSignAPdf">
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/pdf"/>
+                <data android:mimeType="application/x-pdf"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.EditPdfAliasActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter android:label="@string/idsEditPdfShortcut">
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/pdf"/>
+                <data android:mimeType="application/x-pdf"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.DoctoPdfAliasActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter android:label="@string/idsShareAsPdfShortcut">
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/vnd.oasis.opendocument.text"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                <data android:mimeType="application/msword"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+                <data android:mimeType="application/odp"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                <data android:mimeType="application/vnd.ms-excel.sheet.macroenabled.12"/>
+                <data android:mimeType="application/xlsm"/>
+                <data android:mimeType="application/vnd.ms-excel"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:label="@string/create_note_app_shortcut_label" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.CreateNotesAliasActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+                <data android:mimeType="text/*"/>
+            </intent-filter>
+            <intent-filter android:label="@string/create_note_contextual_menu_shortcut_label">
+                <action android:name="android.intent.action.PROCESS_TEXT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:label="@string/idsExtractTextShortcut" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.ImageToTextAliasActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:label="@string/idsExtractTableShortcut" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.ImageToTableAliasActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:label="@string/idsShareAsPdfShortcut" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.ImagetoPdfAliasActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:icon="@mipmap/ic_officemobile_open_pdf_tray" android:label="@string/idsOpenOfficeFromPdf" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobilePDFAliasActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/pdf"/>
+                <data android:mimeType="application/x-pdf"/>
+            </intent-filter>
+        </activity-alias>
+        <activity-alias android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:label="@string/officemobileApp_name" android:launchMode="singleTask" android:name="com.microsoft.office.officesuite.OfficeSuiteActivity" android:targetActivity="com.microsoft.office.officemobile.OfficeMobileActivity" android:theme="@style/OfficeMobileAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
+        </activity-alias>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:name="com.microsoft.office.officemobile.ActionLauncherActivity" android:theme="@style/ShortcutTheme.SplashscreenDisplay" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:name="com.microsoft.office.officemobile.LensImageToWordActivity" android:theme="@style/OfficeMobileAppTheme"/>
+        <activity android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.filetransfer.FileTransferActivity" android:theme="@style/OfficeMobileAppTheme"/>
+        <activity android:autoRemoveFromRecents="true" android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.fluid.FluidActivity" android:taskAffinity="com.microsoft.office.officemobile.fluid" android:theme="@style/OfficeMobileFluidTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:autoRemoveFromRecents="true" android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.Pdf.OfficeMobilePdfActivity" android:taskAffinity="com.microsoft.office.officemobile.pdf" android:theme="@style/OfficeMobilePdfTheme"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.merge.MergePdfsActivity" android:theme="@style/OfficeMobileAppTheme" android:windowSoftInputMode="adjustResize|stateUnchanged"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:name="com.microsoft.office.officemobile.dashboard.apps.AppsSecondScreenActivity" android:theme="@style/OfficeMobileAppTheme" android:windowSoftInputMode="adjustResize|stateUnchanged"/>
+        <activity android:configChanges="density|fontScale|keyboardHidden|locale|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:excludeFromRecents="true" android:name="com.microsoft.office.insertpictureui.AudioRecorder" android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"/>
+        <activity android:configChanges="density|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen" android:name="com.microsoft.office.powerpoint.YouTubePlayerActivity" android:process="com.microsoft.office.officemobile.powerpoint" android:screenOrientation="landscape" android:taskAffinity="com.microsoft.office.officemobile.powerpoint"/>
+        <activity android:configChanges="density|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen" android:name="com.microsoft.office.powerpoint.VideoPlayerActivityEx" android:process="com.microsoft.office.officemobile.powerpoint" android:screenOrientation="landscape" android:taskAffinity="com.microsoft.office.officemobile.powerpoint"/>
+        <activity android:configChanges="density|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen" android:name="com.microsoft.office.powerpoint.VideoPlayerActivity" android:process="com.microsoft.office.officemobile.powerpoint" android:screenOrientation="landscape" android:taskAffinity="com.microsoft.office.officemobile.powerpoint"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:name="com.microsoft.office.officemobile.people.peopleUI.FrequentCollaboratorSeeAllActivity" android:theme="@style/OfficeMobileAppTheme" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|locale|mcc|mnc|navigation|orientation|screenLayout|touchscreen|uiMode" android:excludeFromRecents="true" android:launchMode="singleTask" android:name="com.microsoft.office.msohttp.AddAccountInSettingsActivity" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|smallestScreenSize|touchscreen|uiMode" android:name="com.microsoft.office.officemobile.StickyNotes.EditNoteActivity" android:theme="@style/OfficeMobileThemeForNote" android:windowSoftInputMode="stateAlwaysHidden|adjustResize"/>
+        <activity android:name="com.microsoft.office.officemobile.dashboard.SendFeedbackActivity" android:theme="@style/OfficeMobileAppTheme" android:windowSoftInputMode="adjustResize|stateUnchanged"/>
+        <activity android:name="com.microsoft.office.officemobile.search.shaker.ShakerFeedbackActivity" android:theme="@style/OfficeMobileAppTheme" android:windowSoftInputMode="adjustResize|stateUnchanged"/>
+        <activity android:name="com.microsoft.office.officemobile.search.voice.consent.VoiceUserConsentActivity" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:configChanges="layoutDirection|orientation|screenSize|touchscreen" android:launchMode="singleTop" android:name="com.microsoft.office.officemobile.search.SearchActivity" android:theme="@style/OfficeMobileAppTheme" android:windowSoftInputMode="adjustResize|stateVisible"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen" android:launchMode="singleTop" android:name="com.microsoft.office.officemobile.notificationcenter.NCActivity" android:theme="@style/NCActivityTheme"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.securerelease.SecureReleaseActivity" android:theme="@style/OfficeMobileAppTheme"/>
+        <service android:exported="false" android:name="com.microsoft.office.msohttp.keystore.OfficeAuthenticationService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data android:name="android.accounts.AccountAuthenticator" android:resource="@xml/office_authenticator"/>
+        </service>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:icon="@mipmap/ic_officemobile_open_ppt_tray" android:label="@string/idsOpenOfficeFromPPT" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobilePPTActivity" android:process="com.microsoft.office.officemobile.powerpoint" android:taskAffinity="com.microsoft.office.officemobile.powerpoint" android:theme="@style/OfficeMobilePPTAppThemeWithSplash">
+            <intent-filter>
+                <data android:scheme="office"/>
+                <data android:scheme="ms-powerpoint"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/vnd.oasis.opendocument.presentation"/>
+                <data android:mimeType="application/vnd.ms-powerpoint.slideshow.macroenabled.12"/>
+                <data android:mimeType="application/vnd.ms-powerpoint.slideshow.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.slideshow"/>
+                <data android:mimeType="application/vnd.ms-powerpoint.presentation.macroenabled.12"/>
+                <data android:mimeType="application/vnd.ms-powerpoint.presentation.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.template"/>
+                <data android:mimeType="application/vnd.ms-powerpoint"/>
+                <data android:mimeType="application/ppsm"/>
+                <data android:mimeType="application/pptm"/>
+                <data android:mimeType="application/odp"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="content"/>
+                <data android:pathPattern="/.*.pptm"/>
+                <data android:pathPattern="/.*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*..*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.pptm"/>
+                <data android:pathPattern="/.*.ppsm"/>
+                <data android:pathPattern="/.*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*..*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.ppsm"/>
+                <data android:pathPattern="/.*.odp"/>
+                <data android:pathPattern="/.*..*.odp"/>
+                <data android:pathPattern="/.*..*..*.odp"/>
+                <data android:pathPattern="/.*..*..*..*.odp"/>
+                <data android:pathPattern="/.*..*..*..*..*.odp"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.odp"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="file"/>
+                <data android:pathPattern="/.*.pptm"/>
+                <data android:pathPattern="/.*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*..*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.pptm"/>
+                <data android:pathPattern="/.*.ppsm"/>
+                <data android:pathPattern="/.*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*..*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.ppsm"/>
+                <data android:pathPattern="/.*.odp"/>
+                <data android:pathPattern="/.*..*.odp"/>
+                <data android:pathPattern="/.*..*..*.odp"/>
+                <data android:pathPattern="/.*..*..*..*.odp"/>
+                <data android:pathPattern="/.*..*..*..*..*.odp"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.odp"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="1drv.ms"/>
+                <data android:pathPrefix="/p"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.sharepoint.com"/>
+                <data android:host="*.sharepoint.de"/>
+                <data android:host="*.sharepoint-df.com"/>
+                <data android:pathPrefix="/:p:"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.safelinks.protection.outlook.com"/>
+                <data android:pathPrefix="/ap/p-59584e83"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.sharepoint.com"/>
+                <data android:host="*.sharepoint.de"/>
+                <data android:host="*.sharepoint-df.com"/>
+                <data android:pathPattern="/.*.odp"/>
+                <data android:pathPattern="/.*..*.odp"/>
+                <data android:pathPattern="/.*..*..*.odp"/>
+                <data android:pathPattern="/.*..*..*..*.odp"/>
+                <data android:pathPattern="/.*..*..*..*..*.odp"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.odp"/>
+                <data android:pathPattern="/.*.pps"/>
+                <data android:pathPattern="/.*..*.pps"/>
+                <data android:pathPattern="/.*..*..*.pps"/>
+                <data android:pathPattern="/.*..*..*..*.pps"/>
+                <data android:pathPattern="/.*..*..*..*..*.pps"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.pps"/>
+                <data android:pathPattern="/.*.ppsm"/>
+                <data android:pathPattern="/.*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*..*..*.ppsm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.ppsm"/>
+                <data android:pathPattern="/.*.ppsx"/>
+                <data android:pathPattern="/.*..*.ppsx"/>
+                <data android:pathPattern="/.*..*..*.ppsx"/>
+                <data android:pathPattern="/.*..*..*..*.ppsx"/>
+                <data android:pathPattern="/.*..*..*..*..*.ppsx"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.ppsx"/>
+                <data android:pathPattern="/.*.ppt"/>
+                <data android:pathPattern="/.*..*.ppt"/>
+                <data android:pathPattern="/.*..*..*.ppt"/>
+                <data android:pathPattern="/.*..*..*..*.ppt"/>
+                <data android:pathPattern="/.*..*..*..*..*.ppt"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.ppt"/>
+                <data android:pathPattern="/.*.pot"/>
+                <data android:pathPattern="/.*..*.pot"/>
+                <data android:pathPattern="/.*..*..*.pot"/>
+                <data android:pathPattern="/.*..*..*..*.pot"/>
+                <data android:pathPattern="/.*..*..*..*..*.pot"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.pot"/>
+                <data android:pathPattern="/.*.pptm"/>
+                <data android:pathPattern="/.*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*..*..*.pptm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.pptm"/>
+                <data android:pathPattern="/.*.pptx"/>
+                <data android:pathPattern="/.*..*.pptx"/>
+                <data android:pathPattern="/.*..*..*.pptx"/>
+                <data android:pathPattern="/.*..*..*..*.pptx"/>
+                <data android:pathPattern="/.*..*..*..*..*.pptx"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.pptx"/>
+                <data android:pathPattern="/.*.potx"/>
+                <data android:pathPattern="/.*..*.potx"/>
+                <data android:pathPattern="/.*..*..*.potx"/>
+                <data android:pathPattern="/.*..*..*..*.potx"/>
+                <data android:pathPattern="/.*..*..*..*..*.potx"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.potx"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.samsung.android.support.REMOTE_ACTION"/>
+            </intent-filter>
+            <meta-data android:name="com.samsung.android.support.REMOTE_ACTION" android:resource="@xml/remote_action_samsung_officehub_row"/>
+        </activity>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:documentLaunchMode="intoExisting" android:exported="true" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:name="com.microsoft.office.officemobile.multidoc.OfficeMobileMultiDocPPTActivity" android:process="com.microsoft.office.officemobile.powerpoint" android:taskAffinity="com.microsoft.office.officemobile.powerpoint" android:theme="@style/OfficeMobilePPTAppThemeWithSplash"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobilePPTTabletActivity1" android:process="com.microsoft.office.officemobile.powerpoint.process1" android:taskAffinity="com.microsoft.office.officemobile.powerpoint.process1" android:theme="@style/OfficeMobilePPTAppThemeWithSplash"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobilePPTTabletActivity2" android:process="com.microsoft.office.officemobile.powerpoint.process2" android:taskAffinity="com.microsoft.office.officemobile.powerpoint.process2" android:theme="@style/OfficeMobilePPTAppThemeWithSplash"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobilePPTTabletActivity3" android:process="com.microsoft.office.officemobile.powerpoint.process3" android:taskAffinity="com.microsoft.office.officemobile.powerpoint.process3" android:theme="@style/OfficeMobilePPTAppThemeWithSplash"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:icon="@mipmap/ic_officemobile_open_word_tray" android:label="@string/idsOpenOfficeFromWord" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobileWordActivity" android:process="com.microsoft.office.officemobile.word" android:taskAffinity="com.microsoft.office.officemobile.word" android:theme="@style/OfficeMobileWordAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <data android:scheme="office"/>
+                <data android:scheme="ms-word"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/vnd.ms-word.document.macroenabled.12"/>
+                <data android:mimeType="application/vnd.ms-word.document.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.template"/>
+                <data android:mimeType="application/msword"/>
+                <data android:mimeType="application/vnd.oasis.opendocument.text"/>
+                <data android:mimeType="application/vnd.ms-word.document.12"/>
+                <data android:mimeType="application/rtf"/>
+                <data android:mimeType="text/rtf"/>
+                <data android:mimeType="text/plain"/>
+                <data android:mimeType="application/docm"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="content"/>
+                <data android:pathPattern="/.*.docm"/>
+                <data android:pathPattern="/.*..*.docm"/>
+                <data android:pathPattern="/.*..*..*.docm"/>
+                <data android:pathPattern="/.*..*..*..*.docm"/>
+                <data android:pathPattern="/.*..*..*..*..*.docm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.docm"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="file"/>
+                <data android:pathPattern="/.*.docm"/>
+                <data android:pathPattern="/.*..*.docm"/>
+                <data android:pathPattern="/.*..*..*.docm"/>
+                <data android:pathPattern="/.*..*..*..*.docm"/>
+                <data android:pathPattern="/.*..*..*..*..*.docm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.docm"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="1drv.ms"/>
+                <data android:pathPrefix="/w"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.sharepoint.com"/>
+                <data android:host="*.sharepoint.de"/>
+                <data android:host="*.sharepoint-df.com"/>
+                <data android:pathPrefix="/:w:"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.safelinks.protection.outlook.com"/>
+                <data android:pathPrefix="/ap/w-59584e83"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.sharepoint.com"/>
+                <data android:host="*.sharepoint.de"/>
+                <data android:host="*.sharepoint-df.com"/>
+                <data android:pathPattern="/.*.doc"/>
+                <data android:pathPattern="/.*..*.doc"/>
+                <data android:pathPattern="/.*..*..*.doc"/>
+                <data android:pathPattern="/.*..*..*..*.doc"/>
+                <data android:pathPattern="/.*..*..*..*..*.doc"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.doc"/>
+                <data android:pathPattern="/.*.docm"/>
+                <data android:pathPattern="/.*..*.docm"/>
+                <data android:pathPattern="/.*..*..*.docm"/>
+                <data android:pathPattern="/.*..*..*..*.docm"/>
+                <data android:pathPattern="/.*..*..*..*..*.docm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.docm"/>
+                <data android:pathPattern="/.*.docx"/>
+                <data android:pathPattern="/.*..*.docx"/>
+                <data android:pathPattern="/.*..*..*.docx"/>
+                <data android:pathPattern="/.*..*..*..*.docx"/>
+                <data android:pathPattern="/.*..*..*..*..*.docx"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.docx"/>
+                <data android:pathPattern="/.*.odt"/>
+                <data android:pathPattern="/.*..*.odt"/>
+                <data android:pathPattern="/.*..*..*.odt"/>
+                <data android:pathPattern="/.*..*..*..*.odt"/>
+                <data android:pathPattern="/.*..*..*..*..*.odt"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.odt"/>
+                <data android:pathPattern="/.*.rtf"/>
+                <data android:pathPattern="/.*..*.rtf"/>
+                <data android:pathPattern="/.*..*..*.rtf"/>
+                <data android:pathPattern="/.*..*..*..*.rtf"/>
+                <data android:pathPattern="/.*..*..*..*..*.rtf"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.rtf"/>
+                <data android:pathPattern="/.*.txt"/>
+                <data android:pathPattern="/.*..*.txt"/>
+                <data android:pathPattern="/.*..*..*.txt"/>
+                <data android:pathPattern="/.*..*..*..*.txt"/>
+                <data android:pathPattern="/.*..*..*..*..*.txt"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.txt"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:documentLaunchMode="intoExisting" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:name="com.microsoft.office.officemobile.multidoc.OfficeMobileMultiDocWordActivity" android:process="com.microsoft.office.officemobile.word" android:taskAffinity="com.microsoft.office.officemobile.word" android:theme="@style/OfficeMobileWordAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobileWordTabletActivity1" android:process="com.microsoft.office.officemobile.word.process1" android:taskAffinity="com.microsoft.office.officemobile.word.process1" android:theme="@style/OfficeMobileWordAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobileWordTabletActivity2" android:process="com.microsoft.office.officemobile.word.process2" android:taskAffinity="com.microsoft.office.officemobile.word.process2" android:theme="@style/OfficeMobileWordAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobileWordTabletActivity3" android:process="com.microsoft.office.officemobile.word.process3" android:taskAffinity="com.microsoft.office.officemobile.word.process3" android:theme="@style/OfficeMobileWordAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:exported="true" android:icon="@mipmap/ic_officemobile_open_excel_tray" android:label="@string/idsOpenOfficeFromExcel" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobileExcelActivity" android:process="com.microsoft.office.officemobile.excel" android:taskAffinity="com.microsoft.office.officemobile.excel" android:theme="@style/OfficeMobileExcelAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden">
+            <intent-filter>
+                <data android:scheme="office"/>
+                <data android:scheme="ms-excel"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/vnd.ms-excel.sheet.macroenabled.12"/>
+                <data android:mimeType="application/vnd.ms-excel.sheet.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.ms-excel.sheet.binary.macroenabled.12"/>
+                <data android:mimeType="application/vnd.ms-excel.sheet.binary.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                <data android:mimeType="application/vnd.oasis.opendocument.spreadsheet"/>
+                <data android:mimeType="text/csv"/>
+                <data android:mimeType="text/comma-separated-values"/>
+                <data android:mimeType="application/vnd.ms-excel"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.template"/>
+                <data android:mimeType="application/vnd.ms-excel.template.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.ms-excel"/>
+                <data android:mimeType="application/xlsb"/>
+                <data android:mimeType="application/xlsm"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="content"/>
+                <data android:pathPattern="/.*.xlsb"/>
+                <data android:pathPattern="/.*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*..*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.xlsb"/>
+                <data android:pathPattern="/.*.xlsm"/>
+                <data android:pathPattern="/.*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*..*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.xlsm"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="file"/>
+                <data android:pathPattern="/.*.xlsb"/>
+                <data android:pathPattern="/.*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*..*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.xlsb"/>
+                <data android:pathPattern="/.*.xlsm"/>
+                <data android:pathPattern="/.*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*..*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.xlsm"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="1drv.ms"/>
+                <data android:pathPrefix="/x"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.sharepoint.com"/>
+                <data android:host="*.sharepoint.de"/>
+                <data android:host="*.sharepoint-df.com"/>
+                <data android:pathPrefix="/:x:"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.safelinks.protection.outlook.com"/>
+                <data android:pathPrefix="/ap/x-59584e83"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="*.sharepoint.com"/>
+                <data android:host="*.sharepoint.de"/>
+                <data android:host="*.sharepoint-df.com"/>
+                <data android:pathPattern="/.*.csv"/>
+                <data android:pathPattern="/.*..*.csv"/>
+                <data android:pathPattern="/.*..*..*.csv"/>
+                <data android:pathPattern="/.*..*..*..*.csv"/>
+                <data android:pathPattern="/.*..*..*..*..*.csv"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.csv"/>
+                <data android:pathPattern="/.*.ods"/>
+                <data android:pathPattern="/.*..*.ods"/>
+                <data android:pathPattern="/.*..*..*.ods"/>
+                <data android:pathPattern="/.*..*..*..*.ods"/>
+                <data android:pathPattern="/.*..*..*..*..*.ods"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.ods"/>
+                <data android:pathPattern="/.*.skv"/>
+                <data android:pathPattern="/.*..*.skv"/>
+                <data android:pathPattern="/.*..*..*.skv"/>
+                <data android:pathPattern="/.*..*..*..*.skv"/>
+                <data android:pathPattern="/.*..*..*..*..*.skv"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.skv"/>
+                <data android:pathPattern="/.*.xls"/>
+                <data android:pathPattern="/.*..*.xls"/>
+                <data android:pathPattern="/.*..*..*.xls"/>
+                <data android:pathPattern="/.*..*..*..*.xls"/>
+                <data android:pathPattern="/.*..*..*..*..*.xls"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.xls"/>
+                <data android:pathPattern="/.*.xlsb"/>
+                <data android:pathPattern="/.*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*..*..*.xlsb"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.xlsb"/>
+                <data android:pathPattern="/.*.xlsm"/>
+                <data android:pathPattern="/.*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*..*..*.xlsm"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.xlsm"/>
+                <data android:pathPattern="/.*.xlsx"/>
+                <data android:pathPattern="/.*..*.xlsx"/>
+                <data android:pathPattern="/.*..*..*.xlsx"/>
+                <data android:pathPattern="/.*..*..*..*.xlsx"/>
+                <data android:pathPattern="/.*..*..*..*..*.xlsx"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.xlsx"/>
+                <data android:pathPattern="/.*.xlt"/>
+                <data android:pathPattern="/.*..*.xlt"/>
+                <data android:pathPattern="/.*..*..*.xlt"/>
+                <data android:pathPattern="/.*..*..*..*.xlt"/>
+                <data android:pathPattern="/.*..*..*..*..*.xlt"/>
+                <data android:pathPattern="/.*..*..*..*..*..*.xlt"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:documentLaunchMode="intoExisting" android:exported="true" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:name="com.microsoft.office.officemobile.multidoc.OfficeMobileMultiDocExcelActivity" android:process="com.microsoft.office.officemobile.excel" android:taskAffinity="com.microsoft.office.officemobile.excel" android:theme="@style/OfficeMobileExcelAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:autoRemoveFromRecents="true" android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.Forms.FormsActivity" android:taskAffinity="com.microsoft.office.officemobile.forms" android:theme="@style/OfficeMobileThemeForFormsActivity"/>
+        <activity android:autoRemoveFromRecents="true" android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:documentLaunchMode="intoExisting" android:maxRecents="4" android:name="com.microsoft.office.officemobile.metaoshub.ui.MetaOsAppActivity" android:taskAffinity="com.microsoft.office.officemobile.metaoshub" android:theme="@style/OfficeMobileWhiteTheme" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:name="com.microsoft.office.officemobile.bingclient.ui.BingComposeActivity" android:theme="@style/BingComposeActivityTheme"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:name="com.microsoft.office.officemobile.bingclient.ui.BingChatActivity" android:theme="@style/BingChatActivityTheme"/>
+        <activity android:autoRemoveFromRecents="true" android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.webbrowser.WebBrowserActivity" android:taskAffinity="com.microsoft.office.officemobile.webbrowser" android:theme="@style/OfficeMobileThemeForWebBrowser"/>
+        <activity android:autoRemoveFromRecents="true" android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:name="com.microsoft.office.officemobile.metaoshub.tabs.ui.MetaOsStaticTabActivity" android:taskAffinity="com.microsoft.office.officemobile.metaoshub" android:theme="@style/OfficeMobileWhiteTheme"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobileExcelTabletActivity1" android:process="com.microsoft.office.officemobile.excel.process1" android:taskAffinity="com.microsoft.office.officemobile.excel.process1" android:theme="@style/OfficeMobileExcelAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobileExcelTabletActivity2" android:process="com.microsoft.office.officemobile.excel.process2" android:taskAffinity="com.microsoft.office.officemobile.excel.process2" android:theme="@style/OfficeMobileExcelAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|navigation|orientation|screenLayout|screenSize|smallestScreenSize|touchscreen|uiMode" android:icon="@mipmap/ic_officemobile" android:label="@string/officemobileApp_name" android:launchMode="singleTask" android:name="com.microsoft.office.officemobile.OfficeMobileExcelTabletActivity3" android:process="com.microsoft.office.officemobile.excel.process3" android:taskAffinity="com.microsoft.office.officemobile.excel.process3" android:theme="@style/OfficeMobileExcelAppThemeWithSplash" android:windowSoftInputMode="adjustResize|stateHidden"/>
+        <service android:exported="true" android:name="com.microsoft.office.onepipe.OnepipeFirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <receiver android:name="com.microsoft.office.playStoreDownloadManager.BroadcastReceiverImp"/>
+        <receiver android:name="com.microsoft.office.onepipe.NotificationDismissedReceiver"/>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.localnotification.NotificationLensActionReceiver" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_LENS">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.LensNotification"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.microsoft.office.officemobile.media.clipperEverywhere.ClipperBroadcastReceiver"/>
+        <receiver android:name="com.microsoft.office.officemobile.LensSDK.startercards.ContextualNotificationTelemetryReceiver"/>
+        <receiver android:name="com.microsoft.office.officemobile.localnotification.NotificationLensAlarmReceiver" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_LENS"/>
+        <receiver android:name="com.microsoft.office.officemobile.notificationcenter.NCPushNotificationPublisher" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_CENTER_PUSH"/>
+        <receiver android:exported="true" android:name="com.microsoft.office.officemobile.AppUpgradeBroadcastReceiver" android:permission="com.microsoft.office.officemobile.permission.OFFICEMOBILE_PACKAGE_REPLACED">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.microsoft.office.officemobile.mynetwork.MyNetworkScheduledNotificationPublisher" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_MY_NETWORK"/>
+        <receiver android:name="com.microsoft.office.officemobile.externalevent.FileCreatePushNotificationPublisher" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_EXTERNAL_EVENT"/>
+        <receiver android:name="com.microsoft.office.officemobile.gamification.GamificationNotificationPublisher" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_GAMIFICATION"/>
+        <receiver android:name="com.microsoft.office.officemobile.gamification.GamificationPushDismissReceiver" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_GAMIFICATION"/>
+        <receiver android:name="com.microsoft.office.officemobile.Fre.notification.CounterBasedSignInNotificationPublisher" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_COUNTER_BASED_SIGN_IN_EXP"/>
+        <receiver android:name="com.microsoft.office.officemobile.Fre.notification.CounterBasedSignInNotificationDismissReceiver" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_COUNTER_BASED_SIGN_IN_EXP"/>
+        <receiver android:name="com.microsoft.office.officemobile.Fre.notification.DayBasedSignInNotificationPublisher" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_DAY_BASED_SIGN_IN_EXP"/>
+        <receiver android:name="com.microsoft.office.officemobile.Fre.notification.DayBasedSignInNotificationDismissReceiver" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_DAY_BASED_SIGN_IN_EXP"/>
+        <receiver android:name="com.microsoft.office.officemobile.LensSDK.startercards.LensContextualNotificationsPublisher" android:permission="com.microsoft.office.officemobile.permission.Lens"/>
+        <receiver android:name="com.microsoft.office.officemobile.LensSDK.startercards.LensContextualNotificationsDismissReceiver" android:permission="com.microsoft.office.officemobile.permission.Lens"/>
+        <receiver android:name="com.microsoft.office.officemobile.harmonynudge.HarmonyPushNotificationPublisher" android:permission="com.microsoft.office.officemobile.permission.HARMONY"/>
+        <receiver android:name="com.microsoft.office.officemobile.homescreenv2.needsattention.pushnotification.NeedsAttentionPushPublisher" android:permission="com.microsoft.office.officemobile.permission.NEEDS_ATTENTION"/>
+        <receiver android:name="com.microsoft.office.officemobile.meetinginsight.MeetingInsightNotificationPublisher" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_MEETING_INSIGHT"/>
+        <receiver android:exported="true" android:name="com.microsoft.office.officemobile.SystemTimeChangedBroadcastReceiver" android:permission="com.microsoft.office.officemobile.permission.SYSTEM_TIME_CHANGED">
+            <intent-filter>
+                <action android:name="android.intent.action.TIME_SET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.microsoft.office.officemobile.metaoshub.notifications.MosNotificationDismissReceiver" android:permission="com.microsoft.office.officemobile.permission.MOS_NOTIFICATION"/>
+        <receiver android:name="com.microsoft.office.officemobile.designer.DesignerNotificationPublisher" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_DESIGNER"/>
+        <receiver android:name="com.microsoft.office.officemobile.designer.DesignerNotificationDismissReceiver" android:permission="com.microsoft.office.officemobile.permission.NOTIFICATION_DESIGNER"/>
+        <receiver android:name="com.microsoft.office.officemobile.metaoshub.scd.SCDNotificationPublisher" android:permission="com.microsoft.office.officemobile.permission.SCD_NOTIFICATION"/>
+        <receiver android:name="com.microsoft.office.officemobile.metaoshub.scd.SCDNotificationDismissReceiver" android:permission="com.microsoft.office.officemobile.permission.SCD_NOTIFICATION"/>
+        <service android:name="com.microsoft.office.playStoreDownloadManager.DownloaderServiceImp"/>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.PowerPointClipContentProvider" android:process="com.microsoft.office.officemobile.powerpoint"/>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint.process1" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.tablet.PowerPointClipContentProvider1" android:process="com.microsoft.office.officemobile.powerpoint.process1"/>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint.process2" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.tablet.PowerPointClipContentProvider2" android:process="com.microsoft.office.officemobile.powerpoint.process2"/>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint.process3" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.tablet.PowerPointClipContentProvider3" android:process="com.microsoft.office.officemobile.powerpoint.process3"/>
+        <provider android:authorities="com.microsoft.office.officemobile.excel" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.ExcelClipContentProvider" android:process="com.microsoft.office.officemobile.excel"/>
+        <provider android:authorities="com.microsoft.office.officemobile.excel.process1" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.tablet.ExcelClipContentProvider1" android:process="com.microsoft.office.officemobile.excel.process1"/>
+        <provider android:authorities="com.microsoft.office.officemobile.excel.process2" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.tablet.ExcelClipContentProvider2" android:process="com.microsoft.office.officemobile.excel.process2"/>
+        <provider android:authorities="com.microsoft.office.officemobile.excel.process3" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.tablet.ExcelClipContentProvider3" android:process="com.microsoft.office.officemobile.excel.process3"/>
+        <provider android:authorities="com.microsoft.office.officemobile.word.process1" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.tablet.WordClipContentProvider1" android:process="com.microsoft.office.officemobile.word.process1"/>
+        <provider android:authorities="com.microsoft.office.officemobile.word.process2" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.tablet.WordClipContentProvider2" android:process="com.microsoft.office.officemobile.word.process2"/>
+        <provider android:authorities="com.microsoft.office.officemobile.word.process3" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.tablet.WordClipContentProvider3" android:process="com.microsoft.office.officemobile.word.process3"/>
+        <provider android:authorities="com.microsoft.office.officemobile.word" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.clipboard.WordClipContentProvider" android:process="com.microsoft.office.officemobile.word"/>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint.PPTApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.PowerPointDropFileContentProvider" android:process="com.microsoft.office.officemobile.powerpoint">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint.process1.PPTApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.tablet.PowerPointDropFileContentProvider1" android:process="com.microsoft.office.officemobile.powerpoint.process1">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint.process2.PPTApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.tablet.PowerPointDropFileContentProvider2" android:process="com.microsoft.office.officemobile.powerpoint.process2">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint.process3.PPTApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.tablet.PowerPointDropFileContentProvider3" android:process="com.microsoft.office.officemobile.powerpoint.process3">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.excel.excelApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.ExcelDropFileContentProvider" android:process="com.microsoft.office.officemobile.excel">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.excel.process1.excelApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.tablet.ExcelDropFileContentProvider1" android:process="com.microsoft.office.officemobile.excel.process1">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.excel.process2.excelApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.tablet.ExcelDropFileContentProvider2" android:process="com.microsoft.office.officemobile.excel.process2">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.excel.process3.excelApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.tablet.ExcelDropFileContentProvider3" android:process="com.microsoft.office.officemobile.excel.process3">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.word.WordApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.WordDropFileContentProvider" android:process="com.microsoft.office.officemobile.word">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.word.process1.WordApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.tablet.WordDropFileContentProvider1" android:process="com.microsoft.office.officemobile.word.process1">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.word.process2.WordApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.tablet.WordDropFileContentProvider2" android:process="com.microsoft.office.officemobile.word.process2">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.word.process3.WordApplication.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.dragdrop.tablet.WordDropFileContentProvider3" android:process="com.microsoft.office.officemobile.word.process3">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/dropprovider_paths"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officehub.PowerPointFileContentProvider" android:process="com.microsoft.office.officemobile.powerpoint" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint.process1.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.tablet.PowerPointFileContentProvider1" android:process="com.microsoft.office.officemobile.powerpoint.process1" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint.process2.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.tablet.PowerPointFileContentProvider2" android:process="com.microsoft.office.officemobile.powerpoint.process2" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.powerpoint.process3.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.tablet.PowerPointFileContentProvider3" android:process="com.microsoft.office.officemobile.powerpoint.process3" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.excel.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officehub.ExcelFileContentProvider" android:process="com.microsoft.office.officemobile.excel" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.excel.process1.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.tablet.ExcelFileContentProvider1" android:process="com.microsoft.office.officemobile.excel.process1" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.excel.process2.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.tablet.ExcelFileContentProvider2" android:process="com.microsoft.office.officemobile.excel.process2" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.excel.process3.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.tablet.ExcelFileContentProvider3" android:process="com.microsoft.office.officemobile.excel.process3" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.word.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officehub.WordFileContentProvider" android:process="com.microsoft.office.officemobile.word" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.word.process1.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.tablet.WordFileContentProvider1" android:process="com.microsoft.office.officemobile.word.process1" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.word.process2.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.tablet.WordFileContentProvider2" android:process="com.microsoft.office.officemobile.word.process2" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.word.process3.fileprovider" android:exported="true" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.tablet.WordFileContentProvider3" android:process="com.microsoft.office.officemobile.word.process3" android:writePermission="com.microsoft.office.officemobile.permission.CONTENT_WRITE"/>
+        <provider android:authorities="com.microsoft.office.officemobile.Meridian.MeridianContentProvider" android:enabled="true" android:exported="true" android:name="com.microsoft.office.officemobile.Meridian.MeridianContentProvider"/>
+        <provider android:authorities="mycontents.com.microsoft.office.officehubrow.mrucontentprovider" android:exported="false" android:name="com.microsoft.office.officemobile.homescreenv2.mycontent.mru.MruContentProvider" android:process="com.microsoft.office.officehubrow"/>
+        <service android:exported="false" android:name="com.microsoft.office.officemobile.warmup.OfficeMobileExcelWarmUpService" android:permission="android.permission.BIND_JOB_SERVICE" android:process="com.microsoft.office.officemobile.excel">
+            <intent-filter>
+                <action android:name="com.microsoft.office.appwarmup.action.WARMUP"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name="com.microsoft.office.officemobile.warmup.OfficeMobilePPTWarmUpService" android:permission="android.permission.BIND_JOB_SERVICE" android:process="com.microsoft.office.officemobile.powerpoint">
+            <intent-filter>
+                <action android:name="com.microsoft.office.appwarmup.action.WARMUP"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name="com.microsoft.office.officemobile.warmup.OfficeMobileWordWarmUpService" android:permission="android.permission.BIND_JOB_SERVICE" android:process="com.microsoft.office.officemobile.word">
+            <intent-filter>
+                <action android:name="com.microsoft.office.appwarmup.action.WARMUP"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name="com.microsoft.office.officemobile.warmup.OfficeMobileWarmUpService" android:permission="android.permission.BIND_JOB_SERVICE" android:process="com.microsoft.office.officehubrow">
+            <intent-filter>
+                <action android:name="com.microsoft.office.appwarmup.action.WARMUP"/>
+            </intent-filter>
+        </service>
+        <receiver android:exported="false" android:name="com.microsoft.office.officesuite.PPTResetReceiver" android:process="com.microsoft.office.officemobile.powerpoint">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.PPTResetReceiver1" android:process="com.microsoft.office.officemobile.powerpoint.process1">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.PPTResetReceiver2" android:process="com.microsoft.office.officemobile.powerpoint.process2">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.PPTResetReceiver3" android:process="com.microsoft.office.officemobile.powerpoint.process3">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officesuite.ExcelResetReceiver" android:process="com.microsoft.office.officemobile.excel">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.ExcelResetReceiver1" android:process="com.microsoft.office.officemobile.excel.process1">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.ExcelResetReceiver2" android:process="com.microsoft.office.officemobile.excel.process2">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.ExcelResetReceiver3" android:process="com.microsoft.office.officemobile.excel.process3">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officesuite.WordResetReceiver" android:process="com.microsoft.office.officemobile.word">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.WordResetReceiver1" android:process="com.microsoft.office.officemobile.word.process1">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.WordResetReceiver2" android:process="com.microsoft.office.officemobile.word.process2">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.WordResetReceiver3" android:process="com.microsoft.office.officemobile.word.process3">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officesuite.BackstageResetReceiver">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officesuite.action.RESET"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:enabled="true" android:exported="true" android:name="com.microsoft.office.officemobile.YPAppContextHandler.AppContextRequestBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.microsoft.crossdevice.appcontextrequest"/>
+            </intent-filter>
+            <meta-data android:name="com.microsoft.crossdevice.applicationContextProvider" android:value="true"/>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.PPTAppContextReceiver" android:process="com.microsoft.office.officemobile.powerpoint">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.PPTAppContextReceiver1" android:process="com.microsoft.office.officemobile.powerpoint.process1">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.PPTAppContextReceiver2" android:process="com.microsoft.office.officemobile.powerpoint.process2">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.PPTAppContextReceiver3" android:process="com.microsoft.office.officemobile.powerpoint.process3">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.WordAppContextReceiver" android:process="com.microsoft.office.officemobile.word">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.WordAppContextReceiver1" android:process="com.microsoft.office.officemobile.word.process1">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.WordAppContextReceiver2" android:process="com.microsoft.office.officemobile.word.process2">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.WordAppContextReceiver3" android:process="com.microsoft.office.officemobile.word.process3">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.ExcelAppContextReceiver" android:process="com.microsoft.office.officemobile.excel">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.ExcelAppContextReceiver1" android:process="com.microsoft.office.officemobile.excel.process1">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.ExcelAppContextReceiver2" android:process="com.microsoft.office.officemobile.process2">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.officemobile.YPAppContextHandler.ExcelAppContextReceiver3" android:process="com.microsoft.office.officemobile.process3">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.YPAppContextHandler.appContextAction"/>
+            </intent-filter>
+        </receiver>
+        <provider android:authorities="com.microsoft.office.officehubrow.provider" android:exported="false" android:grantUriPermissions="true" android:name="com.microsoft.office.officemobile.OfficeHubRowProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/fileprovider_paths"/>
+        </provider>
+        <uses-library android:name="android.test.base" android:required="false"/>
+        <service android:exported="false" android:name="com.microsoft.office.officemobile.media.clipperEverywhere.ClipperFloatingWindowService" android:process="com.microsoft.office.officemobile.lens.clippereverywhere" android:stopWithTask="false"/>
+        <activity android:documentLaunchMode="always" android:name="com.microsoft.office.officemobile.media.clipperEverywhere.screencapture.ScreenShotActivity" android:process="com.microsoft.office.officemobile.lens.clippereverywhere" android:taskAffinity="" android:theme="@style/Theme.Transparent"/>
+        <activity android:excludeFromRecents="true" android:name="com.microsoft.office.officemobile.media.clipperEverywhere.fre.SettingsPermissionPageOverlayFRE" android:process="com.microsoft.office.officemobile.lens.clippereverywhere" android:taskAffinity="" android:theme="@style/OverlayFreDialog"/>
+        <service android:exported="false" android:foregroundServiceType="mediaProjection" android:name="com.microsoft.office.officemobile.media.clipperEverywhere.screencapture.ScreenCaptureService" android:process="com.microsoft.office.officemobile.lens.clippereverywhere"/>
+        <receiver android:enabled="true" android:exported="true" android:name="com.microsoft.office.officemobile.BootCompleteReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <service android:enabled="true" android:exported="true" android:name="com.microsoft.office.plat.sharedprefservice.SharedPrefService">
+            <intent-filter>
+                <action android:name="com.microsoft.office.plat.sharedprefservice.BIND"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name="androidx.work.multiprocess.RemoteWorkManagerService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+            <intent-filter>
+                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+            </intent-filter>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        <activity android:label="@string/title_host_window_activity" android:launchMode="singleTask" android:name="com.microsoft.metaos.hubsdk.ui.HostWindowActivity" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <receiver android:exported="true" android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.messaging.FirebaseMessagingService">
+            <intent-filter android:priority="-500">
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.components.ComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.vision.label.defaults.thin.ThinLabelRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.vision.text.internal.TextRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <provider android:authorities="com.microsoft.office.officehubrow.mlkitinitprovider" android:exported="false" android:initOrder="99" android:name="com.google.mlkit.common.internal.MlKitInitProvider"/>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery">
+            <meta-data android:name="backend:com.google.android.datatransport.cct.CctBackendFactory" android:value="cct"/>
+        </service>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:exported="false" android:launchMode="singleInstance" android:name="com.microsoft.oneplayer.player.ui.view.activity.OnePlayerActivity" android:supportsPictureInPicture="true" android:taskAffinity="com.microsoft.office.officehubrow.OnePlayerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <service android:enabled="false" android:exported="false" android:name="androidx.camera.core.impl.MetadataHolderService">
+            <meta-data android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER" android:value="androidx.camera.camera2.Camera2Config$DefaultProvider"/>
+        </service>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:name="com.microsoft.aad.adal.AuthenticationActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:multiprocess="true" android:name="com.microsoft.identity.common.internal.providers.oauth2.AuthorizationActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:name="com.microsoft.identity.common.internal.providers.oauth2.CurrentTaskAuthorizationActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:multiprocess="true" android:name="com.microsoft.identity.common.internal.broker.BrokerActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:name="com.microsoft.identity.common.internal.broker.InstallCertActivityLauncher" android:theme="@style/Theme.AppCompat.Light"/>
+        <service android:exported="true" android:name="com.google.android.gms.nearby.exposurenotification.WakeUpService" android:permission="com.google.android.gms.nearby.exposurenotification.EXPOSURE_CALLBACK"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <service android:exported="true" android:name="com.google.android.gms.auth.api.signin.RevocationBoundService" android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" android:visibleToInstantApps="true"/>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="false" android:hardwareAccelerated="true" android:name="com.facebook.ads.AudienceNetworkActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <provider android:authorities="com.microsoft.office.officehubrow.AudienceNetworkContentProvider" android:exported="false" android:name="com.facebook.ads.AudienceNetworkContentProvider"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <uses-library android:name="androidx.window.extensions" android:required="false"/>
+        <uses-library android:name="androidx.window.sidecar" android:required="false"/>
+        <service android:exported="true" android:label="" android:name="com.microsoft.intune.mam.client.notification.MAMNotificationReceiverService"/>
+        <service android:exported="false" android:label="" android:name="com.microsoft.intune.mam.client.service.MAMBackgroundService"/>
+        <service android:exported="false" android:label="" android:name="com.microsoft.intune.mam.client.service.MAMBackgroundJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="true" android:name="com.microsoft.intune.mam.client.service.MAMBackgroundReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+            </intent-filter>
+        </receiver>
+        <activity android:exported="false" android:multiprocess="true" android:name="com.microsoft.intune.mam.client.app.offline.OfflineStartupBlockedActivity"/>
+        <activity android:exported="false" android:multiprocess="true" android:name="com.microsoft.intune.mam.client.app.offline.OfflineRestartRequiredActivity"/>
+        <activity android:exported="false" android:multiprocess="true" android:name="com.microsoft.intune.mam.client.app.startup.MAMStartupActivity"/>
+        <activity android:exported="false" android:name="com.microsoft.intune.mam.client.app.resolver.MAMResolverActivity" android:taskAffinity="" android:theme="@style/MAMDialogTheme"/>
+        <activity android:exported="false" android:multiprocess="true" android:name="com.microsoft.intune.mam.client.app.offline.OfflineInstallCompanyPortalDialogActivity" android:theme="@style/MAMDialogTheme"/>
+        <activity android:exported="false" android:name="com.microsoft.intune.mam.client.app.offline.OfflineNotifyWipeActivity"/>
+        <activity android:exported="false" android:label="ComplianceBlock" android:name="com.microsoft.intune.mam.client.app.startup.MAMComplianceBlockActivity"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+            </intent-filter>
+        </receiver>
+        <activity android:enabled="false" android:exported="false" android:launchMode="singleInstance" android:name="com.google.android.play.core.missingsplits.PlayCoreMissingSplitsActivity" android:process=":playcore_missing_splits_activity" android:stateNotNeeded="true"/>
+        <activity android:exported="false" android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity" android:stateNotNeeded="true" android:theme="@style/Theme.PlayCore.Transparent"/>
+        <service android:enabled="false" android:exported="true" android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService">
+            <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003"/>
+        </service>
+        <service android:enabled="false" android:exported="false" android:name="com.google.android.play.core.assetpacks.ExtractionForegroundService"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity android:name="com.microsoft.office.hockeyapp.activities.HockeyWebViewActivity"/>
+        <meta-data android:name="com.microsoft.intune.mam.aad.Authority" android:value="https://login.windows.net/common/"/>
+        <meta-data android:name="com.microsoft.intune.mam.aad.ClientID" android:value="d3590ed6-52b3-4102-aeff-aad2292ab01c"/>
+        <meta-data android:name="com.microsoft.intune.mam.aad.NonBrokerRedirectURI" android:value="urn:ietf:wg:oauth:2.0:oob"/>
+        <meta-data android:name="com.microsoft.intune.mam.aad.SkipBroker" android:value="false"/>
+        <meta-data android:name="com.microsoft.intune.mam.MAMMultiIdentity" android:value="true"/>
+        <meta-data android:name="android.content.APP_RESTRICTIONS" android:resource="@xml/app_restrictions_config"/>
+        <activity android:label="@string/app_launcher" android:name="com.microsoft.o365suite.o365shell.applauncher.activities.AppLauncherActivity" android:theme="@style/AppLauncher"/>
+        <service android:exported="false" android:name="com.microsoft.office.appwarmup.service.WarmUpService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="true" android:name="com.microsoft.office.appwarmup.service.AppWarmUpBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.microsoft.office.appwarmup.action.WARMUP"/>
+            </intent-filter>
+        </receiver>
+        <activity android:enabled="false" android:exported="true" android:extractNativeLibs="true" android:icon="@mipmap/crosssell_icon_officemobile" android:label="@string/crosssell_install_powerpoint_label" android:name="com.microsoft.android.crosssell.activities.PowerpointCrossSellHandlerActivity" android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/vnd.oasis.opendocument.presentation"/>
+                <data android:mimeType="application/vnd.ms-powerpoint.slideshow.macroenabled.12"/>
+                <data android:mimeType="application/vnd.ms-powerpoint.slideshow.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.slideshow"/>
+                <data android:mimeType="application/vnd.ms-powerpoint.presentation.macroenabled.12"/>
+                <data android:mimeType="application/vnd.ms-powerpoint.presentation.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation"/>
+                <data android:mimeType="application/vnd.ms-powerpoint"/>
+                <data android:mimeType="application/ppsm"/>
+                <data android:mimeType="application/pptm"/>
+                <data android:mimeType="application/odp"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="content"/>
+                <data android:pathPattern=".*.pptm"/>
+                <data android:pathPattern=".*..*.pptm"/>
+                <data android:pathPattern=".*..*..*.pptm"/>
+                <data android:pathPattern=".*..*..*..*.pptm"/>
+                <data android:pathPattern=".*..*..*..*..*.pptm"/>
+                <data android:pathPattern=".*..*..*..*..*..*.pptm"/>
+                <data android:pathPattern=".*.ppsm"/>
+                <data android:pathPattern=".*..*.ppsm"/>
+                <data android:pathPattern=".*..*..*.ppsm"/>
+                <data android:pathPattern=".*..*..*..*.ppsm"/>
+                <data android:pathPattern=".*..*..*..*..*.ppsm"/>
+                <data android:pathPattern=".*..*..*..*..*..*.ppsm"/>
+                <data android:pathPattern=".*.odp"/>
+                <data android:pathPattern=".*..*.odp"/>
+                <data android:pathPattern=".*..*..*.odp"/>
+                <data android:pathPattern=".*..*..*..*.odp"/>
+                <data android:pathPattern=".*..*..*..*..*.odp"/>
+                <data android:pathPattern=".*..*..*..*..*..*.odp"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="file"/>
+                <data android:pathPattern=".*.pptm"/>
+                <data android:pathPattern=".*..*.pptm"/>
+                <data android:pathPattern=".*..*..*.pptm"/>
+                <data android:pathPattern=".*..*..*..*.pptm"/>
+                <data android:pathPattern=".*..*..*..*..*.pptm"/>
+                <data android:pathPattern=".*..*..*..*..*..*.pptm"/>
+                <data android:pathPattern=".*.ppsm"/>
+                <data android:pathPattern=".*..*.ppsm"/>
+                <data android:pathPattern=".*..*..*.ppsm"/>
+                <data android:pathPattern=".*..*..*..*.ppsm"/>
+                <data android:pathPattern=".*..*..*..*..*.ppsm"/>
+                <data android:pathPattern=".*..*..*..*..*..*.ppsm"/>
+                <data android:pathPattern=".*.odp"/>
+                <data android:pathPattern=".*..*.odp"/>
+                <data android:pathPattern=".*..*..*.odp"/>
+                <data android:pathPattern=".*..*..*..*.odp"/>
+                <data android:pathPattern=".*..*..*..*..*.odp"/>
+                <data android:pathPattern=".*..*..*..*..*..*.odp"/>
+            </intent-filter>
+        </activity>
+        <activity android:enabled="false" android:exported="true" android:icon="@mipmap/crosssell_icon_officemobile" android:label="@string/crosssell_install_excel_label" android:name="com.microsoft.android.crosssell.activities.ExcelCrossSellHandlerActivity" android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/vnd.ms-excel.sheet.macroenabled.12"/>
+                <data android:mimeType="application/vnd.ms-excel.sheet.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.ms-excel.sheet.binary.macroenabled.12"/>
+                <data android:mimeType="application/vnd.ms-excel.sheet.binary.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"/>
+                <data android:mimeType="application/vnd.oasis.opendocument.spreadsheet"/>
+                <data android:mimeType="text/csv"/>
+                <data android:mimeType="text/comma-separated-values"/>
+                <data android:mimeType="application/vnd.ms-excel"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.template"/>
+                <data android:mimeType="application/vnd.ms-excel.template.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.ms-excel"/>
+                <data android:mimeType="application/xlsb"/>
+                <data android:mimeType="application/xlsm"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="content"/>
+                <data android:pathPattern=".*.xlsb"/>
+                <data android:pathPattern=".*..*.xlsb"/>
+                <data android:pathPattern=".*..*..*.xlsb"/>
+                <data android:pathPattern=".*..*..*..*.xlsb"/>
+                <data android:pathPattern=".*..*..*..*..*.xlsb"/>
+                <data android:pathPattern=".*..*..*..*..*..*.xlsb"/>
+                <data android:pathPattern=".*.xlsm"/>
+                <data android:pathPattern=".*..*.xlsm"/>
+                <data android:pathPattern=".*..*..*.xlsm"/>
+                <data android:pathPattern=".*..*..*..*.xlsm"/>
+                <data android:pathPattern=".*..*..*..*..*.xlsm"/>
+                <data android:pathPattern=".*..*..*..*..*..*.xlsm"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="file"/>
+                <data android:pathPattern=".*.xlsb"/>
+                <data android:pathPattern=".*..*.xlsb"/>
+                <data android:pathPattern=".*..*..*.xlsb"/>
+                <data android:pathPattern=".*..*..*..*.xlsb"/>
+                <data android:pathPattern=".*..*..*..*..*.xlsb"/>
+                <data android:pathPattern=".*..*..*..*..*..*.xlsb"/>
+                <data android:pathPattern=".*.xlsm"/>
+                <data android:pathPattern=".*..*.xlsm"/>
+                <data android:pathPattern=".*..*..*.xlsm"/>
+                <data android:pathPattern=".*..*..*..*.xlsm"/>
+                <data android:pathPattern=".*..*..*..*..*.xlsm"/>
+                <data android:pathPattern=".*..*..*..*..*..*.xlsm"/>
+            </intent-filter>
+        </activity>
+        <activity android:enabled="false" android:exported="true" android:icon="@mipmap/crosssell_icon_officemobile" android:label="@string/crosssell_install_word_label" android:name="com.microsoft.android.crosssell.activities.WordCrossSellHandlerActivity" android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/msword"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.template"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/vnd.ms-word.document.macroenabled.12"/>
+                <data android:mimeType="application/vnd.ms-word.document.macroEnabled.12"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document"/>
+                <data android:mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.template"/>
+                <data android:mimeType="application/msword"/>
+                <data android:mimeType="application/vnd.oasis.opendocument.text"/>
+                <data android:mimeType="application/vnd.ms-word.document.12"/>
+                <data android:mimeType="application/rtf"/>
+                <data android:mimeType="text/rtf"/>
+                <data android:mimeType="text/plain"/>
+                <data android:mimeType="application/docm"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="content"/>
+                <data android:pathPattern=".*.docm"/>
+                <data android:pathPattern=".*..*.docm"/>
+                <data android:pathPattern=".*..*..*.docm"/>
+                <data android:pathPattern=".*..*..*..*.docm"/>
+                <data android:pathPattern=".*..*..*..*..*.docm"/>
+                <data android:pathPattern=".*..*..*..*..*..*.docm"/>
+                <data android:host="*" android:mimeType="*/*" android:scheme="file"/>
+                <data android:pathPattern=".*.docm"/>
+                <data android:pathPattern=".*..*.docm"/>
+                <data android:pathPattern=".*..*..*.docm"/>
+                <data android:pathPattern=".*..*..*..*.docm"/>
+                <data android:pathPattern=".*..*..*..*..*.docm"/>
+                <data android:pathPattern=".*..*..*..*..*..*.docm"/>
+            </intent-filter>
+        </activity>
+        <activity android:enabled="false" android:exported="true" android:icon="@mipmap/crosssell_icon_officemobile" android:label="@string/crosssell_install_pdf_label" android:name="com.microsoft.android.crosssell.activities.PdfCrossSellHandlerActivity" android:noHistory="true">
+            <intent-filter>
+                <data android:scheme="office"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_EDIT"/>
+                <action android:name="com.dropbox.android.intent.action.DBXC_VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="application/pdf"/>
+                <data android:mimeType="application/x-pdf"/>
+            </intent-filter>
+        </activity>
+        <service android:enabled="false" android:exported="false" android:name="com.microsoft.android.crosssell.CrossSellAgentMarker">
+            <meta-data android:name="com.microsoft.android.crosssell.key.VERSION" android:value="@integer/version_code"/>
+            <intent-filter>
+                <action android:name="com.microsoft.android.crosssell.action.AGENT_CHECK"/>
+            </intent-filter>
+        </service>
+        <receiver android:enabled="false" android:exported="false" android:name="com.microsoft.android.crosssell.CrossSellReceiver">
+            <intent-filter>
+                <action android:name="com.microsoft.android.crosssell.action.REFRESH_CROSS_SELL"/>
+                <action android:name="com.microsoft.android.crosssell.action.STOP_CROSS_SELL"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:enabled="false" android:exported="true" android:name="com.microsoft.android.crosssell.PackageStateReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.PACKAGE_ADDED"/>
+                <action android:name="android.intent.action.PACKAGE_REMOVED"/>
+                <action android:name="android.intent.action.PACKAGE_CHANGED"/>
+                <action android:name="android.intent.action.PACKAGE_FULLY_REMOVED"/>
+                <data android:scheme="package"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:enabled="false" android:exported="true" android:name="com.microsoft.android.crosssell.SelfReplacementReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
+        <activity android:configChanges="keyboard|orientation|screenSize" android:multiprocess="true" android:name="com.microsoft.office.sharecontrollauncher.ShareIntentLauncher$ChooserActivity" android:theme="@style/ShareChooserActivityTheme"/>
+        <receiver android:name="com.microsoft.office.messagingirispush.IrisPushNotificationDismissHandler"/>
+        <receiver android:enabled="true" android:exported="false" android:name="com.microsoft.office.BackgroundTaskHost.SystemBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.microsoft.office.Notification.ACTION_APP_FIRST_LAUNCH"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.microsoft.office.Notification.ACTION_AUTOMATION_RUN"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.microsoft.office.Notification.DELAYED_PACKAGE_UPGRADE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.microsoft.office.action.OFF_PEAK_HOURS_DAILY"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="false" android:name="com.microsoft.office.BackgroundTaskHost.BackgroundTaskService" android:permission="android.permission.BIND_JOB_SERVICE" android:process=":remote"/>
+        <provider android:authorities="com.microsoft.office.dragservice.provider" android:grantUriPermissions="true" android:name="com.microsoft.office.dragservice.DragFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/drag_file_paths"/>
+        </provider>
+        <service android:exported="false" android:name="com.microsoft.office.backstage.prefetch.PrefetchBackgroundService" android:permission="android.permission.BIND_JOB_SERVICE" android:process="com.microsoft.office.officemobile.prefetch"/>
+        <receiver android:exported="false" android:name="com.microsoft.office.backstage.prefetch.PrefetchAlarmReceiver">
+            <intent-filter>
+                <action android:name="com.microsoft.office.officemobile.prefetch.action.ACTION_PREFETCH_DAILY"/>
+            </intent-filter>
+        </receiver>
+        <activity android:name="com.facebook.react.devsupport.DevSettingsActivity"/>
+        <receiver android:enabled="true" android:exported="true" android:name="com.microsoft.designer.core.host.publish.PublishTelemetryBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+            </intent-filter>
+        </receiver>
+        <activity android:configChanges="uiMode" android:exported="false" android:launchMode="singleTop" android:name="com.microsoft.designer.core.host.designfromscratch.view.DFSActivity" android:screenOrientation="portrait" android:taskAffinity="com.microsoft.designer.core.host" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:configChanges="uiMode" android:exported="false" android:launchMode="singleTop" android:name="com.microsoft.designer.core.host.designcreation.view.DesignerDocumentActivity" android:screenOrientation="portrait" android:taskAffinity="com.microsoft.designer.core.host" android:theme="@style/Theme.AppCompat.NoActionBar" android:windowSoftInputMode="adjustNothing">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <provider android:authorities="com.microsoft.office.officehubrow.provider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
+        <activity android:exported="false" android:name="com.microsoft.designer.common.utils.TextOverlayLauncher" android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.NoActionBar" android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
+        <activity android:exported="false" android:name="com.microsoft.designer.common.device.media.CameraLauncher" android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:exported="false" android:launchMode="singleTop" android:name="com.microsoft.designer.common.userinteraction.fullscreeninteraction.FullScreenInteractionActivity" android:screenOrientation="portrait" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:multiprocess="true" android:name="com.microsoft.office.lens.lenscommon.ui.LensActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity android:multiprocess="true" android:name="com.microsoft.office.lens.lensgallery.immersivegallery.ImmersiveGalleryActivity" android:screenOrientation="portrait" android:theme="@style/LensGalleryCommonTheme"/>
+        <provider android:authorities="lenshvc.com.microsoft.office.officehubrow.provider" android:exported="false" android:grantUriPermissions="true" android:name="com.microsoft.office.lens.imageinteractioncomponent.LensHVCCustomFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/lenshvc_file_provider_paths"/>
+        </provider>
+        <service android:exported="false" android:name="com.microsoft.office.lens.mediaprocessor.service.LensRemoteWorkerService" android:permission="android.permission.BIND_JOB_SERVICE" android:process=":mediaprocess"/>
+        <activity android:exported="false" android:multiprocess="true" android:name="com.microsoft.mobile.paywallsdk.ui.PaywallActivity" android:theme="@style/PaywallSDKTheme.Transparent"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:launchMode="singleTask" android:multiprocess="true" android:name="com.microsoft.authentication.internal.OneAuthNavigationActivity" android:theme="@style/oneauth_theme"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:launchMode="singleTask" android:name="com.microsoft.authentication.internal.SignInActivity" android:theme="@style/oneauth_theme"/>
+        <service android:enabled="true" android:exported="true" android:name="com.microsoft.tokenshare.TokenSharingService">
+            <intent-filter>
+                <action android:name="com.microsoft.tokenshare.TokenSharingService"/>
+            </intent-filter>
+        </service>
+        <meta-data android:name="token_share_sdk_version" android:value="2"/>
+        <meta-data android:name="token_share_build_version" android:value="1.6.4"/>
+        <meta-data android:name="token_share_parcelable_version" android:value="3"/>
+        <provider android:authorities="com.microsoft.office.officehubrow.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_provider_paths"/>
+        </provider>
+        <meta-data android:name="com.google.android.play.billingclient.version" android:value="5.2.1"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:exported="false" android:name="com.android.billingclient.api.ProxyBillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:label="@string/ah" android:name="com.microsoft.moderninput.voiceactivity.voicesettings.LanguageSettingsActivity"/>
+        <activity android:label="@string/af" android:name="com.microsoft.moderninput.voiceactivity.voicesettings.SettingsActivity"/>
+        <activity android:name="com.microsoft.moderninput.voiceactivity.HelpPageActivity"/>
+        <activity android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize" android:launchMode="singleTask" android:name="com.microsoft.office.transcriptionapp.TranscriptionAudioRecordActivity" android:taskAffinity="com.microsoft.office.transcriptionapp" android:theme="@style/TranscriptionActivityDefaultTheme" android:windowSoftInputMode="adjustPan"/>
+        <activity android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize" android:launchMode="singleTask" android:name="com.microsoft.office.transcriptionapp.TranscriptionAudioUploadActivity" android:taskAffinity="com.microsoft.office.transcriptionapp" android:theme="@style/TranscriptionActivityDefaultTheme"/>
+        <activity android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize" android:launchMode="singleTask" android:name="com.microsoft.office.transcriptionapp.PlayTranscriptionActivity" android:taskAffinity="com.microsoft.office.transcriptionapp" android:theme="@style/TranscriptionActivityDefaultTheme" android:windowSoftInputMode="adjustPan"/>
+        <service android:name="com.microsoft.office.transcriptionapp.session.audioRecord.service.RecordAndTranscribeService"/>
+        <service android:name="com.microsoft.office.transcriptionapp.session.audioUpload.service.UploadAndTranscribeService"/>
+        <service android:name="com.microsoft.office.transcriptionapp.session.audioUpload.service.FastUploadAndTranscribeService"/>
+        <service android:name="com.microsoft.office.transcriptionapp.session.audioPlay.service.PlayTranscriptionService"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize" android:name="com.appnexus.opensdk.AdActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:name="com.microsoft.office.adsmobile.wxpu.inAppBrowser.InAppWebViewActivity" android:theme="@style/Theme.AppCompat"/>
+        <activity android:excludeFromRecents="true" android:label="@string/yubikit_otp_activity_title" android:name="com.yubico.yubikit.android.ui.OtpActivity" android:theme="@style/YubiKitPromptDialogTheme"/>
+        <activity android:excludeFromRecents="true" android:label="@string/yubikit_prompt_activity_title" android:name="com.yubico.yubikit.android.ui.YubiKeyPromptActivity" android:theme="@style/YubiKitPromptDialogTheme"/>
+    </application>
+</manifest>

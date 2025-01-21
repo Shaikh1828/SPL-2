@@ -1,0 +1,893 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="35" android:compileSdkVersionCodename="15" package="com.microsoft.office.outlook" platformBuildVersionCode="35" platformBuildVersionName="15">
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_PROFILE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.WRITE_CALENDAR"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.WRITE_SYNC_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_SYNC_STATS"/>
+    <uses-permission android:name="android.permission.WRITE_CONTACTS"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:maxSdkVersion="32" android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-feature android:name="android.hardware.camera.autofocus" android:required="false"/>
+    <uses-permission android:name="android.permission.REORDER_TASKS"/>
+    <uses-permission android:name="com.microsoft.office.outlook.configurator.READCONFIG"/>
+    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.telephony" android:required="false"/>
+    <uses-feature android:name="android.hardware.location.gps" android:required="false"/>
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+    <permission android:name="com.microsoft.office.outlook.ACCOUNT_CREATION_PERMISSION" android:protectionLevel="normal"/>
+    <uses-permission android:name="com.microsoft.office.outlook.ACCOUNT_CREATION_PERMISSION"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <queries>
+        <package android:name="com.microsoft.office.outlook"/>
+        <package android:name="com.microsoft.office.outlook.dev"/>
+        <package android:name="com.microsoft.office.outlook.dawg"/>
+        <package android:name="com.microsoft.office.outlook.wip"/>
+        <package android:name="com.microsoft.office.word"/>
+        <package android:name="com.microsoft.office.powerpoint"/>
+        <package android:name="com.microsoft.office.excel"/>
+        <package android:name="com.microsoft.skydrive"/>
+        <package android:name="com.microsoft.office.onenote"/>
+        <package android:name="com.microsoft.teams"/>
+        <package android:name="com.yammer.v1"/>
+        <package android:name="com.microsoft.office.officehubrow"/>
+        <package android:name="com.microsoft.todos"/>
+        <package android:name="com.touchtype.swiftkey"/>
+        <package android:name="com.skype.raider"/>
+        <package android:name="com.microsoft.office.lync15"/>
+        <package android:name="com.microsoft.translator"/>
+        <package android:name="com.microsoft.ipviewer"/>
+        <package android:name="com.microsoft.office.sfb.beta"/>
+        <package android:name="com.microsoft.skype.teams.dev"/>
+        <package android:name="com.microsoft.skype.teams.alpha"/>
+        <package android:name="com.microsoft.skype.teams.beta"/>
+        <package android:name="com.microsoft.appmanager"/>
+        <package android:name="com.microsoft.office.officehub"/>
+        <package android:name="com.android.vending"/>
+        <package android:name="com.microsoft.office.outlook.swerve"/>
+        <package android:name="com.microsoft.fluent.mobile.icons.sample"/>
+        <package android:name="com.microsoft.office.outlook.configurator"/>
+        <package android:name="com.android.webview"/>
+        <package android:name="com.google.android.webview"/>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="geo"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:host="apps" android:scheme="amzn"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="https"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="http"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="mailto"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.EDIT"/>
+            <data android:mimeType="vnd.android.cursor.item/contact"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.PROCESS_TEXT"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="tel"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.CALL"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SENDTO"/>
+        </intent>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:mimeType="*/*"/>
+        </intent>
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE"/>
+        </intent>
+        <package android:name="com.microsoft.emmx"/>
+        <package android:name="com.microsoft.emmx.local"/>
+        <package android:name="com.microsoft.emmx.canary"/>
+        <package android:name="com.microsoft.emmx.beta"/>
+        <package android:name="com.microsoft.bing"/>
+        <package android:name="com.microsoft.sapphire.bing.daily"/>
+        <package android:name="com.microsoft.sapphire.bing.dogfood"/>
+        <package android:name="com.google.android.apps.googleassistant"/>
+        <package android:name="com.microsoft.stream"/>
+        <package android:name="com.azure.authenticator"/>
+        <package android:name="com.microsoft.identity.testuserapp"/>
+        <package android:name="com.microsoft.windowsintune.companyportal"/>
+        <package android:name="com.microsoft.mockauthapp"/>
+        <package android:name="com.microsoft.mockcp"/>
+        <package android:name="com.microsoft.mockltw"/>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:scheme="https"/>
+        </intent>
+        <intent>
+            <action android:name="com.android.vending.billing.InAppBillingService.BIND"/>
+        </intent>
+        <intent>
+            <action android:name="com.singular.preinstall.READ_PERMISSION_SINGULAR"/>
+        </intent>
+        <package android:name="com.facebook.katana"/>
+        <package android:name="com.instagram.android"/>
+        <package android:name="com.google.android.apps.maps"/>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.EDIT"/>
+        </intent>
+        <intent>
+            <action android:name="com.microsoft.tokenshare.TokenSharingService"/>
+        </intent>
+    </queries>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.REQUEST_PASSWORD_COMPLEXITY"/>
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_PROFILES"/>
+    <uses-permission android:name="com.android.vending.BILLING"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
+    <uses-permission android:name="com.android.vending.CHECK_LICENSE"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <permission android:name="com.microsoft.office.outlook.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.microsoft.office.outlook.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS"/>
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-feature android:name="android.hardware.usb.host" android:required="false"/>
+    <uses-feature android:name="android.hardware.nfc" android:required="false"/>
+    <uses-permission android:name="com.sec.android.provider.badge.permission.READ"/>
+    <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE"/>
+    <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.htc.launcher.permission.UPDATE_SHORTCUT"/>
+    <uses-permission android:name="com.sonyericsson.home.permission.BROADCAST_BADGE"/>
+    <uses-permission android:name="com.sonymobile.home.permission.PROVIDER_INSERT_BADGE"/>
+    <uses-permission android:name="com.anddoes.launcher.permission.UPDATE_COUNT"/>
+    <uses-permission android:name="com.majeur.launcher.permission.UPDATE_BADGE"/>
+    <uses-permission android:name="com.huawei.android.launcher.permission.CHANGE_BADGE"/>
+    <uses-permission android:name="com.huawei.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.huawei.android.launcher.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.READ_APP_BADGE"/>
+    <uses-permission android:name="com.oppo.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="com.oppo.launcher.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_READ"/>
+    <uses-permission android:name="me.everything.badger.permission.BADGE_COUNT_WRITE"/>
+    <application android:allowBackup="false" android:appComponentFactory="com.microsoft.office.outlook.performance.OutlookAppComponentFactory" android:dataExtractionRules="@xml/backup_config_s_and_above" android:extractNativeLibs="true" android:fullBackupContent="@xml/backup_config_below_s" android:hardwareAccelerated="true" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:localeConfig="@xml/_generated_res_locale_config" android:name="com.acompli.acompli.OutlookApplication" android:networkSecurityConfig="@xml/network_security_config" android:resizeableActivity="true" android:roundIcon="@mipmap/ic_launcher_round" android:supportsRtl="true" android:theme="@style/Theme.Outlook" android:usesCleartextTraffic="false">
+        <meta-data android:name="android.content.APP_RESTRICTIONS" android:resource="@xml/mdm_profile"/>
+        <meta-data android:name="android.allow_multiple_resumed_activities" android:value="true"/>
+        <meta-data android:name="com.microsoft.intune.mam.WorkingTime" android:value="false"/>
+        <activity android:launchMode="singleTask" android:name="com.acompli.acompli.CalendarCentralActivity" android:taskAffinity="@string/task_affinity_calendar"/>
+        <activity android:launchMode="singleTop" android:name="com.acompli.acompli.DeepLinkSearchActivity"/>
+        <activity android:exported="true" android:label="@string/app_name" android:name="com.microsoft.office.outlook.MainActivity" android:theme="@style/Theme.Outlook.Launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
+        </activity>
+        <activity android:enabled="false" android:exported="true" android:label="@string/app_name" android:name="com.microsoft.office.outlook.MainActivityEdu" android:theme="@style/Theme.Outlook.Launcher.Edu">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
+        </activity>
+        <activity android:enabled="@bool/calendar_icon_enabled" android:exported="true" android:icon="@mipmap/ic_calendar_shortcut" android:label="@string/calendar_icon_display_name" android:name="com.microsoft.office.outlook.MainCalendarActivity" android:taskAffinity="@string/task_affinity_calendar" android:theme="@style/Theme.Outlook.Launcher">
+            <meta-data android:name="com.microsoft.office.outlook.dynamic_icons" android:resource="@array/calendar_icons_dynamic"/>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.APP_CALENDAR"/>
+            </intent-filter>
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
+        </activity>
+        <activity android:label="@string/app_name" android:name="com.microsoft.office.outlook.ui.retailmode.RetailModeActivity"/>
+        <activity android:exported="true" android:name="com.acompli.acompli.DeepLinkActivity" android:theme="@style/Theme.Outlook.Transparent">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="ms-outlook"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="krs.microsoft.com" android:pathPrefix="/r/QVzAJ0JY" android:scheme="https"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="com.microsoft.office.outlook" android:scheme="outlook-auth-mos"/>
+                <data android:pathPattern="/auth-callback"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.microsoft.office.outlook.PopUpRedirectionActivity" android:theme="@style/Theme.Outlook.Transparent"/>
+        <activity android:label="@string/settings_add_account" android:name="com.microsoft.office.outlook.ui.onboarding.login.AddAccountActivity"/>
+        <activity android:configChanges="keyboardHidden" android:label="@string/qr_connect_intro_title" android:name="com.microsoft.office.outlook.ui.onboarding.qrscan.QRConnectActivity" android:theme="@style/Theme.Outlook.Splash"/>
+        <activity android:configChanges="keyboardHidden" android:label="@string/qr_connect_intro_title" android:name="com.microsoft.office.outlook.ui.onboarding.qrcodev2.QRConnectActivityV2" android:theme="@style/Theme.Outlook.Splash"/>
+        <activity android:label=" " android:name="com.microsoft.office.outlook.ui.onboarding.qrscan.QRScanResultActivity" android:theme="@style/Theme.Outlook" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/qr_dialog_title" android:name="com.microsoft.office.outlook.ui.onboarding.qrscan.QRDialogActivity" android:theme="@style/Theme.Outlook.AlertDialogActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_add_shared_mailbox" android:name="com.microsoft.office.outlook.account.AddSharedMailboxActivity"/>
+        <activity android:label="@string/title_activity_add_shared_mailbox" android:name="com.microsoft.office.outlook.account.EnterSharedMailboxActivity" android:parentActivityName="com.microsoft.office.outlook.account.AddSharedMailboxActivity" android:windowSoftInputMode="adjustResize">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.microsoft.office.outlook.account.AddSharedMailboxActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_delegate_inbox_picker" android:name="com.acompli.acompli.ui.settings.DelegateInboxPickerActivity" android:windowSoftInputMode="stateAlwaysVisible|adjustResize"/>
+        <activity android:name="com.acompli.acompli.ui.settings.DelegateInboxPermissionsActivity"/>
+        <activity android:label="@string/settings_add_work_account" android:name="com.microsoft.office.outlook.ui.onboarding.login.OrgAllowedAccountsActivity"/>
+        <activity android:label="@string/add_sensitivity" android:name="com.microsoft.office.outlook.clp.AddSensitivityActivity"/>
+        <activity android:label="@string/title_importance" android:name="com.microsoft.office.outlook.compose.importance.SetMessageImportanceActivity"/>
+        <activity android:label="@string/title_request_read_delivery_receipt" android:name="com.microsoft.office.outlook.compose.receipt.ReadAndDeliveryReceiptsActivity"/>
+        <activity android:label="@string/clp_justification_title" android:name="com.microsoft.office.outlook.clp.ClpJustificationActivity"/>
+        <activity android:label="@string/onboarding_account_added" android:name="com.microsoft.office.outlook.ui.onboarding.login.AddAnotherAccountActivity"/>
+        <activity android:label="@string/onboarding_choose_account" android:name="com.microsoft.office.outlook.ui.onboarding.login.ChooseAccountActivity"/>
+        <activity android:label="@string/choose_storage_account_title" android:name="com.acompli.acompli.ui.settings.ChooseStorageAccountActivity"/>
+        <activity android:label="@string/settings_add_account" android:name="com.microsoft.office.outlook.ui.onboarding.sso.AddSSOAccountActivity" android:theme="@style/Theme.Outlook.Onboarding" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/login" android:launchMode="singleTask" android:name="com.microsoft.office.outlook.ui.onboarding.oauth.OAuthActivity"/>
+        <activity android:label="@string/app_name" android:launchMode="singleTask" android:name="com.acompli.acompli.CentralActivity" android:theme="@style/Theme.Outlook.Main"/>
+        <activity android:name="com.acompli.acompli.MailCentralActivity"/>
+        <activity android:exported="true" android:launchMode="singleTask" android:name="com.microsoft.office.outlook.calendar.CalendarDispatcherActivity" android:theme="@style/Theme.Outlook.Light">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.APP_CALENDAR"/>
+                <data android:mimeType="time/epoch"/>
+                <data android:host="com.android.calendar"/>
+                <data android:scheme="content"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.INSERT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.android.cursor.dir/event"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.INSERT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.android.cursor.item/event"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.EDIT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="vnd.android.cursor.item/event"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:mimeType="text/calendar"/>
+                <data android:scheme="content"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:mimeType="application/ics"/>
+                <data android:scheme="content"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:pathPattern=".*.ics"/>
+                <data android:scheme="content"/>
+                <data android:scheme="file"/>
+                <data android:host="*"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.acompli.acompli.ui.conversation.ConversationActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustNothing"/>
+        <activity android:label="@string/title_activity_message_detail" android:name="com.acompli.acompli.ui.conversation.v3.MessageDetailActivityV3" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:exported="false" android:label="@string/title_activity_meeting_detail" android:name="com.acompli.acompli.ui.event.details.EventDetailsActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:exported="false" android:name="com.acompli.acompli.ui.event.details.EventDetailsAttendeesActivity" android:parentActivityName="com.acompli.acompli.ui.event.details.EventDetailsActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:exported="false" android:name="com.acompli.acompli.ui.map.MapActivity" android:theme="@style/Theme.Outlook.Light"/>
+        <activity android:exported="false" android:name="com.acompli.acompli.ui.event.details.EventNotesActivity" android:parentActivityName="com.acompli.acompli.ui.event.details.EventDetailsActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:name="com.microsoft.office.outlook.compose.ComposeInkFullScreenActivity"/>
+        <activity android:configChanges="orientation" android:name="com.microsoft.office.outlook.compose.NotificationReplyActivity"/>
+        <activity android:exported="true" android:name="com.microsoft.office.outlook.compose.ComposeLauncherActivity" android:theme="@style/Theme.Outlook.Launcher">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.SENDTO"/>
+                <action android:name="android.intent.action.SEND"/>
+                <data android:scheme="mailto"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.email.intent.action.REPLY"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="ui.email2.android.com" android:pathPrefix="/compose" android:scheme="content"/>
+            </intent-filter>
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.SEND"/>
+                <action android:name="android.intent.action.SENDTO"/>
+                <data android:mimeType="*/*"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter android:label="@string/app_name">
+                <action android:name="android.intent.action.SEND_MULTIPLE"/>
+                <data android:mimeType="*/*"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="android.service.chooser.chooser_target_service" android:value="androidx.sharetarget.ChooserTargetServiceCompat"/>
+        </activity>
+        <activity android:label="@string/title_activity_settings" android:name="com.acompli.acompli.ui.settings.SettingsActivity"/>
+        <activity android:label="@string/title_activity_settings" android:name="com.acompli.acompli.ui.settings.LoadGoogleAccountActivity" android:theme="@style/Theme.Outlook.IllustrationPrompt"/>
+        <activity android:label="@string/title_activity_settings" android:name="com.microsoft.office.outlook.ui.settings.SettingsActivityV2" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name="com.acompli.acompli.ui.settings.ThemeSettingsActivity"/>
+        <activity android:label="@string/folder_contacts" android:name="com.acompli.acompli.ui.contact.ContactListActivity"/>
+        <activity android:label="@string/files_tab_name" android:name="com.microsoft.office.outlook.file.FilesDirectListActivity" android:windowSoftInputMode="stateVisible"/>
+        <activity android:label="@string/files_tab_name" android:name="com.microsoft.office.outlook.file.FilesDirectCombinedListActivity"/>
+        <activity android:label="@string/compose_choose_from_emails" android:name="com.microsoft.office.outlook.compose.attachment.EmailPickerActivity"/>
+        <activity android:configChanges="orientation|screenSize" android:label="@string/contact_results" android:name="com.microsoft.office.outlook.search.ContactSearchResultsActivity"/>
+        <activity android:configChanges="orientation|screenSize" android:label="@string/calendar_results" android:name="com.acompli.acompli.ui.search.EventSearchResultsActivity"/>
+        <activity android:configChanges="orientation|screenSize" android:name="com.microsoft.office.outlook.search.answers.AnswerSearchResultsActivity"/>
+        <activity android:name="com.microsoft.office.outlook.people.ContactSyncPermissionsActivity" android:theme="@style/Theme.Outlook.Launcher"/>
+        <activity android:launchMode="singleTask" android:name="com.microsoft.office.outlook.people.EnableContactsSyncActivity" android:noHistory="true" android:theme="@style/Theme.Outlook.Transparent"/>
+        <activity android:launchMode="singleTask" android:name="com.microsoft.office.outlook.people.ContactSyncAppOpsActivity" android:noHistory="true" android:theme="@style/Theme.Outlook.Transparent"/>
+        <activity android:label="Account Storage Details" android:name="com.acompli.acompli.ui.settings.UsqStorageDetailsActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="false" android:name="com.acompli.acompli.ui.settings.UsqFreeUpOpxActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:exported="false" android:name="com.acompli.acompli.ui.settings.SubSettingsActivity">
+            <intent-filter>
+                <action android:name="com.microsoft.outlook.action.ACCOUNT_INFO"/>
+                <action android:name="com.microsoft.outlook.action.CATEGORIES"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="true" android:icon="@mipmap/ic_calendar_shortcut" android:label="@string/calendar_shortcut_preview_label" android:launchMode="singleTask" android:name="com.acompli.acompli.ui.event.calendar.shortcuts.CalendarShortcutActivity" android:roundIcon="@mipmap/ic_calendar_shortcut_round">
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/app_name" android:name="com.microsoft.office.outlook.applock.AppLockActivity" android:theme="@style/Theme.Outlook.Launcher"/>
+        <provider android:authorities="com.microsoft.office.outlook.contentprovider" android:enabled="true" android:exported="false" android:grantUriPermissions="true" android:label="@string/acompli_content_provider_label" android:name="com.acompli.acompli.providers.OutlookContentProvider">
+            <grant-uri-permission android:pathPattern="com.android.contacts/*"/>
+            <grant-uri-permission android:pathPattern="@string/contact_uri_pattern"/>
+            <grant-uri-permission android:pathPattern="@string/contacts_uri_pattern"/>
+            <grant-uri-permission android:pathPattern="@string/meeting_uri_pattern"/>
+            <grant-uri-permission android:pathPrefix="@string/meetingdays_uri_path_pattern"/>
+            <grant-uri-permission android:pathPrefix="@string/drag_file_uri_path_pattern"/>
+            <grant-uri-permission android:pathPrefix="@string/drag_message_uri_path_pattern"/>
+            <grant-uri-permission android:pathPrefix="@string/drag_event_uri_path_pattern"/>
+            <grant-uri-permission android:pathPrefix="@string/blob_provider_uri_path_pattern"/>
+        </provider>
+        <provider android:authorities="com.microsoft.office.outlook.shareddatacontentprovider" android:enabled="true" android:exported="true" android:label="Outlook Shared Data Content" android:name="com.microsoft.office.outlook.providers.OutlookSharedDataContentProvider"/>
+        <provider android:authorities="com.microsoft.office.outlook.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/filepaths"/>
+        </provider>
+        <provider android:authorities="@string/blob_provider_authority" android:exported="false" android:name="com.facebook.react.modules.blob.BlobProvider"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyDtDBiG9PCk5imlYP-3MM0uSvm3j562_hU"/>
+        <service android:exported="true" android:name="com.microsoft.office.outlook.fcm.OutlookFirebaseMessagingService" android:stopWithTask="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <activity android:label="@string/title_activity_select_availability" android:name="com.acompli.acompli.SelectAvailabilityActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:exported="true" android:name="com.acompli.acompli.ui.event.create.DraftEventActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.INSERT"/>
+                <data android:host="create_event" android:scheme="mscal"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.acompli.acompli.ui.event.create.DraftEventActivityAffinity" android:taskAffinity="@string/task_affinity_compose" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="orientation|screenSize" android:name="com.acompli.acompli.ui.contact.AddPeopleActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustPan|stateVisible"/>
+        <activity android:label="@string/timezone" android:name="com.acompli.acompli.ui.timezone.TimezonePickerActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:label="@string/title_activity_location" android:name="com.acompli.acompli.ui.location.LocationPickerActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:label="@string/calendar_category_label" android:name="com.acompli.acompli.ui.category.CategoryPickerActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/calendar_category_label" android:name="com.acompli.acompli.ui.category.CategoryPickerActivityV2" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_room_finder" android:name="com.microsoft.office.outlook.calendar.roomfinder.RoomFinderActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/building_location" android:name="com.microsoft.office.outlook.calendar.reservespace.ChooseRoomActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/workspace" android:name="com.microsoft.office.outlook.calendar.reservespace.ChooseSpaceActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_recurring_rule_editor" android:name="com.acompli.acompli.ui.event.recurrence.RecurrenceRuleEditorActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_repeat_until" android:name="com.acompli.acompli.ui.event.recurrence.RepeatUntilPickerActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_repeat_on_day" android:name="com.acompli.acompli.ui.event.recurrence.RepeatOnDayPickerActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/app_name" android:name="com.acompli.acompli.GenericWebViewActivity"/>
+        <activity android:configChanges="orientation|screenSize" android:label="@string/app_name" android:name="com.microsoft.office.outlook.support.faq.FaqWebViewActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/app_name" android:name="com.microsoft.office.outlook.ui.onboarding.splash.SplashActivity" android:theme="@style/Theme.Outlook.Splash"/>
+        <activity android:label="@string/app_name" android:name="com.microsoft.office.outlook.certificate.InstallCertificateActivity" android:theme="@style/Theme.Outlook.Transparent"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/file_preview" android:launchMode="singleTop" android:name="com.microsoft.office.outlook.imageviewer.ImageViewerV2Activity" android:theme="@style/Theme.Outlook.ImageViewer"/>
+        <activity android:configChanges="orientation|screenSize" android:name="com.acompli.acompli.ui.contact.AttendeeResponseOptionsActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:launchMode="singleTask" android:name="com.microsoft.office.outlook.viewers.vcf.VcfAccountPickerActivity" android:noHistory="true" android:theme="@style/Theme.Outlook.Transparent"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/file_preview" android:name="com.microsoft.office.outlook.viewers.vcf.VcfViewerActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <meta-data android:name="com.google.android.gms.analytics.globalConfigResource" android:resource="@xml/global_tracker"/>
+        <receiver android:exported="true" android:label="@string/calendar_widget_display_name" android:name="com.acompli.acompli.AgendaWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.microsoft.office.outlook.action.AGENDA_APPWIDGET_UPDATE"/>
+                <action android:name="com.acompli.acompli.action.CREATE_EVENT"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/agenda_widget_info"/>
+        </receiver>
+        <service android:name="com.acompli.acompli.appwidget.agenda.AgendaWidgetService" android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <receiver android:exported="true" android:label="@string/inbox_widget_display_name" android:name="com.acompli.acompli.InboxWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.microsoft.office.outlook.action.INBOX_APPWIDGET_UPDATE"/>
+                <action android:name="com.microsoft.office.outlook.action.COMPOSE"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/inbox_widget_info"/>
+        </receiver>
+        <service android:name="com.acompli.acompli.appwidget.inbox.InboxWidgetService" android:permission="android.permission.BIND_REMOTEVIEWS"/>
+        <receiver android:exported="true" android:label="@string/outlook_device_policy" android:name="com.acompli.accore.receivers.OutlookDeviceAdminReceiver" android:permission="android.permission.BIND_DEVICE_ADMIN">
+            <intent-filter>
+                <action android:name="android.app.action.DEVICE_ADMIN_ENABLED"/>
+                <action android:name="android.app.action.DEVICE_ADMIN_DISABLE_REQUESTED"/>
+                <action android:name="android.app.action.DEVICE_ADMIN_DISABLED"/>
+                <action android:name="com.microsoft.office.outlook.ACTION.UPDATE_POLICIES"/>
+            </intent-filter>
+            <meta-data android:name="android.app.device_admin" android:resource="@xml/outlook_device_admin"/>
+        </receiver>
+        <receiver android:enabled="true" android:exported="false" android:name="com.acompli.acompli.receivers.SignupReminderReceiver"/>
+        <receiver android:enabled="true" android:exported="false" android:name="com.microsoft.office.outlook.utils.ComponentChosenIntentReceiver"/>
+        <activity android:label="@string/calendar_settings" android:name="com.acompli.acompli.ui.event.calendar.share.CalendarSettingsActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:name="com.microsoft.office.outlook.calendar.LocalCalendarSettingsActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:name="com.acompli.acompli.ui.event.calendar.share.ShareCalendarContainerActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:name="com.acompli.acompli.ui.event.calendar.share.AddSharedCalendarActivity"/>
+        <activity android:name="com.microsoft.office.outlook.calendar.reservespace.BookWorkspaceActivity" android:parentActivityName="com.acompli.acompli.CentralActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name="com.microsoft.office.outlook.calendar.reservespace.IndoorMapActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:name="com.microsoft.office.outlook.calendar.focustime.FocusTimeActivity" android:parentActivityName="com.acompli.acompli.CentralActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_group_card" android:name="com.acompli.acompli.ui.group.activities.GroupCardActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:label="@string/title_activity_group_members" android:name="com.acompli.acompli.ui.group.activities.GroupFilesActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:label="@string/groups_tab_name" android:name="com.acompli.acompli.ui.group.activities.ZeroQueryGroupsListActivity"/>
+        <activity android:label="@string/title_activity_create_group" android:name="com.acompli.acompli.ui.group.activities.CreateGroupActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:label="@string/title_activity_create_group" android:name="com.microsoft.office.outlook.groups.CreateConsumerGroupActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:label="@string/title_activity_group_privacy" android:name="com.acompli.acompli.ui.group.activities.EditPrivacyActivity"/>
+        <activity android:label="@string/title_activity_edit_group" android:name="com.acompli.acompli.ui.group.activities.EditGroupActivity" android:parentActivityName="com.acompli.acompli.ui.group.activities.GroupCardActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.acompli.acompli.ui.group.activities.GroupCardActivity"/>
+        </activity>
+        <activity android:label="@string/add_sensitivity" android:name="com.acompli.acompli.ui.group.activities.AddGroupSensitivityActivity"/>
+        <activity android:label="@string/title_activity_group_members" android:name="com.acompli.acompli.ui.group.activities.GroupMembersActivity" android:parentActivityName="com.acompli.acompli.ui.group.activities.GroupCardActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.acompli.acompli.ui.group.activities.GroupCardActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_add_members" android:name="com.acompli.acompli.ui.group.activities.AddMembersActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_group_event" android:name="com.microsoft.office.outlook.groups.GroupCardAllEventsActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_group_event" android:name="com.microsoft.office.outlook.groups.GroupEventDetailsActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:label="@string/people_tab_name" android:name="com.microsoft.office.outlook.livepersonacard.ui.LivePersonaCardActivity" android:theme="@style/Theme.Outlook">
+            <intent-filter>
+                <action android:name="android.intent.action.CALL_PRIVILEGED"/>
+                <data android:scheme="tel"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/people_tab_name" android:name="com.microsoft.office.outlook.livepersonacard.ui.LivePersonaCardAllEventsActivity" android:theme="@style/Theme.Outlook"/>
+        <activity android:exported="true" android:label="@string/title_activity_configure_agenda_widget" android:name="com.acompli.acompli.appwidget.agenda.ConfigureAgendaWidgetActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="true" android:icon="@mipmap/ic_email_shortcut" android:label="@string/email_shortcut" android:launchMode="singleTask" android:name="com.acompli.acompli.appwidget.inbox.ConfigureInboxWidgetActivity">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_CONFIGURE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.CREATE_SHORTCUT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/title_activity_device_management" android:name="com.acompli.acompli.DeviceManagementActivity" android:theme="@style/Theme.Outlook.Light"/>
+        <service android:exported="false" android:name="com.acompli.acompli.services.LocalNotificationIntentService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:exported="true" android:name="com.acompli.acompli.contacts.sync.OutlookAuthenticatorService">
+            <intent-filter>
+                <action android:name="android.accounts.AccountAuthenticator"/>
+            </intent-filter>
+            <meta-data android:name="android.accounts.AccountAuthenticator" android:resource="@xml/outlook_authenticator"/>
+        </service>
+        <service android:exported="true" android:name="com.microsoft.office.outlook.services.MobileSideReceiverService">
+            <intent-filter>
+                <action android:name="com.google.android.gms.wearable.MESSAGE_RECEIVED"/>
+                <action android:name="com.google.android.gms.wearable.CAPABILITY_CHANGED"/>
+                <data android:host="*" android:pathPrefix="/" android:scheme="wear"/>
+            </intent-filter>
+        </service>
+        <activity android:label="@string/automatic_replies" android:name="com.acompli.acompli.ui.settings.AutoReplySettingsActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize|stateVisible"/>
+        <activity android:label="@string/week_number_setting_title" android:name="com.acompli.acompli.ui.settings.WeekNumberActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:exported="false" android:label="@string/title_activity_company_portal_required" android:name="com.acompli.acompli.MAMCompanyPortalRequiredActivity"/>
+        <receiver android:exported="false" android:name="com.microsoft.office.outlook.notification.NotificationsActionReceiver">
+            <intent-filter>
+                <action android:name="com.microsoft.office.outlook.action.REMOVE_ALL_MESSAGE_NOTIFICATIONS"/>
+                <action android:name="com.microsoft.office.outlook.action.REMOVE_ACCOUNT_MESSAGE_NOTIFICATIONS"/>
+                <action android:name="com.microsoft.office.outlook.action.REMOVE_MESSAGE_NOTIFICATION"/>
+                <action android:name="com.microsoft.office.outlook.action.REMOVE_EVENT_NOTIFICATION"/>
+            </intent-filter>
+        </receiver>
+        <activity android:label="@string/interesting_calendar_title" android:name="com.acompli.acompli.ui.event.calendar.interesting.InterestingCalendarActivity"/>
+        <activity android:label="@string/floodgate_activity_survey_title" android:name="com.microsoft.office.feedback.floodgate.MainActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge.Light"/>
+        <activity android:exported="false" android:label="@string/app_name" android:name="com.microsoft.office.outlook.ui.onboarding.oauth.StackChooserActivity" android:theme="@style/Theme.Outlook.Transparent"/>
+        <activity android:label="@string/title_activity_edit_favorites" android:name="com.acompli.acompli.ui.drawer.favorite.EditFavoritesActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:label="@string/title_activity_edit_favorites" android:name="com.acompli.acompli.ui.drawer.favorite.ComposeEditFavoritesActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:name="com.acompli.acompli.ui.drawer.favorite.FavoritePickerActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name="com.microsoft.office.outlook.compose.ComposeActivityWithFragment" android:theme="@style/Theme.Outlook.Compose" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name="com.microsoft.office.outlook.compose.ComposeActivityWithFragmentAffinity" android:taskAffinity="@string/task_affinity_compose" android:theme="@style/Theme.Outlook.Compose.NewWindow" android:windowSoftInputMode="adjustResize"/>
+        <activity android:exported="false" android:name="com.acompli.acompli.ui.localcalendars.LocalCalendarsPickerActivity"/>
+        <activity android:exported="false" android:label="" android:name="com.microsoft.office.outlook.inappupdate.appcenter.AppCenterInAppUpdateActivity" android:theme="@style/Theme.Outlook.Transparent"/>
+        <receiver android:exported="false" android:name="com.acompli.acompli.receivers.PowerLiftDiagnosticsStatusReceiver">
+            <intent-filter>
+                <action android:name="com.microsoft.ACTION_SEND_DIAGNOSTICS_STATUS"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.acompli.acompli.receivers.PackageReplacedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.outlook.receiver.OutlookBootReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="false" android:name="com.microsoft.office.outlook.services.FilesDirectDownloadIntentService"/>
+        <service android:exported="false" android:name="com.microsoft.office.outlook.recoverymode.RecoveryModeProcess" android:permission="android.permission.BIND_JOB_SERVICE" android:process=":recoveryMode"/>
+        <receiver android:exported="true" android:name="com.acompli.acompli.receivers.TimeZoneChangedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <activity android:name="com.microsoft.office.outlook.ics.IcsActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:name="com.microsoft.office.outlook.calendar.CalendarSyncPermissionsActivity" android:theme="@style/Theme.Outlook.Launcher"/>
+        <activity android:launchMode="singleTask" android:name="com.microsoft.office.outlook.calendar.sync.EnableCalendarSyncActivity" android:noHistory="true" android:theme="@style/Theme.Outlook.Transparent"/>
+        <service android:exported="true" android:name="com.microsoft.office.outlook.calendarsync.adapter.CalendarSyncAdapterService">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data android:name="android.content.SyncAdapter" android:resource="@xml/calsyncadapter"/>
+        </service>
+        <service android:exported="true" android:name="com.microsoft.office.outlook.contactsync.adapter.ContactSyncAdapterService">
+            <intent-filter>
+                <action android:name="android.content.SyncAdapter"/>
+            </intent-filter>
+            <meta-data android:name="android.content.SyncAdapter" android:resource="@xml/contacts_syncadapter"/>
+            <meta-data android:name="android.provider.CONTACTS_STRUCTURE" android:resource="@xml/contacts_structure"/>
+        </service>
+        <activity android:name="com.microsoft.office.outlook.compose.smime.SmimeOptionsActivityV1"/>
+        <receiver android:exported="true" android:name="com.microsoft.office.outlook.auth.service.AccountSSOCreationRequestReceiver">
+            <intent-filter>
+                <action android:name="com.microsoft.office.outlook.ACCOUNT_CREATION_PERMISSION"/>
+            </intent-filter>
+        </receiver>
+        <meta-data android:name="com.google.android.actions" android:resource="@xml/actions"/>
+        <activity android:name="com.microsoft.office.outlook.privacy.PrivacyTourActivity" android:theme="@style/Theme.Outlook.Splash"/>
+        <activity android:label="" android:name="com.microsoft.office.outlook.calendar.intentbased.IntentBasedTimePickerActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:name="com.microsoft.office.outlook.calendar.intentbased.SchedulingRequestsActivity" android:theme="@style/Theme.Outlook"/>
+        <activity android:name="com.microsoft.office.outlook.calendar.intentbased.PollDetailActivity" android:theme="@style/Theme.Outlook"/>
+        <activity android:name="com.microsoft.office.outlook.calendar.intentbased.PollTimeDetailActivity" android:theme="@style/Theme.Outlook"/>
+        <activity android:name="com.microsoft.office.outlook.calendar.intentbased.MeetingPollVoteActivity" android:theme="@style/Theme.Outlook.Transparent"/>
+        <activity android:name="com.microsoft.office.outlook.calendar.intentbased.DisplayAttendeeVotesActivity" android:theme="@style/Theme.Outlook"/>
+        <activity android:name="com.microsoft.office.outlook.calendar.hybrid.HybridTimePickerActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:name="com.microsoft.office.outlook.folders.ChooseFolderActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:name="com.microsoft.office.outlook.folders.ComposeChooseFolderActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:exported="false" android:name="com.microsoft.office.outlook.zip.ZipBrowserActivity"/>
+        <activity android:label="@string/ad_preferences_setting_title" android:name="com.acompli.acompli.ads.regulations.RegulatoryPromptActivity" android:theme="@style/Theme.Outlook.IllustrationPrompt"/>
+        <activity android:label="@string/ad_preferences_setting_title" android:name="com.acompli.acompli.ads.regulations.RegulatoryOpxActivity" android:theme="@style/Theme.Outlook"/>
+        <activity android:name="com.acompli.acompli.ads.details.AdDetailsActivity"/>
+        <activity android:label="@string/ad_preferences_setting_title" android:name="com.acompli.acompli.ads.eu.EuRulingPromptActivity" android:theme="@style/Theme.Outlook.IllustrationPrompt"/>
+        <activity android:exported="false" android:label="@string/app_name" android:name="com.microsoft.office.outlook.ui.onboarding.login.support.HelpAndWrongAuthTypeActivity" android:theme="@style/Theme.Outlook.Transparent"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/file_preview" android:launchMode="singleTop" android:name="com.microsoft.office.outlook.previewer.WacPreviewActivity" android:windowSoftInputMode="adjustResize"/>
+        <receiver android:enabled="true" android:exported="false" android:name="com.microsoft.office.outlook.calendar.workers.EventNotificationUpdateReceiver"/>
+        <activity android:name="com.acompli.acompli.ui.settings.SmimeCertificatesPickerActivity"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:label="@string/file_preview" android:launchMode="singleTop" android:name="com.microsoft.office.outlook.viewers.text.TextFileViewerActivity"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:label="@string/file_preview" android:launchMode="singleTop" android:name="com.microsoft.office.outlook.viewers.media.MediaViewerActivity"/>
+        <receiver android:enabled="true" android:exported="false" android:name="com.acompli.acompli.download.FileDownloadReceiver"/>
+        <activity android:configChanges="keyboardHidden|layoutDirection|orientation|screenSize" android:label="@string/office_feedback_title" android:name="com.microsoft.office.feedback.inapp.MainActivity" android:theme="@style/OfficeFeedbackDialog"/>
+        <activity android:exported="false" android:label="@string/ads_and_iap_debug" android:name="com.microsoft.office.outlook.iap.debug.IapDebugProdActivity"/>
+        <activity android:name="com.microsoft.office.outlook.compose.menuitems.EditMenuItemOrderActivity" android:theme="@style/Theme.Outlook"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize" android:label="@string/contact_editor" android:launchMode="singleTask" android:name="com.microsoft.office.outlook.livepersonaeditor.ui.LivePersonaEditorActivity" android:theme="@style/Theme.Outlook"/>
+        <activity android:label="@string/settings_sender_screening_management_title" android:name="com.acompli.acompli.ui.settings.SenderScreeningAccountSwitcherActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge"/>
+        <activity android:exported="false" android:name="com.microsoft.office.outlook.utils.OutlookWebViewActivity" android:theme="@style/Theme.Outlook.Transparent"/>
+        <activity android:exported="false" android:name="com.microsoft.office.outlook.iap.IapRedeemActivity" android:theme="@style/Theme.Outlook.Transparent"/>
+        <receiver android:name="com.microsoft.office.outlook.notification.PeriodicSyncKeepAliveReceiver"/>
+        <service android:name="com.microsoft.office.outlook.notification.PeriodicSyncKeepAliveService"/>
+        <service android:enabled="false" android:exported="false" android:name="androidx.appcompat.app.AppLocalesMetadataHolderService">
+            <meta-data android:name="autoStoreLocales" android:value="true"/>
+        </service>
+        <provider android:authorities="com.microsoft.office.outlook.provider" android:exported="false" android:grantUriPermissions="true" android:name="com.reactnative.ivpusic.imagepicker.IvpusicImagePickerFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/ivpusic_imagepicker_provider_paths"/>
+        </provider>
+        <activity android:name="com.yalantis.ucrop.UCropActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <provider android:authorities="com.microsoft.office.outlook.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_provider_paths"/>
+        </provider>
+        <activity android:exported="true" android:launchMode="singleTask" android:name="com.microsoft.office.outlook.OnboardingActivity"/>
+        <activity android:exported="false" android:name="com.microsoft.office.outlook.calendar.compose.EventComposeActivity"/>
+        <activity android:name="com.microsoft.office.outlook.compose.ComposeDialogActivity" android:theme="@style/Theme.Outlook.ComposeV2.Transparent"/>
+        <activity android:name="com.microsoft.office.outlook.compose.link.SharingLinkPermissionSettingsActivity"/>
+        <activity android:configChanges="orientation|screenSize" android:label="@string/settings_addin_title" android:name="com.microsoft.office.addins.ui.WebViewActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="" android:name="com.microsoft.office.addins.ui.DialogWebViewActivity" android:theme="@style/Theme.Outlook.DialogWhenLarge" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/settings_addin_title" android:name="com.microsoft.office.addins.ui.StoreActivity"/>
+        <activity android:label="@string/settings_addin_terms_privacy_title" android:name="com.microsoft.office.addins.ui.TermsPrivacyPolicyActivity"/>
+        <activity android:label="@string/app_name" android:name="com.microsoft.office.addins.ui.GenericWebViewActivity"/>
+        <activity android:label="@string/docked_drafts" android:name="com.microsoft.outlook.itemdocking.itemlist.DockItemListActivity"/>
+        <activity android:label="@string/title_activity_attach" android:name="com.microsoft.office.outlook.mailui.actions.contributions.actionbar.ui.EditActionBarOrderActivity"/>
+        <activity android:name="com.microsoft.office.outlook.genai.ui.inboxsummary.InboxSummaryActivity"/>
+        <activity android:name="com.microsoft.office.outlook.genai.ui.coach.CoachDebugActivity" android:theme="@style/Theme.Outlook.Transparent" android:windowSoftInputMode="adjustResize|stateVisible"/>
+        <activity android:exported="false" android:name="com.microsoft.office.outlook.platform.sdkmanager.PlatformSdkIntentProcessorActivity" android:theme="@style/Theme.AppCompat.Transparent.NoActionBar"/>
+        <activity android:exported="false" android:name="com.microsoft.office.outlook.edgeintegration.EdgeOpenLinkCardActivity" android:theme="@style/Theme.Outlook.Transparent"/>
+        <activity android:launchMode="singleTask" android:name="com.microsoft.office.outlook.acw.ui.AccountCheckupWizardCampaignActivity" android:taskAffinity="@string/task_affinity_account_checkup_wizard"/>
+        <service android:exported="false" android:name="com.acompli.accore.ACCoreService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:exported="false" android:name="com.microsoft.office.outlook.shutdown.ShutdownMonitorService"/>
+        <receiver android:exported="false" android:name="com.acompli.accore.ACCoreService$Receiver">
+            <intent-filter>
+                <action android:name="ACOMPLI_ARCHIVE"/>
+                <action android:name="ACOMPLI_SOFT_RESET"/>
+                <action android:name="ACOMPLI_HARD_RESET"/>
+                <action android:name="ACOMPLI_BUNDLE_RESET"/>
+                <action android:name="ACOMPLI_DELETE"/>
+                <action android:name="OUTLOOK_REMOVE_AND_RE_ADD_ACCOUNT"/>
+                <action android:name="DIRECT_REPLY"/>
+                <action android:name="OLM_BG_CONNECT_ACTION"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.microsoft.office.outlook.notification.NotificationActionReceiver">
+            <intent-filter>
+                <action android:name="DELETE_ACTION"/>
+                <action android:name="MARK_READ_ACTION"/>
+                <action android:name="MARK_READ_AND_ARCHIVE_ACTION"/>
+                <action android:name="FLAG_MESSAGE_ACTION"/>
+                <action android:name="ACOMPLI_ARCHIVE"/>
+            </intent-filter>
+        </receiver>
+        <provider android:authorities="com.microsoft.office.outlook.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.profileinstaller.ProfileInstallerInitializer" android:value="androidx.startup"/>
+        </provider>
+        <service android:exported="false" android:name="com.evernote.android.job.v21.PlatformJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:exported="false" android:name="com.evernote.android.job.JobRescheduleService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <activity android:exported="true" android:name="com.microsoft.office.outlook.dictation.settings.DictationLanguageActivity">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.microsoft.cortana.shared.cortana.common.VoiceConsentActivity" android:theme="@style/Theme.Outlook.CommutePlayer"/>
+        <activity android:name="com.microsoft.office.outlook.authenticator.settings.AuthenticatorSettingsActivity"/>
+        <activity android:name="com.microsoft.office.outlook.authenticator.AuthenticatorInteractiveRegistrationActivity"/>
+        <activity android:label="@string/title_activity_attach" android:name="com.microsoft.office.outlook.lenscapture.compose.LensPhotoCaptureActivity" android:theme="@style/Theme.Lens.Transparent"/>
+        <activity android:name="com.microsoft.office.outlook.lenscapture.contact.BusinessCardFlowActivity" android:theme="@style/Theme.Lens.Transparent"/>
+        <activity android:label="@string/title_activity_attach" android:name="com.microsoft.office.outlook.lensvideo.compose.LensVideoCaptureActivity" android:theme="@style/Theme.Lens.Transparent"/>
+        <activity android:exported="true" android:launchMode="singleTask" android:name="com.microsoft.office.outlook.ui.InteractiveAuthActivity" android:windowSoftInputMode="adjustResize">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="com.microsoft.office.outlook" android:scheme="outlook-oauth"/>
+                <data android:pathPattern="/android/.*/oauth2redirect"/>
+            </intent-filter>
+        </activity>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.microsoft.authenticator.mfasdk.authentication.aad.ui.MfaAuthDialogActivity" android:theme="@style/activity_dialog_theme"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:launchMode="singleTask" android:name="com.microsoft.authenticator.mfasdk.authentication.msa.ui.MsaSessionActivity" android:theme="@style/msa_activity_dialog_theme"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.microsoft.authenticator.mfasdk.authentication.msa.ui.MsaProtectionActivity" android:theme="@style/msa_protection_activity_dialog_theme"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.microsoft.authenticator.mfasdk.authentication.msa.ui.MsaProtectionWebViewActivity" android:theme="@style/msa_protection_activity_web_view_theme"/>
+        <receiver android:name="com.microsoft.authenticator.mfasdk.businessLogic.MfaNotificationActionBroadcastReceiver"/>
+        <provider android:authorities="com.microsoft.office.outlook.mfasdk.shareddatacontentprovider" android:enabled="true" android:exported="true" android:name="com.microsoft.authenticator.mfasdk.provider.SharedDataContentProvider"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:foregroundServiceType="location|shortService" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.microsoft.authenticator.commonuilibrary.ui.localauth.DeviceScreenUnlockActivity" android:theme="@style/transparent_theme"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.microsoft.authenticator.commonuilibrary.ui.AppLockActivity" android:screenOrientation="portrait"/>
+        <service android:exported="false" android:name="com.google.android.enterprise.connectedapps.CrossProfileConnector_Service"/>
+        <service android:exported="true" android:label="" android:name="com.microsoft.intune.mam.client.notification.MAMNotificationReceiverService"/>
+        <service android:exported="false" android:label="" android:name="com.microsoft.intune.mam.client.service.MAMBackgroundService"/>
+        <receiver android:exported="true" android:name="com.microsoft.intune.mam.client.service.MAMBackgroundReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+            </intent-filter>
+        </receiver>
+        <activity android:exported="false" android:multiprocess="true" android:name="com.microsoft.intune.mam.client.app.offline.OfflineStartupBlockedActivity"/>
+        <activity android:exported="false" android:multiprocess="true" android:name="com.microsoft.intune.mam.client.app.startup.MAMStartupActivity"/>
+        <activity android:exported="false" android:name="com.microsoft.intune.mam.client.app.resolver.MAMResolverActivity" android:taskAffinity="" android:theme="@style/MAMDialogTheme"/>
+        <meta-data android:name="com.microsoft.intune.mam.MAMMultiIdentity" android:value="true"/>
+        <meta-data android:name="com.microsoft.intune.mam.aad.ClientID" android:value="27922004-5251-4030-b22d-91ecd9a37ea4"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="false" android:name="com.microsoft.office.outlook.uikit.widget.ExtractModeEditTextActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:configChanges="density|fontScale|keyboard|keyboardHidden|layoutDirection|locale|mcc|mnc|navigation|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:exported="false" android:launchMode="singleInstance" android:name="com.microsoft.oneplayer.player.ui.view.activity.OnePlayerActivity" android:supportsPictureInPicture="true" android:taskAffinity="com.microsoft.office.outlook.OnePlayerActivity" android:theme="@style/op_default_theme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <service android:exported="false" android:name="com.microsoft.oneplayer.core.service.PlayerProviderService"/>
+        <activity android:label="@string/title_host_window_activity" android:launchMode="singleTask" android:name="com.microsoft.metaos.hubsdk.ui.HostWindowActivity" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <provider android:authorities="com.microsoft.office.outlook.provider" android:exported="false" android:grantUriPermissions="true" android:name="com.microsoft.apphostingsdk.providers.HostSdkFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
+        <activity android:exported="false" android:name="com.microsoft.powerlift.android.rave.internal.ui.conversation.RaveConversationActivity" android:theme="@style/Theme.PowerLift"/>
+        <activity android:exported="false" android:name="com.microsoft.powerlift.android.rave.internal.ui.start.RaveStartActivity" android:theme="@style/Theme.PowerLift.Dialog"/>
+        <activity android:exported="false" android:name="com.microsoft.powerlift.android.rave.internal.ui.insights.SupportInsightsActivity" android:theme="@style/Theme.PowerLift"/>
+        <activity android:exported="false" android:name="com.microsoft.powerlift.android.RemedyActivity" android:theme="@style/Theme.PowerLift"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:launchMode="singleTop" android:name="com.microsoft.authentication.internal.OneAuthNavigationActivity" android:theme="@style/oneauth_theme"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:name="com.microsoft.identity.common.internal.providers.oauth2.AuthorizationActivity" android:theme="@style/oneauth_theme"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="false" android:launchMode="singleTask" android:name="com.microsoft.identity.internal.ui.BrowserTabActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:name="com.microsoft.identity.common.internal.providers.oauth2.CurrentTaskAuthorizationActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:name="com.microsoft.identity.common.internal.broker.BrokerActivity"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:name="com.microsoft.identity.common.internal.broker.InstallCertActivityLauncher" android:theme="@style/Theme.AppCompat.Light"/>
+        <meta-data android:name="com.google.android.play.billingclient.version" android:value="6.2.1"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:exported="false" android:name="com.android.billingclient.api.ProxyBillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:exported="false" android:name="com.android.billingclient.api.ProxyBillingActivityV2" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <receiver android:exported="true" android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+            <meta-data android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED" android:value="true"/>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.messaging.FirebaseMessagingService">
+            <intent-filter android:priority="-500">
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.components.ComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <service android:enabled="true" android:exported="false" android:name="androidx.credentials.playservices.CredentialProviderMetadataHolder">
+            <meta-data android:name="androidx.credentials.CREDENTIAL_PROVIDER_KEY" android:value="androidx.credentials.playservices.CredentialProviderPlayServicesImpl"/>
+        </service>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize" android:enabled="true" android:exported="false" android:fitsSystemWindows="true" android:name="androidx.credentials.playservices.HiddenActivity" android:theme="@style/Theme.Hidden"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <service android:exported="true" android:name="com.google.android.gms.auth.api.signin.RevocationBoundService" android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" android:visibleToInstantApps="true"/>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.vision.barcode.internal.BarcodeRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <provider android:authorities="com.microsoft.office.outlook.mlkitinitprovider" android:exported="false" android:initOrder="99" android:name="com.google.mlkit.common.internal.MlKitInitProvider"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="false" android:hardwareAccelerated="true" android:name="com.facebook.ads.AudienceNetworkActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <provider android:authorities="com.microsoft.office.outlook.firebaseinitprovider" android:directBootAware="true" android:exported="false" android:initOrder="100" android:name="com.google.firebase.provider.FirebaseInitProvider"/>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+            <intent-filter>
+                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+            </intent-filter>
+        </receiver>
+        <activity android:name="com.flipgrid.camera.onecamera.playback.SaveVideoToDownloadsActivity" android:theme="@style/Theme.AppCompat.Light"/>
+        <service android:exported="true" android:name="androidx.sharetarget.ChooserTargetServiceCompat" android:permission="android.permission.BIND_CHOOSER_TARGET_SERVICE">
+            <intent-filter>
+                <action android:name="android.service.chooser.ChooserTargetService"/>
+            </intent-filter>
+        </service>
+        <uses-library android:name="androidx.window.extensions" android:required="false"/>
+        <uses-library android:name="androidx.window.sidecar" android:required="false"/>
+        <service android:enabled="false" android:exported="false" android:name="androidx.camera.core.impl.MetadataHolderService">
+            <meta-data android:name="androidx.camera.core.impl.MetadataHolderService.DEFAULT_CONFIG_PROVIDER" android:value="androidx.camera.camera2.Camera2Config$DefaultProvider"/>
+        </service>
+        <provider android:authorities="com.microsoft.office.outlook.com.flipgrid.camera.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.flipgrid.camera.core.OneCameraFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"/>
+        </provider>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery">
+            <meta-data android:name="backend:com.google.android.datatransport.cct.CctBackendFactory" android:value="cct"/>
+        </service>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION"/>
+            </intent-filter>
+        </receiver>
+        <activity android:exported="false" android:multiprocess="true" android:name="com.microsoft.mobile.paywallsdk.ui.PaywallActivity" android:theme="@style/PaywallSDKTheme.Transparent"/>
+        <activity android:exported="false" android:multiprocess="true" android:name="com.microsoft.mobile.paywallsdk.ui.compliance.PaywallPrivacyActivity" android:theme="@style/PaywallSDKTheme.Transparent"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize" android:name="com.appnexus.opensdk.AdActivity" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:excludeFromRecents="true" android:label="@string/yubikit_otp_activity_title" android:name="com.yubico.yubikit.android.ui.OtpActivity" android:theme="@style/YubiKitPromptDialogTheme"/>
+        <activity android:excludeFromRecents="true" android:label="@string/yubikit_prompt_activity_title" android:name="com.yubico.yubikit.android.ui.YubiKeyPromptActivity" android:theme="@style/YubiKitPromptDialogTheme"/>
+        <service android:exported="false" android:label="" android:name="com.microsoft.intune.mam.client.service.MAMBackgroundJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <activity android:exported="false" android:multiprocess="true" android:name="com.microsoft.intune.mam.client.app.offline.OfflineRestartRequiredActivity"/>
+        <activity android:exported="false" android:multiprocess="true" android:name="com.microsoft.intune.mam.client.app.offline.OfflineInstallCompanyPortalDialogActivity" android:theme="@style/MAMDialogTheme"/>
+        <activity android:exported="false" android:name="com.microsoft.intune.mam.client.app.offline.OfflineNotifyWipeActivity"/>
+        <activity android:exported="false" android:label="ComplianceBlock" android:name="com.microsoft.intune.mam.client.app.startup.MAMComplianceBlockActivity"/>
+        <activity android:label="@string/ah" android:name="com.microsoft.moderninput.voiceactivity.voicesettings.LanguageSettingsActivity"/>
+        <activity android:label="@string/af" android:name="com.microsoft.moderninput.voiceactivity.voicesettings.SettingsActivity"/>
+        <activity android:name="com.microsoft.moderninput.voiceactivity.HelpPageActivity"/>
+        <activity android:multiprocess="true" android:name="com.microsoft.office.lens.lenscommon.ui.LensActivity" android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" android:windowSoftInputMode="stateAlwaysHidden|adjustPan"/>
+        <activity android:exported="true" android:name="androidx.test.core.app.InstrumentationActivityInvoker$BootstrapActivity"/>
+        <activity android:exported="true" android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyActivity"/>
+        <activity android:exported="true" android:name="androidx.test.core.app.InstrumentationActivityInvoker$EmptyFloatingActivity"/>
+        <service android:enabled="true" android:exported="true" android:name="com.microsoft.tokenshare.TokenSharingService">
+            <intent-filter>
+                <action android:name="com.microsoft.tokenshare.TokenSharingService"/>
+            </intent-filter>
+        </service>
+        <meta-data android:name="token_share_sdk_version" android:value="2"/>
+        <meta-data android:name="token_share_build_version" android:value="1.6.11"/>
+        <meta-data android:name="token_share_parcelable_version" android:value="3"/>
+    </application>
+</manifest>

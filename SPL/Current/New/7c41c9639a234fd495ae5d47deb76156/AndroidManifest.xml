@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13" package="com.miui.calculator" platformBuildVersionCode="33" platformBuildVersionName="13">
+    <permission android:name="com.miui.calculator.permission.SHOW_FLOAT_WINDOW" android:protectionLevel="privileged|signature"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL"/>
+    <uses-permission android:name="android.permission.WRITE_SECURE_SETTINGS"/>
+    <uses-permission android:name="com.xiaomi.market.sdk.UPDATE"/>
+    <uses-permission android:name="com.miui.securitycenter.permission.SYSTEM_PERMISSION_DECLARE"/>
+    <uses-permission android:name="miui.personalassistant.ACCESS_PROVIDER"/>
+    <uses-permission android:name="com.miui.personalassistant.permission.WIDGET_READ_SETTINGS"/>
+    <uses-permission android:name="com.miui.personalassistant.permission.WIDGET_WRITE_SETTINGS"/>
+    <meta-data android:name="miui_private_label" android:value="PRIVATE_V150"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:icon="@drawable/app_icon" android:label="@string/app_name" android:name="com.miui.calculator.CalculatorApplication" android:resizeableActivity="true" android:supportsRtl="true">
+        <meta-data android:name="android.max_aspect" android:value="3.0"/>
+        <meta-data android:name="miui.screenOrientation" android:value="1.unspecified,2.portrait,3.unspecified"/>
+        <meta-data android:name="app_description_title" android:resource="@string/uninstall_warning_title"/>
+        <meta-data android:name="app_description_content" android:resource="@string/uninstall_warning_content"/>
+        <meta-data android:name="mi_stat_channel" android:value="miui"/>
+        <meta-data android:name="required_permissions" android:value="@string/required_permissions"/>
+        <meta-data android:name="use_miui_font" android:value="true"/>
+        <meta-data android:name="miuiWidgetVersion" android:value="6"/>
+        <property android:name="android.view.PROPERTY_MIUI_SMOOTH_CORNER_ENABLED" android:value="true"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="true" android:label="@string/app_name" android:launchMode="singleTop" android:name="com.miui.calculator.cal.CalculatorActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Simple.ActionBar.NoTitle" android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.APP_CALCULATOR"/>
+                <category android:name="miui.intent.category.SYSAPP_TOOL"/>
+            </intent-filter>
+            <meta-data android:name="android.app.shortcuts" android:resource="@xml/shortcuts"/>
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="com.miui.calculator" android:path="/home" android:scheme="calculator"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="mi.quicksearch.intent.action.RETRIEVE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="mi.quicksearch.hints" android:resource="@xml/mi_quicksearch_hints"/>
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.miui.calculator.action.SCIENTIFIC_MODE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.miui.calculator.action.CONVERT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.miui.calculator.action.MAINPAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="functionindex" android:resource="@xml/functionindex"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="true" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.miui.calculator.cal.CalculatorTabActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Simple.ActionBar.NoTitle" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:exported="true" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.miui.calculator.cal.DefaultCalculatorActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Translucent.ActionBar.NoTitle" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:exported="true" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.miui.calculator.cal.AllInOneCalculatorActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Simple.ActionBar.NoTitle" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:label="@string/tax_city_picker" android:name="com.miui.calculator.tax.CityPickerActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.ActionBar">
+            <property android:name="miui.continuity.policy" android:value="4"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:label="@string/tax_individual_income_tax_result" android:name="com.miui.calculator.tax.ResultOfTaxActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.ActionBar">
+            <property android:name="miui.continuity.policy" android:value="4"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:label="@string/tax_income_annual_bonus_list" android:name="com.miui.calculator.tax.AnnualBonusResultActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.ActionBar">
+            <property android:name="miui.continuity.policy" android:value="4"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:label="@string/mortgage_result" android:name="com.miui.calculator.tax.ResultOfMortgageActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.ActionBar">
+            <property android:name="miui.continuity.policy" android:value="4"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="true" android:label="@string/wf_word_figure" android:name="com.miui.calculator.wordfigure.WordFigureActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Translucent.ActionBar.NoTitle" android:windowSoftInputMode="stateAlwaysHidden"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="true" android:label="@string/convert_currency" android:launchMode="singleTask" android:name="com.miui.calculator.convert.CurrencyActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Translucent.ActionBar.NoTitle" android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <action android:name="com.miui.calculator.action.CURRENCY"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:excludeFromRecents="true" android:exported="true" android:launchMode="singleTask" android:name="com.miui.calculator.convert.WidgetCurrencyActivity" android:resizeableActivity="false" android:screenOrientation="behind" android:taskAffinity="com.miui.calculator.convert.WidgetCurrencyActivity" android:theme="@style/Calculator.Theme.Light.Translucent.Widget" android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="com.miui.calculator" android:path="/convert/currency_activity" android:scheme="calculator"/>
+            </intent-filter>
+            <meta-data android:name="miui.screenOrientation" android:value="3.unset"/>
+            <property android:name="miui.window.DOT_ENABLED" android:value="false"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="true" android:label="@string/relationship" android:name="com.miui.calculator.relationship.RelationshipActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Translucent.ActionBar.NoTitle" android:windowSoftInputMode="stateAlwaysHidden">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <action android:name="miui.intent.action.calculator.relationship"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="true" android:name="com.miui.calculator.cal.CalSettingsActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Settings"/>
+        <activity android:exported="true" android:label="@string/preference_privacy_setting" android:name="com.miui.calculator.setting.PrivacySettingActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Settings"/>
+        <activity android:exported="true" android:label="@string/preference_permission_info" android:name="com.miui.calculator.setting.PermissionInfoActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Settings"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="true" android:label="@string/extra_deduction_title" android:name="com.miui.calculator.tax.ExtraDeductionPickActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Simple.Background">
+            <property android:name="miui.continuity.policy" android:value="4"/>
+        </activity>
+        <activity android:excludeFromRecents="true" android:exported="false" android:label="" android:name="com.miui.calculator.tax.LicenseActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.LicenseActivity">
+            <property android:name="miui.continuity.policy" android:value="4"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:label="@string/investment_loan_result" android:name="com.miui.calculator.convert.global.activity.FinanceResultActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Simple.Background"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:label="@string/label_statistics" android:name="com.miui.calculator.convert.global.activity.StatisticActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Simple.Background"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="true" android:label="@string/item_title_menu_income_tax" android:name="com.miui.calculator.tax.TaxActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Translucent.ActionBar.NoTitle">
+            <intent-filter>
+                <action android:name="com.miui.calculator.action.TAX"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <property android:name="miui.continuity.policy" android:value="4"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="true" android:label="@string/item_title_menu_mortgage" android:name="com.miui.calculator.tax.MortgageActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Translucent.ActionBar.NoTitle">
+            <intent-filter>
+                <action android:name="com.miui.calculator.action.MORTGAGE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <property android:name="miui.continuity.policy" android:value="4"/>
+        </activity>
+        <activity android:label="@string/item_title_result" android:name="com.miui.calculator.convert.BmiResultActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Simple.Background"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:exported="false" android:label="@string/tax_insurance_and_fund" android:name="com.miui.calculator.cal.FiveInsuranceActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Simple.Background">
+            <property android:name="miui.continuity.policy" android:value="4"/>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:label="@string/histories" android:name="com.miui.calculator.cal.history.HistoryActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Translucent">
+            <property android:name="miui.continuity.policy" android:value="4"/>
+        </activity>
+        <activity android:exported="false" android:label="@string/label_share" android:launchMode="singleTop" android:name="com.miui.calculator.global.share.ImageShareActivity" android:screenOrientation="behind" android:theme="@style/Calculator.Theme.Light.Simple"/>
+        <provider android:authorities="com.miui.calculator.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"/>
+        </provider>
+        <receiver android:exported="true" android:name="com.miui.voiceassist.mvs.client.MvsClientReceiver" android:permission="com.miui.voiceassist.MVS_BROADCAST">
+            <intent-filter>
+                <action android:name="com.miui.voiceassist.mvs.client.ACTION_RESGISTER_MVS"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:label="@string/widget_calculator_name" android:name="com.miui.calculator.widget.CalWidgetProvider" android:process=":widgetProvider">
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/cal_appwidget_info"/>
+            <meta-data android:name="miuiWidget" android:value="true"/>
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="miui.appwidget.action.APPWIDGET_UPDATE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:label="@string/widget_currency_name" android:name="com.miui.calculator.widget.CurrencyWidgetProvider" android:process=":widgetProvider">
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/currency_appwidget_info"/>
+            <meta-data android:name="miuiWidget" android:value="true"/>
+            <meta-data android:name="miuiWidgetRefresh" android:value="exposure"/>
+            <meta-data android:name="miuiWidgetRefreshMinInterval" android:value="1800000"/>
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="miui.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="UPDATE_CURRENCY"/>
+                <action android:name="IS_NETWORK_CONNECTED"/>
+                <action android:name="android.intent.action.LOCALE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <meta-data android:name="market_sdk_version" android:value="3.2.26"/>
+        <meta-data android:name="miuixpreference" android:value="3.0"/>
+        <meta-data android:name="appcompat" android:value="3.0"/>
+        <meta-data android:name="transition" android:value="1.0"/>
+        <meta-data android:name="popupwidget" android:value="1.0"/>
+        <meta-data android:name="androidbasewidget" android:value="1.0"/>
+        <meta-data android:name="miuixstretchablewidget" android:value="1.0"/>
+        <meta-data android:name="slidingwidget" android:value="1.0"/>
+        <meta-data android:name="pickerwidget" android:value="1.0"/>
+        <meta-data android:name="miuixbasewidget" android:value="1.0"/>
+        <meta-data android:name="springback" android:value="3.0"/>
+        <meta-data android:name="recyclerview" android:value="2.0"/>
+        <meta-data android:name="nest" android:value="2.0"/>
+        <meta-data android:name="haptic" android:value="1.0"/>
+        <meta-data android:name="dynamicoverscroller" android:value="2.0"/>
+        <meta-data android:name="recyclerview_animator" android:value="2.0"/>
+        <meta-data android:name="folme" android:value="2.0"/>
+        <meta-data android:name="smooth" android:value="1.0"/>
+        <meta-data android:name="devicebaseinfo" android:value="1.0"/>
+        <meta-data android:name="graphics" android:value="2.0"/>
+        <meta-data android:name="core" android:value="2.0"/>
+        <meta-data android:name="viewpager" android:value="2.0"/>
+        <meta-data android:name="spring" android:value="1.0"/>
+        <uses-library android:name="androidx.window.extensions" android:required="false"/>
+        <uses-library android:name="androidx.window.sidecar" android:required="false"/>
+        <meta-data android:name="animation" android:value="1.0"/>
+        <meta-data android:name="theme" android:value="1.0"/>
+    </application>
+</manifest>

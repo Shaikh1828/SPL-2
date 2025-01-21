@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="35" android:compileSdkVersionCodename="Baklava" android:requiredSplitTypes="" android:splitTypes="" package="com.google.android.apps.youtube.music" platformBuildVersionCode="35" platformBuildVersionName="Baklava">
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:maxSdkVersion="30" android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:maxSdkVersion="30" android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.NFC"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_AUDIO"/>
+    <uses-permission android:maxSdkVersion="32" android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:maxSdkVersion="30" android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <uses-permission android:maxSdkVersion="22" android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:maxSdkVersion="22" android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:maxSdkVersion="22" android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="com.google.android.gms.permission.ACTIVITY_RECOGNITION"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_DATA_SYNC"/>
+    <uses-permission android:name="android.permission.RUN_USER_INITIATED_JOBS"/>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_MEDIA_PLAYBACK"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <permission android:name="com.google.android.apps.youtube.music.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.google.android.apps.youtube.music.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <uses-feature android:name="android.hardware.wifi" android:required="false"/>
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
+    <uses-feature android:name="android.hardware.microphone" android:required="false"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.location" android:required="false"/>
+    <uses-feature android:name="android.hardware.location.gps" android:required="false"/>
+    <queries>
+        <package android:name="com.google.android.youtube"/>
+        <package android:name="com.google.android.apps.youtube.kids"/>
+        <package android:name="com.google.android.apps.youtube.unplugged"/>
+        <intent>
+            <action android:name="android.media.action.DISPLAY_AUDIO_EFFECT_CONTROL_PANEL"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.TTS_SERVICE"/>
+        </intent>
+        <package android:name="com.google.android.mediaprovider"/>
+        <package android:name="com.google.android.apps.maps"/>
+        <package android:name="com.google.android.apps.meetings"/>
+        <package android:name="com.google.android.gm"/>
+        <package android:name="com.google.android.apps.tachyon"/>
+        <intent>
+            <action android:name="com.android.vending.billing.InAppBillingService.BIND"/>
+        </intent>
+        <intent>
+            <action android:name="com.google.android.apps.play.billingtestcompanion.BillingOverrideService.BIND"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND"/>
+            <data android:mimeType="text/plain"/>
+        </intent>
+        <provider android:authorities="androidx.car.app.connection" android:name="androidx.car.app.connection.provider"/>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:host="www.example.com" android:scheme="http"/>
+        </intent>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService"/>
+        </intent>
+    </queries>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-permission android:name="com.android.vending.BILLING"/>
+    <uses-permission android:name="android.permission.REQUEST_COMPANION_START_FOREGROUND_SERVICES_FROM_BACKGROUND"/>
+    <uses-permission-sdk-23 android:name="android.permission.RECORD_AUDIO"/>
+    <uses-feature android:name="android.hardware.screen.portrait" android:required="false"/>
+    <uses-feature android:glEsVersion="0x00020000" android:required="true"/>
+    <application android:allowBackup="true" android:appCategory="audio" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:backupAgent="com.google.android.apps.youtube.music.application.backup.MusicBackupAgent" android:enableOnBackInvokedCallback="true" android:extractNativeLibs="false" android:fullBackupOnly="false" android:gwpAsanMode="always" android:hardwareAccelerated="true" android:hasFragileUserData="false" android:icon="@mipmap/ic_launcher_release" android:label="@string/app_name" android:largeHeap="true" android:localeConfig="@xml/locales_config" android:logo="@drawable/action_bar_logo_release" android:name="com.google.android.apps.youtube.music.application.YouTubeMusicTikTokRoot_Application" android:networkSecurityConfig="@xml/network_security_config" android:restoreAnyVersion="true" android:roundIcon="@mipmap/ic_launcher_release" android:supportsRtl="true" android:taskAffinity="" android:theme="@style/Theme.YouTubeMusic">
+        <profileable android:shell="true"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <meta-data android:name="com.google.android.backup.api_key" android:value="AEdPqrEAAAAIQEVQYkOug33MYaYu4VFqTEMYaZdvzbKxylIgLQ"/>
+        <meta-data android:name="com.google.android.apps.youtube.config.BuildType" android:value="RELEASE"/>
+        <meta-data android:name="com.google.android.apps.youtube.config.BuildChangelist" android:value="703180205"/>
+        <provider android:authorities="com.google.android.apps.youtube.music.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.google.android.apps.youtube.music.util.MusicFileProviderCompat">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_provider_paths"/>
+        </provider>
+        <service android:exported="false" android:foregroundServiceType="mediaPlayback" android:name="com.google.android.libraries.youtube.player.background.service.BackgroundPlayerService"/>
+        <service android:exported="false" android:foregroundServiceType="dataSync" android:name="com.google.android.libraries.youtube.offline.transfer.service.OfflineKeepAliveService"/>
+        <receiver android:enabled="@bool/enable_package_replaced_receiver" android:exported="@bool/enable_package_replaced_receiver" android:name="com.google.android.apps.youtube.music.offline.OfflineStorePackageReplacedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:enabled="true" android:exported="false" android:name="androidx.mediarouter.media.MediaTransferReceiver"/>
+        <meta-data android:name="analytics.safelisted_events" android:resource="@array/firebase_safelisted_events"/>
+        <provider android:authorities="com.google.android.apps.youtube.music.firebaseinitprovider" android:exported="false" android:name="com.google.firebase.provider.FirebaseInitProvider"/>
+        <activity android:allowTaskReparenting="true" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:exported="true" android:label="@string/app_launcher_name" android:launchMode="singleTask" android:name="com.google.android.apps.youtube.music.activities.MusicActivity" android:resizeableActivity="true" android:supportsPictureInPicture="false" android:theme="@style/Theme.YouTubeMusic.Home" android:windowSoftInputMode="adjustNothing">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="com.google.android.youtube.music.action.shortcut"/>
+                <action android:name="com.google.android.youtube.music.action.navigate"/>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MUSIC_PLAYER"/>
+                <action android:name="com.google.android.youtube.music.action.play"/>
+                <action android:name="android.media.action.MEDIA_PLAY_FROM_SEARCH"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.APP_MUSIC"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.youtube.music.action.unlimited"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="vnd.youtube.music"/>
+                <data android:scheme="vnd.youtube.music.launch"/>
+            </intent-filter>
+        </activity>
+        <activity-alias android:exported="false" android:name="com.google.android.apps.youtube.music.activities.InternalMusicActivity" android:targetActivity="com.google.android.apps.youtube.music.activities.MusicActivity"/>
+        <activity android:excludeFromRecents="true" android:exported="true" android:label="@string/music_picker_title" android:name="com.google.android.apps.youtube.music.activities.MusicPickerActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.PICK"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.OPENABLE"/>
+                <data android:mimeType="vnd.android.cursor.dir/audio"/>
+            </intent-filter>
+        </activity>
+        <receiver android:exported="false" android:name="com.google.android.apps.youtube.music.signals.awareness.router.AwarenessRouterBroadcastReceiver"/>
+        <activity android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize" android:excludeFromRecents="true" android:exported="true" android:name="com.google.android.apps.youtube.music.audiopreview.AudioPreviewPlayerActivity" android:theme="@style/AudioPreviewDialogTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="file"/>
+                <data android:mimeType="audio/*"/>
+                <data android:mimeType="application/ogg"/>
+                <data android:mimeType="application/x-ogg"/>
+                <data android:mimeType="application/itunes"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http"/>
+                <data android:mimeType="audio/*"/>
+                <data android:mimeType="application/ogg"/>
+                <data android:mimeType="application/x-ogg"/>
+                <data android:mimeType="application/itunes"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:mimeType="audio/*"/>
+                <data android:mimeType="application/ogg"/>
+                <data android:mimeType="application/x-ogg"/>
+                <data android:mimeType="application/itunes"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="content"/>
+                <data android:mimeType="audio/*"/>
+                <data android:mimeType="application/ogg"/>
+                <data android:mimeType="application/x-ogg"/>
+                <data android:mimeType="application/itunes"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize" android:exported="false" android:name="com.google.android.apps.youtube.music.browser.BrowserActivity" android:theme="@style/Theme.YouTubeMusic.Settings.Compat"/>
+        <activity android:allowTaskReparenting="false" android:excludeFromRecents="true" android:exported="true" android:label="@string/app_launcher_name" android:launchMode="standard" android:name="com.google.android.apps.youtube.music.deeplink.MusicServiceDeepLinkActivity" android:resizeableActivity="false" android:supportsPictureInPicture="false" android:taskAffinity=".MusicServiceDeepLinkActivity" android:theme="@style/Theme.YouTubeMusic.DeepLinkDialog" android:windowSoftInputMode="adjustNothing">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:host="music.youtube.com"/>
+                <data android:pathPattern=".*"/>
+            </intent-filter>
+        </activity>
+        <receiver android:enabled="true" android:exported="true" android:name="androidx.media.session.MediaButtonReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MEDIA_BUTTON"/>
+            </intent-filter>
+        </receiver>
+        <service android:configChanges="locale" android:exported="true" android:foregroundServiceType="mediaPlayback" android:name="com.google.android.apps.youtube.music.mediabrowser.MusicBrowserService">
+            <intent-filter>
+                <action android:name="android.media.browse.MediaBrowserService"/>
+                <action android:name="android.intent.action.MEDIA_BUTTON"/>
+            </intent-filter>
+        </service>
+        <meta-data android:name="com.google.android.gms.car.application" android:resource="@xml/automotive_app_desc"/>
+        <meta-data android:name="com.google.android.gms.car.application.theme" android:resource="@style/AndroidAutoTheme"/>
+        <service android:exported="true" android:label="SETTINGS" android:name="com.google.android.apps.youtube.music.mediabrowser.androidautoprojected.AndroidAutoCarAppServices">
+            <intent-filter>
+                <action android:name="androidx.car.app.CarAppService"/>
+                <category android:name="androidx.car.app.category.SETTINGS"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.google.android.apps.youtube.music.mediabrowser.androidautoprojected.SETTINGS_INTENT_ACTION"/>
+            </intent-filter>
+        </service>
+        <meta-data android:name="androidx.car.app.minCarApiLevel" android:value="3"/>
+        <receiver android:enabled="true" android:exported="true" android:name="com.google.android.apps.youtube.music.mediabrowser.waze.MusicWazeBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.waze.sdk.audio.ACTION_INIT"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </receiver>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.apps.youtube.music.notifications.FcmMessageListenerService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <activity android:configChanges="orientation|screenLayout|screenSize|smallestScreenSize" android:exported="false" android:label="@string/settings" android:name="com.google.android.apps.youtube.music.settings.SettingsCompatActivity" android:theme="@style/Theme.YouTubeMusic.Settings.Compat"/>
+        <receiver android:exported="false" android:name="com.google.android.libraries.youtube.notification.NotificationInteractionBroadcastReceiver"/>
+        <receiver android:exported="true" android:label="@string/widget_toolbar_title" android:name="com.google.android.apps.youtube.music.player.widget.MusicWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.google.android.apps.music.player.widget.FORCE_WIDGET_PROVIDER_REFRESH"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/app_widget_info"/>
+        </receiver>
+        <receiver android:exported="false" android:name="com.google.android.apps.youtube.music.player.widget.base.PendingIntentReceiver">
+            <intent-filter>
+                <action android:name="com.google.android.youtube.music.pendingintent.controller_widget_play"/>
+                <action android:name="com.google.android.youtube.music.pendingintent.controller_widget_pause"/>
+                <action android:name="com.google.android.youtube.music.pendingintent.controller_widget_replay"/>
+                <action android:name="com.google.android.youtube.music.pendingintent.controller_widget_retry"/>
+                <action android:name="com.google.android.youtube.music.pendingintent.controller_widget_previous"/>
+                <action android:name="com.google.android.youtube.music.pendingintent.controller_widget_next"/>
+                <action android:name="com.google.android.youtube.music.pendingintent.controller_widget_dislike"/>
+                <action android:name="com.google.android.youtube.music.pendingintent.controller_widget_like"/>
+                <action android:name="com.google.android.youtube.music.pendingintent.controller_widget_launch_app"/>
+                <action android:name="com.google.android.youtube.music.pendingintent.controller_widget_request_data"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:enabled="@bool/enable_freeform_appwidget" android:exported="true" android:label="@string/widget_freeform_title" android:name="com.google.android.apps.youtube.music.player.widget.gm3.FreeformMusicWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.google.android.apps.music.player.widget.FORCE_WIDGET_PROVIDER_REFRESH"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/app_widget_freeform_info"/>
+        </receiver>
+        <receiver android:enabled="false" android:exported="true" android:label="@string/widget_now_playing_title" android:name="com.google.android.apps.youtube.music.player.widget.gm3.NowPlayingWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.google.android.apps.music.player.widget.FORCE_WIDGET_PROVIDER_REFRESH"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/app_widget_now_playing_info"/>
+        </receiver>
+        <receiver android:enabled="false" android:exported="true" android:label="@string/widget_now_playing_title" android:name="com.google.android.apps.youtube.music.player.widget.gm3.FlipWidgetProvider">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE"/>
+                <action android:name="com.google.android.apps.music.player.widget.FORCE_WIDGET_PROVIDER_REFRESH"/>
+            </intent-filter>
+            <meta-data android:name="android.appwidget.provider" android:resource="@xml/flip_app_widget_now_playing_info"/>
+            <meta-data android:name="com.samsung.android.appwidget.provider" android:resource="@xml/samsung_flip_app_widget_now_playing_info"/>
+        </receiver>
+        <meta-data android:name="com.google.android.gms.phenotype.registration.xml:com.google.android.libraries.notifications" android:resource="@xml/com_google_android_libraries_notifications_phenotype"/>
+        <service android:enabled="false" android:exported="false" android:name="com.google.android.libraries.phenotype.registration.PhenotypeMetadataHolderService" android:process="">
+            <intent-filter>
+                <action android:name="com.google.android.libraries.phenotype.registration.PhenotypeMetadataHolderService"/>
+            </intent-filter>
+            <meta-data android:name="com.google.android.gms.phenotype.registration.binarypb:com.google.android.libraries.notifications" android:resource="@raw/com_google_android_libraries_notifications_registration_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.gms.auth_account" android:resource="@raw/com_google_android_gms_auth_account_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.libraries.consentverifier" android:resource="@raw/com_google_android_libraries_consentverifier_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.registration.binarypb:com.google.android.libraries.consentverifier" android:resource="@raw/com_google_android_libraries_consentverifier_registration_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.gms.device_performance" android:resource="@raw/com_google_android_gms_device_performance_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.registration.binarypb:com.google.android.gms.device_performance" android:resource="@raw/com_google_android_gms_device_performance_registration_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.gms.droidguard" android:resource="@raw/com_google_android_gms_droidguard_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.gms.measurement" android:resource="@raw/com_google_android_gms_measurement_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.gms.ulr" android:resource="@raw/com_google_android_gms_ulr_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.gms.usagereporting" android:resource="@raw/com_google_android_gms_usagereporting_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.registration.binarypb:com.google.android.libraries.notifications.platform" android:resource="@raw/com_google_android_libraries_notifications_platform_registration_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.libraries.user.profile.photopicker" android:resource="@raw/com_google_android_libraries_user_profile_photopicker_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.registration.binarypb:com.google.android.libraries.user.profile.photopicker" android:resource="@raw/com_google_android_libraries_user_profile_photopicker_registration_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.android.billingclient" android:resource="@raw/com_android_billingclient_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.registration.binarypb:com.android.billingclient" android:resource="@raw/com_android_billingclient_registration_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.heterodyne_info.binarypb:com.google.android.libraries.performance.primes" android:resource="@raw/com_google_android_libraries_performance_primes_heterodyne_info"/>
+            <meta-data android:name="com.google.android.gms.phenotype.registration.binarypb:com.google.android.libraries.performance.primes" android:resource="@raw/com_google_android_libraries_performance_primes_registration_info"/>
+        </service>
+        <meta-data android:name="com.google.android.gms.phenotype.registration.xml:com.google.android.libraries.consentverifier" android:resource="@xml/com_google_android_libraries_consentverifier_phenotype"/>
+        <meta-data android:name="com.google.android.gms.phenotype.registration.xml:com.google.android.gms.device_performance" android:resource="@xml/com_google_android_gms_device_performance_phenotype"/>
+        <meta-data android:name="com.google.android.gms.phenotype.registration.xml:com.google.android.libraries.notifications.platform" android:resource="@xml/com_google_android_libraries_notifications_platform_phenotype"/>
+        <meta-data android:name="com.google.android.gms.phenotype.registration.xml:com.google.android.libraries.user.profile.photopicker" android:resource="@xml/com_google_android_libraries_user_profile_photopicker_phenotype"/>
+        <meta-data android:name="com.google.android.gms.phenotype.registration.xml:com.android.billingclient" android:resource="@xml/com_android_billingclient_phenotype"/>
+        <meta-data android:name="com.google.android.gms.phenotype.registration.xml:com.google.android.libraries.performance.primes" android:resource="@xml/com_google_android_libraries_performance_primes_phenotype"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="false" android:name="com.google.android.apps.youtube.music.playlist.customthumbnail.CustomThumbnailCreationActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <service android:exported="false" android:name="com.google.android.apps.youtube.music.signals.update.HomePagePrefetchService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <service android:exported="false" android:name="com.google.firebase.components.ComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.dynamiclinks.internal.FirebaseDynamicLinkRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.iid.Registrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementReceiver"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementService"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:directBootAware="false" android:enabled="false" android:exported="false" android:name="com.google.android.libraries.directboot.DirectBootHelperService" android:process=""/>
+        <activity android:exported="false" android:name="com.google.android.libraries.families.FamilyActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <provider android:authorities="com.google.android.apps.youtube.music.mlkitinitprovider" android:exported="false" android:initOrder="99" android:name="com.google.mlkit.common.internal.MlKitInitProvider"/>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.nl.languageid.thin.internal.ThinLanguageIdRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.nl.languageid.internal.LanguageIdRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <receiver android:exported="true" android:name="com.google.android.libraries.notifications.entrypoints.blockstatechanged.BlockStateChangedReceiver">
+            <intent-filter>
+                <action android:name="android.app.action.APP_BLOCK_STATE_CHANGED"/>
+                <action android:name="android.app.action.NOTIFICATION_CHANNEL_BLOCK_STATE_CHANGED"/>
+                <action android:name="android.app.action.NOTIFICATION_CHANNEL_GROUP_BLOCK_STATE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="false" android:name="com.google.android.libraries.notifications.entrypoints.scheduled.ScheduledTaskService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="false" android:name="com.google.android.libraries.notifications.entrypoints.systemtray.SystemTrayBroadcastReceiver"/>
+        <activity android:exported="false" android:name="com.google.android.libraries.notifications.entrypoints.systemtray.SystemTrayActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <receiver android:exported="true" android:name="com.google.android.libraries.notifications.platform.entrypoints.accountchanged.AccountChangedReceiver">
+            <intent-filter>
+                <action android:name="android.accounts.LOGIN_ACCOUNTS_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.google.android.libraries.notifications.platform.entrypoints.localechanged.LocaleChangedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.LOCALE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.google.android.libraries.notifications.platform.entrypoints.restart.RestartReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.google.android.libraries.notifications.platform.entrypoints.timezonechanged.TimezoneChangedReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.google.android.libraries.notifications.platform.entrypoints.update.UpdateReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="false" android:name="com.google.android.libraries.notifications.platform.executor.impl.GnpExecutorApiService"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:exported="false" android:name="com.google.android.libraries.parenttools.youtube.ParentToolsActivity" android:screenOrientation="locked" android:theme="@style/ParentToolsTheme"/>
+        <receiver android:exported="false" android:name="com.google.android.libraries.performance.primes.transmitter.LifeboatReceiver" android:process=":primes_lifeboat"/>
+        <receiver android:exported="true" android:name="com.google.android.libraries.phenotype.client.stable.AccountRemovedBroadcastReceiver" android:process="">
+            <intent-filter>
+                <action android:name="android.accounts.action.ACCOUNT_REMOVED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.google.android.libraries.phenotype.client.stable.PhenotypeUpdateBackgroundBroadcastReceiver" android:permission="com.google.android.gms.permission.PHENOTYPE_UPDATE_BROADCAST" android:process="">
+            <intent-filter>
+                <action android:name="com.google.android.gms.phenotype.UPDATE"/>
+            </intent-filter>
+        </receiver>
+        <meta-data android:name="com.google.android.play.billingclient.version" android:value="7.1.1"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:exported="false" android:name="com.android.billingclient.api.ProxyBillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:exported="false" android:name="com.android.billingclient.api.ProxyBillingActivityV2" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:exported="true" android:label="@string/preferences_license_title" android:name="com.google.android.libraries.social.licenses.LicenseMenuActivity" android:theme="@style/Theme.AppCompat.DayNight"/>
+        <activity android:exported="false" android:label="@string/preferences_license_title" android:name="com.google.android.libraries.social.licenses.LicenseActivity" android:theme="@style/Theme.AppCompat.DayNight"/>
+        <service android:exported="false" android:name="com.google.android.libraries.youtube.account.service.AccountsChangedJobIntentService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="true" android:name="com.google.android.libraries.youtube.account.service.AccountsChangedReceiver">
+            <intent-filter>
+                <action android:name="android.accounts.LOGIN_ACCOUNTS_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <meta-data android:name="firebase_analytics_collection_enabled" android:value="false"/>
+        <receiver android:exported="false" android:name="com.google.android.libraries.youtube.mdx.background.MdxBackgroundPlaybackBroadcastReceiver"/>
+        <meta-data android:name="com.google.android.gms.cast.framework.OPTIONS_PROVIDER_CLASS_NAME" android:value="com.google.android.libraries.youtube.mdx.castclient.CastOptionsProvider"/>
+        <activity android:configChanges="keyboardHidden" android:exported="false" android:name="com.google.android.libraries.youtube.mdx.manualpairing.PairWithTvActivity" android:theme="@style/Mdx.Theme.Settings"/>
+        <service android:exported="false" android:foregroundServiceType="mediaPlayback" android:name="com.google.android.libraries.youtube.mdx.mediaroute.service.RemotePlaybackControlsService"/>
+        <activity android:configChanges="keyboardHidden" android:exported="false" android:name="com.google.android.libraries.youtube.mdx.tvsignin.TvSignInActivity" android:screenOrientation="portrait" android:theme="@style/Mdx.TvSignIn.FullScreen"/>
+        <service android:exported="false" android:label="job service" android:name="com.google.android.libraries.youtube.offline.transfer.service.OfflineUserInitiatedDataTransferJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="false" android:name="com.google.android.libraries.youtube.rendering.customtabs.CustomTabsReceiver"/>
+        <receiver android:exported="false" android:name="com.google.android.libraries.youtube.share.endpoint.ShareLoggingBroadcastReceiver"/>
+        <service android:exported="false" android:name="com.google.apps.tiktok.concurrent.AndroidFuturesService"/>
+        <service android:exported="false" android:foregroundServiceType="shortService" android:name="com.google.apps.tiktok.concurrent.InternalForegroundService"/>
+        <activity android:exported="false" android:label="@string/title_activity_qr_code_capture" android:name="com.google.cardboard.sdk.QrCodeCaptureActivity" android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity android:exported="true" android:label="@string/headset_detection_activity_title" android:name="com.google.cardboard.sdk.HeadsetDetectionActivity">
+            <intent-filter>
+                <action android:name="android.nfc.action.NDEF_DISCOVERED"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="cardboard"/>
+            </intent-filter>
+        </activity>
+        <receiver android:exported="true" android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.messaging.FirebaseMessagingService">
+            <intent-filter android:priority="-500">
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:enabled="false" android:exported="false" android:name="android.net.http.MetaDataHolder">
+            <meta-data android:name="android.net.http.EnableTelemetry" android:value="true"/>
+        </service>
+        <activity android:exported="false" android:name="androidx.car.app.CarAppPermissionActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <receiver android:exported="false" android:name="androidx.car.app.notification.CarAppNotificationBroadcastReceiver"/>
+        <uses-library android:name="android.ext.adservices" android:required="false"/>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        <uses-library android:name="androidx.window.extensions" android:required="false"/>
+        <uses-library android:name="androidx.window.sidecar" android:required="false"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+            <intent-filter>
+                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+            </intent-filter>
+        </receiver>
+        <service android:enabled="false" android:exported="false" android:name="com.google.android.build.data.PropertiesServiceHolder" android:process="">
+            <intent-filter>
+                <action android:name="com.google.android.build.data.Properties"/>
+            </intent-filter>
+            <meta-data android:name="com.google.android.build.data.properties" android:resource="@raw/build_data"/>
+        </service>
+        <meta-data android:name="com.android.stamp.source" android:value="https://play.google.com/store"/>
+        <meta-data android:name="com.android.stamp.type" android:value="STAMP_TYPE_DISTRIBUTION_APK"/>
+        <meta-data android:name="com.android.vending.splits" android:resource="@xml/splits0"/>
+        <meta-data android:name="com.android.vending.derived.apk.id" android:value="4"/>
+    </application>
+</manifest>

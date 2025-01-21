@@ -1,0 +1,550 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="34" android:compileSdkVersionCodename="14" package="com.miui.android.fashiongallery" platformBuildVersionCode="34" platformBuildVersionName="14">
+    <uses-permission android:name="miui.permission.USE_INTERNAL_GENERAL_API"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.WRITE_MEDIA_IMAGES"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="com.android.launcher.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.EXPAND_STATUS_BAR"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW"/>
+    <uses-permission android:name="com.xiaomi.market.sdk.UPDATE"/>
+    <uses-permission android:name="miui.keyguard.editor.WRITE_EDITOR_FILE"/>
+    <queries>
+        <package android:name="com.ziyou.haokan"/>
+        <package android:name="com.hk.ugc"/>
+        <package android:name="com.android.chrome"/>
+        <package android:name="com.android.thememanager"/>
+        <package android:name="jp.softbank.mb.parentalcontrols"/>
+        <package android:name="com.mi.globalbrowser"/>
+        <package android:name="com.opera.mini.native"/>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.SEND"/>
+        </intent>
+        <package android:name="com.facebook.katana"/>
+        <package android:name="com.facebook.orca"/>
+        <package android:name="com.whatsapp"/>
+        <intent>
+            <action android:name="android.intent.action.SEND"/>
+            <data android:mimeType="image/jpeg"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.MAIN"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:scheme="https"/>
+        </intent>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService"/>
+        </intent>
+    </queries>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.SET_WALLPAPER"/>
+    <permission android:name="com.glance.permission.ANSHINFILTER" android:protectionLevel="normal"/>
+    <permission android:name="glance.sdk.api.status.permission.READ" android:protectionLevel="normal"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION"/>
+    <protected-broadcast android:name="action.glance.missed.download.complete"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.USE_BIOMETRIC"/>
+    <uses-permission android:name="android.permission.USE_FINGERPRINT"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID"/>
+    <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES"/>
+    <permission android:name="com.miui.android.fashiongallery.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.miui.android.fashiongallery.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <application android:allowBackup="false" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="false" android:icon="@drawable/icon" android:label="@string/app_name" android:largeHeap="true" android:name="com.miui.android.fashiongallery.LockScreenApplication" android:networkSecurityConfig="@xml/network_security_config" android:requestLegacyExternalStorage="true" android:resizeableActivity="false" android:supportsRtl="true" android:theme="@style/Theme.MiGalleryLockScreenGlobal">
+        <uses-library android:name="com.miui.system" android:required="false"/>
+        <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false"/>
+        <meta-data android:name="firebase_analytics_collection_enabled" android:value="false"/>
+        <meta-data android:name="firebase_crash_collection_enabled" android:value="false"/>
+        <meta-data android:name="firebase_analytics_collection_deactivated" android:value="false"/>
+        <meta-data android:name="com_miui_fg_theme_compat_provider_enabled" android:value="true"/>
+        <meta-data android:name="com_miui_android_fashiongallery_support_screenOn" android:value="true"/>
+        <meta-data android:name="notch.config" android:value="portrait|landscape"/>
+        <meta-data android:name="enableLog" android:value="false"/>
+        <activity android:exported="true" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.miui.android.fashiongallery.glance.GlanceActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/NiceGalleryPreviewTheme" android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="home" android:scheme="fashiongallery"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="true" android:name="com.miui.android.fashiongallery.glance.activity.GlanceUnlockActivity">
+            <intent-filter>
+                <action android:name="com.miui.fashiongallery.action.unlock"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="@string/lockscreen_magazine_title" android:launchMode="singleTask" android:name="com.miui.android.fashiongallery.setting.SettingActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Preference.DayNight">
+            <intent-filter>
+                <action android:name="com.miui.android.fashiongallery.setting.SETTING"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="setting" android:scheme="fashiongallery"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:label="@string/setting_carousel_mode" android:name="com.miui.android.fashiongallery.newsetting.WallpaperCarouselActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Preference.DayNight"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:name="com.miui.android.fashiongallery.debug.DebugActivity" android:theme="@style/Theme.AppCompat.DayNight">
+            <intent-filter>
+                <action android:name="com.miui.fashiongallery.DEBUG"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:label="@string/setting_about_title" android:name="com.miui.android.fashiongallery.setting.PrivacyActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Preference.DayNight"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:label="@string/setting_advance_tab_title" android:name="com.miui.android.fashiongallery.setting.AdvanceTabActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Preference.DayNight"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:label="@string/lockscreen_magazine_title" android:name="com.miui.android.fashiongallery.ui.MiFGDeclarationActivity" android:theme="@style/CustomDialog"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:launchMode="singleTask" android:name="com.miui.android.fashiongallery.ui.GlanceWebviewActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/WebViewTheme"/>
+        <activity android:exported="false" android:name="com.miui.android.fashiongallery.ui.NotificationActivity" android:theme="@style/TranslucentStyle"/>
+        <provider android:authorities="com.miui.android.fashiongallery.lockscreen_magazine_provider" android:exported="true" android:name="com.miui.android.fashiongallery.LockScreenMagazineProvider">
+            <intent-filter>
+                <action android:name="miui.intent.action.LOCKWALLPAPER_PROVIDER"/>
+            </intent-filter>
+        </provider>
+        <provider android:authorities="com.miui.android.fashiongallery" android:exported="true" android:name="com.miui.android.fashiongallery.database.GlanceFGDataContentProvider"/>
+        <provider android:authorities="com.miui.android.fashiongallery.file" android:exported="false" android:grantUriPermissions="true" android:name="com.miui.android.fashiongallery.MyFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"/>
+        </provider>
+        <provider android:authorities="com.miui.android.fashiongallery.thirdPartyWallpaperProvider" android:exported="true" android:name="com.miui.android.fashiongallery.ThirdPartyContentProviderShell"/>
+        <receiver android:enabled="true" android:exported="true" android:name="com.miui.android.fashiongallery.receiver.LockScreenBroadcastReceiver"/>
+        <service android:enabled="true" android:exported="false" android:name="com.miui.nicegallery.view.FloatingWindowService"/>
+        <service android:name="com.miui.android.fashiongallery.service.FashionGalleryJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-3398696460930132~2452580081"/>
+        <receiver android:exported="true" android:name="glance.sdk.XiaomiOciEventReceiver">
+            <intent-filter>
+                <action android:name="com.xiaomi.market.DOWNLOAD_INSTALL_RESULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.market.OPEN_APP"/>
+            </intent-filter>
+        </receiver>
+        <activity android:name="glance.sdk.activity.OciAppOpenActivity" android:theme="@style/GlanceTheme.Light"/>
+        <activity android:name="glance.sdk.activity.HeadLessAppOpenActivity" android:theme="@style/GlanceTheme.Light"/>
+        <activity android:label="Share Receiver Activity" android:name="glance.sdk.activity.ShareGlanceReceiverActivity"/>
+        <activity android:exported="true" android:name="glance.sdk.deeplinks.DeepLinkActivity" android:theme="@style/GlanceTheme.Dark">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="home" android:scheme="glance"/>
+                <data android:host="menu" android:scheme="glance"/>
+                <data android:host="video" android:scheme="glance"/>
+                <data android:host="shortcut" android:scheme="glance"/>
+                <data android:host="game" android:scheme="glance"/>
+                <data android:host="dynamicScreen" android:scheme="glance"/>
+                <data android:host="profile" android:scheme="glance"/>
+                <data android:host="categories" android:scheme="glance"/>
+                <data android:host="oci" android:scheme="glance"/>
+                <data android:host="followedCreators" android:scheme="glance"/>
+                <data android:host="languages" android:scheme="glance"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="live.glance.com" android:scheme="https"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="glance.com" android:path="/surveys" android:scheme="https"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="false" android:name="glance.sdk.deeplinks.internal.InternalDeepLinkActivity" android:theme="@style/GlanceTheme.Dark">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="live" android:scheme="glance"/>
+                <data android:host="shop" android:scheme="glance"/>
+                <data android:host="dynamicweb" android:scheme="glance"/>
+                <data android:host="share_receiver" android:scheme="glance"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="false" android:launchMode="singleTask" android:name="com.miui.nicegallery.ui.mode.ModeSelectionActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/NiceGalleryPreviewTheme"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:launchMode="singleTask" android:name="com.miui.nicegallery.pwa.LabWebViewActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/WebViewTheme"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:label="@string/lockscreen_magazine_title" android:name="com.miui.nicegallery.ui.topic.TopicActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/NiceGalleryPreviewTheme">
+            <intent-filter>
+                <action android:name="com.miui.fashiongallery.ui.TOPIC"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="uiMode" android:exported="true" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.miui.nicegallery.preview.ImagePreviewActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/NiceGalleryPreviewTheme" android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="com.miui.fashiongallery.home.PREVIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="uiMode" android:exported="true" android:label="@string/app_name" android:name="com.miui.nicegallery.favorite.FavoritePreviewActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/NiceGalleryPreviewTheme" android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="com.miui.fashiongallery.home.PREVIEW_NEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:label="@string/favorite_list_title" android:launchMode="singleTask" android:name="com.miui.nicegallery.favorite.FavoriteListActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/Theme.Preference.DayNight"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="@string/lockscreen_magazine_title" android:launchMode="singleTask" android:name="com.miui.nicegallery.setting.KSettingActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Preference.DayNight">
+            <intent-filter>
+                <action android:name="com.miui.fashiongallery.setting.SETTING"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="@string/setting_about_title" android:name="com.miui.nicegallery.setting.KPrivacyActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Preference.DayNight"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="@string/setting_terms_of_use" android:name="com.miui.nicegallery.setting.KUserAgreementActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Preference.DayNight"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:launchMode="singleTask" android:name="com.miui.nicegallery.ui.MiFGDeclarationActivity" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/TranslucentStyle"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:launchMode="singleTask" android:name="com.miui.nicegallery.ui.MiFGDeclarationDialog" android:theme="@style/CustomDialog"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:label="@string/setting_gallery_title_v2" android:launchMode="singleTask" android:name="com.miui.nicegallery.gallery.WallpaperMixActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Preference.DayNight"/>
+        <activity android:exported="true" android:name="com.miui.nicegallery.base.DispatchEventActivity" android:theme="@style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="nicegallery" android:pathPrefix="/web" android:scheme="mifgg"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="false" android:launchMode="singleInstance" android:name="com.miui.nicegallery.ui.WebViewActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/WebViewTheme"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:launchMode="singleTask" android:name="com.miui.nicegallery.ui.OptOutWebViewActivity" android:screenOrientation="portrait" android:theme="@style/WebView.Privacy.Theme"/>
+        <provider android:authorities="com.miui.android.nicegallery" android:exported="true" android:name="com.miui.carousel.datasource.database.FGDataContentProvider"/>
+        <service android:exported="false" android:name="com.miui.carousel.datasource.jobservice.UpdateDataJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:enabled="true" android:exported="true" android:name="com.miui.nicegallery.receiver.LockScreenBroadcastReceiver"/>
+        <activity android:exported="false" android:launchMode="singleTask" android:name="com.miui.carousel.feature.ui.lockscreen.LockScreenActivity" android:theme="@style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:launchMode="singleTask" android:name="com.miui.carousel.feature.ui.PwaWebViewActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/WebViewTheme"/>
+        <activity android:exported="true" android:name="com.miui.cw.feature.ui.dispatch.DispatchActivity" android:theme="@style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="wallpapercarousel" android:pathPrefix="/web" android:scheme="miglobal"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize|uiMode" android:exported="true" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.miui.cw.feature.ui.home.HomeActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/CwComTheme" android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:launchMode="singleTask" android:name="com.miui.cw.feature.ui.setting.view.OpenAppDialogActivity" android:theme="@style/CustomDialog"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="@string/setting_about_title" android:name="com.miui.cw.feature.ui.setting.privacy.SettingPrivacyActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Preference.DayNight"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:label="@string/setting_gallery_title_v2" android:launchMode="singleTask" android:name="com.miui.cw.feature.ui.setting.mix.MixActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Preference.DayNight"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="true" android:label="@string/lockscreen_magazine_title" android:launchMode="singleTask" android:name="com.miui.cw.feature.ui.setting.SettingActivity" android:screenOrientation="portrait" android:theme="@style/Theme.Preference.DayNight">
+            <intent-filter>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize|uiMode" android:exported="false" android:launchMode="singleTask" android:name="com.miui.cw.feature.ui.detail.WebViewActivity" android:screenOrientation="portrait" android:showOnLockScreen="true" android:showWhenLocked="true" android:theme="@style/WebTranslucent"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:exported="false" android:name="com.miui.cw.feature.ui.debug.DebugActivity" android:theme="@style/Theme.AppCompat.DayNight">
+            <intent-filter>
+                <action android:name="com.miui.fashiongallery.debug"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <receiver android:enabled="true" android:exported="true" android:name="com.miui.cw.feature.broadcast.CwBroadcastReceiver"/>
+        <service android:enabled="true" android:exported="false" android:name="com.miui.cw.feature.FloatingWindowService"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:launchMode="singleTop" android:name="glance.ui.sdk.roposo.ui.RoposoLiveActivity" android:screenOrientation="landscape" android:theme="@style/GlanceTheme.Dark"/>
+        <activity android:label="@string/glance_app_label" android:name="glance.ui.sdk.activity.WebviewActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dark"/>
+        <activity android:exported="false" android:label="@string/glance_app_label" android:name="glance.ui.sdk.activity.CookiesConsentActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Transparent">
+            <intent-filter>
+                <action android:name="glance.action.cookie.consent"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/glance_app_label" android:name="glance.ui.sdk.activity.GCGamePlayWebviewActivity" android:noHistory="true" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dark"/>
+        <activity android:label="@string/glance_app_label" android:name="glance.ui.sdk.activity.LivePwaActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dark"/>
+        <activity android:exported="false" android:label="@string/glance_app_label" android:name="glance.ui.sdk.activity.UnlockActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="glance.action.unlock"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="true" android:label="@string/glance_app_label" android:name="glance.ui.sdk.activity.DeeplinkHandler" android:theme="@style/GlanceTheme.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="experience.glance.com" android:path="/getGlance" android:scheme="https"/>
+                <data android:host="glance.com" android:path="/getGlance" android:scheme="https"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="@string/glance_oci_host" android:path="@string/glance_oci_path" android:scheme="@string/glance_scheme_https"/>
+            </intent-filter>
+        </activity>
+        <provider android:authorities="@string/glance_image_provider" android:exported="false" android:grantUriPermissions="true" android:name="glance.ui.sdk.utils.ImageFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/paths"/>
+        </provider>
+        <provider android:authorities="@string/glance_video_provider" android:exported="false" android:grantUriPermissions="true" android:name="glance.ui.sdk.utils.VideoFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/paths"/>
+        </provider>
+        <activity android:label="@string/glance_app_label" android:launchMode="singleInstance" android:name="glance.ui.sdk.activity.PermissionActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dialog"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:exported="true" android:label="@string/glance_app_label" android:name="glance.ui.sdk.activity.GlanceGamePlayActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dark">
+            <intent-filter>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="orientation|screenSize" android:exported="false" android:label="@string/glance_app_label" android:launchMode="singleInstance" android:name="glance.ui.sdk.bubbles.views.BubblesActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.FullScreen.Highlights">
+            <intent-filter>
+                <action android:name="com.glance.action.peek.bubble"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="true" android:label="@string/glance_app_label" android:name="glance.ui.sdk.bubbles.views.intro.HighlightsIntroActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.FullScreen.Intro">
+            <intent-filter>
+                <action android:name="com.glance.action.highlight"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/glance_app_label" android:name="glance.ui.sdk.bubbles.views.ProfileActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dark"/>
+        <activity android:exported="false" android:label="@string/glance_app_label" android:name="glance.ui.sdk.activity.CategoriesActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dark">
+            <intent-filter>
+                <action android:name="glance.action.categories"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="false" android:label="@string/glance_app_label" android:name="glance.ui.sdk.activity.LanguagesActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dark">
+            <intent-filter>
+                <action android:name="glance.action.languages"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/glance_app_label" android:name="glance.ui.sdk.activity.GlanceRewardActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dark"/>
+        <activity android:label="@string/glance_app_label" android:name="glance.ui.sdk.bubbles.views.followCreators.FollowedCreatorsActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dark"/>
+        <activity android:exported="true" android:label="@string/glance_app_label" android:name="glance.ui.sdk.activity.ParentalControlActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dark"/>
+        <activity android:label="@string/glance_app_label" android:launchMode="singleTop" android:name="glance.ui.sdk.webUi.WebUiActivity" android:screenOrientation="portrait" android:theme="@style/GlanceTheme.Dark"/>
+        <activity android:exported="false" android:name="glance.ui.sdk.activity.DiagnosticActivity" android:screenOrientation="portrait" android:theme="@style/GlanceAppTheme.Light"/>
+        <meta-data android:name="com.google.android.gms.ads.INTEGRATION_MANAGER" android:value="webview"/>
+        <meta-data android:name="com.google.android.gms.ads.flag.NATIVE_AD_DEBUGGER_ENABLED" android:value="false"/>
+        <receiver android:exported="false" android:name="glance.render.sdk.OciNotificationActionReceiver"/>
+        <meta-data android:name="com.google.android.gms.ads.flag.OPTIMIZE_INITIALIZATION" android:value="true"/>
+        <meta-data android:name="com.google.android.gms.ads.flag.OPTIMIZE_AD_LOADING" android:value="true"/>
+        <receiver android:exported="false" android:name="glance.sdk.FcmNotificationActionReceiver"/>
+        <receiver android:enabled="true" android:name="glance.sdk.NotificationHelper$NotificationBroadcastReciever"/>
+        <receiver android:enabled="true" android:name="glance.sdk.NotificationScheduler$ScheduleNotificationBroadcastReceiver"/>
+        <provider android:authorities="@string/glance_sdk_provider" android:enabled="true" android:exported="true" android:name="glance.sdk.api.GlanceStatusProvider" android:readPermission="glance.sdk.api.status.permission.READ"/>
+        <provider android:authorities="com.glance.lockscreen" android:enabled="true" android:exported="true" android:grantUriPermissions="true" android:name="glance.sdk.api.GlanceAnshinProvider" android:permission="com.glance.permission.ANSHINFILTER"/>
+        <meta-data android:name="firebase_messaging_auto_init_enabled" android:value="true"/>
+        <service android:exported="false" android:name="glance.internal.sdk.wakeup.FcmMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <activity android:autoRemoveFromRecents="true" android:excludeFromRecents="true" android:exported="false" android:launchMode="singleInstance" android:name="glance.internal.appinstall.sdk.activity.GanConfirmationScreenActivity" android:noHistory="true" android:screenOrientation="portrait" android:theme="@style/Theme.GanConfirmationScreen"/>
+        <receiver android:enabled="true" android:name="glance.internal.appinstall.sdk.scheduler.NudgeScreenScheduler$ScheduleNudgeScreenBroadcastReceiver"/>
+        <activity android:autoRemoveFromRecents="true" android:excludeFromRecents="true" android:exported="false" android:name="glance.internal.appinstall.sdk.activity.NudgeScreenActivity" android:noHistory="true" android:theme="@style/Theme.Transparent"/>
+        <activity android:autoRemoveFromRecents="true" android:excludeFromRecents="true" android:name="glance.internal.appinstall.sdk.activity.HeadLessNotificationActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"/>
+        <provider android:authorities="com.miui.android.fashiongallery.appsflyer.preinstall" android:exported="true" android:name="glance.internal.appinstall.sdk.attribution.appsflyer.AppsFlyerContentProvider">
+            <intent-filter>
+                <action android:name="com.appsflyer.referrer.INSTALL_PROVIDER"/>
+            </intent-filter>
+        </provider>
+        <provider android:authorities="com.miui.android.fashiongallery.adjust.preinstall" android:exported="true" android:name="glance.internal.appinstall.sdk.attribution.adjust.AdjustContentProvider">
+            <intent-filter>
+                <action android:name="com.attribution.REFERRAL_PROVIDER"/>
+            </intent-filter>
+        </provider>
+        <service android:name="glance.internal.sdk.commons.job.GlanceJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:name="glance.internal.sdk.commons.job.AlarmBroadcastReceiver"/>
+        <provider android:authorities="com.miui.android.fashiongallery.com.roposo.surface.lockscreen.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.roposo.surface.lockscreen.RoposoLockscreenProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths"/>
+        </provider>
+        <meta-data android:name="preloaded_fonts" android:resource="@array/preloaded_fonts"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:exported="false" android:name="com.google.android.gms.ads.AdActivity" android:theme="@android:style/Theme.Translucent"/>
+        <provider android:authorities="com.miui.android.fashiongallery.mobileadsinitprovider" android:exported="false" android:initOrder="100" android:name="com.google.android.gms.ads.MobileAdsInitProvider"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.ads.AdService"/>
+        <provider android:authorities="com.miui.android.fashiongallery.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.work.WorkManagerInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.profileinstaller.ProfileInstallerInitializer" android:value="androidx.startup"/>
+        </provider>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+            <intent-filter>
+                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+            </intent-filter>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        <receiver android:exported="true" android:name="com.market.sdk.DownloadCompleteReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+            </intent-filter>
+        </receiver>
+        <provider android:authorities="com.miui.android.fashiongallery.selfupdate.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.market.sdk.LazyFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/xiaomi_update_sdk_file_paths"/>
+        </provider>
+        <meta-data android:name="miuixpreference" android:value="3.0"/>
+        <meta-data android:name="miui_private_label" android:value="PRIVATE_V150"/>
+        <meta-data android:name="com.google.android.gms.ads.AD_MANAGER_APP" android:value="true"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <activity android:exported="false" android:name="com.roposo.lib_gating_impl.FeatureControlActivity" android:screenOrientation="portrait"/>
+        <meta-data android:name="com.bumptech.glide.integration.okhttp3.OkHttpGlideModule" android:value="GlideModule"/>
+        <meta-data android:name="appcompat" android:value="3.0"/>
+        <meta-data android:name="viewpager" android:value="2.0"/>
+        <meta-data android:name="miuixbasewidget" android:value="1.0"/>
+        <meta-data android:name="popupwidget" android:value="1.0"/>
+        <meta-data android:name="androidbasewidget" android:value="1.0"/>
+        <meta-data android:name="miuixstretchablewidget" android:value="1.0"/>
+        <meta-data android:name="slidingwidget" android:value="1.0"/>
+        <meta-data android:name="pickerwidget" android:value="1.0"/>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.components.ComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.firestore.FirebaseFirestoreKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.firestore.FirestoreRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.auth.ktx.FirebaseAuthLegacyRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.auth.FirebaseAuthRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.remoteconfig.FirebaseRemoteConfigKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.remoteconfig.RemoteConfigRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.crashlytics.FirebaseCrashlyticsKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.sessions.FirebaseSessionsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.abt.component.AbtRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <receiver android:exported="true" android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+            <meta-data android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED" android:value="true"/>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.messaging.FirebaseMessagingService">
+            <intent-filter android:priority="-500">
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <activity android:excludeFromRecents="true" android:exported="true" android:launchMode="singleTask" android:name="com.google.firebase.auth.internal.GenericIdpActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="firebase.auth" android:path="/" android:scheme="genericidp"/>
+            </intent-filter>
+        </activity>
+        <activity android:excludeFromRecents="true" android:exported="true" android:launchMode="singleTask" android:name="com.google.firebase.auth.internal.RecaptchaActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="firebase.auth" android:path="/" android:scheme="recaptcha"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementReceiver"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementService"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <property android:name="android.adservices.AD_SERVICES_CONFIG" android:resource="@xml/ga_ad_services_config"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.firebase.sessions.SessionLifecycleService"/>
+        <activity android:exported="true" android:name="androidx.compose.ui.tooling.PreviewActivity"/>
+        <meta-data android:name="springback" android:value="3.0"/>
+        <meta-data android:name="recyclerview" android:value="2.0"/>
+        <meta-data android:name="nest" android:value="2.0"/>
+        <meta-data android:name="haptic" android:value="1.0"/>
+        <meta-data android:name="graphics" android:value="2.0"/>
+        <meta-data android:name="smooth" android:value="1.0"/>
+        <meta-data android:name="core" android:value="2.0"/>
+        <meta-data android:name="recyclerview_animator" android:value="2.0"/>
+        <meta-data android:name="spring" android:value="1.0"/>
+        <uses-library android:name="androidx.window.extensions" android:required="false"/>
+        <uses-library android:name="androidx.window.sidecar" android:required="false"/>
+        <meta-data android:name="dynamicoverscroller" android:value="2.0"/>
+        <meta-data android:name="folme" android:value="2.0"/>
+        <uses-library android:name="android.ext.adservices" android:required="false"/>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery">
+            <meta-data android:name="backend:com.google.android.datatransport.cct.CctBackendFactory" android:value="cct"/>
+        </service>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION"/>
+            </intent-filter>
+        </receiver>
+        <meta-data android:name="animation" android:value="1.0"/>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"/>
+        <activity android:enabled="false" android:exported="false" android:launchMode="singleInstance" android:name="com.google.android.play.core.missingsplits.PlayCoreMissingSplitsActivity" android:process=":playcore_missing_splits_activity" android:stateNotNeeded="true"/>
+        <activity android:exported="false" android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity" android:stateNotNeeded="true" android:theme="@style/Theme.PlayCore.Transparent"/>
+        <service android:enabled="false" android:exported="true" android:name="com.google.android.play.core.assetpacks.AssetPackExtractionService">
+            <meta-data android:name="com.google.android.play.core.assetpacks.versionCode" android:value="11003"/>
+        </service>
+        <service android:enabled="false" android:exported="false" android:name="com.google.android.play.core.assetpacks.ExtractionForegroundService"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:hardwareAccelerated="true" android:name="ai.meson.rendering.MesonFullScreenActivity" android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:configChanges="fontScale|keyboard|keyboardHidden|locale|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:hardwareAccelerated="true" android:name="ai.meson.rendering.MesonLandingPageActivity" android:theme="@android:style/Theme.NoTitleBar"/>
+        <meta-data android:name="theme" android:value="1.0"/>
+        <meta-data android:name="devicebaseinfo" android:value="1.0"/>
+    </application>
+</manifest>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="34" android:compileSdkVersionCodename="14" package="com.securew2.paladin" platformBuildVersionCode="34" platformBuildVersionName="14">
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_LOGS"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <uses-feature android:name="android.hardware.location.gps" android:required="false"/>
+    <uses-feature android:name="android.hardware.location" android:required="false"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
+    <application android:allowBackup="false" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="false" android:icon="@drawable/icon" android:label="@string/application_label" android:name="androidx.multidex.MultiDexApplication" android:theme="@style/CustomTheme" android:usesCleartextTraffic="true">
+        <activity android:exported="true" android:label="@string/application_label" android:name="com.securew2.paladin.android.activity.MainActivity" android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/activity_configuration" android:name="com.securew2.paladin.android.activity.ConfigurationActivity" android:theme="@style/CustomAlert"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.LockScreenActivity" android:screenOrientation="portrait"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.LocationScreenActivity" android:screenOrientation="portrait"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.WarningNoteScreenActivity" android:screenOrientation="portrait"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.ShowResultActivity" android:theme="@style/CustomAlert"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.UnlockActivity" android:theme="@style/CustomAlert"/>
+        <activity android:configChanges="keyboardHidden|orientation" android:label="" android:launchMode="singleTask" android:name="com.securew2.paladin.android.activity.CloudActivity" android:screenOrientation="portrait"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.SearchCloudActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.ProfilesListActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.CredentialsActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:exported="true" android:name="com.securew2.paladin.android.activity.MimeTypeHandlerActivity" android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+            <intent-filter>
+                <data android:scheme="securew2"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+            <intent-filter>
+                <data android:scheme="http"/>
+                <data android:scheme="https"/>
+                <data android:mimeType="application/x-securew2-cloudconfig" android:pathPattern=".*\\cloudconfig"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="true" android:name="com.securew2.paladin.android.activity.RedirectUriReceiverActivity">
+            <intent-filter>
+                <data android:scheme="sw2_auth_redirect"/>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+            </intent-filter>
+        </activity>
+        <activity android:name="com.securew2.paladin.android.activity.AddWLANActivity" android:theme="@style/CustomAlert"/>
+        <activity android:name="com.securew2.paladin.android.activity.ConnectActivity" android:theme="@style/CustomAlert"/>
+        <activity android:name="com.securew2.paladin.android.activity.AddCertificateActivity" android:theme="@style/CustomAlert"/>
+        <activity android:name="com.securew2.paladin.android.activity.AddPrivateKeyActivity" android:theme="@style/CustomAlert"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.ManageActivity"/>
+        <activity android:excludeFromRecents="true" android:name="com.securew2.paladin.android.activity.AlertActivity" android:taskAffinity="" android:theme="@style/CustomTheme"/>
+        <provider android:authorities="com.securew2.paladin.android.emailattach.provider" android:grantUriPermissions="true" android:name="com.securew2.paladin.android.CachedFileProvider"/>
+        <service android:backupAgent="MyBackupAgent" android:name="com.securew2.paladin.android.service.MainService"/>
+        <receiver android:exported="true" android:name="com.securew2.paladin.android.service.BootBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            </intent-filter>
+        </receiver>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.GuidanceActivity" android:screenOrientation="portrait"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.PreConnectActivity" android:screenOrientation="portrait"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.ConfigurationSuccessActivity" android:screenOrientation="portrait"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.WifiSuggestionActivity" android:screenOrientation="portrait"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.InstructionActivity" android:screenOrientation="portrait"/>
+        <activity android:label="" android:name="com.securew2.paladin.android.activity.SuggestionAlertActivity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <activity android:exported="false" android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity" android:stateNotNeeded="true" android:theme="@style/Theme.PlayCore.Transparent"/>
+    </application>
+</manifest>
