@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtGui import QFont, QPalette, QBrush, QLinearGradient, QColor
 from PyQt5.QtCore import Qt
-
+import MLmodel
 from scan import Scan
 
 class MainWindow(QWidget):
@@ -149,6 +149,22 @@ class MainWindow(QWidget):
 
         main_layout.addLayout(content_layout)
         self.setLayout(main_layout)
+
+        
+
+    def train_model(self):
+        try:
+            # Call the MLModel's train_model method
+            accuracy, cm = self.ml_model.train_model()
+
+            # Display the results in the text box
+            results = f"Model trained successfully!\n\n"
+            results += f"Accuracy: {accuracy * 100:.2f}%\n\n"
+            results += f"Confusion Matrix:\n{cm}"
+            self.results_text.setText(results)
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to train the model: {e}")
 
     def choose_file(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Select File", "", "All Files (*)")
