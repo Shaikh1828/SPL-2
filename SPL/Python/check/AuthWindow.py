@@ -1,17 +1,17 @@
-import MainWindow
 import sqlite3
-from PyQt5.QtWidgets import (
-   QWidget, QLabel, QPushButton, QVBoxLayout,  QLineEdit, QMessageBox, QTableWidget, QTableWidgetItem, QHBoxLayout, QTextEdit, QApplication,  QFileDialog
-)
-from PyQt5.QtGui import QFont
+import MainWindow
+from Authentication import Authentication  # Import the Authentication class
+from PyQt5.QtWidgets import QWidget, QLabel, QPushButton, QVBoxLayout, QLineEdit, QMessageBox, QTableWidget, QTableWidgetItem
+from PyQt5.QtGui import QFont, QPalette, QBrush, QLinearGradient, QColor
 from PyQt5.QtCore import Qt
 
-class AuthWindow(QWidget):
+class AuthWindows(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Login/Register")
         self.resize(500, 300)
         self.setStyleSheet("background-color: #E2F6FD;")
+        self.auth = Authentication()  # Initialize the Authentication class
         self.init_ui()
     
     def init_ui(self):
@@ -20,7 +20,6 @@ class AuthWindow(QWidget):
         self.title_label.setAlignment(Qt.AlignCenter)
         self.title_label.setFont(QFont("Arial", 16, QFont.Bold))
         self.title_label.setStyleSheet("color: #1E90FF; ")
-
 
         # Username Input
         self.username_input = QLineEdit()
@@ -63,31 +62,11 @@ class AuthWindow(QWidget):
         username = self.username_input.text()
         password = self.password_input.text()
 
-        if not username or not password:
-            QMessageBox.warning(self, "Input Error", "Username and Password cannot be empty.")
-            return
-
-        try:
-            conn = sqlite3.connect("users.db")
-            cursor = conn.cursor()
-
+        if self.auth.validate_user(username, password, self.mode, self):
             if self.mode == "login":
-                cursor.execute("SELECT * FROM users WHERE username = ? AND password = ?", (username, password))
-                user = cursor.fetchone()
-                conn.close()
-                if user:
-                    QMessageBox.information(self, "Success", "Login Successful!")
-                    self.open_main_window()
-                else:
-                    QMessageBox.warning(self, "Error", "Invalid credentials.")
-            elif self.mode == "register":
-                cursor.execute("INSERT INTO users (username, password) VALUES (?, ?)", (username, password))
-                conn.commit()
-                conn.close()
-                QMessageBox.information(self, "Success", "Registration Successful! You can now log in.")
-                self.toggle_mode()
-        except Exception as e:
-            QMessageBox.critical(self, "Database Error", f"An error occurred: {e}")
+                self.open_main_window()  # Open the main window if login succeeds
+            else:
+                self.toggle_mode()  # Switch to login mode after registration
 
     def toggle_mode(self):
         if self.mode == "login":
@@ -133,8 +112,7 @@ class AuthWindow(QWidget):
         except Exception as e:
             QMessageBox.critical(self, "Database Error", f"An error occurred: {e}")
 
-
     def open_main_window(self):
-        self.main_window = MainWindow()
+        self.main_window = MainWindow.MainWindow()
         self.main_window.show()
         self.close()
