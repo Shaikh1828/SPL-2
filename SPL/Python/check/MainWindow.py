@@ -5,7 +5,7 @@ from PyQt5.QtGui import QFont, QPalette, QBrush, QLinearGradient, QColor
 from PyQt5.QtCore import Qt
 
 from scan import Scan
-from MLmodel import MLModel  # Import the MLModel class
+from MLmodel import MLModel  
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -123,7 +123,17 @@ class MainWindow(QWidget):
 
         # Results Display
         self.results_text = QTextEdit()
+        self.results_text.setStyleSheet("""
+            QTextEdit {
+                background-color: rgba(240, 248, 255, 200);
+                color: black;
+                font: 11pt Courier;
+                border-radius: 10px;
+                padding: 15px;
+            }
+        """)
         self.results_text.setReadOnly(True)
+        self.results_text.setVisible(False)
         # left_layout.addWidget(self.results_text)
 
         # self.central_widget.setLayout(left_layout)
@@ -133,9 +143,10 @@ class MainWindow(QWidget):
 
 
         # Info Panel
-        info_text = QTextEdit()
-        info_text.setReadOnly(True)
-        info_text.setText(
+        self.info_text = QTextEdit()
+        self.info_text.setReadOnly(True)
+        self.info_text.setVisible(True)
+        self.info_text.setText(
             "   Droid Scanner is a powerful and easy-to-use Android application designed to scan and analyze "
             "the apps on your device for security, privacy, and performance.\n\n"
             "Key Features:\n"
@@ -148,7 +159,7 @@ class MainWindow(QWidget):
             "   - Uninstallation Recommendations to free up space."
         )
 
-        info_text.setStyleSheet("""
+        self.info_text.setStyleSheet("""
             QTextEdit {
                 background-color: rgba(240, 248, 255, 200);
                 color: black;
@@ -167,12 +178,12 @@ class MainWindow(QWidget):
         left_layout.addWidget(scan_button)
         left_layout.addStretch()
         left_layout.addWidget(self.train_button)
-        left_layout.addWidget(self.results_text)
 
         # self.central_widget.setLayout(left_layout)
 
         right_layout = QVBoxLayout()
-        right_layout.addWidget(info_text)
+        right_layout.addWidget(self.info_text)
+        right_layout.addWidget(self.results_text)
 
         main_layout = QVBoxLayout()
         main_layout.addWidget(title_bar)
@@ -206,6 +217,8 @@ class MainWindow(QWidget):
         try:
             # Call the MLModel's train_model method
             accuracy, cm = self.ml_model.train_model()
+            self.info_text.setVisible(False)
+            self.results_text.setVisible(True)
 
             # Display the results in the text box
             results = f"Model trained successfully!\n\n"
@@ -215,59 +228,3 @@ class MainWindow(QWidget):
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to train the model: {e}")
-
-
-# rom PyQt5.QtWidgets import (
-#     QMainWindow, QPushButton, QTextEdit, QVBoxLayout, QWidget, QMessageBox, QLabel
-# )
-# from ml_model import MLModel  # Import the MLModel class
-
-
-# class MainWindow(QMainWindow):
-#     def _init_(self):
-#         super()._init_()
-#         self.setWindowTitle("Droid Scanner - MainWindow")
-#         self.resize(800, 600)
-
-#         # Main Widget
-#         self.central_widget = QWidget()
-        # self.setCentralWidget(self.central_widget)
-
-#         # Layout
-#         layout = QVBoxLayout()
-
-#         # Title Label
-#         title_label = QLabel("Droid Scanner - Machine Learning Integration")
-#         title_label.setStyleSheet("font-size: 18px; font-weight: bold;")
-#         layout.addWidget(title_label)
-
-#         # Train Model Button
-#         self.train_button = QPushButton("Train Model")
-#         self.train_button.clicked.connect(self.train_model)
-#         layout.addWidget(self.train_button)
-
-#         # Results Display
-#         self.results_text = QTextEdit()
-#         self.results_text.setReadOnly(True)
-#         layout.addWidget(self.results_text)
-
-#         self.central_widget.setLayout(layout)
-
-#         # Initialize MLModel with the CSV file path
-#         self.ml_model = MLModel('processed_output.csv')
-    
-    
-
-#     def train_model(self):
-#         try:
-#             # Call the MLModel's train_model method
-#             accuracy, cm = self.ml_model.train_model()
-
-#             # Display the results in the text box
-#             results = f"Model trained successfully!\n\n"
-#             results += f"Accuracy: {accuracy * 100:.2f}%\n\n"
-#             results += f"Confusion Matrix:\n{cm}"
-#             self.results_text.setText(results)
-
-#         except Exception as e:
-#             QMessageBox.critical(self, "Error", f"Failed to train the model: {e}")
