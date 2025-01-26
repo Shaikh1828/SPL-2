@@ -6,7 +6,7 @@ class Authentication:
     def __init__(self, db_path="users.db"):
         self.db_path = db_path
 
-        Database.Database.init_database(self)
+        Database.Database()
 
 
 
