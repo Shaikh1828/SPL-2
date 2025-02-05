@@ -38,6 +38,7 @@ class AuthWindows(QWidget):
         self.submit_button = QPushButton("Login")
         self.submit_button.clicked.connect(self.validate_user)
         self.submit_button.setStyleSheet("background-color: #FFF; font:16px; padding: 5px; border-radius: 5px;")
+        
 
         self.toggle_button = QPushButton("Switch to Register")
         self.toggle_button.clicked.connect(self.toggle_mode)
@@ -64,9 +65,9 @@ class AuthWindows(QWidget):
 
         if self.auth.validate_user(username, password, self.mode, self):
             if self.mode == "login":
-                self.open_main_window()  # Open the main window if login succeeds
+                self.open_main_window()  
             else:
-                self.toggle_mode()  # Switch to login mode after registration
+                self.toggle_mode()  
 
     def toggle_mode(self):
         if self.mode == "login":
@@ -84,7 +85,7 @@ class AuthWindows(QWidget):
         try:
             conn = sqlite3.connect("users.db")
             cursor = conn.cursor()
-            cursor.execute("SELECT id, username, password FROM users")  # Fetching password
+            cursor.execute("SELECT id, username, password FROM users")  
             data = cursor.fetchall()
             conn.close()
 
@@ -94,9 +95,9 @@ class AuthWindows(QWidget):
             self.data_window.resize(600, 400)
 
             # Create a table widget
-            self.table = QTableWidget(len(data), 3)  # Number of rows and columns
+            self.table = QTableWidget(len(data), 3)  
             self.table.setHorizontalHeaderLabels(["ID", "Username", "Password"])
-            self.table.setEditTriggers(QTableWidget.NoEditTriggers)  # Make table read-only
+            self.table.setEditTriggers(QTableWidget.NoEditTriggers) 
 
             # Populate the table with data
             for row_idx, (id_, username, password) in enumerate(data):

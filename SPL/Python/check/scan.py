@@ -40,7 +40,7 @@ class Scan(QWidget):
     def check_devices(self):
         """Check if any device is connected."""
         try:
-            result = subprocess.run(["adb", "devices"], capture_output=True, text=True, check=True)
+            result = subprocess.run(["C:\\platform-tools\\adb.exe", "devices"], capture_output=True, text=True, check=True)
             devices = [line.split()[0] for line in result.stdout.splitlines()[1:] if line.strip() and "device" in line]
 
             if devices:
@@ -63,7 +63,7 @@ class Scan(QWidget):
             return
 
         try:
-            result = subprocess.run(["adb", "-s", selected_device, "shell", "pm", "list", "packages", "-3"], capture_output=True, text=True, check=True)
+            result = subprocess.run(["C:\\platform-tools\\adb.exe", "-s", selected_device, "shell", "pm", "list", "packages", "-3"], capture_output=True, text=True, check=True)
             packages = [line.split(":")[1].strip() for line in result.stdout.splitlines() if line.startswith("package:")]
 
             if packages:
