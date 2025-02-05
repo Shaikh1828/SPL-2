@@ -102,10 +102,7 @@ def upload_file(request):
             features= permissions+intents
             update_database(uploaded_file.file.name, features)
             # Display the extracted features
-<<<<<<< HEAD
             analyze_last_apk(request)
-=======
->>>>>>> 36e88cf14490d3cc63be65fdc055e08730501fd7
             return render(request, 'result.html', {
                 # 'manifest_content': result,
                 'permissions': permissions,
@@ -217,7 +214,7 @@ def extract_apk(request):
         manifest_path = extract_manifest(local_base_apk_path, "E:\\5th Sem\\SPL-2\\SPL-2\\SPL\\Current\\New")
         permissions = extract_permissions(manifest_path)
         intents = extract_intents(manifest_path)
-<<<<<<< HEAD
+
         file_name = os.path.basename(local_base_apk_path)
         update_database(package_name, permissions+intents)
         print("Permissions-",permissions)
@@ -230,7 +227,7 @@ def extract_apk(request):
             'permissions': permissions,
             'intents': intents,
             'Classification':Prediction
-=======
+        })
         print("Permissions-",permissions)
         print()
         print("Intents",intents)
@@ -238,12 +235,10 @@ def extract_apk(request):
         return render(request, 'result.html', {
             'permissions': permissions,
             'intents': intents
->>>>>>> 36e88cf14490d3cc63be65fdc055e08730501fd7
         })
     except Exception as e:
         return JsonResponse({"success": False, "error": str(e)})
 
-<<<<<<< HEAD
 from django.http import JsonResponse
 from .models import AppFeatures
 import joblib
@@ -324,8 +319,6 @@ def analyze_last_apk(request):
 
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
-=======
-
 # def extract_apk(request):
 #     """Extract the APK of a specified package and analyze its contents."""
 #     package_name = request.GET.get("package_name")
@@ -373,4 +366,3 @@ def analyze_last_apk(request):
 
 #     except subprocess.CalledProcessError as e:
 #         return JsonResponse({"success": False, "error": e.stderr})
->>>>>>> 36e88cf14490d3cc63be65fdc055e08730501fd7
