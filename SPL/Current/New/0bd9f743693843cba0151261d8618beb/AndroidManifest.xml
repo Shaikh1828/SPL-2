@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="33" android:compileSdkVersionCodename="13" package="com.xiaomi.scanner" platformBuildVersionCode="33" platformBuildVersionName="13">
+    <uses-permission android:name="com.miui.securitycenter.permission.SYSTEM_PERMISSION_DECLARE"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.START_ANY_ACTIVITY"/>
+    <uses-permission android:name="com.xiaomi.scanner.receiver.RECEIVER"/>
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+    <uses-permission android:name="android.permission.GET_TASKS"/>
+    <uses-permission android:name="com.miui.securitycenter.permission.PERM_USE_INFO"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.START_ACTIVITIES_FROM_BACKGROUND"/>
+    <uses-permission android:name="com.miui.securitycenter.permission.SYSTEM_PERMISSION_DECLARE"/>
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"/>
+    <uses-permission android:name="com.miui.voiceassist.AI_WEB_ACTIVITY"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <permission android:name="com.xiaomi.scanner.receiver.RECEIVER" android:protectionLevel="signature"/>
+    <permission android:name="com.xiaomi.scanner.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.xiaomi.scanner.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <uses-permission android:name="miui.permission.ACCESS_MILINK_CAST"/>
+    <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:extractNativeLibs="false" android:hardwareAccelerated="true" android:icon="@drawable/barcode_scanner" android:label="@string/app_name" android:name="com.xiaomi.scanner.app.ScannerApp" android:networkSecurityConfig="@xml/network_security_config" android:requestLegacyExternalStorage="true" android:resizeableActivity="false" android:supportsRtl="true">
+        <activity android:exported="true" android:launchMode="singleTop" android:name="com.xiaomi.scanner.app.ScanActivity" android:screenOrientation="unspecified" android:theme="@style/ThemeCameraNaviBar" android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="miui.intent.action.scanbarcode"/>
+                <action android:name="miui.intent.action.scanner"/>
+                <action android:name="miui.intent.action.scanbusinesscard"/>
+                <action android:name="miui.intent.action.scanclassesmodule"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="miui.intent.category.SYSAPP_TOOL"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="com.xiaomi.scanner" android:pathPattern="/main" android:scheme="scanner"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="mi.quicksearch.intent.action.RETRIEVE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <meta-data android:name="mi.quicksearch.hints" android:resource="@xml/mi_quicksearch_hints"/>
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+        </activity>
+        <activity android:allowTaskReparenting="true" android:exported="true" android:label="@string/scan_result" android:name="com.xiaomi.scanner.module.code.app.QRResultActivity" android:screenOrientation="user" android:theme="@style/Theme.DayNight">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="miui.intent.action.receiverResultBarcodeScanner"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="miui.intent.category.SYSAPP_TOOL"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/about_title" android:launchMode="singleTop" android:name="com.xiaomi.scanner.setting.AboutActivity" android:screenOrientation="behind" android:theme="@style/Theme.DayNight"/>
+        <activity android:label="@string/setting_title" android:launchMode="singleTop" android:name="com.xiaomi.scanner.setting.SettingActivity" android:screenOrientation="behind" android:theme="@style/Theme.DayNight"/>
+        <activity android:exported="false" android:launchMode="singleTop" android:name="com.xiaomi.scanner.setting.FullScreenCtaActivity" android:screenOrientation="behind" android:theme="@style/Theme.DayNight"/>
+        <activity android:label="@string/setting_function_sort" android:launchMode="singleTop" android:name="com.xiaomi.scanner.app.FunctionSortActivity" android:screenOrientation="behind" android:theme="@style/Theme.DayNight"/>
+        <activity android:excludeFromRecents="true" android:exported="true" android:launchMode="singleInstance" android:name="com.xiaomi.scanner.screenscanner.ScreenScannerActivity" android:theme="@style/Transparent" android:windowSoftInputMode="stateAlwaysHidden|adjustPan">
+            <intent-filter>
+                <action android:name="miui.intent.action.screenscanner"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <meta-data android:name="global_app_hide_enable" android:value="true"/>
+        <meta-data android:name="app_remove_icon_description_title" android:resource="@string/app_remove_icon_description_title"/>
+        <meta-data android:name="app_remove_icon_description_content" android:resource="@string/app_remove_icon_description_content"/>
+        <meta-data android:name="app_uninstall_description_title" android:resource="@string/app_description_title"/>
+        <meta-data android:name="app_uninstall_description_content" android:resource="@string/app_description_content"/>
+        <meta-data android:name="mi_stat_channel" android:value="XiaoMi_Market"/>
+        <meta-data android:name="app_description_title" android:resource="@string/app_description_title"/>
+        <meta-data android:name="app_description_content" android:resource="@string/app_description_content"/>
+        <meta-data android:name="android.max_aspect" android:value="2.2"/>
+        <meta-data android:name="homework_appid" android:value="xiaomisaoyisao"/>
+        <meta-data android:name="required_permissions" android:value="@string/required_permissions"/>
+        <activity android:excludeFromRecents="true" android:launchMode="singleInstance" android:name="com.xiaomi.scanner.module.code.app.BarCodeScannerActivity" android:noHistory="true" android:theme="@style/Transparent"/>
+        <activity android:clearTaskOnLaunch="true" android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:excludeFromRecents="true" android:finishOnCloseSystemDialogs="true" android:launchMode="singleInstance" android:name="com.xiaomi.scanner.dialog.ShowCTADialogActivity" android:showForAllUsers="true" android:theme="@style/Theme.ShowCTADialogActivity"/>
+        <receiver android:exported="true" android:name="com.xiaomi.scanner.module.code.app.BarCodeScannerReceiver" android:permission="com.xiaomi.scanner.receiver.RECEIVER">
+            <intent-filter android:priority="-1">
+                <action android:name="com.xiaomi.scanner.receiver.senderbarcodescanner"/>
+            </intent-filter>
+        </receiver>
+        <service android:enabled="true" android:exported="true" android:name="com.xiaomi.scanner.app.RemoteService">
+            <intent-filter>
+                <action android:name="com.xiaomi.scanner.app.RemoteService"/>
+            </intent-filter>
+        </service>
+        <provider android:authorities="com.xiaomi.scanner.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/filepaths"/>
+        </provider>
+        <activity android:exported="false" android:name="com.alibaba.alibclinkpartner.ui.ALPEntranceActivity"/>
+        <activity android:exported="true" android:label="@string/study_scan_result" android:name="com.xiaomi.scanner.module.study.app.FeedSearchActivity" android:screenOrientation="behind" android:theme="@style/Theme.DayNight">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:launchMode="singleTop" android:name="com.xiaomi.scanner.module.ui.ClassesResultActivity" android:screenOrientation="behind" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name="com.xiaomi.scanner.app.MiPayInDialogActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:label="@string/setting_title" android:launchMode="singleTop" android:name="com.xiaomi.scanner.setting.SettingXActivity" android:screenOrientation="behind" android:theme="@style/SettingStyle"/>
+        <meta-data android:name="miuixpreference" android:value="3.0"/>
+        <meta-data android:name="miui_private_label" android:value="PRIVATE_V150"/>
+        <meta-data android:name="appcompat" android:value="3.0"/>
+        <meta-data android:name="miuixstretchablewidget" android:value="1.0"/>
+        <meta-data android:name="slidingwidget" android:value="1.0"/>
+        <meta-data android:name="popupwidget" android:value="1.0"/>
+        <meta-data android:name="pickerwidget" android:value="1.0"/>
+        <meta-data android:name="miuixbasewidget" android:value="1.0"/>
+        <meta-data android:name="androidbasewidget" android:value="1.0"/>
+        <meta-data android:name="recyclerview" android:value="2.0"/>
+        <meta-data android:name="springback" android:value="3.0"/>
+        <meta-data android:name="nest" android:value="2.0"/>
+        <meta-data android:name="haptic" android:value="1.0"/>
+        <meta-data android:name="smooth" android:value="1.0"/>
+        <meta-data android:name="graphics" android:value="2.0"/>
+        <meta-data android:name="core" android:value="2.0"/>
+        <meta-data android:name="viewpager" android:value="2.0"/>
+        <meta-data android:name="dynamicoverscroller" android:value="2.0"/>
+        <meta-data android:name="recyclerview_animator" android:value="2.0"/>
+        <meta-data android:name="folme" android:value="2.0"/>
+        <meta-data android:name="animation" android:value="1.0"/>
+        <uses-library android:name="androidx.window.extensions" android:required="false"/>
+        <uses-library android:name="androidx.window.sidecar" android:required="false"/>
+        <meta-data android:name="spring" android:value="1.0"/>
+        <provider android:authorities="com.xiaomi.scanner.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+        </provider>
+        <meta-data android:name="theme" android:value="1.0"/>
+        <meta-data android:name="devicebaseinfo" android:value="1.0"/>
+    </application>
+</manifest>

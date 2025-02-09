@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" xmlns:dist="http://schemas.android.com/apk/distribution" android:compileSdkVersion="33" android:compileSdkVersionCodename="13" package="com.duokan.phone.remotecontroller" platformBuildVersionCode="33" platformBuildVersionName="13">
+    <dist:module dist:instant="true"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-permission android:maxSdkVersion="28" android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:maxSdkVersion="28" android:name="android.permission.GET_ACCOUNTS_PRIVILEGED"/>
+    <uses-permission android:maxSdkVersion="22" android:name="android.permission.USE_CREDENTIALS"/>
+    <uses-permission android:name="android.permission.MANAGE_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.TRANSMIT_IR"/>
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH" android:required="false"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" android:required="false"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_ADVERTISE"/>
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT"/>
+    <uses-permission android:name="com.android.launcher.permission.UNINSTALL_SHORTCUT"/>
+    <uses-permission android:name="com.miui.home.launcher.permission.UNINSTALL_SHORTCUT"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.xiaomi.permission.CLOUD_MANAGER"/>
+    <uses-permission android:name="android.permission.FLASHLIGHT"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.AUTHENTICATE_ACCOUNTS"/>
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS"/>
+    <uses-permission android:name="android.permission.BROADCAST_STICKY"/>
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation"/>
+    <uses-feature android:name="android.hardware.camera"/>
+    <uses-feature android:name="android.hardware.camera.autofocus"/>
+    <uses-permission android:name="com.miui.securitycenter.permission.SYSTEM_PERMISSION_DECLARE"/>
+    <queries>
+        <package android:name="com.xiaomi.market"/>
+        <package android:name="com.duokan.phone.remotecontroller.peel.plugin"/>
+        <package android:name="tv.peel.app"/>
+        <package android:name="com.android.vending"/>
+        <package android:name="com.uei.quicksetsdk.huawei"/>
+        <package android:name="com.miui.weather2"/>
+        <package android:name="com.huawei.systemmanager"/>
+        <package android:name="com.vivo.permissionmanager"/>
+        <package android:name="com.iqoo.secure"/>
+        <package android:name="com.meizu.safe"/>
+    </queries>
+    <uses-permission android:name="com.htc.IR_CONTROLLER"/>
+    <uses-permission android:name="tv.peel.samsung.app.REMOTE_CONTROL"/>
+    <uses-permission android:name="tv.peel.smartremote.REMOTE_CONTROL"/>
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE"/>
+    <uses-permission android:name="com.xiaomi.passport.permission.PASSPORT_UI_CONTROLLER_SERVICE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
+    <uses-permission android:name="android.permission.DISABLE_KEYGUARD"/>
+    <uses-permission android:name="mitv.permission.ACCESS_INNER_APPLICATION"/>
+    <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:icon="@mipmap/ic_launcher" android:label="@string/app_name" android:largeHeap="true" android:name="com.xiaomi.mitv.phone.remotecontroller.XMRCApplication" android:networkSecurityConfig="@xml/network_security_config" android:persistent="true" android:resizeableActivity="false" android:roundIcon="@mipmap/ic_launcher_r" android:supportsRtl="false" android:theme="@style/RCAppThemeLight_MIUIV11">
+        <meta-data android:name="android.supports_size_changes" android:value="true"/>
+        <meta-data android:name="io.fabric.ApiKey" android:value="7583fd0053a28ed3f80dd66c516e2786b63de954"/>
+        <meta-data android:name="force_dark_google" android:value="true"/>
+        <meta-data android:name="android.support.VERSION" android:value="26.0.2"/>
+        <meta-data android:name="firebase_analytics_collection_deactivated" android:value="false"/>
+        <meta-data android:name="google_analytics_adid_collection_enabled" android:value="false"/>
+        <meta-data android:name="BUILD_FLAVOR" android:value="rsa"/>
+        <meta-data android:name="WXPAY_APPID" android:value="wx9cb5908d458a2f18"/>
+        <meta-data android:name="android.max_aspect" android:value="2.2"/>
+        <meta-data android:name="use_miui_font" android:value="true"/>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity android:configChanges="screenLayout|screenSize|smallestScreenSize|uiMode" android:exported="true" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.xiaomi.mitv.phone.remotecontroller.HoriWidgetMainActivityV2" android:screenOrientation="portrait" android:theme="@style/RCAppTheme_Background_White">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="miui.intent.category.SYSAPP_TOOL"/>
+            </intent-filter>
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:host="home" android:pathPrefix="/controller" android:scheme="miremote"/>
+                <data android:host="home" android:pathPrefix="/epg" android:scheme="miremote"/>
+                <data android:host="addir" android:pathPrefix="/brand" android:scheme="miremote"/>
+                <data android:host="epg" android:pathPrefix="/channel" android:scheme="miremote"/>
+                <data android:host="epg" android:pathPrefix="/category" android:scheme="miremote"/>
+                <data android:host="epg" android:pathPrefix="/program" android:scheme="miremote"/>
+            </intent-filter>
+        </activity>
+        <activity android:exported="true" android:label="@string/app_name" android:launchMode="singleTop" android:name="com.xiaomi.mitv.phone.remotecontroller.remotecall.RemoteCallHandlerActivity" android:screenOrientation="unspecified">
+            <intent-filter>
+                <action android:name="com.xiaomi.mitv.phone.remotecontroller.main"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.xiaomi.mitv.phone.remotecontroller.main.xiaoai"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|uiMode" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.xiaomi.mitv.phone.remotecontroller.PrivacyActivity" android:screenOrientation="unspecified" android:theme="@style/RCAppTheme_Trans"/>
+        <activity android:exported="true" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.duokan.phone.remotecontroller.wxapi.WXEntryActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.common.activity.PermissionManageActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|uiMode" android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.user.BackupActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize|smallestScreenSize|uiMode" android:exported="false" android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.epg.activity.EPGWeekActivity" android:screenOrientation="portrait">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="channel" android:pathPrefix="/week" android:scheme="mirc"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.epg.activity.EPGEpisodeActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:name="com.xiaomi.mitv.phone.remotecontroller.common.activity.SettingsActivityV50" android:screenOrientation="portrait"/>
+        <activity android:configChanges="uiMode" android:name="com.xiaomi.mitv.phone.remotecontroller.common.activity.LegalTermsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.xiaomi.mitv.phone.remotecontroller.common.DropAgreementActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:label="@string/app_name" android:launchMode="singleTask" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.AddDeviceActivityV52" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.brandsearch.BrandSearchActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.LineupSelectActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.MatchIRActivityV52" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.EditDeviceActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.IssueFeedbackActivity" android:screenOrientation="portrait" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.CitySelectActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.UnknownDeviceActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:launchMode="singleTop" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.RoomActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.ControllerSelectActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboardHidden|layoutDirection|orientation|screenSize" android:label="@string/app_name" android:launchMode="singleTop" android:name="com.xiaomi.mitv.phone.remotecontroller.milink.activity.MiWifiRCActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.bluetooth.MiBtrcActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.MiLinkRCIRActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.DVDRCActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.BoxRCIRActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:configChanges="uiMode" android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.TVStbActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.VOHRCActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.ACRCActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.ACRCActivityKK" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.ACRCActivityNormal" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.AudioRCActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.LightIRActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.SatelliteSTBRCActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.FanRCActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.CameraIRActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.WaterHeaterIRActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.panel.AirCleanerIRActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight_MIUIV10"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.NetWorkDiagnosisActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.pruning.AnalyzeIRCodeActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.pruning.PruningMatchActivity2" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.pruning.TVRCTestActivity" android:screenOrientation="portrait" android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.CommitDoneActivity" android:screenOrientation="portrait"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize" android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.FeedbackActivityNew" android:screenOrientation="portrait"/>
+        <activity android:name="com.xiaomi.mitv.phone.remotecontroller.common.activity.RCWebViewActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.xiaomi.mitv.phone.remotecontroller.common.web.XiaomiAccountDetailH5Activity" android:screenOrientation="portrait"/>
+        <activity android:exported="false" android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.epg.EpgDetail.EPGDetailActivityV53" android:screenOrientation="portrait" android:theme="@style/RCAppThemeNew">
+            <intent-filter android:priority="1000">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="details" android:pathPrefix="/program" android:scheme="mirc"/>
+            </intent-filter>
+        </activity>
+        <service android:enabled="true" android:exported="true" android:label="MDNSSDListener" android:name="com.duokan.mdnssd.listener.ListenService">
+            <intent-filter>
+                <action android:name="duokan.mdnssd.listener.aidl.IListenService"/>
+            </intent-filter>
+        </service>
+        <service android:enabled="true" android:exported="true" android:label="ArickanService" android:name="com.duokan.phone.remotecontroller.airkan.AirkanService"/>
+        <provider android:authorities="com.xiaomi.mitv.phone.remotecontroller.provider.LockScreenProvider;com.xiaomi.remotecontroller.DeviceProvider" android:exported="true" android:multiprocess="false" android:name="com.xiaomi.mitv.phone.remotecontroller.remotecall.LockScreenProvider"/>
+        <provider android:authorities="com.xiaomi.mitv.phone.remotecontroller.upgrade.AppInstallProvider" android:exported="true" android:multiprocess="false" android:name="com.xiaomi.mitv.phone.remotecontroller.upgrade.AppInstallProvider"/>
+        <receiver android:exported="true" android:name="com.xiaomi.mitv.phone.remotecontroller.utils.download.DownloadReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.DOWNLOAD_COMPLETE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.xiaomi.mitv.phone.remotecontroller.epg.EPGBookAlarmReceiver" android:permission="com.duokan.phone.remotecontroller.permission.BROADCAST_RECEIVE" android:process=":newinst">
+            <intent-filter>
+                <action android:name="com.xiaomi.mitv.phone.remotecontroller.book_program_action"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.xiaomi.mitv.phone.remotecontroller.voice.VoiceControlReceiver">
+            <intent-filter>
+                <action android:name="com.xiaomi.mitv.phone.remotecontroller.voice_control_action"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.miui.voiceassist.mvs.client.MvsClientReceiver" android:permission="com.miui.voiceassist.MVS_BROADCAST">
+            <intent-filter>
+                <action android:name="com.miui.voiceassist.mvs.client.ACTION_RESGISTER_MVS"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="true" android:name="com.xiaomi.mitv.phone.assistant.receiver.AccountChangerReceiver">
+            <intent-filter>
+                <action android:name="android.accounts.LOGIN_ACCOUNTS_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <activity android:exported="false" android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.epg.activity.EPGEventListActivity" android:screenOrientation="portrait">
+            <intent-filter android:priority="1000">
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="category" android:pathPrefix="/eventlist" android:scheme="mirc"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.ShareRCActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.ShareRCListActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.common.activity.AddressListActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:launchMode="singleTask" android:name="com.xiaomi.mitv.phone.remotecontroller.common.web.WebViewActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.common.activity.NameListActivityEx" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.epg.activity.EPGProgramBookActivity" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.epg.activity.EPGChannelActivity_v53" android:screenOrientation="portrait"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.InputModelNameActivity" android:screenOrientation="portrait"/>
+        <receiver android:exported="false" android:name="com.xiaomi.mitv.phone.remotecontroller.utils.shortcut.ShortCutReceiver">
+            <intent-filter>
+                <action android:name="com.duokan.phone.remotecontroller.shortcut.success"/>
+            </intent-filter>
+        </receiver>
+        <activity android:exported="false" android:label="@string/app_name" android:name="com.google.zxing.CaptureActivity" android:screenOrientation="portrait" android:theme="@style/RCAppThemeLight"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.user.UserTabActivity" android:screenOrientation="portrait"/>
+        <service android:enabled="true" android:exported="false" android:label="HttpService" android:name="com.duokan.airkan.http.HttpService"/>
+        <activity android:label="@string/app_name" android:name="com.xiaomi.mitv.phone.remotecontroller.ir.activity.BrandListActivityV2" android:screenOrientation="portrait" android:theme="@style/App_Compat_Dark"/>
+        <activity android:name="com.xiaomi.mitv.phone.remotecontroller.milink.activity.ScreenShotPictureActivity"/>
+        <provider android:authorities="com.xiaomi.mitv.phone.remotecontroller.upgrade.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.xiaomi.mitv.phone.remotecontroller.utils.InstallFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/file_paths"/>
+        </provider>
+        <provider android:authorities="com.duokan.phone.remotecontroller.firebaseinitprovider" android:enabled="false" android:exported="false" android:initOrder="100" android:name="com.google.firebase.provider.FirebaseInitProvider"/>
+        <service android:exported="true" android:icon="@drawable/ic_miui_til" android:label="@string/app_name" android:name="com.duokan.phone.remotecontroller.common.MIUI11TileService" android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+            <meta-data android:name="android.service.quicksettings.ACTIVE_TILE" android:value="true"/>
+        </service>
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity android:exported="true" android:name="androidx.compose.ui.tooling.PreviewActivity"/>
+        <provider android:authorities="com.duokan.phone.remotecontroller.lifecycle-process" android:exported="false" android:multiprocess="true" android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"/>
+        <provider android:authorities="com.duokan.phone.remotecontroller.PassportUIInitProvider" android:exported="false" android:name="com.xiaomi.passport.ui.internal.PassportUIInitProvider"/>
+        <activity android:name="com.xiaomi.passport.ui.internal.PickCountryCodeActivity" android:theme="@style/PassportTheme.NoActionBar"/>
+        <activity android:label="" android:name="com.xiaomi.passport.ui.page.UserAvatarUpdateActivity" android:screenOrientation="portrait" android:theme="@style/TransparentCompat"/>
+        <provider android:authorities="com.duokan.phone.remotecontroller.passport.fileprovider" android:exported="false" android:grantUriPermissions="true" android:name="com.xiaomi.passport.ui.settings.provider.PassportFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/passport_provider_file_paths"/>
+        </provider>
+        <activity android:exported="true" android:name="com.xiaomi.passport.ui.sns.WXEntryActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:excludeFromRecents="true" android:exported="false" android:name="com.xiaomi.passport.ui.internal.ConfirmCredentialActivity" android:theme="@style/Passport.Theme.Light.Dialog.NoTitle" android:windowSoftInputMode="adjustPan">
+            <intent-filter>
+                <action android:name="com.xiaomi.account.action.XIAOMI_ACCOUNT_QUICK_LOGIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+        <activity android:excludeFromRecents="true" android:name="com.xiaomi.passport.ui.page.AccountLoginActivity" android:screenOrientation="behind" android:theme="@style/PassportTheme.NoActionBar" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <activity android:label="@string/account_user_details" android:name="com.xiaomi.passport.ui.page.UserInfoActivity" android:theme="@style/PassportTheme.NoActionBar"/>
+        <activity android:name="com.xiaomi.passport.ui.internal.PassportJsbWebViewActivity" android:theme="@style/PassportTheme.NoActionBar"/>
+        <service android:exported="false" android:name="com.xiaomi.passport.accountmanager.OwnAppXiaomiAccountAuthenticatorService">
+            <intent-filter>
+                <action android:name="com.xiaomi.accounts.AccountAuthenticator"/>
+            </intent-filter>
+        </service>
+        <service android:exported="true" android:name="com.xiaomi.account.service.AppAccountExchangeService">
+            <intent-filter>
+                <action android:name="com.xiaomi.account.action.BIND_ACCOUNT_EXCHANGE_SERVICE"/>
+            </intent-filter>
+        </service>
+        <service android:exported="false" android:name="no.nordicsemi.android.support.v18.scanner.ScannerService"/>
+        <receiver android:exported="true" android:name="no.nordicsemi.android.support.v18.scanner.PendingIntentReceiver">
+            <intent-filter>
+                <action android:name="no.nordicsemi.android.support.v18.ACTION_FOUND"/>
+            </intent-filter>
+        </receiver>
+        <uses-library android:name="com.xiaomi.mitv.api" android:required="false"/>
+        <provider android:authorities="com.duokan.phone.remotecontroller.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.profileinstaller.ProfileInstallerInitializer" android:value="androidx.startup"/>
+        </provider>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+            </intent-filter>
+        </receiver>
+    </application>
+</manifest>

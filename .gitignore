@@ -1,0 +1,15 @@
+# Ignore everything in the folder
+/SPL\Current\extracted_apks/*
+
+!/SPL\Current\extracted_apks/.keep
+
+
+
+/SPL\Current\New/*
+
+!/SPL\Current\New/.keep
+
+
+/SPL\Current\media/*
+
+!/SPL\Current\media/.keep

@@ -3,6 +3,11 @@ from django.shortcuts import render, redirect
 from .forms import UploadFileForm
 from .models import UploadedFile
 import pandas as pd
+<<<<<<< HEAD
+from .utils.permissions_extractor import extract_permissions
+from .utils.intents_extractor import extract_intents
+=======
+>>>>>>> 36e88cf14490d3cc63be65fdc055e08730501fd7
 
 # def process_file(file_path):
 #     df = pd.read_csv(file_path)
@@ -56,6 +61,16 @@ def extract_manifest(apk_path, output_dir):
             
             if os.path.exists(manifest_path):
                 delete_all_except(manifest_path)
+<<<<<<< HEAD
+                return manifest_path
+            # return manifest_path
+            # #     # Read the manifest content
+            #     with open(manifest_path, 'r', encoding='utf-8') as f:
+            #         manifest_content = f.read()
+            # #with open(manifest_path, 'r', encoding='utf-8', errors='replace') as f:
+            # #         manifest_content = f.read()
+            #     return manifest_content  # Return manifest content
+=======
             # return manifest_path
             #     # Read the manifest content
                 with open(manifest_path, 'r', encoding='utf-8') as f:
@@ -63,6 +78,7 @@ def extract_manifest(apk_path, output_dir):
             #with open(manifest_path, 'r', encoding='utf-8', errors='replace') as f:
             #         manifest_content = f.read()
                 return manifest_content  # Return manifest content
+>>>>>>> 36e88cf14490d3cc63be65fdc055e08730501fd7
             else:
                 shutil.rmtree(temp_dir)
                 return "Manifest file not found in APK."
@@ -102,10 +118,26 @@ def upload_file(request):
             file_path = uploaded_file.file.path
             # return file_path
             # result = process_file(file_path)  # Call your tool here
+<<<<<<< HEAD
+            # result = extract_manifest(file_path,"E:\\5th Sem\\SPL-2\\SPL-2\\SPL\\multiTest\\Newmedia\\temp")
+            manifestpath = extract_manifest(file_path,"E:\\5th Sem\\SPL-2\\SPL-2\\SPL\\multiTest\\Newmedia\\temp")
+            permissions = extract_permissions(manifestpath)
+            intents = extract_intents(manifestpath)
+
+            # Display the extracted features
+            return render(request, 'result.html', {
+                # 'manifest_content': result,
+                'permissions': permissions,
+                'intents': intents
+            })
+            # # Display the result to the user
+            # return render(request, 'result.html', {'result': result})
+=======
             result = extract_manifest(file_path,"D:\\Git\\Python\\SPL\\multiTest\\Newmedia\\temp")
             
             # Display the result to the user
             return render(request, 'result.html', {'result': result})
+>>>>>>> 36e88cf14490d3cc63be65fdc055e08730501fd7
 
     else:
         form = UploadFileForm()
