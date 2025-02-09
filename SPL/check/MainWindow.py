@@ -5,6 +5,7 @@ from PyQt5.QtGui import QFont, QPalette, QBrush, QLinearGradient, QColor
 from PyQt5.QtCore import Qt
 
 from scan import Scan
+from MLmodel import MLModel  # Import the MLModel class
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -86,6 +87,51 @@ class MainWindow(QWidget):
             }
         """)
 
+        scan_button = QPushButton("Scan Devices")
+        scan_button.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(90, 180, 160);
+                color: black;
+                font: bold 15pt Arial;
+                border-radius: 10px;
+                padding: 8px;
+                margin-top: 20px;
+            }
+            QPushButton:hover {
+                background-color: rgb(110, 190, 170);
+            }
+        """)
+        scan_button.clicked.connect(self.open_scan_window)
+
+        # Train Model Button
+        self.train_button = QPushButton("Train Model")
+        self.train_button.clicked.connect(self.train_model)
+        self.train_button.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(255, 105, 135);
+                color: black;
+                font: bold 15pt Arial;
+                border-radius: 10px;
+                padding: 8px;
+                margin-top: 20px;
+            }
+            QPushButton:hover {
+                background-color: rgb(235, 85, 115);
+            }
+        """)
+        # left_layout.addWidget(self.train_button)
+
+        # Results Display
+        self.results_text = QTextEdit()
+        self.results_text.setReadOnly(True)
+        # left_layout.addWidget(self.results_text)
+
+        # self.central_widget.setLayout(left_layout)
+
+        # Initialize MLModel with the CSV file path
+        self.ml_model = MLModel('processed_output.csv')
+
+
         # Info Panel
         info_text = QTextEdit()
         info_text.setReadOnly(True)
@@ -118,7 +164,12 @@ class MainWindow(QWidget):
         left_layout.addWidget(choose_button)
         left_layout.addWidget(self.file_path_label)
         left_layout.addWidget(upload_button)
+        left_layout.addWidget(scan_button)
         left_layout.addStretch()
+        left_layout.addWidget(self.train_button)
+        left_layout.addWidget(self.results_text)
+
+        # self.central_widget.setLayout(left_layout)
 
         right_layout = QVBoxLayout()
         right_layout.addWidget(info_text)
@@ -131,12 +182,6 @@ class MainWindow(QWidget):
 
         main_layout.addLayout(content_layout)
         self.setLayout(main_layout)
-
-        scan_button = QPushButton("Scan Devices")
-        scan_button.clicked.connect(self.open_scan_window)
-        left_layout.addWidget(scan_button)
-
-
 
     def choose_file(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Select File", "", "All Files (*)")
@@ -153,8 +198,76 @@ class MainWindow(QWidget):
             self.move(event.globalPos() - self.drag_pos)
             event.accept()
 
-
     def open_scan_window(self):
         self.scan_window = Scan()
         self.scan_window.show()
 
+    def train_model(self):
+        try:
+            # Call the MLModel's train_model method
+            accuracy, cm = self.ml_model.train_model()
+
+            # Display the results in the text box
+            results = f"Model trained successfully!\n\n"
+            results += f"Accuracy: {accuracy * 100:.2f}%\n\n"
+            results += f"Confusion Matrix:\n{cm}"
+            self.results_text.setText(results)
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to train the model: {e}")
+
+
+# rom PyQt5.QtWidgets import (
+#     QMainWindow, QPushButton, QTextEdit, QVBoxLayout, QWidget, QMessageBox, QLabel
+# )
+# from ml_model import MLModel  # Import the MLModel class
+
+
+# class MainWindow(QMainWindow):
+#     def _init_(self):
+#         super()._init_()
+#         self.setWindowTitle("Droid Scanner - MainWindow")
+#         self.resize(800, 600)
+
+#         # Main Widget
+#         self.central_widget = QWidget()
+        # self.setCentralWidget(self.central_widget)
+
+#         # Layout
+#         layout = QVBoxLayout()
+
+#         # Title Label
+#         title_label = QLabel("Droid Scanner - Machine Learning Integration")
+#         title_label.setStyleSheet("font-size: 18px; font-weight: bold;")
+#         layout.addWidget(title_label)
+
+#         # Train Model Button
+#         self.train_button = QPushButton("Train Model")
+#         self.train_button.clicked.connect(self.train_model)
+#         layout.addWidget(self.train_button)
+
+#         # Results Display
+#         self.results_text = QTextEdit()
+#         self.results_text.setReadOnly(True)
+#         layout.addWidget(self.results_text)
+
+#         self.central_widget.setLayout(layout)
+
+#         # Initialize MLModel with the CSV file path
+#         self.ml_model = MLModel('processed_output.csv')
+    
+    
+
+#     def train_model(self):
+#         try:
+#             # Call the MLModel's train_model method
+#             accuracy, cm = self.ml_model.train_model()
+
+#             # Display the results in the text box
+#             results = f"Model trained successfully!\n\n"
+#             results += f"Accuracy: {accuracy * 100:.2f}%\n\n"
+#             results += f"Confusion Matrix:\n{cm}"
+#             self.results_text.setText(results)
+
+#         except Exception as e:
+#             QMessageBox.critical(self, "Error", f"Failed to train the model: {e}")

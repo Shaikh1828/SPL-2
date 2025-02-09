@@ -1,12 +1,12 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox, QComboBox, QTextEdit
 import subprocess
 
-
 class Scan(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Scan Devices")
         self.resize(600, 400)
+        self.setStyleSheet("background-color: rgb(50, 50, 50); color: white;")
         self.init_ui()
 
     def init_ui(self):
