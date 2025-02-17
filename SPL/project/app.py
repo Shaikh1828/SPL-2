@@ -80,9 +80,10 @@ def index():
 
     # Render the HTML form for file upload
     return render_template('index.html')
+# works need to be updatedd
 
 # Start the server
 if __name__ == '__main__':
-    # with app.app_context():
+    # with app.app_context():th
     #     db.create_all()  # Run this once
     app.run(debug=True)
