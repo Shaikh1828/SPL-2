@@ -5,3 +5,4 @@ Analysis Result
 Training ML Model
 Manipulating Database
 Classifying app
+Authentication through mail
