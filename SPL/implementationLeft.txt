@@ -3,6 +3,7 @@ Dashboard
 Report
 Analysis Result
 Training ML Model
+-Modification of database accordingly
 Manipulating Database
 Classifying app
 Authentication through mail
