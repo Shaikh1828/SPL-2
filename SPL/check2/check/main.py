@@ -10,4 +10,5 @@ from PyQt5.QtWidgets import (
 app = QApplication([])
 auth_window = AuthWindow.AuthWindows()
 auth_window.show()
+
 app.exec_()
