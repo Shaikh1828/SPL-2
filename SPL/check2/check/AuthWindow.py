@@ -242,7 +242,7 @@ class AuthWindows(QWidget):
                     QMessageBox.warning(
                         self,
                         "Error",
-                        "Invalid verification code."
+                        "Invalid or expired verification code."
                     )
         elif result:
             if self.mode == "login":
