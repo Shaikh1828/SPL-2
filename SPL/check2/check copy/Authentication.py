@@ -1,14 +1,13 @@
-# authentication.py
 from PyQt5.QtWidgets import QMessageBox
 import jwt
 from datetime import datetime, timedelta
 import random
 import smtplib
 from email.mime.text import MIMEText
-from config import EMAIL, EMAIL_PASSWORD
+from config import EMAIL, EMAIL_PASSWORD, JWT_SECRET_KEY
 
-# Use a strong secret key and keep it secure in production
-SECRET_KEY = "your_secret_key_should_be_strong_and_secure"
+# Use the secret key from config
+SECRET_KEY = JWT_SECRET_KEY
 
 class Authentication:
     def __init__(self, db_connection):
@@ -135,8 +134,48 @@ class Authentication:
                 else:
                     QMessageBox.warning(parent, "Error", "Invalid credentials.")
                     return False
+            
+            elif mode == "register":
+                # Check if email is provided for registration
+                if not email:
+                    QMessageBox.warning(parent, "Input Error", "Email address is required for registration.")
+                    return False
+                
+                # Validate email format (basic check)
+                if "@" not in email or "." not in email:
+                    QMessageBox.warning(parent, "Input Error", "Please enter a valid email address.")
+                    return False
                     
-            # ... rest of the method remains the same ...
+                # Generate OTP and token for email verification
+                otp = self.generate_otp()
+                jwt_token = self.create_jwt(email, otp)
+                
+                # Add user to database
+                if self.db.add_user(username, password, email, jwt_token):
+                    # Send verification email
+                    if self.send_email(email, otp):
+                        QMessageBox.information(
+                            parent,
+                            "Registration",
+                            "Account created! Please verify your email address to activate your account."
+                        )
+                        parent.current_email = email
+                        parent.show_verification_dialog(email)
+                        return "verify"
+                    else:
+                        QMessageBox.warning(
+                            parent,
+                            "Email Error",
+                            "Failed to send verification email. Please check your email settings."
+                        )
+                        return False
+                else:
+                    QMessageBox.warning(
+                        parent,
+                        "Registration Error",
+                        "Username or email already exists. Please choose a different one."
+                    )
+                    return False
 
         except Exception as e:
             QMessageBox.critical(parent, "Error", f"An error occurred: {e}")

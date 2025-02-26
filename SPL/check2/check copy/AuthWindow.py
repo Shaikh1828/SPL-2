@@ -134,8 +134,12 @@ class AuthWindows(QWidget):
                 self.open_main_window()
 
     def show_verification_dialog(self, email):
-        dialog = VerificationDialog(email, self)
-        if dialog.exec_() == QDialog.Accepted:
+        while True:  # Use a loop instead of recursion
+            dialog = VerificationDialog(email, self)
+            if dialog.exec_() != QDialog.Accepted:
+                # User cancelled the dialog
+                break
+                
             verification_code = dialog.get_code()
             verification_result = self.auth.verify_email(email, verification_code)
             
@@ -146,20 +150,25 @@ class AuthWindows(QWidget):
                     "Email verified successfully! You can now login."
                 )
                 self.toggle_mode()  # Switch back to login
+                break  # Exit the loop after successful verification
             elif verification_result == "expired":
-                QMessageBox.warning(
+                user_response = QMessageBox.warning(
                     self,
                     "Expired Code",
-                    "Your verification code has expired. Please request a new one."
+                    "Your verification code has expired. Would you like to try again?",
+                    QMessageBox.Yes | QMessageBox.No
                 )
-                self.show_verification_dialog(email)  # Show dialog again
+                if user_response == QMessageBox.No:
+                    break  # Exit the loop if user doesn't want to try again
             else:
-                QMessageBox.warning(
+                user_response = QMessageBox.warning(
                     self,
                     "Error",
-                    "Invalid verification code. Please try again."
+                    "Invalid verification code. Would you like to try again?",
+                    QMessageBox.Yes | QMessageBox.No
                 )
-                self.show_verification_dialog(email)  # Show dialog again
+                if user_response == QMessageBox.No:
+                    break  # Exit the loop if user doesn't want to try again
 
     def resend_verification_code(self, email):
         """Resend verification code to user"""
