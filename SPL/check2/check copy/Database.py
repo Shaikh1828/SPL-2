@@ -3,7 +3,7 @@ import sqlite3
 from datetime import datetime
 
 class Database:
-    def __init__(self, db_path="users.db"):
+    def __init__(self, db_path="D:\\Git\\SPL-2\\SPL\\check2\\check copy\\users.db"):
         self.db_path = db_path
         # Initialize database connection
         self.connection = sqlite3.connect(db_path)

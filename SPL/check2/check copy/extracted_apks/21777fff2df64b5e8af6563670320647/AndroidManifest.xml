@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?><manifest xmlns:android="http://schemas.android.com/apk/res/android" android:compileSdkVersion="35" android:compileSdkVersionCodename="15" android:installLocation="auto" package="com.chess" platformBuildVersionCode="35" platformBuildVersionName="15">
+    <queries>
+        <package android:name="com.facebook.katana"/>
+        <intent>
+            <action android:name="android.settings.BLUETOOTH_SETTINGS"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:scheme="https"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <category android:name="android.intent.category.BROWSABLE"/>
+            <data android:scheme="http"/>
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW"/>
+            <data android:scheme="https"/>
+        </intent>
+        <intent>
+            <action android:name="android.support.customtabs.action.CustomTabsService"/>
+        </intent>
+        <intent>
+            <action android:name="com.android.vending.billing.InAppBillingService.BIND"/>
+        </intent>
+    </queries>
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
+    <uses-permission android:name="android.permission.WAKE_LOCK"/>
+    <uses-feature android:name="android.hardware.camera" android:required="false"/>
+    <uses-feature android:name="android.hardware.type.pc" android:required="false"/>
+    <uses-permission android:name="com.android.vending.BILLING"/>
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM"/>
+    <uses-permission android:maxSdkVersion="30" android:name="android.permission.BLUETOOTH"/>
+    <uses-permission android:maxSdkVersion="30" android:name="android.permission.BLUETOOTH_ADMIN"/>
+    <uses-permission android:maxSdkVersion="30" android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:maxSdkVersion="30" android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation"/>
+    <uses-permission android:name="android.permission.BLUETOOTH_CONNECT"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-feature android:name="android.hardware.bluetooth" android:required="false"/>
+    <uses-feature android:name="android.hardware.bluetooth_le" android:required="false"/>
+    <uses-feature android:name="android.hardware.wifi" android:required="false"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE"/>
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_ATTRIBUTION"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_AD_ID"/>
+    <uses-permission android:name="android.permission.ACCESS_ADSERVICES_TOPICS"/>
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE"/>
+    <permission android:name="com.chess.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION" android:protectionLevel="signature"/>
+    <uses-permission android:name="com.chess.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION"/>
+    <application android:allowBackup="true" android:appComponentFactory="androidx.core.app.CoreComponentFactory" android:dataExtractionRules="@xml/data_extraction_rules" android:extractNativeLibs="true" android:fullBackupContent="@xml/backup_rules" android:icon="@mipmap/ic_launcher" android:label="@string/chess_app_name" android:name="com.chess.MainApplication" android:supportsRtl="true" android:theme="@style/AppTheme">
+        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity android:exported="true" android:name="com.chess.splash.SplashActivity" android:screenOrientation="behind" android:theme="@style/Splash">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/title_activity_signup" android:name="com.chess.welcome.signup.SignupActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:exported="true" android:label="@string/chess_app_name" android:launchMode="singleTask" android:name="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="www.chess.com"/>
+                <data android:path="/daily-chess-puzzle"/>
+                <data android:path="/lessons"/>
+                <data android:path="/membership"/>
+                <data android:path="/play"/>
+                <data android:path="/play/computer"/>
+                <data android:path="/play/online/new"/>
+                <data android:path="/puzzles"/>
+                <data android:path="/puzzles/rated"/>
+                <data android:path="/puzzles/rush"/>
+                <data android:path="/registration-invite"/>
+                <data android:pathPrefix="/analysis/game/daily/"/>
+                <data android:pathPrefix="/analysis/game/live/"/>
+                <data android:pathPrefix="/daily-chess-puzzle/"/>
+                <data android:pathPrefix="/join/"/>
+                <data android:pathPrefix="/play/arena/"/>
+                <data android:pathPrefix="/play/computer"/>
+                <data android:pathPrefix="/play/tournament/"/>
+                <data android:pathPrefix="/tv"/>
+                <data android:pathPrefix="/year-in-chess"/>
+                <data android:pathPrefix="/game/live/"/>
+                <data android:pathPrefix="/live/game/"/>
+                <data android:pathPrefix="/game/daily/"/>
+                <data android:pathPrefix="/daily/game/"/>
+            </intent-filter>
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="https"/>
+                <data android:host="link.chess.com"/>
+            </intent-filter>
+            <meta-data android:name="default-url" android:value="https://www.chess.com"/>
+        </activity>
+        <activity android:label="@string/title_activity_lessons" android:name="com.chess.features.lessons.course.LessonCourseActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/challenge" android:name="com.chess.features.play.invite.ui.PlayInviteActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_lessons_challenge" android:name="com.chess.features.lessons.challenge.LessonChallengesActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_lessons_video" android:name="com.chess.features.lessons.video.LessonVideoActivity" android:parentActivityName="com.chess.features.lessons.challenge.LessonChallengesActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.lessons.challenge.LessonChallengesActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_puzzles" android:name="com.chess.features.puzzles.path.PuzzleCoachGameActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_puzzles" android:name="com.chess.features.puzzles.home.section.PuzzleSectionActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="adjustPan">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_puzzle_rush" android:name="com.chess.features.puzzles.game.rush.RushPuzzlesGameActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_rush_problem_review" android:name="com.chess.features.puzzles.review.ReviewPuzzlesActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_rush_problem_review" android:name="com.chess.features.puzzles.recent.RecentRushReviewActivity" android:parentActivityName="com.chess.features.puzzles.review.ReviewPuzzlesActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.puzzles.review.ReviewPuzzlesActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_puzzle_learning" android:name="com.chess.features.puzzles.game.learning.LearningPuzzlesGameActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_recent_puzzles" android:name="com.chess.features.puzzles.recent.RecentPuzzlesActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_puzzle_battle" android:name="com.chess.features.puzzles.battle.PuzzlesBattleGameActivity" android:parentActivityName="com.chess.features.puzzles.home.section.PuzzleSectionActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.puzzles.home.section.PuzzleSectionActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_daily_puzzle" android:name="com.chess.features.puzzles.daily.DailyPuzzleActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_game" android:name="com.chess.features.daily.DailyGameActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_live_game" android:name="com.chess.realchess.ui.game.RealGameActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="adjustResize">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_archived_live_game" android:name="com.chess.features.live.archive.ArchivedLiveGameActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_new_game" android:name="com.chess.features.newgame.NewGameActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_game_type" android:name="com.chess.features.newgame.NewGameTypeActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_game_time" android:name="com.chess.features.newgame.NewGameTimeActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_odds" android:name="com.chess.features.odds.OddsActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_custom_game" android:launchMode="singleTop" android:name="com.chess.customgame.CustomGameActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_custom_game" android:launchMode="singleTop" android:name="com.chess.customgame.CustomGameSimpleActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_finished" android:name="com.chess.finishedgames.FinishedGamesActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_login" android:name="com.chess.login.LoginActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="stateHidden"/>
+        <activity android:label="@string/title_activity_login" android:name="com.chess.login.AnyFactorLoginActivity" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_signup" android:name="com.chess.signup.PhoneNumberSignupActivity" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_notifications" android:name="com.chess.notifications.ui.NotificationsActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_archive_search" android:name="com.chess.finishedgames.ArchiveSearchActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:label="@string/chess_app_name" android:name="com.facebook.FacebookActivity" android:theme="@style/com_facebook_activity_theme"/>
+        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/facebook_client_token"/>
+        <meta-data android:name="com.facebook.sdk.AutoLogAppEventsEnabled" android:value="false"/>
+        <meta-data android:name="com.facebook.sdk.AutoInitEnabled" android:value="false"/>
+        <activity android:exported="true" android:name="com.facebook.CustomTabActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:scheme="@string/fb_login_protocol_scheme"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="cct.com.chess" android:scheme="fbconnect"/>
+            </intent-filter>
+        </activity>
+        <activity android:label="@string/title_activity_achievements" android:name="com.chess.achievements.AchievementsActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_news" android:name="com.chess.features.news.NewsActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:name="com.chess.features.news.item.NewsItemCommentsActivity" android:parentActivityName="com.chess.features.news.NewsActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.news.item.NewsItemCommentsActivity"/>
+        </activity>
+        <activity android:name="com.chess.features.news.comment.NewsCommentEditActivity" android:parentActivityName="com.chess.features.news.item.NewsItemCommentsActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.news.item.NewsItemCommentsActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_add_forum_topic" android:name="com.chess.features.forums.add.AddForumTopicActivity" android:parentActivityName="com.chess.features.forums.ForumsActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.forums.ForumsActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_forums" android:name="com.chess.features.forums.ForumsActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_forums" android:name="com.chess.features.forums.comments.ForumTopicCommentsActivity" android:parentActivityName="com.chess.features.forums.ForumsActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.forums.ForumsActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_stats" android:name="com.chess.stats.StatsActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_compare" android:name="com.chess.stats.compare.CompareActivity" android:parentActivityName="com.chess.profile.UserProfileActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:configChanges="orientation|screenSize" android:label="@string/title_activity_chesstv" android:name="com.chess.chesstv.ChessTvActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_report_bug" android:name="com.chess.reportbug.ui.ReportBugActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="adjustResize">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_endgames" android:name="com.chess.endgames.EndgameSectionActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_endgames" android:name="com.chess.endgames.practice.EndgamePracticeGameActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_endgames" android:name="com.chess.endgames.challenge.EndgameChallengeGameActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_practice" android:name="com.chess.practice.PracticeSectionActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="adjustPan">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_practice" android:name="com.chess.practice.play.PracticePlayGameActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_vision" android:name="com.chess.vision.VisionSetupActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_vision" android:name="com.chess.vision.VisionChallengeActivity" android:parentActivityName="com.chess.vision.VisionSetupActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.vision.VisionSetupActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_solo" android:name="com.chess.solo.SoloChessSetupActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_solo" android:name="com.chess.solo.practice.SoloChessPracticeActivity" android:parentActivityName="com.chess.solo.SoloChessSetupActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.solo.SoloChessSetupActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_solo" android:name="com.chess.solo.challenge.SoloChessChallengeActivity" android:parentActivityName="com.chess.solo.SoloChessSetupActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.solo.SoloChessSetupActivity"/>
+        </activity>
+        <activity android:label="PassAndPlayActivity" android:name="com.chess.passandplay.PassAndPlayActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="adjustNothing">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_friends" android:name="com.chess.features.connect.friends.FriendsActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_facebook_friends" android:name="com.chess.features.connect.friends.facebook.ui.FacebookFriendsActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_search_contacts" android:name="com.chess.features.connect.friends.contacts.ui.SearchContactsActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_pick_friend" android:name="com.chess.features.connect.friends.play.PlayFriendActivity" android:parentActivityName="com.chess.features.connect.friends.FriendsActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.connect.friends.FriendsActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_messages" android:name="com.chess.features.messages.MessagesActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_message_thread" android:name="com.chess.features.messages.thread.MessageThreadActivity" android:parentActivityName="com.chess.features.messages.MessagesActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.messages.MessagesActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_compose_message" android:name="com.chess.features.messages.compose.ComposeMessageActivity" android:parentActivityName="com.chess.features.messages.MessagesActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.messages.MessagesActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_articles" android:name="com.chess.features.articles.ArticlesActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:name="com.chess.features.articles.item.ArticleCommentsActivity" android:parentActivityName="com.chess.features.articles.ArticlesActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.articles.ArticlesActivity"/>
+        </activity>
+        <activity android:name="com.chess.features.articles.comment.ArticlesCommentEditActivity" android:parentActivityName="com.chess.features.articles.item.ArticleCommentsActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.articles.item.ArticleCommentsActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_videos" android:name="com.chess.features.more.videos.VideosActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.more.videos.VideosActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_video_details" android:name="com.chess.features.more.videos.details.VideoDetailsActivity" android:parentActivityName="com.chess.features.more.videos.VideosActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.more.videos.VideosActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_full_screen_video" android:name="com.chess.features.more.videos.details.FullScreenVideoActivity" android:parentActivityName="com.chess.features.more.videos.details.VideoDetailsActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.more.videos.details.VideoDetailsActivity"/>
+        </activity>
+        <activity android:name="com.chess.features.more.videos.comment.VideosCommentEditActivity" android:parentActivityName="com.chess.features.more.videos.details.VideoDetailsActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.more.videos.details.VideoDetailsActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_settings" android:name="com.chess.features.settings.SettingsActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:name="com.chess.features.settings.account.AccountSettingsActivity" android:parentActivityName="com.chess.features.settings.SettingsActivity" android:theme="@style/AppTheme.NoActionBar.ActionMode" android:windowSoftInputMode="stateAlwaysHidden">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.settings.SettingsActivity"/>
+        </activity>
+        <activity android:exported="false" android:name="com.chess.features.settings.deletion.AccountDeletionActivity" android:parentActivityName="com.chess.features.settings.account.AccountSettingsActivity" android:theme="@style/AppTheme.NoActionBar.ActionMode">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.settings.account.AccountSettingsActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_explorer" android:name="com.chess.features.explorer.GameExplorerActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_themes" android:name="com.chess.features.more.themes.ThemesActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_custom_theme" android:name="com.chess.features.more.themes.custom.CustomThemeActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_custom_back_pick" android:name="com.chess.features.more.themes.custom.background.CustomBackgroundActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.more.themes.ThemesActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_custom_pieces_pick" android:name="com.chess.features.more.themes.custom.pieces.CustomPiecesActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.more.themes.ThemesActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_custom_board_pick" android:name="com.chess.features.more.themes.custom.board.CustomBoardActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.more.themes.ThemesActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_custom_board_pick" android:name="com.chess.features.more.themes.custom.sounds.CustomSoundsActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.more.themes.ThemesActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_tournaments" android:name="com.chess.features.more.tournaments.TournamentsActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_diagram_game" android:name="com.chess.diagrams.game.DiagramGameActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_diagram_puzzle" android:name="com.chess.diagrams.puzzle.DiagramPuzzleActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".features.news.NewsActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_watch" android:name="com.chess.features.more.watch.WatchActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_self_engineless_analysis" android:name="com.chess.features.analysis.selfengineless.AnalysisSelfEnginelessActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_standalone_analysis_menu" android:name="com.chess.features.analysis.standalone.menu.StandaloneAnalysisMenuActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="adjustPan"/>
+        <activity android:label="@string/title_activity_standalone_analysis" android:name="com.chess.features.analysis.standalone.StandaloneAnalysisActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_live_tournament_home" android:name="com.chess.features.more.tournaments.live.home.LiveTournamentHomeActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="adjustResize">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value=".home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_wait" android:name="com.chess.realchess.ui.wait.WaitGameActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_daily_game_seek" android:name="com.chess.waitgame.daily.DailyGameSeekActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_notes" android:name="com.chess.notes.NotesActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_play_streak" android:name="com.chess.features.play.streak.PlayStreakActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_lessons" android:name="com.chess.lessons.LessonsActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_native_interstitial" android:name="com.chess.features.ads.interstitials.ui.NativeInterstitialActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version"/>
+        <service android:exported="false" android:name="com.chess.live.service.LiveChessService"/>
+        <receiver android:exported="false" android:name="com.chess.live.service.TournamentReminderReceiver"/>
+        <receiver android:exported="false" android:name="com.chess.features.more.tournaments.live.ArenaTimeWarningReceiver"/>
+        <service android:exported="false" android:name="com.chess.notifications.service.FcmListenerService">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/ic_pawn_notification_white"/>
+        <meta-data android:name="com.google.firebase.messaging.default_notification_color" android:resource="@color/green_1"/>
+        <meta-data android:name="iterable_notification_icon" android:resource="@drawable/ic_pawn_notification_white"/>
+        <meta-data android:name="iterable_notification_color" android:resource="@color/green_1"/>
+        <meta-data android:name="iterable_notification_channel_name" android:resource="@string/android_engagement_notification_channel_name"/>
+        <meta-data android:name="com.bugsnag.android.API_KEY" android:value="373a9e95dfd3f4b1af7077cbd0c8acb7"/>
+        <meta-data android:name="com.google.mlkit.vision.DEPENDENCIES" android:value="barcode_ui"/>
+        <service android:exported="false" android:name="com.chess.notifications.service.FirebaseInstanceIdListenerService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <provider android:authorities="com.chess" android:exported="false" android:grantUriPermissions="true" android:name="androidx.core.content.FileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/avatar_paths"/>
+        </provider>
+        <provider android:authorities="com.chess.androidx-startup" android:exported="false" android:name="androidx.startup.InitializationProvider">
+            <meta-data android:name="androidx.emoji2.text.EmojiCompatInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.lifecycle.ProcessLifecycleInitializer" android:value="androidx.startup"/>
+            <meta-data android:name="androidx.profileinstaller.ProfileInstallerInitializer" android:value="androidx.startup"/>
+        </provider>
+        <property android:name="android.adservices.AD_SERVICES_CONFIG" android:resource="@xml/gma_ad_services_config"/>
+        <service android:enabled="false" android:exported="false" android:name="androidx.appcompat.app.AppLocalesMetadataHolderService">
+            <meta-data android:name="autoStoreLocales" android:value="true"/>
+        </service>
+        <meta-data android:name="firebase_crashlytics_collection_enabled" android:value="false"/>
+        <activity android:label="@string/title_activity_awards_overview" android:name="com.chess.awards.AwardsOverviewActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_passports" android:name="com.chess.awards.PassportsActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_opening_books" android:name="com.chess.awards.OpeningBooksActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_user_profile" android:name="com.chess.profile.UserProfileActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:exported="false" android:label="@string/title_activity_conditional_moves" android:name="com.chess.conditionalmoves.ConditionalMovesActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_connected_board_game" android:name="com.chess.features.connectedboards.ConnectedBoardGameActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_connected_board_preparation" android:name="com.chess.features.connectedboards.ConnectedBoardPreparationActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_user_friends" android:name="com.chess.features.connect.friends.userfriends.UserFriendsActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_flair_selection" android:name="com.chess.features.settings.flair.FlairSelectionActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_edit_profile" android:name="com.chess.features.settings.profile.EditProfileActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_language_settings" android:name="com.chess.features.settings.language.LanguageSettingsActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_change_password" android:name="com.chess.features.settings.password.ChangePasswordActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_phone_number_settings" android:name="com.chess.features.settings.phone.PhoneNumberSettingsActivity" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_coach_settings" android:name="com.chess.features.settings.coach.CoachSettingsActivity" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_coach_settings" android:name="com.chess.features.settings.coach.SelectCoachActivity" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar" android:windowSoftInputMode="adjustResize"/>
+        <activity android:label="@string/title_activity_feature_webview" android:name="com.chess.home.more.FeatureWebViewActivity" android:theme="@style/AppTheme.NoActionBar" android:windowSoftInputMode="adjustResize"/>
+        <activity android:exported="false" android:label="@string/title_activity_game_review" android:name="com.chess.gamereview.v2.GameReviewActivity" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar"/>
+        <activity android:label="@string/title_activity_upgrade" android:name="com.chess.features.upgrade.v2.UpgradeActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_upgrade" android:name="com.chess.features.upgrade.v2.prepaid.PrepaidPlanActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_bot_selection" android:name="com.chess.features.versusbots.setup.BotSelectionActivity" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_game_type" android:name="com.chess.features.versusbots.setup.BotGameTypeActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_game_time" android:name="com.chess.features.versusbots.setup.BotGameTimeActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_bot_mode_setup" android:name="com.chess.features.versusbots.setup.BotModeSetupActivity" android:parentActivityName="com.chess.features.versusbots.setup.BotSelectionActivity" android:theme="@style/AppTheme.NoActionBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.features.versusbots.setup.BotSelectionActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_coach_game_setup" android:name="com.chess.features.versusbots.coach.CoachGameSetupActivity" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar"/>
+        <activity android:label="@string/title_activity_bot_game" android:name="com.chess.features.versusbots.game.BotGameActivityV2" android:parentActivityName="com.chess.home.HomeActivity" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar">
+            <meta-data android:name="android.support.PARENT_ACTIVITY" android:value="com.chess.home.HomeActivity"/>
+        </activity>
+        <activity android:label="@string/title_activity_bot_archived_game" android:name="com.chess.features.versusbots.archive.ArchivedBotGameActivityV2" android:theme="@style/AppTheme.TransparentStatusAndNavigationBar"/>
+        <activity android:label="@string/title_activity_leaderboard_overview" android:name="com.chess.leaderboard.overview.LeaderboardOverviewActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_single_leaderboard" android:name="com.chess.leaderboard.singleboard.SingleLeaderboardActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <meta-data android:name="com.google.android.gms.ads.APPLICATION_ID" android:value="ca-app-pub-7780207826179707~8994444741"/>
+        <activity android:label="@string/title_activity_custom_position" android:name="com.chess.features.gamesetup.CustomPositionActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:label="@string/title_activity_webview" android:name="com.chess.webview.WebViewActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:launchMode="singleInstance" android:name="com.chess.captcha.CaptchaActivity" android:theme="@style/AppTheme.NoActionBar"/>
+        <receiver android:exported="true" android:name="com.chess.utils.android.phonenumbers.SmsCodeBroadcastReceiver" android:permission="com.google.android.gms.auth.api.phone.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.gms.auth.api.phone.SMS_RETRIEVED"/>
+            </intent-filter>
+        </receiver>
+        <activity android:configChanges="keyboardHidden|orientation|screenSize" android:exported="true" android:launchMode="singleTop" android:name="org.prebid.mobile.rendering.views.browser.AdBrowserActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar" android:windowSoftInputMode="adjustPan|stateHidden"/>
+        <service android:exported="false" android:name="io.intercom.android.sdk.fcm.IntercomFcmMessengerService">
+            <intent-filter android:priority="-400">
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+            </intent-filter>
+        </service>
+        <meta-data android:name="io.sentry.auto-init" android:value="false"/>
+        <activity android:configChanges="orientation|screenSize" android:exported="false" android:name="io.intercom.android.sdk.lightbox.LightBoxActivity" android:theme="@style/Intercom_LightBoxTheme" android:windowSoftInputMode="adjustResize|stateUnchanged"/>
+        <activity android:configChanges="orientation|screenSize" android:exported="false" android:launchMode="singleTask" android:name="io.intercom.android.sdk.activities.IntercomPostActivity" android:theme="@style/Intercom_PostTheme" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="orientation|screenSize" android:exported="false" android:launchMode="singleTask" android:name="io.intercom.android.sdk.post.PostActivityV2" android:theme="@style/Intercom_PostTheme" android:windowSoftInputMode="stateHidden"/>
+        <activity android:configChanges="orientation|screenSize" android:exported="false" android:launchMode="singleTask" android:name="io.intercom.android.sdk.activities.IntercomNoteActivity" android:theme="@style/Intercom_NoteTheme" android:windowSoftInputMode="adjustResize|stateUnchanged"/>
+        <activity android:configChanges="orientation|screenSize" android:exported="false" android:launchMode="singleTop" android:name="io.intercom.android.sdk.activities.IntercomSheetActivity" android:theme="@style/Intercom_ModalActivityTheme" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:launchMode="singleTask" android:name="io.intercom.android.sdk.activities.IntercomCarouselActivity" android:screenOrientation="portrait" android:theme="@style/Intercom_CarouselTheme" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="io.intercom.android.sdk.helpcenter.articles.ArticleActivity" android:theme="@style/Intercom.BaseMaterial" android:windowSoftInputMode="stateHidden"/>
+        <activity android:exported="false" android:name="io.intercom.android.sdk.helpcenter.articles.IntercomArticleActivity" android:theme="@style/Intercom_TransparentTheme_WithAnimations" android:windowSoftInputMode="adjustResize"/>
+        <activity android:exported="false" android:name="io.intercom.android.sdk.survey.ui.IntercomSurveyActivity" android:theme="@style/Intercom.BaseMaterial.Compose" android:windowSoftInputMode="adjustResize"/>
+        <activity android:exported="false" android:name="io.intercom.android.sdk.helpcenter.search.IntercomArticleSearchActivity" android:theme="@style/Intercom.BaseMaterial"/>
+        <activity android:exported="false" android:name="io.intercom.android.sdk.push.IntercomPushTrampolineActivity" android:theme="@style/Intercom.BaseMaterial.Transparent"/>
+        <activity android:name="io.intercom.android.sdk.m5.IntercomRootActivity" android:theme="@style/Intercom_TransparentTheme_WithAnimations" android:windowSoftInputMode="adjustResize"/>
+        <activity android:allowEmbedded="true" android:documentLaunchMode="always" android:exported="false" android:name="io.intercom.android.sdk.m5.bubble.IntercomBubbleActivity" android:resizeableActivity="true" android:theme="@style/Intercom_TransparentTheme_WithAnimations"/>
+        <receiver android:exported="false" android:name="io.intercom.android.sdk.push.IntercomPushBroadcastReceiver">
+            <intent-filter>
+                <action android:name="io.intercom.android.sdk.INTERCOM_PUSH_DISMISSED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name="io.intercom.android.sdk.m5.push.ConversationReplyReceiver"/>
+        <provider android:authorities="com.chess.IntercomInitializeContentProvider" android:exported="false" android:name="io.intercom.android.sdk.IntercomInitializeContentProvider"/>
+        <provider android:authorities="com.chess.IntercomFileProvider" android:exported="false" android:grantUriPermissions="true" android:name="io.intercom.android.sdk.IntercomFileProvider">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/intercom_file_paths"/>
+        </provider>
+        <activity android:name="io.intercom.android.sdk.ui.preview.ui.IntercomPreviewActivity" android:theme="@android:style/Theme.Material.Light.NoActionBar"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:name="com.google.android.gms.auth.api.signin.internal.SignInHubActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <service android:exported="true" android:name="com.google.android.gms.auth.api.signin.RevocationBoundService" android:permission="com.google.android.gms.auth.api.signin.permission.REVOCATION_NOTIFICATION" android:visibleToInstantApps="true"/>
+        <service android:exported="false" android:name="com.iterable.iterableapi.IterableFirebaseMessagingService">
+            <intent-filter android:priority="-1">
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <receiver android:exported="false" android:name="com.iterable.iterableapi.IterablePushActionReceiver">
+            <intent-filter>
+                <action android:name="com.iterable.push.ACTION_PUSH_ACTION"/>
+            </intent-filter>
+        </receiver>
+        <activity android:excludeFromRecents="true" android:exported="false" android:launchMode="singleInstance" android:name="com.iterable.iterableapi.IterableTrampolineActivity" android:theme="@style/TrampolineActivity.Transparent"/>
+        <uses-library android:name="androidx.security" android:required="false"/>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.components.ComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.inappmessaging.display.FirebaseInAppMessagingDisplayKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.inappmessaging.display.FirebaseInAppMessagingDisplayRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.perf.ktx.FirebasePerfLegacyRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.perf.FirebasePerfKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.perf.FirebasePerfRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.messaging.FirebaseMessagingRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.crashlytics.FirebaseCrashlyticsKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.crashlytics.CrashlyticsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.sessions.FirebaseSessionsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.inappmessaging.FirebaseInAppMessagingKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.inappmessaging.FirebaseInAppMessagingRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.remoteconfig.RemoteConfigRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.dynamiclinks.ktx.FirebaseDynamicLinksLegacyRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.dynamiclinks.FirebaseDynamicLinksKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.dynamiclinks.internal.FirebaseDynamicLinkRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.ktx.FirebaseCommonLegacyRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.abt.component.AbtRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.FirebaseCommonKtxRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.firebase.datatransport.TransportRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <activity android:name="com.facebook.CustomTabMainActivity"/>
+        <activity android:exported="false" android:name="com.google.mlkit.vision.codescanner.internal.GmsBarcodeScanningDelegateActivity" android:screenOrientation="portrait"/>
+        <receiver android:exported="true" android:name="com.google.firebase.iid.FirebaseInstanceIdReceiver" android:permission="com.google.android.c2dm.permission.SEND">
+            <intent-filter>
+                <action android:name="com.google.android.c2dm.intent.RECEIVE"/>
+            </intent-filter>
+            <meta-data android:name="com.google.android.gms.cloudmessaging.FINISHED_AFTER_HANDLED" android:value="true"/>
+        </receiver>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.firebase.messaging.FirebaseMessagingService">
+            <intent-filter android:priority="-500">
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <service android:directBootAware="true" android:exported="false" android:name="com.google.mlkit.common.internal.MlKitComponentDiscoveryService">
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.vision.common.internal.VisionCommonRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+            <meta-data android:name="com.google.firebase.components:com.google.mlkit.common.internal.CommonComponentRegistrar" android:value="com.google.firebase.components.ComponentRegistrar"/>
+        </service>
+        <provider android:authorities="com.chess.mlkitinitprovider" android:exported="false" android:initOrder="99" android:name="com.google.mlkit.common.internal.MlKitInitProvider"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.firebase.sessions.SessionLifecycleService"/>
+        <provider android:authorities="com.chess.firebaseinitprovider" android:directBootAware="true" android:exported="false" android:initOrder="100" android:name="com.google.firebase.provider.FirebaseInitProvider"/>
+        <activity android:exported="false" android:name="com.google.android.gms.common.api.GoogleApiActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:exported="false" android:name="com.google.android.gms.ads.AdActivity" android:theme="@android:style/Theme.Translucent"/>
+        <provider android:authorities="com.chess.mobileadsinitprovider" android:exported="false" android:initOrder="100" android:name="com.google.android.gms.ads.MobileAdsInitProvider"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.ads.AdService"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize|smallestScreenSize|uiMode" android:exported="false" android:name="com.google.android.gms.ads.OutOfContextTestingActivity"/>
+        <activity android:excludeFromRecents="true" android:exported="false" android:launchMode="singleTask" android:name="com.google.android.gms.ads.NotificationHandlerActivity" android:taskAffinity="" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_job_service_default" android:exported="true" android:name="androidx.work.impl.background.systemjob.SystemJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <service android:directBootAware="false" android:enabled="@bool/enable_system_foreground_service_default" android:exported="false" android:name="androidx.work.impl.foreground.SystemForegroundService"/>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="false" android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"/>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.BATTERY_OKAY"/>
+                <action android:name="android.intent.action.BATTERY_LOW"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy">
+            <intent-filter>
+                <action android:name="android.intent.action.DEVICE_STORAGE_LOW"/>
+                <action android:name="android.intent.action.DEVICE_STORAGE_OK"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="false" android:exported="false" android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"/>
+                <action android:name="android.intent.action.TIME_SET"/>
+                <action android:name="android.intent.action.TIMEZONE_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="@bool/enable_system_alarm_service_default" android:exported="false" android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver">
+            <intent-filter>
+                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS"/>
+            </intent-filter>
+        </receiver>
+        <provider android:authorities="com.chess.FacebookInitProvider" android:exported="false" android:name="com.facebook.internal.FacebookInitProvider"/>
+        <receiver android:exported="false" android:name="com.facebook.CurrentAccessTokenExpirationBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.facebook.sdk.ACTION_CURRENT_ACCESS_TOKEN_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:exported="false" android:name="com.facebook.AuthenticationTokenManager$CurrentAuthenticationTokenChangedBroadcastReceiver">
+            <intent-filter>
+                <action android:name="com.facebook.sdk.ACTION_CURRENT_AUTHENTICATION_TOKEN_CHANGED"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementReceiver"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementService"/>
+        <service android:enabled="true" android:exported="false" android:name="com.google.android.gms.measurement.AppMeasurementJobService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <uses-library android:name="android.ext.adservices" android:required="false"/>
+        <uses-library android:name="androidx.window.extensions" android:required="false"/>
+        <uses-library android:name="androidx.window.sidecar" android:required="false"/>
+        <provider android:authorities="com.chess.SentryInitProvider" android:exported="false" android:name="io.sentry.android.core.SentryInitProvider"/>
+        <provider android:authorities="com.chess.SentryPerformanceProvider" android:exported="false" android:initOrder="200" android:name="io.sentry.android.core.SentryPerformanceProvider"/>
+        <provider android:authorities="com.chess.plumber-installer" android:enabled="@bool/leak_canary_plumber_auto_install" android:exported="false" android:name="leakcanary.internal.PlumberInstaller"/>
+        <provider android:authorities="com.chess.bugsnag-startup" android:exported="false" android:initOrder="9000" android:name="com.bugsnag.android.internal.BugsnagContentProvider"/>
+        <provider android:authorities="com.chess.com.squareup.picasso" android:exported="false" android:name="com.squareup.picasso.PicassoProvider"/>
+        <service android:directBootAware="true" android:exported="false" android:name="androidx.room.MultiInstanceInvalidationService"/>
+        <meta-data android:name="com.google.android.play.billingclient.version" android:value="6.0.1"/>
+        <activity android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|screenSize" android:exported="false" android:name="com.android.billingclient.api.ProxyBillingActivity" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.backends.TransportBackendDiscovery">
+            <meta-data android:name="backend:com.google.android.datatransport.cct.CctBackendFactory" android:value="cct"/>
+        </service>
+        <receiver android:directBootAware="false" android:enabled="true" android:exported="true" android:name="androidx.profileinstaller.ProfileInstallReceiver" android:permission="android.permission.DUMP">
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.INSTALL_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SKIP_FILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.SAVE_PROFILE"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="androidx.profileinstaller.action.BENCHMARK_OPERATION"/>
+            </intent-filter>
+        </receiver>
+        <service android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.JobInfoSchedulerService" android:permission="android.permission.BIND_JOB_SERVICE"/>
+        <receiver android:exported="false" android:name="com.google.android.datatransport.runtime.scheduling.jobscheduling.AlarmManagerSchedulerBroadcastReceiver"/>
+        <activity android:exported="false" android:name="com.jakewharton.processphoenix.ProcessPhoenix" android:process=":phoenix" android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:exported="false" android:name="com.google.android.play.core.common.PlayCoreDialogWrapperActivity" android:stateNotNeeded="true" android:theme="@style/Theme.PlayCore.Transparent"/>
+        <activity android:configChanges="orientation|screenSize" android:exported="true" android:name="com.amazon.aps.ads.activity.ApsInterstitialActivity" android:theme="@style/NoWindow"/>
+        <activity android:configChanges="orientation|screenSize" android:exported="true" android:name="com.amazon.device.ads.DTBInterstitialActivity"/>
+        <meta-data android:name="com.bugsnag.android.BUILD_UUID" android:value="16c2b8ee-3f97-4402-b79d-6e6cc3acb3c3"/>
+    </application>
+</manifest>
