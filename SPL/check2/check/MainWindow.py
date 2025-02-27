@@ -220,7 +220,6 @@ class MainWindow(QWidget):
             self.info_text.setVisible(False)
             self.results_text.setVisible(True)
 
-            # Display the results in the text box
             results = f"Model trained successfully!\n\n"
             results += f"Accuracy: {accuracy * 100:.2f}%\n\n"
             results += f"Confusion Matrix:\n{cm}"
