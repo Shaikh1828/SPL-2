@@ -11,7 +11,7 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Droid Scanner")
-        self.resize(1000, 600)
+        self.resize(1400, 900)
         self.setWindowFlags(Qt.FramelessWindowHint) 
         self.init_ui()
         self.drag_pos = None  
@@ -139,7 +139,7 @@ class MainWindow(QWidget):
         # self.central_widget.setLayout(left_layout)
 
         # Initialize MLModel with the CSV file path
-        self.ml_model = MLModel('processed_output.csv')
+        self.ml_model = MLModel("D:\\Git\\SPL-2\\SPL\\check2\\check copy\\processed_output.csv")
 
 
         # Info Panel

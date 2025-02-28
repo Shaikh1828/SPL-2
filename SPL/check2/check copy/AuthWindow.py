@@ -12,7 +12,7 @@ class VerificationDialog(QDialog):
     def __init__(self, email, parent=None):
         super().__init__(parent)
         self.setWindowTitle("Email Verification")
-        self.setFixedWidth(300)
+        self.setFixedWidth(400)
         self.email = email
         
         layout = QVBoxLayout()

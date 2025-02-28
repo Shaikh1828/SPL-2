@@ -11,7 +11,7 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("Droid Scanner")
-        self.resize(1000, 600)
+        self.resize(1400, 900)
         self.setWindowFlags(Qt.FramelessWindowHint) 
         self.init_ui()
         self.drag_pos = None  

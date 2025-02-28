@@ -66,9 +66,9 @@ class PortalWindow(QWidget):
         # Option Cards
         options = [
             {"title": "Personal Scanner", "desc": "Scan and monitor your personal Android devices", "color": "#6BC8B4"},
-            {"title": "Business Scanner", "desc": "Security solution for corporate devices", "color": "#FF6987"},
-            {"title": "Advanced Scanner", "desc": "Deep analysis with custom scanning options", "color": "#D4A017"},
-            {"title": "Quick Scan", "desc": "Fast scanning for immediate threats", "color": "#8467D7"}
+            # {"title": "Business Scanner", "desc": "Security solution for corporate devices", "color": "#FF6987"},
+            {"title": "Developer Scanner", "desc": "Deep analysis with custom scanning options", "color": "#D4A017"},
+            # {"title": "Quick Scan", "desc": "Fast scanning for immediate threats", "color": "#8467D7"}
         ]
         
         self.option_buttons = []

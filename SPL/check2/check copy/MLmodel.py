@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 import joblib
 
 class MLModel:
-    def __init__(self, csv_file='processed_output.csv'):
+    def __init__(self, csv_file="D:\\Git\\SPL-2\\SPL\\check2\\check copy\\processed_output.csv"):
         self.csv_file = csv_file
         self.classifier = None
         self.accuracy = 0

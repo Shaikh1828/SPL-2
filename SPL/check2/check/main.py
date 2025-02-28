@@ -1,14 +1,10 @@
 import sqlite3
-import AuthWindow
-
-from PyQt5.QtWidgets import (
-    QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit, QMessageBox, QTableWidget, QTableWidgetItem, QTextEdit, QFileDialog
-)
-
+from PyQt5.QtWidgets import QApplication
+from PortalWindow import PortalWindow
 
 # Run Application
 app = QApplication([])
-auth_window = AuthWindow.AuthWindows()
-auth_window.show()
+portal_window = PortalWindow()
+portal_window.show()
 
 app.exec_()
