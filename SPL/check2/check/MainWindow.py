@@ -6,6 +6,7 @@ from PyQt5.QtCore import Qt
 
 from scan import Scan
 from MLmodel import MLModel  
+import os,parsing
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -86,7 +87,7 @@ class MainWindow(QWidget):
                 background-color: rgb(235, 85, 115);
             }
         """)
-
+        
         scan_button = QPushButton("Scan Devices")
         scan_button.setStyleSheet("""
             QPushButton {
@@ -193,11 +194,25 @@ class MainWindow(QWidget):
 
         main_layout.addLayout(content_layout)
         self.setLayout(main_layout)
-
+    
     def choose_file(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Select File", "", "All Files (*)")
         if file_path:
             self.file_path_label.setText(file_path)
+            print(file_path)
+            print("yes")
+            manifest_path=Scan.extract_manifest(file_path,"E:\\5th Sem\\SPL-2\\new bullshit\\SPL\\check2\\check\\extracted_apks")
+            print("no")
+            if os.path.exists(manifest_path):
+                    with open(manifest_path, 'r', encoding='utf-8') as file:
+                        manifest_content = file.read()
+                    self.info_text.setText(f"Extracted AndroidManifest.xml:\n\n{manifest_content}")
+                    permissions = parsing.extract_permissions(manifest_path)
+                    intents = parsing.extract_intents(manifest_path)
+                    features=[]
+                    features= permissions+intents
+                    self.info_text.setText(f"Extracted Permissions:\n\n{permissions}\n{intents}")
+            print("done")  
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
