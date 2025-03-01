@@ -6,6 +6,16 @@ import shutil
 import uuid
 import parsing
 
+import sqlite3
+import numpy as np
+import joblib
+import os
+import sqlite3
+import subprocess
+
+# Define database path
+from Database import Database
+# Function to store APK in SQLite
 
 class Scan(QWidget):
     def __init__(self):
@@ -123,12 +133,13 @@ class Scan(QWidget):
                 return
 
             # Pull APK from device
-            local_apk_dir = "E:\\5th Sem\\SPL-2\\new bullshit\\SPL\\check\\extracted_apks"
+            local_apk_dir = "E:\\5th Sem\\SPL-2\\new bullshit\\SPL\\check2\\check\\extracted_apks"
             os.makedirs(local_apk_dir, exist_ok=True)
             local_apk_path = os.path.join(local_apk_dir, f"{package_name}-base.apk")
             subprocess.run(["adb", "-s", selected_device, "pull", base_apk_path, local_apk_path], check=True)
 
             if os.path.exists(local_apk_path):
+                app_id=Database.store_apk_in_db(local_apk_path, package_name)
                 manifest_path = self.extract_manifest(local_apk_path, local_apk_dir)
                 if os.path.exists(manifest_path):
                     with open(manifest_path, 'r', encoding='utf-8') as file:
@@ -139,6 +150,13 @@ class Scan(QWidget):
                     features=[]
                     features= permissions+intents
                     self.output_area.setText(f"Extracted Permissions:\n\n{permissions}\n{intents}")
+                    self.update_database(app_id,features)
+                    status=self.classify_last_apk()
+                    print(status)
+                    if status=='Malicious':
+                        self.update_status(app_id)
+                    print("Updated")    
+
                 else:
                     QMessageBox.warning(self, "Manifest Extraction Failed", str(manifest_path))
                 QMessageBox.information(self, "Success", f"APK successfully extracted to:\n{local_apk_path}")
@@ -146,6 +164,7 @@ class Scan(QWidget):
                 QMessageBox.warning(self, "Extraction Failed", "Failed to pull the APK.")
         except subprocess.CalledProcessError as e:
             QMessageBox.critical(self, "Error", f"Failed to extract APK:\n{e.stderr}")
+    
 
     def extract_manifest(self,apk_path, output_dir):
         apktool_jar = "C:\\apktool\\apktool_2.10.0.jar"
@@ -181,72 +200,76 @@ class Scan(QWidget):
                 dir_path = os.path.join(root, directory)
                 shutil.rmtree(dir_path) 
 
-import sqlite3
-import numpy as np
-import joblib
 
-def update_database(package_name, extracted_features):
-    # Connect to the database
-    conn = sqlite3.connect('app_data.db')
-    cursor = conn.cursor()
+    def update_database(self,app_id, extracted_features):
+        # Connect to the database
+        conn = sqlite3.connect('app_data.db')
+        cursor = conn.cursor()
 
-    # Fetch all features from the permissions_intents table
-    cursor.execute("SELECT Feature_Name FROM Permissions_Intents")
-    all_features = [row[0] for row in cursor.fetchall()]
+        # Fetch all features from the permissions_intents table
+        cursor.execute("SELECT Feature_Name FROM Permissions_Intents")
+        all_features = [row[0] for row in cursor.fetchall()]
+        
+        # # Insert matched features into app_features table
+        # cursor.execute("INSERT INTO App_Features () VALUES (?)", (package_name,))
+        # app_id = cursor.lastrowid  # Get the last inserted app_id
+            
+        for feature in extracted_features:
+            if feature in all_features:
+                cursor.execute("INSERT INTO App_Features (App_ID, Feature_ID) SELECT ?, Feature_ID FROM permissions_intents WHERE Feature_Name = ?", (app_id, feature))
 
-    # Insert matched features into app_features table
-    cursor.execute("INSERT INTO App_Features (package_name) VALUES (?)", (package_name,))
-    app_id = cursor.lastrowid  # Get the last inserted app_id
-
-    for feature in extracted_features:
-        if feature in all_features:
-            cursor.execute("INSERT INTO app_features_features (app_id, feature_id) SELECT ?, id FROM permissions_intents WHERE feature_name = ?", (app_id, feature))
-
-    # Commit and close the connection
-    conn.commit()
-    conn.close()
-
-def classify_last_apk():
-    # Connect to the database
-    conn = sqlite3.connect('droid_scanner.db')
-    cursor = conn.cursor()
-
-    # Fetch the last inserted app_id from app_features
-    cursor.execute("SELECT id FROM app_features ORDER BY id DESC LIMIT 1")
-    last_row = cursor.fetchone()
-    if not last_row:
+        # Commit and close the connection
+        conn.commit()
         conn.close()
-        return "No app data found."
-    app_id = last_row[0]
 
-    # Fetch all features from the permissions_intents table
-    cursor.execute("SELECT id, feature_name FROM permissions_intents ORDER BY id")
-    features_list = cursor.fetchall()
+    def classify_last_apk(self):
+        # Connect to the database
+        conn = sqlite3.connect('app_data.db')
+        cursor = conn.cursor()
 
-    # Initialize feature vector with zeros
-    feature_vector = np.zeros(len(features_list))
+        # Fetch the last inserted app_id from app_features
+        cursor.execute("SELECT App_ID FROM App_Features ORDER BY App_ID DESC LIMIT 1")
+        last_row = cursor.fetchone()
+        if not last_row:
+            conn.close()
+            return "No app data found."
+        app_id = last_row[0]
+        print(app_id)
+        cursor.execute("SELECT Feature_ID, Feature_Name FROM Permissions_Intents ORDER BY Feature_ID")
+        features_list = cursor.fetchall()
 
-    # Fetch features associated with the app_id
-    cursor.execute("SELECT feature_id FROM app_features_features WHERE app_id = ?", (app_id,))
-    matched_features = {row[0] for row in cursor.fetchall()}
+        # Initialize feature vector with zeros
+        feature_vector = np.zeros(len(features_list))
+        
+        # Fetch features associated with the app_id
+        cursor.execute("SELECT Feature_ID FROM App_Features WHERE app_id = ?", (app_id,))
+        matched_features = {row[0] for row in cursor.fetchall()}
 
-    # Mark matched features as 1 in the feature vector
-    for index, (feature_id, _) in enumerate(features_list):
-        if feature_id in matched_features:
-            feature_vector[index] = 1
+        # Mark matched features as 1 in the feature vector
+        for index, (feature_id, _) in enumerate(features_list):
+            if feature_id in matched_features:
+                feature_vector[index] = 1
 
-    # Close database connection
-    conn.close()
+        # Close database connection
+        conn.close()
 
-    # Load the ML model
-    with open('AppClassifier1.joblib', 'rb') as f:
-        model = joblib.load(f)
+        # Load the ML model
+        with open('AppClassifier1.joblib', 'rb') as f:
+            model = joblib.load(f)
 
-    # Reshape and predict
-    prediction = model.predict(feature_vector.reshape(1, -1))
-    prediction_label = 'Malicious' if prediction[0] == 'S' else 'Benign'
+        # Reshape and predict
+        prediction = model.predict(feature_vector.reshape(1, -1))
+        prediction_label = 'Malicious' if prediction[0] == 'S' else 'Benign'
 
-    return prediction_label
+        return prediction_label
+    
+    def update_status(self,app_id):
+        conn = sqlite3.connect('app_data.db')
+        cursor = conn.cursor()
+        cursor.execute("UPDATE App SET Status = ? WHERE App_ID = ?", ("Malicious", app_id))
+        print("Updated Successfully")
+        conn.commit()
+        conn.close()
 
 
 
