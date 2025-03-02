@@ -348,6 +348,7 @@
 
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox, QComboBox, QTextEdit
 from PyQt5.QtCore import pyqtSignal
+from Database import Database
 import subprocess
 import sqlite3
 import numpy as np
@@ -501,11 +502,23 @@ class Scan(QWidget):
             }
 
             if os.path.exists(local_apk_path):
+                app_id=Database.store_apk_in_db(local_apk_path, package_name)
                 manifest_path = self.extract_manifest(local_apk_path, local_apk_dir)
                 if os.path.exists(manifest_path):
-                    # Extract permissions and intents
+                    with open(manifest_path, 'r', encoding='utf-8') as file:
+                        manifest_content = file.read()
+                    self.output_area.setText(f"Extracted AndroidManifest.xml:\n\n{manifest_content}")
                     permissions = parsing.extract_permissions(manifest_path)
                     intents = parsing.extract_intents(manifest_path)
+                    features=[]
+                    features= permissions+intents
+                    self.output_area.setText(f"Extracted Permissions:\n\n{permissions}\n{intents}")
+                    self.update_database(app_id,features)
+                    status=self.classify_last_apk()
+                    print(status)
+                    if status=='Malicious':
+                        self.update_status(app_id)
+                    print("Updated")
                     
                     # List of potentially suspicious permissions (you can expand this list)
                     suspicious_permission_list = [
@@ -532,7 +545,7 @@ class Scan(QWidget):
                     suspicious_intents = [i for i in intents if i in suspicious_intent_list]
                     
                     # Classify the app (simplified version, use your ML model in production)
-                    classification = self.classify_app(permissions, intents)
+                    classification = status
                     
                     scan_result = {
                         "package_name": package_name,
@@ -546,8 +559,8 @@ class Scan(QWidget):
                     
                     # Display basic info in the scan window
                     self.output_area.setText(f"App: {package_name}\nVersion: {app_version}\nClassification: {classification}\n\n"
-                                            f"Total Permissions: {len(permissions)}\nSuspicious Permissions: {len(suspicious_permissions)}\n"
-                                            f"Total Intents: {len(intents)}\nSuspicious Intents: {len(suspicious_intents)}")
+                                            f"Total Permissions: {len(permissions)}\n"
+                                            f"Total Intents: {len(intents)}\n")
                     
                     # Emit the signal with scan results to update the main window
                     if self.parent:
@@ -594,35 +607,75 @@ class Scan(QWidget):
                 dir_path = os.path.join(root, directory)
                 shutil.rmtree(dir_path) 
 
-    def classify_app(self, permissions, intents):
-        """Simplified classification for demonstration. 
-        In production, you would load your ML model and perform proper classification."""
-        try:
-            # Load the model
-            model_path = "AppClassifier1.joblib"
-            if not os.path.exists(model_path):
-                return "Unknown (Model not found)"
-                
-            model = joblib.load(model_path)
+    def update_database(self,app_id, extracted_features):
+        # Connect to the database
+        conn = sqlite3.connect('app_data.db')
+        cursor = conn.cursor()
+
+        # Fetch all features from the permissions_intents table
+        cursor.execute("SELECT Feature_Name FROM Permissions_Intents")
+        all_features = [row[0] for row in cursor.fetchall()]
+        
+        # # Insert matched features into app_features table
+        # cursor.execute("INSERT INTO App_Features () VALUES (?)", (package_name,))
+        # app_id = cursor.lastrowid  # Get the last inserted app_id
             
-            # Create feature vector - this is simplified and should match how your model was trained
-            # You'll need to adapt this based on your actual model implementation
-            all_known_features = self.get_all_known_features()
-            feature_vector = np.zeros(len(all_known_features))
-            
-            for i, feature in enumerate(all_known_features):
-                if feature in permissions or feature in intents:
-                    feature_vector[i] = 1
-                    
-            # Predict
-            prediction = model.predict(feature_vector.reshape(1, -1))
-            if prediction[0] == 'S':
-                return "Malicious"
-            else:
-                return "Benign"
-        except Exception as e:
-            print(f"Classification error: {e}")
-            return "Error in classification"
+        for feature in extracted_features:
+            if feature in all_features:
+                cursor.execute("INSERT INTO App_Features (App_ID, Feature_ID) SELECT ?, Feature_ID FROM permissions_intents WHERE Feature_Name = ?", (app_id, feature))
+
+        # Commit and close the connection
+        conn.commit()
+        conn.close()
+
+    def classify_last_apk(self):
+        # Connect to the database
+        conn = sqlite3.connect('app_data.db')
+        cursor = conn.cursor()
+
+        # Fetch the last inserted app_id from app_features
+        cursor.execute("SELECT App_ID FROM App_Features ORDER BY App_ID DESC LIMIT 1")
+        last_row = cursor.fetchone()
+        if not last_row:
+            conn.close()
+            return "No app data found."
+        app_id = last_row[0]
+        print(app_id)
+        cursor.execute("SELECT Feature_ID, Feature_Name FROM Permissions_Intents ORDER BY Feature_ID")
+        features_list = cursor.fetchall()
+
+        # Initialize feature vector with zeros
+        feature_vector = np.zeros(len(features_list))
+        
+        # Fetch features associated with the app_id
+        cursor.execute("SELECT Feature_ID FROM App_Features WHERE app_id = ?", (app_id,))
+        matched_features = {row[0] for row in cursor.fetchall()}
+
+        # Mark matched features as 1 in the feature vector
+        for index, (feature_id, _) in enumerate(features_list):
+            if feature_id in matched_features:
+                feature_vector[index] = 1
+
+        # Close database connection
+        conn.close()
+
+        # Load the ML model
+        with open('AppClassifier1.joblib', 'rb') as f:
+            model = joblib.load(f)
+
+        # Reshape and predict
+        prediction = model.predict(feature_vector.reshape(1, -1))
+        prediction_label = 'Malicious' if prediction[0] == 'S' else 'Benign'
+
+        return prediction_label
+    
+    def update_status(self,app_id):
+        conn = sqlite3.connect('app_data.db')
+        cursor = conn.cursor()
+        cursor.execute("UPDATE App SET Status = ? WHERE App_ID = ?", ("Malicious", app_id))
+        print("Updated Successfully")
+        conn.commit()
+        conn.close()
     
     def get_all_known_features(self):
         """Get all known features (permissions and intents) that the model was trained on.

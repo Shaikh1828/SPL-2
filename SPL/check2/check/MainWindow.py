@@ -305,6 +305,7 @@ class MainWindow(QWidget):
         self.file_path_label.setStyleSheet("color: white; font-style: italic;")
 
         upload_button = QPushButton("Upload")
+        # upload_button.clicked.connect()
         upload_button.setStyleSheet("""
             QPushButton {
                 background-color: rgb(255, 105, 135);
