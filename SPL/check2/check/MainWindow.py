@@ -337,7 +337,7 @@ class MainWindow(QWidget):
         scan_button.clicked.connect(self.open_scan_window)
 
         # Train Model Button
-        self.train_button = QPushButton("Train Model")
+        self.train_button = QPushButton("Model Accuracy")
         self.train_button.clicked.connect(self.train_model)
         self.train_button.setStyleSheet("""
             QPushButton {

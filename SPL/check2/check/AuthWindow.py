@@ -24,6 +24,8 @@ class VerificationDialog(QDialog):
         self.code_input = QLineEdit()
         self.code_input.setPlaceholderText("Enter 6-digit verification code")
         self.code_input.setMaxLength(6)
+        # Connect Enter key press to accept method
+        self.code_input.returnPressed.connect(self.accept)
         
         verify_button = QPushButton("Verify")
         verify_button.clicked.connect(self.accept)
@@ -84,6 +86,8 @@ class AuthWindows(QWidget):
         self.username_input.setStyleSheet(
             "background-color: #FFF; padding: 5px; border-radius: 5px; margin: 5px;"
         )
+        # Connect Enter key press to nextInFocusChain
+        self.username_input.returnPressed.connect(self.focus_next_input)
 
         # Password Input
         self.password_input = QLineEdit()
@@ -92,6 +96,8 @@ class AuthWindows(QWidget):
         self.password_input.setStyleSheet(
             "background-color: #FFF; padding: 5px; border-radius: 5px; margin: 5px;"
         )
+        # Connect Enter key press to submit action or focus next
+        self.password_input.returnPressed.connect(self.handle_return_press)
 
         # Email Input (initially hidden)
         self.email_input = QLineEdit()
@@ -99,6 +105,8 @@ class AuthWindows(QWidget):
         self.email_input.setStyleSheet(
             "background-color: #FFF; padding: 5px; border-radius: 5px; margin: 5px;"
         )
+        # Connect Enter key press to validate action
+        self.email_input.returnPressed.connect(self.validate_user)
         self.email_input.hide()
         
         # Domain info label (for business users)
@@ -152,72 +160,55 @@ class AuthWindows(QWidget):
         self.mode = "login"
         self.current_email = None
 
-    def validate_user(self):
-        username = self.username_input.text()
-        password = self.password_input.text()
-        email = self.email_input.text() if self.mode == "register" else None
+    def focus_next_input(self):
+        """Move focus to the next input field"""
+        self.focusNextChild()
+        
+    def handle_return_press(self):
+        """Handle Enter key on password field - if in login mode, submit;
+        if in register mode, move to email field"""
+        if self.mode == "login":
+            self.validate_user()
+        else:
+            self.focus_next_input()
 
-        # Additional validation for business/admin users
-        if self.mode == "register" and email and (self.user_type == "business" or self.user_type == "admin"):
-            domain_valid = False
-            for domain in self.ALLOWED_ORG_DOMAINS:
-                if email.endswith(f"@{domain}"):
-                    domain_valid = True
-                    break
-            
-            if not domain_valid:
-                QMessageBox.warning(
-                    self,
-                    "Domain Error",
-                    f"For {self.user_type} users, you must use an approved organizational email domain."
-                )
-                return
+    def validate_user(self):
+        username = self.username_input.text().strip()
+        password = self.password_input.text().strip()
+        email = self.email_input.text().strip() if self.mode == "register" else None
+
+        if not username or not password:
+            QMessageBox.warning(self, "Login Failed", "Username and Password cannot be empty.")
+            return
 
         result = self.auth.validate_user(username, password, email, self.mode, self)
-        
-        if result == "verify":
-            self.current_email = email
+
+        if result == "verify" and self.current_email != email:
+            self.current_email = email  # Prevent duplicate dialogs
             self.show_verification_dialog(email)
         elif result:
-            if self.mode == "login":
-                self.open_main_window()
+            QMessageBox.information(self, "Success", "Login successful!")
+            self.open_main_window()
+        else:
+            QMessageBox.warning(self, "Login Failed", "Invalid username or password.")
+
 
     def show_verification_dialog(self, email):
-        while True:  # Use a loop instead of recursion
-            dialog = VerificationDialog(email, self)
-            if dialog.exec_() != QDialog.Accepted:
-                # User cancelled the dialog
-                break
-                
+        """Show the verification dialog and process user input."""
+        dialog = VerificationDialog(email, self)
+        
+        if dialog.exec_() == QDialog.Accepted:
             verification_code = dialog.get_code()
             verification_result = self.auth.verify_email(email, verification_code)
             
-            if verification_result == True:
-                QMessageBox.information(
-                    self,
-                    "Success",
-                    "Email verified successfully! You can now login."
-                )
-                self.toggle_mode()  # Switch back to login
-                break  # Exit the loop after successful verification
+            if verification_result is True:
+                QMessageBox.information(self, "Success", "Email verified successfully! You can now log in.")
+                self.toggle_mode()  # Switch back to login mode
             elif verification_result == "expired":
-                user_response = QMessageBox.warning(
-                    self,
-                    "Expired Code",
-                    "Your verification code has expired. Would you like to try again?",
-                    QMessageBox.Yes | QMessageBox.No
-                )
-                if user_response == QMessageBox.No:
-                    break  # Exit the loop if user doesn't want to try again
+                QMessageBox.warning(self, "Expired Code", "Your verification code has expired. Request a new one.")
             else:
-                user_response = QMessageBox.warning(
-                    self,
-                    "Error",
-                    "Invalid verification code. Would you like to try again?",
-                    QMessageBox.Yes | QMessageBox.No
-                )
-                if user_response == QMessageBox.No:
-                    break  # Exit the loop if user doesn't want to try again
+                QMessageBox.warning(self, "Invalid Code", "The entered verification code is incorrect. Try again.")
+
 
     def resend_verification_code(self, email):
         """Resend verification code to user"""
