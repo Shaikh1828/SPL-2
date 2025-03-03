@@ -5,7 +5,6 @@ from PyQt5.QtWidgets import QMessageBox
 class Authentication:
     def __init__(self, db_path="users.db"):
         self.db_path = db_path
-
         Database.Database()
 
 
@@ -27,7 +26,7 @@ class Authentication:
                 conn.close()
                 if user:
                     QMessageBox.information(parent, "Success", "Login Successful!")
-                    return True  # Return success to open the main window
+                    return user[0]  # Return success to open the main window
                 else:
                     QMessageBox.warning(parent, "Error", "Invalid credentials.")
             elif mode == "register":

@@ -19,6 +19,16 @@ class Database:
                     password TEXT NOT NULL
                 )
             """)
+            cursor.execute("ATTACH DATABASE 'app_data.db' AS app_db;")
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS Scans (
+                    Scan_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    User_ID INTEGER,
+                    App_ID INTEGER,
+                    Scan_Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY (User_ID) REFERENCES users(id)
+                )
+            """)
             conn.commit()
             conn.close()
         except Exception as e:
@@ -84,7 +94,7 @@ class Database:
                     FOREIGN KEY (Feature_ID) REFERENCES Permissions_Intents(Feature_ID)
                 )
             """)
-
+            
             conn.commit()
             conn.close()
             print("APP Database initialized successfully.")
@@ -104,3 +114,15 @@ class Database:
 
         print(f"APK for {package_name} stored successfully in database.")
         return app_id
+    
+    def log_scan(user_id, app_id):
+        conn_scan = sqlite3.connect("users.db")
+        cursor_scan = conn_scan.cursor()
+
+        cursor_scan.execute("""
+            INSERT INTO Scans(User_ID, App_ID)
+            VALUES (?, ?)
+        """, (user_id, app_id))
+
+        conn_scan.commit()
+        conn_scan.close()

@@ -1,29 +1,23 @@
-import sys
 from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox, QComboBox, QTextEdit, QLineEdit
-import subprocess
-import os
-import shutil
-import uuid
+import os,sqlite3,subprocess,sys
+import shutil,uuid
 import parsing
-
-import sqlite3
 import numpy as np
 import joblib
-import os
-import sqlite3
-import subprocess
-
+import AuthWindow
 # Define database path
 from Database import Database
 # Function to store APK in SQLite
 
 class Scan(QWidget):
-    def __init__(self):
+    u_id=0
+    def __init__(self,u_id):
         super().__init__()
         self.setWindowTitle("Scan Devices")
         self.resize(600, 400)
         self.setStyleSheet("background-color: rgb(50, 50, 50); color: white;")
         self.init_ui()
+        self.u_id=u_id
 
     def init_ui(self):
         layout = QVBoxLayout()
@@ -140,6 +134,7 @@ class Scan(QWidget):
 
             if os.path.exists(local_apk_path):
                 app_id=Database.store_apk_in_db(local_apk_path, package_name)
+                Database.log_scan(self.u_id,app_id)
                 manifest_path = self.extract_manifest(local_apk_path, local_apk_dir)
                 if os.path.exists(manifest_path):
                     with open(manifest_path, 'r', encoding='utf-8') as file:
@@ -270,6 +265,8 @@ class Scan(QWidget):
         print("Updated Successfully")
         conn.commit()
         conn.close()
+    
+
 
 
 

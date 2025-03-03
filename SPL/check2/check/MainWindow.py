@@ -9,13 +9,16 @@ from MLmodel import MLModel
 import os,parsing
 
 class MainWindow(QWidget):
-    def __init__(self):
+    u_id=0
+    def __init__(self,u_id):
         super().__init__()
         self.setWindowTitle("Droid Scanner")
         self.resize(1000, 600)
         self.setWindowFlags(Qt.FramelessWindowHint) 
         self.init_ui()
-        self.drag_pos = None  
+        self.drag_pos = None 
+        self.u_id=u_id
+        
     
     def init_ui(self):
         palette = QPalette()
@@ -225,7 +228,7 @@ class MainWindow(QWidget):
             event.accept()
 
     def open_scan_window(self):
-        self.scan_window = Scan()
+        self.scan_window = Scan(self.u_id)
         self.scan_window.show()
 
     def train_model(self):

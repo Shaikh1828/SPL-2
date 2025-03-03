@@ -61,10 +61,10 @@ class AuthWindows(QWidget):
     def validate_user(self):
         username = self.username_input.text()
         password = self.password_input.text()
-
-        if self.auth.validate_user(username, password, self.mode, self):
+        u_id=self.auth.validate_user(username, password, self.mode, self)
+        if u_id!=0:
             if self.mode == "login":
-                self.open_main_window()  # Open the main window if login succeeds
+                self.open_main_window(u_id)  # Open the main window if login succeeds
             else:
                 self.toggle_mode()  # Switch to login mode after registration
 
@@ -112,7 +112,7 @@ class AuthWindows(QWidget):
         except Exception as e:
             QMessageBox.critical(self, "Database Error", f"An error occurred: {e}")
 
-    def open_main_window(self):
-        self.main_window = MainWindow.MainWindow()
+    def open_main_window(self,u_id):
+        self.main_window = MainWindow.MainWindow(u_id)
         self.main_window.show()
         self.close()
