@@ -1,4 +1,5 @@
 import sqlite3
+from PyQt5.QtWidgets import QMessageBox
 import hashlib
 from datetime import datetime
 
@@ -133,19 +134,21 @@ class Database:
             print(f"Error retrieving verification token: {e}")
             return None
 
-    def store_apk_in_db(self, apk_path, package_name):
+    def store_apk_in_db( apk_path, package_name):
         """Store APK file in database"""
         try:
             with open(apk_path, 'rb') as file:
                 apk_data = file.read()
 
-            conn = sqlite3.connect(self.db_path)
+            conn = sqlite3.connect("app_data.db")
             cursor = conn.cursor()
             cursor.execute("INSERT INTO App (Package_Name, Name, Version, Status, APK_File) VALUES (?, ?, ?, ?, ?)",
                            (package_name, package_name, "2.1.0", "Benign", apk_data))
+            app_id=cursor.lastrowid
             conn.commit()
             conn.close()
             print(f"APK for {package_name} stored successfully.")
+            return app_id
         except Exception as e:
             print(f"Error storing APK in database: {e}")
 
@@ -168,3 +171,53 @@ class Database:
         except Exception as e:
             print(f"Error getting user type: {e}")
             return "personal"
+
+    def update_user_credentials(self, user_id, new_username, new_password):
+        """Update user's username and password in the database"""
+        try:
+            # Check if new_username is already taken by another user
+            self.cursor.execute("SELECT id FROM users WHERE username = ? AND id != ?", (new_username, user_id))
+            if self.cursor.fetchone():
+                print("Username already exists!")
+                return False
+
+            hashed_password = self.hash_password(new_password)
+            self.cursor.execute(
+                "UPDATE users SET username = ?, password = ? WHERE id = ?",
+                (new_username, hashed_password, user_id)
+            )
+            self.connection.commit()
+            print("User credentials updated successfully.")
+            return True
+        except Exception as e:
+            print(f"Error updating user credentials: {e}")
+            return False
+        
+    def save_credentials(self):
+        new_username = self.user_id_input.text().strip()
+        new_password = self.password_input.text()
+        
+        # Basic validation
+        if not new_username:
+            QMessageBox.warning(self, "Input Error", "User ID cannot be empty.")
+            return
+            
+        
+        # Update credentials in the database
+        if self.database:
+            success = self.database.update_user_credentials(
+                self.user_credentials["id"],  # Use the user's database ID
+                new_username,
+                new_password
+            )
+            if success:
+                # Update local credentials and notify parent
+                self.user_credentials["user_id"] = new_username
+                self.user_credentials["password"] = new_password
+                self.credentials_updated.emit(self.user_credentials)
+                QMessageBox.information(self, "Success", "Credentials updated successfully.")
+                self.close()
+            else:
+                QMessageBox.warning(self, "Error", "Username already taken.")
+        else:
+            QMessageBox.warning(self, "Error", "Database connection not available.")
