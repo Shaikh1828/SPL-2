@@ -3,11 +3,19 @@ import os,sqlite3,subprocess,sys
 import shutil,uuid
 import parsing
 import numpy as np
+import pandas as pd
 import joblib
 import AuthWindow
 # Define database path
 from Database import Database
 # Function to store APK in SQLite
+from MLmodel import MLModel
+# Get the directory where the script is running
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+# Define paths to Apktool and ADB
+APKTOOL_PATH = os.path.join(BASE_DIR, "apktool_2.10.0.jar")
+ADB_PATH = os.path.join(BASE_DIR, "adb.exe")
 
 class Scan(QWidget):
     u_id=0
@@ -38,9 +46,8 @@ class Scan(QWidget):
 
         # List installed packages button
         list_packages_button = QPushButton("List Installed Packages")
-        self.packages=list_packages_button.clicked.connect(self.list_installed_packages)
+        list_packages_button.clicked.connect(self.list_installed_packages)
         layout.addWidget(list_packages_button)
-
         # Input field for package name
         self.package_input = QLineEdit(self)
         self.package_input.setPlaceholderText("Enter Package Name")
@@ -50,7 +57,7 @@ class Scan(QWidget):
         extract_button = QPushButton("Extract APK")
         extract_button.clicked.connect(self.handle_extraction)
         layout.addWidget(extract_button)
-
+    
         # perform full scan
         full_scan_button = QPushButton("Full Scan")
         full_scan_button.clicked.connect(self.handle_full_scan)
@@ -66,7 +73,7 @@ class Scan(QWidget):
     def check_devices(self):
         """Check for connected devices using ADB."""
         try:
-            result = subprocess.run(["adb", "devices"], capture_output=True, text=True, check=True)
+            result = subprocess.run([ADB_PATH, "devices"], capture_output=True, text=True, check=True)
             devices = [line.split()[0] for line in result.stdout.splitlines() if "\tdevice" in line]
 
             self.device_dropdown.clear()
@@ -91,11 +98,11 @@ class Scan(QWidget):
 
         try:
             result = subprocess.run(
-                ["adb", "-s", selected_device, "shell", "pm", "list", "packages", "-3"],
+                [ADB_PATH, "-s", selected_device, "shell", "pm", "list", "packages", "-3"],
                 capture_output=True, text=True, check=True
             )
             packages = [line.split(":")[1].strip() for line in result.stdout.splitlines() if line.startswith("package:")]
-
+            self.packages=packages
             if packages:
                 self.output_area.setText(f"Installed packages:\n{', '.join(packages)}")
                 return packages
@@ -126,7 +133,7 @@ class Scan(QWidget):
         for package_name in self.packages:
             try:
                 print(f"Scanning package: {package_name}")
-                apk_path, package_name = self.extract_apk(package_name)
+                apk_path, packagename = self.extract_apk(package_name)
                 manifest_path, app_id = self.extract_manifest(apk_path, package_name)
                 features = self.extract_features(manifest_path)
                 self.update_database(app_id, features)
@@ -142,21 +149,23 @@ class Scan(QWidget):
                 print(f"Error scanning {package_name}: {e}")
         print("Full scan completed.")
 
-    def extract_apk(self):
+    def extract_apk(self,package_name=None):
         """Extract APK from the selected device based on package name."""
         selected_device = self.device_dropdown.currentText()
-        package_name = self.package_input.text().strip()
-
+        
         if not selected_device:
             QMessageBox.warning(self, "No Device Selected", "Please select a device.")
             return
+        if package_name is None:
+            package_name = self.package_input.text().strip()
+
         if not package_name:
             QMessageBox.warning(self, "No Package Name", "Please enter a valid package name.")
             return
 
         try:
             result = subprocess.run(
-                ["adb", "-s", selected_device, "shell", "pm", "path", package_name],
+                [ADB_PATH, "-s", selected_device, "shell", "pm", "path", package_name],
                 capture_output=True, text=True, check=True
             )
             apk_paths = result.stdout.splitlines()
@@ -174,7 +183,7 @@ class Scan(QWidget):
             local_apk_dir = "extracted_apks"
             os.makedirs(local_apk_dir, exist_ok=True)
             local_apk_path = os.path.join(local_apk_dir, f"{package_name}-base.apk")
-            subprocess.run(["adb", "-s", selected_device, "pull", base_apk_path, local_apk_path], check=True)
+            subprocess.run([ADB_PATH, "-s", selected_device, "pull", base_apk_path, local_apk_path], check=True)
             return local_apk_path,package_name
                         
         except subprocess.CalledProcessError as e:
@@ -194,7 +203,6 @@ class Scan(QWidget):
         else:
             QMessageBox.warning(self, "Manifest Extraction Failed", str(manifest_path))
     def extract_manifest(self,apk_path, package_name,output_dir="extracted_apks"):
-        print("yes")
         if os.path.exists(apk_path):
             app_id=Database.store_apk_in_db(apk_path, package_name)
             Database.log_scan(self.u_id,app_id)
@@ -203,7 +211,7 @@ class Scan(QWidget):
             os.makedirs(temp_dir, exist_ok=True)
             try:
                 command = [
-                    "java", "-Xmx4G", "-jar", apktool_jar, "d", apk_path, "-o", temp_dir, "--no-src", "-f"
+                    "java", "-Xmx4G", "-jar", APKTOOL_PATH, "d", apk_path, "-o", temp_dir, "--no-src", "-f"
                 ]
                 result = subprocess.run(command, capture_output=True, text=True)
                 if result.returncode == 0:
@@ -289,9 +297,15 @@ class Scan(QWidget):
         # Load the ML model
         with open('AppClassifier1.joblib', 'rb') as f:
             model = joblib.load(f)
+        # Ensure feature_vector is a DataFrame with the correct column names
+        feature_names = joblib.load('feature_names.joblib')
 
+        feature_vector_df = pd.DataFrame([feature_vector], columns=feature_names)
+        
+        # Predict
+        prediction = model.predict(feature_vector_df)
         # Reshape and predict
-        prediction = model.predict(feature_vector.reshape(1, -1))
+        #prediction = model.predict(feature_vector.reshape(1, -1))
         prediction_label = 'Malicious' if prediction[0] == 'S' else 'Benign'
 
         return prediction_label
