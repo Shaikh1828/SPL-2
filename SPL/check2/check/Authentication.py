@@ -92,7 +92,7 @@ class Authentication:
         try:
             if mode == "login":
                 # Check credentials and verification status
-                login_status = self.db.check_login(username, password)
+                u_id,login_status = self.db.check_login(username, password)
                 
                 if login_status == True:
                     # Store the user type in the parent for future reference
@@ -100,7 +100,7 @@ class Authentication:
                     parent.user_type = user_type
                     
                     QMessageBox.information(parent, "Success", "Login Successful!")
-                    return True
+                    return u_id
                 elif login_status == "unverified":
                     # Get the email for this unverified user
                     user_email = self.db.get_user_email(username)

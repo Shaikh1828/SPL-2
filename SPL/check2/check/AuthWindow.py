@@ -7,6 +7,7 @@ from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 from Authentication import Authentication
 from Database import Database
+import MainWindow
 
 class VerificationDialog(QDialog):
     def __init__(self, email, parent=None):
@@ -181,14 +182,11 @@ class AuthWindows(QWidget):
             QMessageBox.warning(self, "Login Failed", "Username and Password cannot be empty.")
             return
 
-        result = self.auth.validate_user(username, password, email, self.mode, self)
+        u_id= self.auth.validate_user(username, password, email, self.mode, self)
 
-        if result == "verify" and self.current_email != email:
-            self.current_email = email  # Prevent duplicate dialogs
-            self.show_verification_dialog(email)
-        elif result:
+        if u_id!=0:
             QMessageBox.information(self, "Success", "Login successful!")
-            self.open_main_window()
+            self.open_main_window(u_id)
         else:
             QMessageBox.warning(self, "Login Failed", "Invalid username or password.")
 
@@ -249,9 +247,9 @@ class AuthWindows(QWidget):
             self.email_input.hide()
             self.domain_info_label.hide()
 
-    def open_main_window(self):
-        from MainWindow import MainWindow
-        self.main_window = MainWindow()
+    def open_main_window(self, u_id):
+        
+        self.main_window = MainWindow.MainWindow(u_id)
         self.main_window.show()
         self.close()
         

@@ -8,48 +8,51 @@ class Database:
         self.db_path = db_path
         self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
-        self.check_and_update_schema()
+        self.init_user_database()
 
     def __del__(self):
         """Close database connection"""
         if hasattr(self, 'connection'):
             self.connection.close()
 
-    def check_and_update_schema(self):
-        """Check and update database schema"""
+    import sqlite3
+
+    def init_user_database(self):
+        """Initializes the database and ensures the users table is set up correctly."""
         try:
-            # Check if users table exists
-            self.cursor.execute("""
-                SELECT name FROM sqlite_master WHERE type='table' AND name='users'
+            conn = sqlite3.connect(self.db_path)
+            cursor = conn.cursor()
+            
+            # Create users table if it doesn't exist
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT UNIQUE NOT NULL,
+                    password TEXT NOT NULL,
+                    email TEXT UNIQUE NOT NULL,
+                    verified INTEGER DEFAULT 0,
+                    verification_token TEXT,
+                    user_type TEXT DEFAULT 'personal',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                )
+            """
+            )
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS Scans (
+                Scan_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                User_ID INTEGER,
+                App_ID INTEGER,
+                Scan_Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (User_ID) REFERENCES users(id)
+                )
             """)
-            if not self.cursor.fetchone():
-                # Create users table if not exists
-                self.cursor.execute("""
-                    CREATE TABLE users (
-                        id INTEGER PRIMARY KEY AUTOINCREMENT,
-                        username TEXT UNIQUE NOT NULL,
-                        password TEXT NOT NULL,
-                        email TEXT UNIQUE NOT NULL,
-                        verified INTEGER DEFAULT 0,
-                        verification_token TEXT,
-                        user_type TEXT DEFAULT 'personal',
-                        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                    )
-                """)
-                self.connection.commit()
-                print("Users table created successfully.")
-            else:
-                # Ensure required columns exist
-                self.cursor.execute("PRAGMA table_info(users)")
-                columns = [column[1] for column in self.cursor.fetchall()]
-                
-                if 'user_type' not in columns:
-                    self.cursor.execute("ALTER TABLE users ADD COLUMN user_type TEXT DEFAULT 'personal'")
-                
-                self.connection.commit()
-                print("User table schema updated successfully.")
+
+            conn.commit()
+            conn.close()
+            print("User database initialized successfully.")
         except Exception as e:
-            print(f"Error updating database schema: {e}")
+            print(f"User Database initialization error: {e}")
+
 
     def hash_password(self, password):
         """Hash the password before storing it"""
@@ -92,11 +95,11 @@ class Database:
             query = "SELECT id, verified FROM users WHERE username = ? AND password = ?"
             self.cursor.execute(query, (username, hashed_password))
             result = self.cursor.fetchone()
-            
-            if result:
-                user_id, is_verified = result
-                return True if is_verified else "unverified"
-            return False
+            is_verified=result[1]
+            if is_verified:
+                return result[0],True 
+            else: 
+                return 0,"unverified"
         except Exception as e:
             print(f"Error checking login: {e}")
             return False
@@ -221,3 +224,15 @@ class Database:
                 QMessageBox.warning(self, "Error", "Username already taken.")
         else:
             QMessageBox.warning(self, "Error", "Database connection not available.")
+
+    def log_scan(user_id, app_id):
+        conn_scan = sqlite3.connect("users.db")
+        cursor_scan = conn_scan.cursor()
+
+        cursor_scan.execute("""
+            INSERT INTO Scans(User_ID, App_ID)
+            VALUES (?, ?)
+        """, (user_id, app_id))
+
+        conn_scan.commit()
+        conn_scan.close()

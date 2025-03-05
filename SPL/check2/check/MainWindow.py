@@ -5,17 +5,19 @@ from PyQt5.QtGui import QFont, QPalette, QBrush, QLinearGradient, QColor
 from PyQt5.QtCore import Qt
 from Dashboard import Dashboard
 
-from scan import Scan
+import scan, os
 from MLmodel import MLModel  
 
 class MainWindow(QWidget):
-    def __init__(self):
+    u_id = 0
+    def __init__(self, u_id):
         super().__init__()
         self.setWindowTitle("Droid Scanner")
         self.resize(1400, 900)
         self.setWindowFlags(Qt.FramelessWindowHint) 
         self.init_ui()
         self.drag_pos = None  
+        self.u_id = u_id
     
     def init_ui(self):
         palette = QPalette()
@@ -73,21 +75,21 @@ class MainWindow(QWidget):
         self.file_path_label.setAlignment(Qt.AlignCenter)
         self.file_path_label.setStyleSheet("color: white; font-style: italic;")
 
-        upload_button = QPushButton("Upload")
-        # upload_button.clicked.connect()
-        upload_button.setStyleSheet("""
-            QPushButton {
-                background-color: rgb(255, 105, 135);
-                color: black;
-                font: bold 15pt Arial;
-                border-radius: 10px;
-                padding: 8px;
-                margin-top: 20px;
-            }
-            QPushButton:hover {
-                background-color: rgb(235, 85, 115);
-            }
-        """)
+        # upload_button = QPushButton("Upload")
+        # # upload_button.clicked.connect()
+        # upload_button.setStyleSheet("""
+        #     QPushButton {
+        #         background-color: rgb(255, 105, 135);
+        #         color: black;
+        #         font: bold 15pt Arial;
+        #         border-radius: 10px;
+        #         padding: 8px;
+        #         margin-top: 20px;
+        #     }
+        #     QPushButton:hover {
+        #         background-color: rgb(235, 85, 115);
+        #     }
+        # """)
 
         scan_button = QPushButton("Scan Devices")
         scan_button.setStyleSheet("""
@@ -185,7 +187,7 @@ class MainWindow(QWidget):
         left_layout.addWidget(upload_label)
         left_layout.addWidget(choose_button)
         left_layout.addWidget(self.file_path_label)
-        left_layout.addWidget(upload_button)
+        # left_layout.addWidget(upload_button)
         left_layout.addWidget(scan_button)
         left_layout.addStretch()
         left_layout.addWidget(self.dashboard_button)
@@ -211,7 +213,21 @@ class MainWindow(QWidget):
     def choose_file(self):
         file_path, _ = QFileDialog.getOpenFileName(self, "Select File", "", "All Files (*)")
         if file_path:
+            scan_instance=scan.Scan(self.u_id)
             self.file_path_label.setText(file_path)
+            manifest_path,app_id=scan_instance.extract_manifest(file_path,os.path.basename(file_path))
+            print("manifest extracted")
+            features=scan_instance.extract_features(manifest_path)
+            print("feature extracted")
+            scan_instance.update_database(app_id,features)
+            print("database updated")
+            status=scan_instance.classify_last_apk()
+            print("classified app")
+            print(status)
+            if status=='Malicious':
+                scan_instance.update_status(app_id)
+            print("Updated")
+            print("done")
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -224,7 +240,7 @@ class MainWindow(QWidget):
             event.accept()
 
     def open_scan_window(self):
-        self.scan_window = Scan(self)
+        self.scan_window = scan.Scan(self.u_id)
         self.scan_window.scan_completed.connect(self.update_scan_results)
         self.scan_window.show()
 
@@ -244,34 +260,33 @@ class MainWindow(QWidget):
         
         <h3>Security Analysis</h3>
         <p><b>Total Permissions:</b> {len(scan_result["permissions"])}</p>
-        <p><b>Suspicious Permissions:</b> {len(scan_result["suspicious_permissions"])}</p>
         <p><b>Total Intents:</b> {len(scan_result["intents"])}</p>
-        <p><b>Suspicious Intents:</b> {len(scan_result["suspicious_intents"])}</p>
+        
         """
         
         # Add suspicious permissions details if any exist
-        if scan_result["suspicious_permissions"]:
-            report += """
-            <h3>Suspicious Permissions</h3>
-            <ul style="color: #DD4444;">
-            """
-            for perm in scan_result["suspicious_permissions"]:
-                # Add human-readable descriptions for common permissions
-                description = self.get_permission_description(perm)
-                report += f"<li><b>{perm}</b> - {description}</li>"
-            report += "</ul>"
+        # if scan_result["suspicious_permissions"]:
+        #     report += """
+        #     <h3>Suspicious Permissions</h3>
+        #     <ul style="color: #DD4444;">
+        #     """
+        #     for perm in scan_result["suspicious_permissions"]:
+        #         # Add human-readable descriptions for common permissions
+        #         description = self.get_permission_description(perm)
+        #         report += f"<li><b>{perm}</b> - {description}</li>"
+        #     report += "</ul>"
         
         # Add suspicious intents details if any exist
-        if scan_result["suspicious_intents"]:
-            report += """
-            <h3>Suspicious Intents</h3>
-            <ul style="color: #DD4444;">
-            """
-            for intent in scan_result["suspicious_intents"]:
-                # Add human-readable descriptions for common intents
-                description = self.get_intent_description(intent)
-                report += f"<li><b>{intent}</b> - {description}</li>"
-            report += "</ul>"
+        # if scan_result["suspicious_intents"]:
+        #     report += """
+        #     <h3>Suspicious Intents</h3>
+        #     <ul style="color: #DD4444;">
+        #     """
+        #     for intent in scan_result["suspicious_intents"]:
+        #         # Add human-readable descriptions for common intents
+        #         description = self.get_intent_description(intent)
+        #         report += f"<li><b>{intent}</b> - {description}</li>"
+        #     report += "</ul>"
         
         # Add all permissions
         report += """

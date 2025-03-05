@@ -14,14 +14,17 @@ from PyQt5.QtGui import QFont, QPalette, QLinearGradient, QColor, QBrush
 
 class Scan(QWidget):
     scan_completed = pyqtSignal(dict)
-    
-    def __init__(self, parent=None):
+    u_id=0
+    packages=[]
+    def __init__(self, u_id, parent=None):
         super().__init__()
         self.parent = parent
         self.setWindowTitle("Scan Devices")
         self.resize(700, 500)
         self.set_gradient_background()
+        self.u_id = u_id
         self.init_ui()
+        
 
     def set_gradient_background(self):
         palette = QPalette()
@@ -71,8 +74,13 @@ class Scan(QWidget):
         extract_button = QPushButton("Extract & Scan APK")
         extract_button.setFont(font)
         extract_button.setStyleSheet(self.button_style())
-        extract_button.clicked.connect(self.extract_and_scan_apk)
+        extract_button.clicked.connect(self.handle_extraction)
         layout.addWidget(extract_button)
+
+        # perform full scan
+        full_scan_button = QPushButton("Full Scan")
+        full_scan_button.clicked.connect(self.handle_full_scan)
+        layout.addWidget(full_scan_button)
 
         # Output area
         self.output_area = QTextEdit()
@@ -106,6 +114,9 @@ class Scan(QWidget):
                 self.device_dropdown.clear()
                 self.device_dropdown.addItems(devices)
                 self.output_area.setText(f"Connected devices:\n{', '.join(devices)}")
+
+                # Connect dropdown selection to method
+                #self.device_dropdown.currentIndexChanged.connect(lambda:self.device_selected)
             else:
                 self.output_area.setText("No connected devices found.")
                 QMessageBox.warning(self, "No Devices", "No connected devices found.")
@@ -113,8 +124,9 @@ class Scan(QWidget):
             self.output_area.setText(f"Error checking devices:\n{e.stderr}")
             QMessageBox.critical(self, "Error", "Failed to check connected devices.")
 
+
     def list_installed_packages(self):
-        """List all installed packages on the selected device."""
+        """List all installed third-party packages on the selected device."""
         selected_device = self.device_dropdown.currentText()
 
         if not selected_device:
@@ -122,31 +134,86 @@ class Scan(QWidget):
             return
 
         try:
-            result = subprocess.run(["adb", "-s", selected_device, "shell", "pm", "list", "packages", "-3"], capture_output=True, text=True, check=True)
+            result = subprocess.run(
+                ["adb", "-s", selected_device, "shell", "pm", "list", "packages", "-3"],
+                capture_output=True, text=True, check=True
+            )
             packages = [line.split(":")[1].strip() for line in result.stdout.splitlines() if line.startswith("package:")]
-
+            self.packages=packages
             if packages:
                 self.package_dropdown.clear()
                 self.package_dropdown.addItems(packages)
                 self.output_area.setText(f"Installed packages:\n{', '.join(packages)}")
+                return packages
             else:
-                self.package_dropdown.clear()
                 self.output_area.setText("No third-party packages found on the device.")
-                QMessageBox.information(self, "No Packages", "No third-party packages found on the device.")
         except subprocess.CalledProcessError as e:
-            self.output_area.setText(f"Error listing packages:\n{e.stderr}")
-            QMessageBox.critical(self, "Error", "Failed to list installed packages.")
+            print(f"Error listing packages: {e.stderr}")  # Debug print
+            QMessageBox.critical(self, "Error", "Failed to list installed packages.")
 
-    def extract_and_scan_apk(self):
+    def handle_extraction(self):
+        # print("handling")
+        apk_path,package_name,app_version=self.extract_apk()
+        # print("apk extracted")
+        manifest_path,app_id=self.extract_manifest(apk_path,package_name)
+        # print("manifest extracted")
+        permissions,intents=self.extract_features(manifest_path)
+        # print("feature extracted")
+        self.update_database(app_id,permissions+intents)
+        # print("database updated")
+        status=self.classify_last_apk()
+        # print("classified app")
+        print(status)
+        if status=='Malicious':
+            self.update_status(app_id)
+        print("Updated")
+        self.generateReport(package_name,permissions,intents,status,app_version)
+        
+    
+    def handle_full_scan(self):
+        print("hello1")
+        for package_name in self.packages:
+            try:
+                print("hello2")
+                print(f"Scanning package: {package_name}")
+                apk_path, packagename,app_version = self.extract_apk(package_name)
+                manifest_path, app_id = self.extract_manifest(apk_path, package_name)
+                permissions,intents = self.extract_features(manifest_path)
+                self.update_database(app_id, permissions+intents)
+                status = self.classify_last_apk()
+                
+                if status == 'Malicious':
+                    self.update_status(app_id)
+                    print(f"{package_name} is Malicious. Status updated.")
+                else:
+                    print(f"{package_name} is Benign.")
+                self.generateReport(package_name,permissions,intents,status,app_version)
+            except Exception as e:
+                print(f"Error scanning {package_name}: {e}")
+        print("Full scan completed.")
+    
+
+    def device_selected(self):
+        """Trigger when a device is selected from the dropdown."""
         selected_device = self.device_dropdown.currentText()
-        package_name = self.package_dropdown.currentText()
+        if selected_device:
+            self.list_installed_packages(selected_device)
+
+
+    def extract_apk(self,package_name=None):
+        selected_device = self.device_dropdown.currentText()
+        
         
         if not selected_device:
             QMessageBox.warning(self, "No Device Selected", "Please select a device.")
             return
+        if package_name is None:
+            package_name = self.package_dropdown.currentText()
+
         if not package_name:
             QMessageBox.warning(self, "No Package Name", "Please enter a valid package name.")
             return
+        
 
         try:
             # Get app version
@@ -182,112 +249,147 @@ class Scan(QWidget):
             local_apk_path = os.path.join(local_apk_dir, f"{package_name}-base.apk")
             subprocess.run(["adb", "-s", selected_device, "pull", base_apk_path, local_apk_path], check=True)
 
-            permissions = []
-            intents = []
-            scan_result = {
-                "package_name": package_name,
-                "app_version": app_version,
-                "classification": "Unknown",
-                "permissions": [],
-                "intents": [],
-                "suspicious_permissions": [],
-                "suspicious_intents": []
-            }
+            return local_apk_path,package_name,app_version
+                        
+        except subprocess.CalledProcessError as e:
+            QMessageBox.critical(self, "Error", f"Failed to extract APK:\n{e.stderr}")
+    
 
-            if os.path.exists(local_apk_path):
-                app_id=Database.store_apk_in_db(local_apk_path, package_name)
-                print(app_id)
-                manifest_path = self.extract_manifest(local_apk_path, local_apk_dir)
-                if os.path.exists(manifest_path):
-                    with open(manifest_path, 'r', encoding='utf-8') as file:
-                        manifest_content = file.read()
-                    self.output_area.setText(f"Extracted AndroidManifest.xml:\n\n{manifest_content}")
-                    permissions = parsing.extract_permissions(manifest_path)
-                    intents = parsing.extract_intents(manifest_path)
-                    features=[]
-                    features= permissions+intents
-                    self.output_area.setText(f"Extracted Permissions:\n\n{permissions}\n{intents}")
-                    self.update_database(app_id,features)
-                    status=self.classify_last_apk()
-                    print(status)
-                    if status=='Malicious':
-                        self.update_status(app_id)
-                    print("Updated")
-                    
-                    # List of potentially suspicious permissions (you can expand this list)
-                    suspicious_permission_list = [
-                        "android.permission.READ_CONTACTS",
-                        "android.permission.WRITE_CONTACTS",
-                        "android.permission.ACCESS_FINE_LOCATION",
-                        "android.permission.READ_CALL_LOG",
-                        "android.permission.READ_SMS",
-                        "android.permission.SEND_SMS",
-                        "android.permission.RECORD_AUDIO",
-                        "android.permission.CAMERA",
-                        "android.permission.READ_PHONE_STATE"
-                    ]
-                    
-                    # List of potentially suspicious intents (you can expand this list)
-                    suspicious_intent_list = [
-                        "android.intent.action.BOOT_COMPLETED",
-                        "android.intent.action.NEW_OUTGOING_CALL",
-                        "android.intent.action.SMS_RECEIVED"
-                    ]
-                    
-                    # Find suspicious permissions and intents
-                    suspicious_permissions = [p for p in permissions if p in suspicious_permission_list]
-                    suspicious_intents = [i for i in intents if i in suspicious_intent_list]
-                    
-                    # Classify the app (simplified version, use your ML model in production)
-                    classification = status
-                    
-                    scan_result = {
+    def generateReport(self,package_name,permissions,intents,classification,app_version="2.1.0"):
+        scan_result = {
                         "package_name": package_name,
                         "app_version": app_version,
                         "classification": classification,
                         "permissions": permissions,
-                        "intents": intents,
-                        "suspicious_permissions": suspicious_permissions,
-                        "suspicious_intents": suspicious_intents
+                        "intents": intents
                     }
                     
                     # Display basic info in the scan window
-                    self.output_area.setText(f"App: {package_name}\nVersion: {app_version}\nClassification: {classification}\n\n"
-                                            f"Total Permissions: {len(permissions)}\n"
-                                            f"Total Intents: {len(intents)}\n")
+        self.output_area.setText(f"App: {package_name}\nVersion: {app_version}\nClassification: {classification}\n\n"
+                                 f"Total Permissions: {len(permissions)}\n"
+                                 f"Permissions List: {permissions}\n"
+                                 f"Total Intents: {len(intents)}\n"
+                                 f"Intents List: {intents}\n")
                     
                     # Emit the signal with scan results to update the main window
-                    if self.parent:
-                        self.scan_completed.emit(scan_result)
-                else:
-                    QMessageBox.warning(self, "Manifest Extraction Failed", str(manifest_path))
-                QMessageBox.information(self, "Scan Completed", f"APK successfully scanned. Results are available in the main window.")
-            else:
-                QMessageBox.warning(self, "Extraction Failed", "Failed to pull the APK.")
-        except subprocess.CalledProcessError as e:
-            QMessageBox.critical(self, "Error", f"Failed to extract APK:\n{e.stderr}")
+        # if self.parent:
+        self.scan_completed.emit(scan_result)
 
-    def extract_manifest(self, apk_path, output_dir):
-        apktool_jar = "C:\\apktool\\apktool_2.10.0.jar"
-        temp_dir = os.path.join(output_dir, uuid.uuid4().hex)
-        os.makedirs(temp_dir, exist_ok=True)
-        try:
-            command = [
-                "java", "-Xmx4G", "-jar", apktool_jar, "d", apk_path, "-o", temp_dir, "--no-src", "-f"
-            ]
-            result = subprocess.run(command, capture_output=True, text=True)
-            if result.returncode == 0:
-                manifest_path = os.path.join(temp_dir, "AndroidManifest.xml")
-                if os.path.exists(manifest_path):
-                    self.delete_all_except(manifest_path)
-                    return manifest_path
+        #     if os.path.exists(local_apk_path):
+        #         app_id=Database.store_apk_in_db(local_apk_path, package_name)
+        #         print(app_id)
+        #         manifest_path = self.extract_manifest(local_apk_path, local_apk_dir, app_id)
+        #         if os.path.exists(manifest_path):
+        #             with open(manifest_path, 'r', encoding='utf-8') as file:
+        #                 manifest_content = file.read()
+        #             self.output_area.setText(f"Extracted AndroidManifest.xml:\n\n{manifest_content}")
+        #             permissions = parsing.extract_permissions(manifest_path)
+        #             intents = parsing.extract_intents(manifest_path)
+        #             features=[]
+        #             features= permissions+intents
+        #             self.output_area.setText(f"Extracted Permissions:\n\n{permissions}\n{intents}")
+        #             self.update_database(app_id,features)
+        #             status=self.classify_last_apk()
+        #             print(status)
+        #             if status=='Malicious':
+        #                 self.update_status(app_id)
+        #             print("Updated")
+                    
+        #             # List of potentially suspicious permissions (you can expand this list)
+        #             suspicious_permission_list = [
+        #                 "android.permission.READ_CONTACTS",
+        #                 "android.permission.WRITE_CONTACTS",
+        #                 "android.permission.ACCESS_FINE_LOCATION",
+        #                 "android.permission.READ_CALL_LOG",
+        #                 "android.permission.READ_SMS",
+        #                 "android.permission.SEND_SMS",
+        #                 "android.permission.RECORD_AUDIO",
+        #                 "android.permission.CAMERA",
+        #                 "android.permission.READ_PHONE_STATE"
+        #             ]
+                    
+        #             # List of potentially suspicious intents (you can expand this list)
+        #             suspicious_intent_list = [
+        #                 "android.intent.action.BOOT_COMPLETED",
+        #                 "android.intent.action.NEW_OUTGOING_CALL",
+        #                 "android.intent.action.SMS_RECEIVED"
+        #             ]
+                    
+        #             # Find suspicious permissions and intents
+        #             suspicious_permissions = [p for p in permissions if p in suspicious_permission_list]
+        #             suspicious_intents = [i for i in intents if i in suspicious_intent_list]
+                    
+        #             # Classify the app (simplified version, use your ML model in production)
+        #             classification = status
+                    
+        #             scan_result = {
+        #                 "package_name": package_name,
+        #                 "app_version": app_version,
+        #                 "classification": classification,
+        #                 "permissions": permissions,
+        #                 "intents": intents,
+        #                 "suspicious_permissions": suspicious_permissions,
+        #                 "suspicious_intents": suspicious_intents
+        #             }
+                    
+        #             # Display basic info in the scan window
+        #             self.output_area.setText(f"App: {package_name}\nVersion: {app_version}\nClassification: {classification}\n\n"
+        #                                     f"Total Permissions: {len(permissions)}\n"
+        #                                     f"Total Intents: {len(intents)}\n")
+                    
+        #             # Emit the signal with scan results to update the main window
+        #             if self.parent:
+        #                 self.scan_completed.emit(scan_result)
+        #         else:
+        #             QMessageBox.warning(self, "Manifest Extraction Failed", str(manifest_path))
+        #         QMessageBox.information(self, "Scan Completed", f"APK successfully scanned. Results are available in the main window.")
+        #     else:
+        #         QMessageBox.warning(self, "Extraction Failed", "Failed to pull the APK.")
+        # except subprocess.CalledProcessError as e:
+        #     QMessageBox.critical(self, "Error", f"Failed to extract APK:\n{e.stderr}")
+
+    def extract_features(self,manifest_path):
+        if os.path.exists(manifest_path):
+            with open(manifest_path, 'r', encoding='utf-8') as file:
+                manifest_content = file.read()
+            self.output_area.setText(f"Extracted AndroidManifest.xml:\n\n{manifest_content}")
+            permissions = parsing.extract_permissions(manifest_path)
+            intents = parsing.extract_intents(manifest_path)
+            features=[]
+            features= permissions+intents
+            self.output_area.setText(f"Extracted Permissions:\n\n{permissions}\n{intents}")
+            return permissions,intents
+        else:
+            QMessageBox.warning(self, "Manifest Extraction Failed", str(manifest_path))
+
+    def extract_manifest(self,apk_path, package_name,output_dir="extracted_apks"):
+        print("yes")
+        if os.path.exists(apk_path):
+            app_id=Database.store_apk_in_db(apk_path, package_name)
+            Database.log_scan(self.u_id,app_id)
+            apktool_jar = "C:\\apktool\\apktool_2.10.0.jar"
+            temp_dir = os.path.join(output_dir, uuid.uuid4().hex)
+            os.makedirs(temp_dir, exist_ok=True)
+            try:
+                command = [
+                    "java", "-Xmx4G", "-jar", apktool_jar, "d", apk_path, "-o", temp_dir, "--no-src", "-f"
+                ]
+                result = subprocess.run(command, capture_output=True, text=True)
+                if result.returncode == 0:
+                    manifest_path = os.path.join(temp_dir, "AndroidManifest.xml")
+                    if os.path.exists(manifest_path):
+                        self.delete_all_except(manifest_path)
+                        return manifest_path,app_id
+                    else:
+                        shutil.rmtree(temp_dir)
+                        return "Manifest file not found in APK."
                 else:
-                    shutil.rmtree(temp_dir)
-                    return "Manifest file not found in APK."
-            else:
-                return f"Error: {result.stderr}"
-        except Exception as e:
-            return f"An error occurred: {e}"
+                    return f"Error: {result.stderr}"
+            except Exception as e:
+                return f"An error occurred: {e}"
+        else:
+                QMessageBox.warning(self, "Extraction Failed", "Failed to pull the Manifest File.")
+
 
     # Clean up extracted directory
     def delete_all_except(self, file_to_keep):
