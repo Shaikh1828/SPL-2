@@ -13,7 +13,7 @@ class MainWindow(QWidget):
     def __init__(self, u_id):
         super().__init__()
         self.setWindowTitle("Droid Scanner")
-        self.resize(1400, 900)
+        self.resize(1200, 800)
         self.setWindowFlags(Qt.FramelessWindowHint) 
         self.init_ui()
         self.drag_pos = None  
@@ -69,6 +69,8 @@ class MainWindow(QWidget):
             QPushButton:hover {
                 background-color: rgb(90, 180, 160);
             }
+                                    
+            
         """)
 
         self.file_path_label = QLabel("No file selected")
@@ -93,8 +95,8 @@ class MainWindow(QWidget):
 
         scan_button = QPushButton("Scan Devices")
         scan_button.setStyleSheet("""
-            QPushButton {
-                background-color: rgb(90, 180, 160);
+             QPushButton {
+                background-color: rgb(255, 105, 135);
                 color: black;
                 font: bold 15pt Arial;
                 border-radius: 10px;
@@ -102,7 +104,7 @@ class MainWindow(QWidget):
                 margin-top: 20px;
             }
             QPushButton:hover {
-                background-color: rgb(110, 190, 170);
+                background-color: rgb(235, 85, 115);
             }
         """)
         scan_button.clicked.connect(self.open_scan_window)
@@ -216,18 +218,47 @@ class MainWindow(QWidget):
             scan_instance=scan.Scan(self.u_id)
             self.file_path_label.setText(file_path)
             manifest_path,app_id=scan_instance.extract_manifest(file_path,os.path.basename(file_path))
-            print("manifest extracted")
-            features=scan_instance.extract_features(manifest_path)
-            print("feature extracted")
-            scan_instance.update_database(app_id,features)
-            print("database updated")
+            permissions,intents=scan_instance.extract_features(manifest_path)
+            scan_instance.update_database(app_id,permissions+intents)
             status=scan_instance.classify_last_apk()
-            print("classified app")
             print(status)
+
             if status=='Malicious':
                 scan_instance.update_status(app_id)
-            print("Updated")
-            print("done")
+            scan_instance.generateReport(os.path.basename(file_path),permissions,intents,status,"2.1.0" )
+            scan_instance.scan_completed.connect(self.update_scan_results)
+            
+            classification_color = "#FF3333" if status == "Malicious" else "#33AA33"
+            result =  f"""
+            <h2>Apk Scan Report</h2>
+            <p><b>Package Name:</b> {os.path.basename(file_path)}</p>
+            <p><b>Version:</b> {"2.1.0"}</p>
+            <p><b>Classification:</b> <span style="color: {classification_color}; font-weight: bold;">{status}</span></p>
+            <p><b>Total Permissions:</b> {len(permissions)}</p>
+            <p><b>Total Intents:</b> {len(intents)}</p>
+            """
+            if status == "Malicious":
+                result += """
+                <p style="color: #FF3333; font-weight: bold;">This app appears to be potentially harmful. Consider the following actions:</p>
+                <ul>
+                    <li>Uninstall this application immediately</li>
+                    <li>Check your device for other suspicious apps</li>
+                    <li>Run a full system scan with an antivirus</li>
+                    <li>Monitor for unusual behavior or excessive battery/data usage</li>
+                </ul>
+                """
+            else:
+                result += """
+                <p style="color: #33AA33;">This app appears to be safe, but always be cautious with app permissions:</p>
+                <ul>
+                    <li>Review permissions regularly</li>
+                    <li>Consider revoking unnecessary permissions</li>
+                    <li>Keep the app updated to the latest version</li>
+                    <li>Only download apps from trusted sources</li>
+                </ul>
+                """
+            # self.results_text.setHtml(result)
+            self.show_report(result)
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -241,8 +272,11 @@ class MainWindow(QWidget):
 
     def open_scan_window(self):
         self.scan_window = scan.Scan(self.u_id)
-        self.scan_window.scan_completed.connect(self.update_scan_results)
+        self.scan_window.scan_result_type1.connect(self.update_scan_results)
+        self.scan_window.scan_result_type2.connect(self.show_report)
         self.scan_window.show()
+        
+
 
     def update_scan_results(self, scan_result):
         """Update the main window with scan results"""
@@ -264,31 +298,6 @@ class MainWindow(QWidget):
         
         """
         
-        # Add suspicious permissions details if any exist
-        # if scan_result["suspicious_permissions"]:
-        #     report += """
-        #     <h3>Suspicious Permissions</h3>
-        #     <ul style="color: #DD4444;">
-        #     """
-        #     for perm in scan_result["suspicious_permissions"]:
-        #         # Add human-readable descriptions for common permissions
-        #         description = self.get_permission_description(perm)
-        #         report += f"<li><b>{perm}</b> - {description}</li>"
-        #     report += "</ul>"
-        
-        # Add suspicious intents details if any exist
-        # if scan_result["suspicious_intents"]:
-        #     report += """
-        #     <h3>Suspicious Intents</h3>
-        #     <ul style="color: #DD4444;">
-        #     """
-        #     for intent in scan_result["suspicious_intents"]:
-        #         # Add human-readable descriptions for common intents
-        #         description = self.get_intent_description(intent)
-        #         report += f"<li><b>{intent}</b> - {description}</li>"
-        #     report += "</ul>"
-        
-        # Add all permissions
         report += """
         <h3>All Permissions</h3>
         <ul style="color: #555555;">
@@ -304,7 +313,7 @@ class MainWindow(QWidget):
         
         if scan_result["classification"] == "Malicious":
             report += """
-            <p style="color: #FF3333; font-weight: bold;">This app appears to be potentially harmful. Consider the following actions:</p>
+            <p style="color: #FF3333; font-weight: bold;">This app appear8+s to be potentially harmful. Consider the following actions:</p>
             <ul>
                 <li>Uninstall this application immediately</li>
                 <li>Check your device for other suspicious apps</li>
@@ -325,6 +334,7 @@ class MainWindow(QWidget):
             
         # Set the formatted report to the results text area
         self.results_text.setHtml(report)
+        self.show_report(report)
 
     def get_permission_description(self, permission):
         """Return a human-readable description of common Android permissions"""
@@ -352,7 +362,7 @@ class MainWindow(QWidget):
     
     # Add these as new methods to your MainWindow class
     def open_dashboard(self):
-        self.dashboard = Dashboard(self, self.get_user_credentials())
+        self.dashboard = Dashboard(self, self.get_user_credentials(), self.u_id)
         self.dashboard.credentials_updated.connect(self.update_user_credentials)
         self.dashboard.show()
 
@@ -384,3 +394,16 @@ class MainWindow(QWidget):
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to train the model: {e}")
+
+    def show_report(self, report):
+        try:
+            print(report)
+            self.info_text.setVisible(False)
+            self.results_text.setText(report)
+            self.results_text.setVisible(True)
+
+            # Display the results in the text box
+           
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Failed to Show the report: {e}")

@@ -9,6 +9,7 @@ class Database:
         self.connection = sqlite3.connect(db_path)
         self.cursor = self.connection.cursor()
         self.init_user_database()
+        self.init_AppDatabase()
 
     def __del__(self):
         """Close database connection"""
@@ -52,6 +53,88 @@ class Database:
             print("User database initialized successfully.")
         except Exception as e:
             print(f"User Database initialization error: {e}")
+
+    def init_AppDatabase(self):
+        try:
+            conn = sqlite3.connect("app_data.db")
+            cursor = conn.cursor()
+
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS App (
+                    App_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Package_Name TEXT NOT NULL,
+                    Name TEXT NOT NULL,
+                    Version TEXT,
+                    Status TEXT,
+                    APK_File BLOB
+                )
+            """)
+            
+    
+            # cursor.execute("""
+            #     DELETE FROM App_Features
+            #     WHERE App_ID in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34);
+
+            # """)
+            # cursor.execute("""
+            #     DELETE FROM App
+            #     WHERE App_ID in (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34);
+            # """)
+
+            # cursor.execute("""
+            #     VACUUM
+            # """)
+            
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS Permissions_Intents (
+                    Feature_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    Feature_Name TEXT NOT NULL
+                )
+            """)
+            dataset_features = [
+                ("SYSTEM_ALERT_WINDOW",), ("CHANGE_WIFI_STATE",), ("BIND_ACCESSIBILITY_SERVICE",), ("CALL",), ("UPDATE_DEVICE_STATS",),
+                ("ACCESS_WIFI_STATE",), ("BROADCAST_SMS",), ("READ_SOCIAL_STREAM",), ("CHANGE_CONFIGURATION",), ("SEND_MULTIPLE",),
+                ("READ_PROFILE",), ("BOOT_COMPLETED",), ("KILL_BACKGROUND_PROCESSES",), ("WRITE_APN_SETTINGS",), ("STATUS_BAR",), ("RUN",),
+                ("CLEAR_APP_CACHE",), ("ADD_VOICEMAIL",), ("TIME_SET",), ("SUBSCRIBED_FEEDS_WRITE",), ("GET_ACCOUNTS",), ("WRITE_USER_DICTIONARY",),
+                ("INSTALL_PACKAGES",), ("SCREEN_ON",), ("RECORD_AUDIO",), ("RESTART_PACKAGES",), ("DISABLE_KEYGUARD",), ("READ_SYNC_SETTINGS",),
+                ("WRITE_GSERVICES",), ("RECEIVE_WAP_PUSH",), ("CALL_PRIVILEGED",), ("SET_PROCESS_LIMIT",), ("ACCESS_NETWORK_STATE",),
+                ("BIND_VPN_SERVICE",), ("ACTION_POWER_CONNECTED",), ("BROADCAST_WAP_PUSH",), ("CONTROL_LOCATION_UPDATES",), ("WRITE_PROFILE",),
+                ("WRITE_SECURE_SETTINGS",), ("CALL_BUTTON",), ("WRITE_EXTERNAL_STORAGE",), ("REORDER_TASKS",), ("SCREEN_OFF",),
+                ("ACTION_POWER_DISCONNECTED",), ("BLUETOOTH_ADMIN",), ("ACCESS_FINE_LOCATION",), ("FLASHLIGHT",), ("WRITE_SYNC_SETTINGS",),
+                ("PACKAGE_REPLACED",), ("SET_WALLPAPER",), ("PACKAGE_DATA_CLEARED",), ("SET_WALLPAPER_HINTS",), ("CAMERA",), ("BIND_WALLPAPER",),
+                ("BROADCAST_STICKY",), ("WRITE_SOCIAL_STREAM",), ("READ_EXTERNAL_STORAGE",), ("READ_SYNC_STATS",), ("READ_CALL_LOG",),
+                ("PERSISTENT_ACTIVITY",), ("WRITE_CALL_LOG",), ("EXPAND_STATUS_BAR",), ("SET_TIME_ZONE",), ("VIBRATE",), ("DELETE_CACHE_FILES",),
+                ("READ_SMS",), ("CLEAR_APP_USER_DATA",), ("INTERNET",), ("WRITE_SMS",), ("READ_HISTORY_BOOKMARKS",), ("WAKE_LOCK",), ("PACKAGE_REMOVED",),
+                ("MASTER_CLEAR",), ("CHANGE_WIFI_MULTICAST_STATE",), ("SET_ORIENTATION",), ("SENDTO",), ("INTERNAL_SYSTEM_WINDOW",), ("WRITE_SETTINGS",),
+                ("ACCESS_SURFACE_FLINGER",), ("ACTION_SHUTDOWN",), ("DUMP",), ("DEVICE_POWER",), ("WRITE_HISTORY_BOOKMARKS",), ("PACKAGE_ADDED",),
+                ("BIND_INPUT_METHOD",), ("WRITE_CONTACTS",), ("AUTHENTICATE_ACCOUNTS",), ("READ_USER_DICTIONARY",), ("CHANGE_COMPONENT_ENABLED_STATE",),
+                ("RECEIVE_BOOT_COMPLETED",), ("READ_CONTACTS",), ("ACCESS_MOCK_LOCATION",), ("SET_PREFERRED_APPLICATIONS",), ("BATTERY_LOW",),
+                ("SUBSCRIBED_FEEDS_READ",), ("DELETE_PACKAGES",), ("BATTERY_OKAY",), ("MODIFY_PHONE_STATE",), ("BATTERY_STATS",), ("RECEIVE_MMS",),
+                ("CALL_PHONE",), ("USE_CREDENTIALS",), ("SET_ACTIVITY_WATCHER",), ("TIMEZONE_CHANGED",), ("BIND_REMOTEVIEWS",), ("BLUETOOTH",),
+                ("ACCESS_COARSE_LOCATION",), ("HARDWARE_TEST",), ("RECEIVE_SMS",), ("INSTALL_LOCATION_PROVIDER",), ("BIND_TEXT_SERVICE",),
+                ("MOUNT_FORMAT_FILESYSTEMS",), ("MOUNT_UNMOUNT_FILESYSTEMS",), ("REBOOT",), ("MODIFY_AUDIO_SETTINGS",), ("BIND_APPWIDGET",),
+                ("CHANGE_NETWORK_STATE",), ("SET_TIME",), ("READ_CALENDAR",), ("PACKAGE_CHANGED",), ("SEND_SMS",), ("BIND_DEVICE_ADMIN",), ("GET_TASKS",),
+                ("PROCESS_OUTGOING_CALLS",), ("READ_PHONE_STATE",), ("READ_FRAME_BUFFER",), ("ACCESS_LOCATION_EXTRA_COMMANDS",), ("GET_PACKAGE_SIZE",),
+                ("READ_LOGS",), ("GLOBAL_SEARCH",), ("PACKAGE_RESTARTED",), ("NFC",), ("NEW_OUTGOING_CALL",), ("MANAGE_ACCOUNTS",), ("WRITE_CALENDAR",)
+            ]
+
+            query = "INSERT INTO Permissions_Intents (Feature_Name) VALUES (?)"
+            #cursor.executemany(query, dataset_features)
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS App_Features (
+                    App_Feature_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                    App_ID INTEGER NOT NULL,
+                    Feature_ID INTEGER NOT NULL,
+                    FOREIGN KEY (App_ID) REFERENCES App(App_ID),
+                    FOREIGN KEY (Feature_ID) REFERENCES Permissions_Intents(Feature_ID)
+                )
+            """)
+            
+            conn.commit()
+            conn.close()
+            print("APP Database initialized successfully.")
+        except Exception as e:
+            print(f"Error initializing database: {e}")
 
 
     def hash_password(self, password):

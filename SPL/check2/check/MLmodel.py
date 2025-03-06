@@ -29,7 +29,7 @@ class MLModel:
 
             # Save the trained model
             joblib.dump(self.classifier, 'AppClassifier1.joblib')
-
+            joblib.dump(X_train.columns, 'feature_names.joblib')
             # Test the model
             Y_pred = self.classifier.predict(X_test)
             self.confusion_matrix = confusion_matrix(Y_test, Y_pred)

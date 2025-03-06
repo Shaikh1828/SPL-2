@@ -5,23 +5,26 @@ from PyQt5.QtWidgets import (
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt, pyqtSignal
 from Database import Database
+import sqlite3
 
 
 class Dashboard(QWidget):
     credentials_updated = pyqtSignal(dict)
-    
-    def __init__(self, parent=None, user_credentials=None, database=None):
+    u_id = 0 
+    def __init__(self, parent=None, user_credentials=None, database=None ):
         super().__init__(parent)
         self.setWindowTitle("User Dashboard")
-        self.resize(800, 600)
+        self.resize(1000, 600)
         self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
+        print("User ID passed to Dashboard:", parent.u_id)  # Debugging
+        self.u_id = parent.u_id
         
         # Database connection
-        self.database = database or Database()
+        # self.database = database or Database()
         
         # User credentials
         self.user_credentials = user_credentials or {"id": None, "user_id": "", "password": ""}
-        
+        # self.loadScanData(u_id)
         self.init_ui()
         self.drag_pos = None
         
@@ -51,8 +54,9 @@ class Dashboard(QWidget):
         # Section Buttons
         section_layout = QHBoxLayout()
         section_buttons = [
-            ("Credentials", self.show_credentials_section),
-            ("Analytics", self.show_analytics_section)
+            ("Profile", self.show_credentials_section),
+            ("History", self.show_history_section),
+            ("AppList", self.show_applist_section)
         ]
         
         self.section_button_group = []
@@ -61,7 +65,7 @@ class Dashboard(QWidget):
             btn.clicked.connect(method)
             btn.setStyleSheet("""
                 QPushButton {
-                    background-color: #4CAF50;
+                    background-color: #6BC8B4;
                     color: white;
                     border: none;
                     padding: 10px;
@@ -69,7 +73,7 @@ class Dashboard(QWidget):
                     border-radius: 5px;
                 }
                 QPushButton:hover {
-                    background-color: #45a049;
+                    background-color: rgb(90, 180, 160);
                 }
             """)
             section_layout.addWidget(btn)
@@ -99,7 +103,7 @@ class Dashboard(QWidget):
         
         self.user_id_input = QLineEdit(self.user_credentials.get("user_id", ""))
         
-        password_label = QLabel("Password:")
+        password_label = QLabel("Add New Password:")
         password_label.setFont(QFont("Arial", 12))
         password_label.setStyleSheet("color: #333; font-weight: bold;")
         
@@ -125,40 +129,55 @@ class Dashboard(QWidget):
         cancel_button = QPushButton("Cancel")
         cancel_button.clicked.connect(self.close)
         
-        update_button = QPushButton("Update Credentials")
-        update_button.clicked.connect(self.update_credentials)
-        
-        history_button = QPushButton("Show History")
-        history_button.clicked.connect(self.show_history)
         
         button_layout.addWidget(save_button)
-        button_layout.addWidget(update_button)
-        button_layout.addWidget(history_button)
         button_layout.addWidget(cancel_button)
         
         credentials_layout.addWidget(form_frame)
         credentials_layout.addLayout(button_layout)
         credentials_section.setLayout(credentials_layout)
+
         
-        # Analytics Section
-        analytics_section = QWidget()
-        analytics_layout = QVBoxLayout()
-        
-        # Analytics Table
-        self.analytics_table = QTableWidget()
-        self.analytics_table.setColumnCount(4)
-        self.analytics_table.setHorizontalHeaderLabels(["Date", "Action", "Result", "Details"])
-        
-        refresh_button = QPushButton("Refresh Analytics")
-        refresh_button.clicked.connect(self.refresh_analytics)
-        
-        analytics_layout.addWidget(self.analytics_table)
-        analytics_layout.addWidget(refresh_button)
-        analytics_section.setLayout(analytics_layout)
+        # history Section
+        history_section = QWidget()
+        history_layout = QVBoxLayout()
+        hbox = QHBoxLayout()
+        self.tableWidget = QTableWidget()
+        # Set up table columns
+        self.tableWidget.setColumnCount(5)
+        self.tableWidget.setHorizontalHeaderLabels([
+            "Scan ID", "User ID", "App Name", "Status", "Scan Timestamp"
+        ])
+         # Add table to HBox layout
+        hbox.addWidget(self.tableWidget)
+        history_layout.addWidget(self.tableWidget)
+        # history_layout.addWidget(refresh_button)
+        history_section.setLayout(history_layout)
+
+
+        ##
+         # Applist
+        applist_section = QWidget()
+        applist_layout = QVBoxLayout()
+        appbox = QHBoxLayout()
+        self.appTable = QTableWidget()
+        # Set up table columns
+        self.appTable.setColumnCount(3)
+        self.appTable.setHorizontalHeaderLabels([
+            "Scan ID", "User ID", "App Name", "Status", "Scan Timestamp"
+        ])
+         # Add table to HBox layout
+        appbox.addWidget(self.appTable)        
+        applist_layout.addWidget(self.appTable)
+        # history_layout.addWidget(refresh_button)
+        applist_section.setLayout(applist_layout)
+
+
         
         # Add Sections to Stacked Widget
         self.stacked_widget.addWidget(credentials_section)
-        self.stacked_widget.addWidget(analytics_section)
+        self.stacked_widget.addWidget(history_section)
+        self.stacked_widget.addWidget(applist_section)
         
         # Main Layout
         main_layout = QVBoxLayout()
@@ -171,11 +190,49 @@ class Dashboard(QWidget):
         # Default to Credentials Section
         self.show_credentials_section()
     
+    def get_username_by_user_id(self, u_id):
+        """
+        Retrieve username from the users.db database based on user_id
+        
+        Parameters:
+        user_id (str): The unique ID of the user to look up
+        
+        Returns:
+        str or None: The username if found, None otherwise
+        """
+        try:
+            import sqlite3
+            
+            # Connect to the users.db database
+            conn = sqlite3.connect('users.db')
+            cursor = conn.cursor()
+            
+            # Query the database for the username
+            cursor.execute("SELECT username FROM users WHERE id = ?", (u_id,))
+            result = cursor.fetchone()
+            
+            # Close the connection
+            conn.close()
+            
+            # Return the username if found, otherwise None
+            return result[0] if result else None
+            
+        except sqlite3.Error as e:
+            print(f"Database error: {e}")
+            return None
+
+
     def show_credentials_section(self):
         self.stacked_widget.setCurrentIndex(0)
     
-    def show_analytics_section(self):
+    def show_history_section(self):
+        self.loadScanData()
         self.stacked_widget.setCurrentIndex(1)
+
+    def show_applist_section(self):
+        self.ShowApplist()
+        self.stacked_widget.setCurrentIndex(2)
+
     
     def toggle_password_visibility(self):
         if self.password_input.echoMode() == QLineEdit.Password:
@@ -184,8 +241,68 @@ class Dashboard(QWidget):
         else:
             self.password_input.setEchoMode(QLineEdit.Password)
             self.toggle_password_btn.setText("Show")
+
+    def loadScanData(self):
+        try:
+            # Connect to user.db for scans
+            user_conn = sqlite3.connect('users.db')
+            user_cursor = user_conn.cursor()
+            
+            # Get all scan data from user.db
+            user_cursor.execute('''
+                SELECT Scan_ID, User_ID, App_ID, Scan_Timestamp
+                FROM Scans WHERE User_ID = ?
+            ''', (self.u_id,))
+            scan_results = user_cursor.fetchall()
+            
+            # Connect to app_data.db for app details
+            app_conn = sqlite3.connect('app_data.db')
+            app_cursor = app_conn.cursor()
+            
+            # Get all app data
+            app_cursor.execute('''
+                SELECT App_ID, Name, Status
+                FROM App
+            ''')
+            
+            # Convert app data to a dictionary for easier lookup
+            app_dict = {}
+            for app_id, name, status in app_cursor.fetchall():
+                app_dict[app_id] = (name, status)
+            
+            # Prepare the combined data
+            combined_results = []
+            for scan_id, user_id, app_id, timestamp in scan_results:
+                if app_id in app_dict:
+                    app_name, status = app_dict[app_id]
+                    combined_results.append((scan_id, user_id, app_name, status, timestamp))
+                else:
+                    # Handle case where App_ID doesn't have a match
+                    combined_results.append((scan_id, user_id, "Unknown", "Unknown", timestamp))
+            
+            # Set the number of rows in the table
+            self.tableWidget.setRowCount(len(combined_results))
+            
+            # Populate the table
+            for row, (scan_id, user_id, app_name, status, timestamp) in enumerate(combined_results):
+                self.tableWidget.setItem(row, 0, QTableWidgetItem(str(scan_id)))
+                self.tableWidget.setItem(row, 1, QTableWidgetItem(str(user_id)))
+                self.tableWidget.setItem(row, 2, QTableWidgetItem(app_name))
+                self.tableWidget.setItem(row, 3, QTableWidgetItem(status))
+                self.tableWidget.setItem(row, 4, QTableWidgetItem(str(timestamp)))
+            
+            # Resize columns to content
+            self.tableWidget.resizeColumnsToContents()
+            
+            # Close the database connections
+            user_conn.close()
+            app_conn.close()
+        except sqlite3.Error as e:
+            print(f"Database error: {e}")
+        except Exception as e:
+            print(f"Exception in loadScanData: {e}")
     
-    def save_credentials(self):
+    def save_credentials(self, u_id ):
         user_id = self.user_id_input.text().strip()
         password = self.password_input.text()
         
@@ -193,13 +310,13 @@ class Dashboard(QWidget):
             QMessageBox.warning(self, "Input Error", "User ID cannot be empty.")
             return
         
-        if len(password) < 8:
-            QMessageBox.warning(self, "Input Error", "Password must be at least 8 characters long.")
-            return
+        # if len(password) < 8:
+        #     QMessageBox.warning(self, "Input Error", "Password must be at least 8 characters long.")
+        #     return
         
         # If user is logged in and has an ID, use database update
         if self.user_credentials.get("id"):
-            success = self.database.update_user_credentials(
+            success = self.update_user_in_database(
                 self.user_credentials["id"],
                 user_id,
                 password
@@ -218,32 +335,65 @@ class Dashboard(QWidget):
             self.credentials_updated.emit(self.user_credentials)
             QMessageBox.information(self, "Success", "Your credentials have been updated successfully.")
             self.close()
-    
-    def update_credentials(self):
-        QMessageBox.information(self, "Update", "Updating credentials...")
-    
-    def show_history(self):
-        QMessageBox.information(self, "History", "Displaying history...")
-    
-    def refresh_analytics(self):
+
+
+    def update_user_in_database(self, u_id, new_username, new_password):
+        """
+        Update user credentials in the users.db database
+        
+        Parameters:
+        user_id (str): The unique ID of the user to update
+        new_username (str): The new username
+        new_password (str): The new password
+        
+        Returns:
+        bool: True if update succeeded, False otherwise
+        """
         try:
-            # Clear existing table
-            self.analytics_table.setRowCount(0)
+            import sqlite3
             
-            # Placeholder for actual user-specific analytics
-            sample_data = [
-                ["2024-03-01", "Login", "Success", "Web Access"],
-                ["2024-03-02", "Password Change", "Success", "Security Update"],
-                ["2024-03-03", "Failed Login", "Failed", "Incorrect Password"]
-            ]
+            # Connect to the users.db database
+            conn = sqlite3.connect('users.db')
+            cursor = conn.cursor()
             
-            self.analytics_table.setRowCount(len(sample_data))
-            for row, data in enumerate(sample_data):
-                for col, value in enumerate(data):
-                    self.analytics_table.setItem(row, col, QTableWidgetItem(value))
-        except Exception as e:
-            print(f"Error refreshing analytics: {e}")
-    
+            # Check if the new username already exists for a different user
+            cursor.execute("SELECT id FROM users WHERE user_id = ? AND id != ?", (new_username, u_id))
+            if cursor.fetchone():
+                conn.close()
+                return False  # Username already taken
+            
+            # Update the user with the new credentials
+                # Handle updates based on which fields are provided
+            if new_username and new_password:
+                # Both username and password are provided
+                cursor.execute(
+                    "UPDATE users SET username = ?, password = ? WHERE id = ?", 
+                    (new_username, new_password, u_id)
+                )
+            elif new_username:
+                # Only username is provided
+                cursor.execute(
+                    "UPDATE users SET username = ? WHERE id = ?", 
+                    (new_username, u_id)
+                )
+            elif new_password:
+                # Only password is provided
+                cursor.execute(
+                    "UPDATE users SET password = ? WHERE id = ?", 
+                    (new_password, u_id)
+                )
+            
+            # Commit changes and close connection
+            conn.commit()
+            conn.close()
+            
+            # Return True if at least one row was affected
+            return cursor.rowcount > 0
+            
+        except sqlite3.Error as e:
+            print(f"Database error: {e}")
+            return False
+        
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
             self.drag_pos = event.globalPos() - self.frameGeometry().topLeft()
@@ -253,3 +403,60 @@ class Dashboard(QWidget):
         if event.buttons() == Qt.LeftButton:
             self.move(event.globalPos() - self.drag_pos)
             event.accept()
+
+    def ShowApplist(self):
+        try:
+            # Connect to user.db for scans
+            user_conn = sqlite3.connect('users.db')
+            user_cursor = user_conn.cursor()
+            
+            # Get unique App_IDs for this user
+            user_cursor.execute('''
+                SELECT DISTINCT App_ID
+                FROM Scans 
+                WHERE User_ID = ?
+            ''', (self.u_id,))
+            unique_app_ids = [row[0] for row in user_cursor.fetchall()]
+            
+            # Connect to app_data.db for app details
+            app_conn = sqlite3.connect('app_data.db')
+            app_cursor = app_conn.cursor()
+            
+            # Prepare the data for displaying
+            unique_apps = []
+            
+            # Get app information for each unique App_ID
+            for app_id in unique_app_ids:
+                app_cursor.execute('''
+                    SELECT App_ID, Name, Status
+                    FROM App
+                    WHERE App_ID = ?
+                ''', (app_id,))
+                
+                app_data = app_cursor.fetchone()
+                if app_data:
+                    app_id, app_name, status = app_data
+                    unique_apps.append((app_id, app_name, status))
+                else:
+                    # Handle case where App_ID doesn't have a match
+                    unique_apps.append((app_id, "Unknown", "Unknown"))
+            
+            # Set the number of rows in the table
+            self.appTable.setRowCount(len(unique_apps))
+            
+            # Populate the table
+            for row, (app_id, app_name, status) in enumerate(unique_apps):
+                self.appTable.setItem(row, 0, QTableWidgetItem(str(app_id)))
+                self.appTable.setItem(row, 1, QTableWidgetItem(app_name))
+                self.appTable.setItem(row, 2, QTableWidgetItem(status))
+            
+            # Resize columns to content
+            self.appTable.resizeColumnsToContents()
+            
+            # Close the database connections
+            user_conn.close()
+            app_conn.close()
+        except sqlite3.Error as e:
+            print(f"Database error: {e}")
+        except Exception as e:
+            print(f"Exception in loadScanData: {e}")

@@ -5,7 +5,8 @@ import subprocess
 import sqlite3
 import numpy as np
 import joblib, os, shutil, uuid, parsing
-
+import pandas as pd
+import MainWindow
 from PyQt5.QtWidgets import (
     QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox, QComboBox, QTextEdit
 )
@@ -13,7 +14,9 @@ from PyQt5.QtCore import pyqtSignal, Qt
 from PyQt5.QtGui import QFont, QPalette, QLinearGradient, QColor, QBrush
 
 class Scan(QWidget):
-    scan_completed = pyqtSignal(dict)
+    scan_completed = pyqtSignal()
+    scan_result_type1 = pyqtSignal(dict)  # or whatever type your first result is
+    scan_result_type2 = pyqtSignal(str)
     u_id=0
     packages=[]
     def __init__(self, u_id, parent=None):
@@ -51,6 +54,7 @@ class Scan(QWidget):
         self.device_dropdown.setFont(font)
         layout.addWidget(self.device_dropdown)
 
+
         # Refresh button
         refresh_button = QPushButton("Refresh Devices")
         refresh_button.setFont(font)
@@ -79,6 +83,7 @@ class Scan(QWidget):
 
         # perform full scan
         full_scan_button = QPushButton("Full Scan")
+        full_scan_button.setStyleSheet(self.button_style())
         full_scan_button.clicked.connect(self.handle_full_scan)
         layout.addWidget(full_scan_button)
 
@@ -172,9 +177,11 @@ class Scan(QWidget):
     
     def handle_full_scan(self):
         print("hello1")
+        report = f"""<h2>Full Scan Report</h2> """
         for package_name in self.packages:
             try:
-                print("hello2")
+                # print("hello2")
+                
                 print(f"Scanning package: {package_name}")
                 apk_path, packagename,app_version = self.extract_apk(package_name)
                 manifest_path, app_id = self.extract_manifest(apk_path, package_name)
@@ -190,7 +197,23 @@ class Scan(QWidget):
                 self.generateReport(package_name,permissions,intents,status,app_version)
             except Exception as e:
                 print(f"Error scanning {package_name}: {e}")
+                
+            classification_color = "#FF3333" if status == "Malicious" else "#33AA33"
+        
+            report += f"""
+            
+            <p><b>Package Name:</b> {package_name}</p>
+            <p><b>Version:</b> {app_version}</p>
+            <p><b>Classification:</b> <span style="color: {classification_color}; font-weight: bold;">{status}</span></p>
+            <p><b>Total Permissions:</b> {len(permissions)}</p>
+            <p><b>Total Intents:</b> {len(intents)}</p>
+            <p></p><br>
+            """
+            # MainWindow.MainWindow.show_report(report)
         print("Full scan completed.")
+        self.scan_result_type2.emit(report)
+
+
     
 
     def device_selected(self):
@@ -273,7 +296,7 @@ class Scan(QWidget):
                     
                     # Emit the signal with scan results to update the main window
         # if self.parent:
-        self.scan_completed.emit(scan_result)
+        self.scan_result_type1.emit(scan_result)
 
         #     if os.path.exists(local_apk_path):
         #         app_id=Database.store_apk_in_db(local_apk_path, package_name)
@@ -460,7 +483,12 @@ class Scan(QWidget):
             model = joblib.load(f)
 
         # Reshape and predict
-        prediction = model.predict(feature_vector.reshape(1, -1))
+        feature_names = joblib.load('feature_names.joblib')
+
+        feature_vector_df = pd.DataFrame([feature_vector], columns=feature_names)
+        
+        # Predict
+        prediction = model.predict(feature_vector_df)
         prediction_label = 'Malicious' if prediction[0] == 'S' else 'Benign'
 
         return prediction_label
