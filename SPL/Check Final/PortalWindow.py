@@ -66,10 +66,12 @@ class PortalWindow(QWidget):
         # Option Cards
         options = [
             {"title": "Personal User", "desc": "For individual device scanning", "color": "#6BC8B4", "user_type": "personal"},
-            {"title": "Business User", "desc": "For corporate devices (requires organization email)", "color": "#FF6987", "user_type": "business"},
+            {"title": "App Developer", "desc": "For corporate devices (requires organization email)", "color": "#FF6987", "user_type": "business"},
             # {"title": "Security Admin", "desc": "Advanced features for security professionals", "color": "#D4A017", "user_type": "admin"},
             # {"title": "Developer", "desc": "Access to API and development tools", "color": "#8467D7", "user_type": "developer"}
         ]
+
+    
         
         self.option_buttons = []
         

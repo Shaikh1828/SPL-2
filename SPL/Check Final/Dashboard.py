@@ -2,7 +2,7 @@ from PyQt5.QtWidgets import (
     QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QTableWidget, QStackedWidget, QTabWidget,
     QLineEdit, QMessageBox, QGridLayout, QFrame, QTableWidgetItem,QComboBox, QDialogButtonBox, QDialog, QHeaderView
 )
-from PyQt5.QtGui import QFont
+from PyQt5.QtGui import QFont, QPalette, QLinearGradient, QColor, QBrush
 from PyQt5.QtCore import Qt, pyqtSignal
 from Database import Database
 import sqlite3,hashlib
@@ -15,6 +15,7 @@ class Dashboard(QWidget):
         super().__init__(parent)
         self.setWindowTitle("User Dashboard")
         self.resize(1000, 600)
+        self.set_gradient_background()
         self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
         print("User ID passed to Dashboard:", parent.u_id)  # Debugging
         self.u_id = parent.u_id
@@ -24,6 +25,26 @@ class Dashboard(QWidget):
         # self.loadScanData(u_id)
         self.init_ui()
         self.drag_pos = None
+
+    def set_gradient_background(self):
+        palette = QPalette()
+        gradient = QLinearGradient(0, 0, 0, self.height())
+        gradient.setColorAt(0.0, QColor(135, 206, 250))  
+        gradient.setColorAt(1.0, QColor(70, 130, 180))   
+        palette.setBrush(QPalette.Window, QBrush(gradient))
+        self.setPalette(palette)
+
+    def button_style(self):
+        return (
+            "QPushButton {"
+            "background-color: #4682B4;"
+            "color: black;"
+            "border-radius: 10px;"
+            "padding: 10px;"
+            "font-weight: bold;"
+            "}" 
+            "QPushButton:hover { background-color: #5A9BD5; }"
+        )
         
     def init_ui(self):
         # Title Bar
@@ -64,7 +85,9 @@ class Dashboard(QWidget):
             btn.setStyleSheet("""
                 QPushButton {
                     background-color: #6BC8B4;
-                    color: white;
+                    color: black;
+                    font: 16px;
+                    "font-weight: bold;"
                     border: none;
                     padding: 10px;
                     margin: 5px;
@@ -122,9 +145,11 @@ class Dashboard(QWidget):
         button_layout = QHBoxLayout()
         
         save_button = QPushButton("Save Changes")
+        save_button.setStyleSheet(self.button_style())
         save_button.clicked.connect(self.save_credentials)
         
         cancel_button = QPushButton("Cancel")
+        cancel_button.setStyleSheet(self.button_style())
         cancel_button.clicked.connect(self.close)
         
         
@@ -155,7 +180,7 @@ class Dashboard(QWidget):
          # Add table to HBox layout
         #hbox.addWidget(self.tableWidget)
         history_layout.addWidget(self.tableWidget)
-        # history_layout.addWidget(refresh_button)
+        
         history_section.setLayout(history_layout)
 
 
@@ -180,6 +205,7 @@ class Dashboard(QWidget):
          # Feature selection label
         label = QLabel('Select Feature to sort:')
         applist_layout.addWidget(label)
+        label.setStyleSheet(self.button_style())
         
         # Create dropdown (combo box)
         self.feature_combo = QComboBox()
@@ -208,8 +234,10 @@ class Dashboard(QWidget):
         # Whitelist buttons
         whitelist_button_layout = QHBoxLayout()
         add_to_whitelist_btn = QPushButton("Add App")
+        add_to_whitelist_btn.setStyleSheet(self.button_style())
         add_to_whitelist_btn.clicked.connect(self.add_to_whitelist)
         remove_from_whitelist_btn = QPushButton("Remove App")
+        remove_from_whitelist_btn.setStyleSheet(self.button_style())
         remove_from_whitelist_btn.clicked.connect(self.remove_from_whitelist)
         
         whitelist_button_layout.addWidget(add_to_whitelist_btn)
@@ -234,8 +262,10 @@ class Dashboard(QWidget):
         # Blacklist buttons
         blacklist_button_layout = QHBoxLayout()
         add_to_blacklist_btn = QPushButton("Add App")
+        add_to_blacklist_btn.setStyleSheet(self.button_style())
         add_to_blacklist_btn.clicked.connect(self.add_to_blacklist)
         remove_from_blacklist_btn = QPushButton("Remove App")
+        remove_from_blacklist_btn.setStyleSheet(self.button_style())
         remove_from_blacklist_btn.clicked.connect(self.remove_from_blacklist)
         
         blacklist_button_layout.addWidget(add_to_blacklist_btn)

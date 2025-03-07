@@ -97,7 +97,7 @@ class MainWindow(QWidget):
         scan_button = QPushButton("Scan Devices")
         scan_button.setStyleSheet("""
             QPushButton {
-                background-color: rgb(90, 180, 160);
+                background-color: rgb(255, 105, 135);
                 color: black;
                 font: bold 15pt Arial;
                 border-radius: 10px;
@@ -105,8 +105,9 @@ class MainWindow(QWidget):
                 margin-top: 20px;
             }
             QPushButton:hover {
-                background-color: rgb(110, 190, 170);
+                background-color: rgb(235, 85, 115);
             }
+        
         """)
         
         scan_button.clicked.connect(self.open_scan_window)
@@ -121,7 +122,7 @@ class MainWindow(QWidget):
                 font: bold 15pt Arial;
                 border-radius: 10px;
                 padding: 8px;
-                margin-top: 20px;
+                margin-top: 10px;
             }
             QPushButton:hover {
                 background-color: rgb(90, 180, 160);
@@ -149,15 +150,15 @@ class MainWindow(QWidget):
         self.download_button.clicked.connect(self.download_report)
         self.download_button.setStyleSheet("""
             QPushButton {
-                background-color: rgb(255, 105, 135);
+                background-color: #6BC8B4;
                 color: black;
                 font: bold 15pt Arial;
                 border-radius: 10px;
                 padding: 8px;
-                margin-top: 20px;
+                margin-top: 10px;
             }
             QPushButton:hover {
-                background-color: rgb(235, 85, 115);
+                background-color: rgb(90, 180, 160);
             }
         """)
         # Info Panel

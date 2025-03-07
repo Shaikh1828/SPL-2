@@ -29,7 +29,7 @@ class Scan(QWidget):
         super().__init__()
         self.parent = parent
         self.setWindowTitle("Scan Devices")
-        self.resize(700, 500)
+        self.resize( 700, 800)
         self.set_gradient_background()
         self.u_id = u_id
         self.init_ui()
@@ -39,8 +39,8 @@ class Scan(QWidget):
     def set_gradient_background(self):
         palette = QPalette()
         gradient = QLinearGradient(0, 0, 0, self.height())
-        gradient.setColorAt(0.0, QColor(135, 206, 250))  # Sky blue
-        gradient.setColorAt(1.0, QColor(70, 130, 180))   # Steel blue
+        gradient.setColorAt(0.0, QColor(135, 206, 250))  
+        gradient.setColorAt(1.0, QColor(70, 130, 180))   
         palette.setBrush(QPalette.Window, QBrush(gradient))
         self.setPalette(palette)
 
@@ -89,6 +89,7 @@ class Scan(QWidget):
 
         # perform full scan
         full_scan_button = QPushButton("Full Scan")
+        full_scan_button.setFont(font)
         full_scan_button.setStyleSheet(self.button_style())
         full_scan_button.clicked.connect(self.handle_full_scan)
         layout.addWidget(full_scan_button)
@@ -106,7 +107,7 @@ class Scan(QWidget):
         return (
             "QPushButton {"
             "background-color: #4682B4;"
-            "color: white;"
+            "color: black;"
             "border-radius: 10px;"
             "padding: 10px;"
             "font-weight: bold;"
