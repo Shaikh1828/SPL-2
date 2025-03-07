@@ -25,6 +25,7 @@ class Scan(QWidget):
     scan_result_type2 = pyqtSignal(str)
     u_id=0
     packages=[]
+    scan_id=0
     def __init__(self, u_id, parent=None):
         super().__init__()
         self.parent = parent
@@ -164,19 +165,28 @@ class Scan(QWidget):
 
     def handle_extraction(self):
         apk_path,package_name,app_version=self.extract_apk()
+        print("extraction ok")
         existing_app,app_id =self.db.previously_scanned(package_name,app_version)
+        print(app_id)
         if existing_app==False:
-            manifest_path,appid=self.extract_manifest(apk_path,package_name,app_version)
+            print("new")
+            manifest_path,appid,scan_id=self.extract_manifest(apk_path,package_name,app_version)
+            print("manifest ok")
             permissions,intents=self.extract_features(manifest_path)
+            print("permission ok")
             self.update_database(appid,permissions+intents)
+            print("database ok")
             status=self.classify_last_apk(appid)
             print(status)
             if status=='Malicious':
                 self.update_status(appid)
             print("Updated")
         else:
+            print("old")
+            self.scan_id=self.db.log_scan(self.u_id,app_id)
+            print(self.scan_id)
             features,status=self.db.get_permission_intent_status(app_id)
-            mid=len(features)/2
+            mid=len(features)//2
             permissions=features[:mid]
             intents=features[mid:]
         self.generateReport(package_name,permissions,intents,status,app_version)
@@ -191,7 +201,7 @@ class Scan(QWidget):
                 
                 print(f"Scanning package: {package_name}")
                 apk_path, packagename,app_version = self.extract_apk(package_name)
-                manifest_path, app_id = self.extract_manifest(apk_path, package_name,app_version)
+                manifest_path, app_id ,scan_id= self.extract_manifest(apk_path, package_name,app_version)
                 #self.update_version(app_id,app_version)
                 permissions,intents = self.extract_features(manifest_path)
                 self.update_database(app_id, permissions+intents)
@@ -279,7 +289,7 @@ class Scan(QWidget):
             os.makedirs(local_apk_dir, exist_ok=True)
             local_apk_path = os.path.join(local_apk_dir, f"{package_name}-base.apk")
             subprocess.run([ADB_PATH, "-s", selected_device, "pull", base_apk_path, local_apk_path], check=True)
-
+            
             return local_apk_path,package_name,app_version
                         
         except subprocess.CalledProcessError as e:
@@ -287,12 +297,14 @@ class Scan(QWidget):
     
 
     def generateReport(self,package_name,permissions,intents,classification,app_version="2.1.0"):
+        print("generating yes")
         scan_result = {
                         "package_name": package_name,
                         "app_version": app_version,
                         "classification": classification,
                         "permissions": permissions,
-                        "intents": intents
+                        "intents": intents,
+                        "scan_id":self.scan_id
                     }
                     
                     # Display basic info in the scan window
@@ -304,6 +316,7 @@ class Scan(QWidget):
                     
                     # Emit the signal with scan results to update the main window
         # if self.parent:
+        print("generating ok")
         self.scan_result_type1.emit(scan_result)
 
 
@@ -325,7 +338,7 @@ class Scan(QWidget):
     def extract_manifest(self,apk_path, package_name,app_version="2.1.0",output_dir="extracted_apks"):
         if os.path.exists(apk_path):
             app_id=self.db.store_apk_in_db(apk_path, package_name,app_version)
-            self.db.log_scan(self.u_id,app_id)
+            self.scan_id=self.db.log_scan(self.u_id,app_id)
             
             temp_dir = os.path.join(output_dir, uuid.uuid4().hex)
             os.makedirs(temp_dir, exist_ok=True)
@@ -338,7 +351,7 @@ class Scan(QWidget):
                     manifest_path = os.path.join(temp_dir, "AndroidManifest.xml")
                     if os.path.exists(manifest_path):
                         self.delete_all_except(manifest_path)
-                        return manifest_path,app_id
+                        return manifest_path,app_id,self.scan_id
                     else:
                         shutil.rmtree(temp_dir)
                         return "Manifest file not found in APK."
