@@ -103,7 +103,7 @@ class Authentication:
                     return u_id
                 elif login_status == "unverified":
                     # Get the email for this unverified user
-                    user_email = self.db.get_user_email(username)
+                    u_id,user_email = self.db.get_user_email(username)
                     if user_email:
                         verification_response = QMessageBox.question(
                             parent, 
@@ -123,8 +123,11 @@ class Authentication:
                             # Send the email
                             if self.send_email(user_email, otp):
                                 parent.current_email = user_email
-                                parent.show_verification_dialog(user_email)
-                                return "verify"
+                                if parent.show_verification_dialog(user_email):
+                                    u_id,user_email = self.db.get_user_email(username)
+                                    return u_id
+                                else:
+                                    return 0
                             else:
                                 QMessageBox.warning(
                                     parent, 
@@ -164,8 +167,11 @@ class Authentication:
                             "Account created! Please verify your email address to activate your account."
                         )
                         parent.current_email = email
-                        parent.show_verification_dialog(email)
-                        return "verify"
+                        if parent.show_verification_dialog(email):
+                            u_id,user_email = self.db.get_user_email(username)
+                            return u_id
+                        else:
+                            return 0
                     else:
                         QMessageBox.warning(
                             parent,

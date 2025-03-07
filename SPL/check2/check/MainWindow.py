@@ -1,11 +1,12 @@
 from PyQt5.QtWidgets import (
     QApplication, QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QLineEdit, QMessageBox, QTableWidget, QTableWidgetItem, QTextEdit, QFileDialog
 )
-from PyQt5.QtGui import QFont, QPalette, QBrush, QLinearGradient, QColor
+from PyQt5.QtGui import QFont, QPalette, QBrush, QLinearGradient, QColor,QTextDocument
 from PyQt5.QtCore import Qt
+from PyQt5.QtPrintSupport import QPrinter
 from Dashboard import Dashboard
 
-import scan, os
+import scan, os, datetime, sqlite3
 from MLmodel import MLModel  
 
 class MainWindow(QWidget):
@@ -18,6 +19,8 @@ class MainWindow(QWidget):
         self.init_ui()
         self.drag_pos = None  
         self.u_id = u_id
+        self.user_name = self.get_user_name(self.u_id)
+
     
     def init_ui(self):
         palette = QPalette()
@@ -143,6 +146,23 @@ class MainWindow(QWidget):
             }
         """)
 
+        # Download Button 
+        self.download_button = QPushButton("Download Report")
+        self.download_button.clicked.connect(self.download_report)
+        self.download_button.setStyleSheet("""
+            QPushButton {
+                background-color: rgb(255, 105, 135);
+                color: black;
+                font: bold 15pt Arial;
+                border-radius: 10px;
+                padding: 8px;
+                margin-top: 20px;
+            }
+            QPushButton:hover {
+                background-color: rgb(235, 85, 115);
+            }
+        """)
+
         # Info Panel
         self.info_text = QTextEdit()
         self.info_text.setReadOnly(True)
@@ -195,6 +215,7 @@ class MainWindow(QWidget):
         left_layout.addWidget(self.dashboard_button)
 
         left_layout.addWidget(self.train_button)
+        left_layout.addWidget(self.download_button)
 
         right_layout = QVBoxLayout()
         right_layout.addWidget(self.info_text)
@@ -229,17 +250,23 @@ class MainWindow(QWidget):
             scan_instance.scan_completed.connect(self.update_scan_results)
             
             classification_color = "#FF3333" if status == "Malicious" else "#33AA33"
-            result =  f"""
+            result=self.generate_result(os.path.basename(file_path),classification_color,status,len(permissions),len(intents))
+            
+            # self.results_text.setHtml(result)
+            self.show_report(result)
+
+    def generate_result(self,package_name,classification_color,status,permission_length,intents_length):
+        result =  f"""
             <h2>Apk Scan Report</h2>
-            <p><b>Package Name:</b> {os.path.basename(file_path)}</p>
+            <p><b>Package Name:</b> {package_name}</p>
             <p><b>Version:</b> {"2.1.0"}</p>
             <p><b>Classification:</b> <span style="color: {classification_color}; font-weight: bold;">{status}</span></p>
-            <p><b>Total Permissions:</b> {len(permissions)}</p>
-            <p><b>Total Intents:</b> {len(intents)}</p>
+            <p><b>Total Permissions:</b> {permission_length}</p>
+            <p><b>Total Intents:</b> {intents_length}</p>
             """
-            if status == "Malicious":
+        if status == "Malicious":
                 result += """
-                <p style="color: #FF3333; font-weight: bold;">This app appears to be potentially harmful. Consider the following actions:</p>
+                <p style="color: #FF3333; font-weight: bold;font-family: Arial, sans-serif;">This app appears to be potentially harmful. Consider the following actions:</p>
                 <ul>
                     <li>Uninstall this application immediately</li>
                     <li>Check your device for other suspicious apps</li>
@@ -247,9 +274,9 @@ class MainWindow(QWidget):
                     <li>Monitor for unusual behavior or excessive battery/data usage</li>
                 </ul>
                 """
-            else:
+        else:
                 result += """
-                <p style="color: #33AA33;">This app appears to be safe, but always be cautious with app permissions:</p>
+                <p style="color: #33AA33; font-family: Arial, sans-serif;">This app appears to be safe, but always be cautious with app permissions:</p>
                 <ul>
                     <li>Review permissions regularly</li>
                     <li>Consider revoking unnecessary permissions</li>
@@ -257,8 +284,60 @@ class MainWindow(QWidget):
                     <li>Only download apps from trusted sources</li>
                 </ul>
                 """
-            # self.results_text.setHtml(result)
-            self.show_report(result)
+        return result        
+        
+    def download_report(self):
+        options = QFileDialog.Options()
+        file_path, _ = QFileDialog.getSaveFileName(self, "Save Report", "", "PDF Files (*.pdf);;All Files (*)", options=options)
+
+        if file_path:
+            printer = QPrinter()
+            printer.setOutputFormat(QPrinter.PdfFormat)
+            printer.setOutputFileName(file_path)
+            # Get current date
+            current_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            
+            # db = Database.Database()  # Create an instance
+            
+            
+            app_name = "Droid Scanner"
+            
+            # App Logo Path (Make sure it's accessible)
+            logo_path = os.path.abspath("logo.png")  # Ensure 'logo.png' is in the same directory
+
+            # Construct the HTML content
+            html_content = f"""
+            <html>
+            <head>
+                <style>
+                    body {{ font-family: Arial, sans-serif; margin: 20px; font-size:14px:}}
+                    .header {{ text-align: center; margin-bottom: 20px; left }}
+                    .header img {{ width: 100px; height: auto; display: block;  margin: 0 auto; }} /* Adjust logo size */
+                    .details {{ margin-bottom: 20px; }}
+                    .results {{ border-top: 2px solid #000; padding-top: 10px; }}
+                </style>
+            </head>
+            <body>
+                <div class="header">
+                    <img src="{logo_path}" alt="App Logo">
+                    <h2>{app_name} - Security Report</h2>
+                </div>
+                <div class="details">
+                    <p><strong>User ID:</strong> {self.user_name}</p>
+                    <p><strong>Date:</strong> {current_date}</p>
+                </div>
+                <div class="results">
+                    {self.results_text.toHtml()} <!-- Your analysis results -->
+                </div>
+            </body>
+            </html>
+            """
+ 
+            document = QTextDocument()
+            document.setHtml(html_content)
+            document.print_(printer)
+
+            print(f"Report saved at {file_path}")
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -407,3 +486,15 @@ class MainWindow(QWidget):
 
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to Show the report: {e}")
+
+    def get_user_name(self,u_id):
+        try:
+            conn = sqlite3.connect("users.db")
+            cursor = conn.cursor()
+            print("connected")
+            cursor.execute("SELECT username FROM users WHERE id = ?", (u_id,))
+            result = cursor.fetchone()
+            return result[0] if result else "Unknown User"
+        except Exception as e:
+            print(f"Error getting user name: {e}")
+            return None

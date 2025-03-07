@@ -107,7 +107,7 @@ class AuthWindows(QWidget):
             "background-color: #FFF; padding: 5px; border-radius: 5px; margin: 5px;"
         )
         # Connect Enter key press to validate action
-        self.email_input.returnPressed.connect(self.validate_user)
+        # self.email_input.returnPressed.connect(self.validate_user)
         self.email_input.hide()
         
         # Domain info label (for business users)
@@ -181,14 +181,15 @@ class AuthWindows(QWidget):
         if not username or not password:
             QMessageBox.warning(self, "Login Failed", "Username and Password cannot be empty.")
             return
-
+        u_id=0
         u_id= self.auth.validate_user(username, password, email, self.mode, self)
-
+        print(u_id)
         if u_id!=0:
-            QMessageBox.information(self, "Success", "Login successful!")
+            #QMessageBox.information(self, "Success", "Login successful!")
             self.open_main_window(u_id)
-        else:
-            QMessageBox.warning(self, "Login Failed", "Invalid username or password.")
+        #else:
+
+            #QMessageBox.warning(self, "Login Failed", "Invalid username or password.")
 
 
     def show_verification_dialog(self, email):
@@ -202,10 +203,13 @@ class AuthWindows(QWidget):
             if verification_result is True:
                 QMessageBox.information(self, "Success", "Email verified successfully! You can now log in.")
                 self.toggle_mode()  # Switch back to login mode
+                return True
             elif verification_result == "expired":
                 QMessageBox.warning(self, "Expired Code", "Your verification code has expired. Request a new one.")
             else:
                 QMessageBox.warning(self, "Invalid Code", "The entered verification code is incorrect. Try again.")
+        else:
+            return False       
 
 
     def resend_verification_code(self, email):

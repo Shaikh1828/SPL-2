@@ -1,11 +1,11 @@
 from PyQt5.QtWidgets import (
     QWidget, QLabel, QPushButton, QVBoxLayout, QHBoxLayout, QTableWidget, QStackedWidget,
-    QLineEdit, QMessageBox, QGridLayout, QFrame, QTableWidgetItem
+    QLineEdit, QMessageBox, QGridLayout, QFrame, QTableWidgetItem, QComboBox
 )
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt, pyqtSignal
 from Database import Database
-import sqlite3
+import sqlite3,hashlib
 
 
 class Dashboard(QWidget):
@@ -14,16 +14,14 @@ class Dashboard(QWidget):
     def __init__(self, parent=None, user_credentials=None, database=None ):
         super().__init__(parent)
         self.setWindowTitle("User Dashboard")
-        self.resize(1000, 600)
+        self.resize(800, 800)
         self.setWindowFlags(Qt.Window | Qt.FramelessWindowHint)
         print("User ID passed to Dashboard:", parent.u_id)  # Debugging
         self.u_id = parent.u_id
         
-        # Database connection
-        # self.database = database or Database()
         
         # User credentials
-        self.user_credentials = user_credentials or {"id": None, "user_id": "", "password": ""}
+        self.user_credentials = user_credentials 
         # self.loadScanData(u_id)
         self.init_ui()
         self.drag_pos = None
@@ -97,11 +95,11 @@ class Dashboard(QWidget):
         
         form_layout = QGridLayout()
         
-        user_id_label = QLabel("User ID:")
+        user_id_label = QLabel("User Name:")
         user_id_label.setFont(QFont("Arial", 12))
         user_id_label.setStyleSheet("color: #333; font-weight: bold;")
         
-        self.user_id_input = QLineEdit(self.user_credentials.get("user_id", ""))
+        self.user_id_input = QLineEdit(self.user_credentials.get("user_name"))
         
         password_label = QLabel("Add New Password:")
         password_label.setFont(QFont("Arial", 12))
@@ -141,7 +139,7 @@ class Dashboard(QWidget):
         # history Section
         history_section = QWidget()
         history_layout = QVBoxLayout()
-        hbox = QHBoxLayout()
+        # hbox = QHBoxLayout()
         self.tableWidget = QTableWidget()
         # Set up table columns
         self.tableWidget.setColumnCount(5)
@@ -149,13 +147,13 @@ class Dashboard(QWidget):
             "Scan ID", "User ID", "App Name", "Status", "Scan Timestamp"
         ])
          # Add table to HBox layout
-        hbox.addWidget(self.tableWidget)
+        # hbox.addWidget(self.tableWidget)
         history_layout.addWidget(self.tableWidget)
         # history_layout.addWidget(refresh_button)
         history_section.setLayout(history_layout)
 
 
-        ##
+
          # Applist
         applist_section = QWidget()
         applist_layout = QVBoxLayout()
@@ -171,7 +169,17 @@ class Dashboard(QWidget):
         applist_layout.addWidget(self.appTable)
         # history_layout.addWidget(refresh_button)
         applist_section.setLayout(applist_layout)
+        ##
 
+         # Feature selection label
+        label = QLabel('Select Feature:')
+        applist_layout.addWidget(label)
+        
+        # Create dropdown (combo box)
+        self.feature_combo = QComboBox()
+        self.feature_combo.addItem('-- Select a feature --')  # Default placeholder
+        self.feature_combo.currentIndexChanged.connect(self.on_feature_selected)
+        applist_layout.addWidget(self.feature_combo)
 
         
         # Add Sections to Stacked Widget
@@ -190,36 +198,36 @@ class Dashboard(QWidget):
         # Default to Credentials Section
         self.show_credentials_section()
     
-    def get_username_by_user_id(self, u_id):
-        """
-        Retrieve username from the users.db database based on user_id
+    # def get_username_by_user_id(self, u_id):
+    #     """
+    #     Retrieve username from the users.db database based on user_id
         
-        Parameters:
-        user_id (str): The unique ID of the user to look up
+    #     Parameters:
+    #     user_id (str): The unique ID of the user to look up
         
-        Returns:
-        str or None: The username if found, None otherwise
-        """
-        try:
-            import sqlite3
+    #     Returns:
+    #     str or None: The username if found, None otherwise
+    #     """
+    #     try:
+    #         import sqlite3
             
-            # Connect to the users.db database
-            conn = sqlite3.connect('users.db')
-            cursor = conn.cursor()
+    #         # Connect to the users.db database
+    #         conn = sqlite3.connect('users.db')
+    #         cursor = conn.cursor()
             
-            # Query the database for the username
-            cursor.execute("SELECT username FROM users WHERE id = ?", (u_id,))
-            result = cursor.fetchone()
+    #         # Query the database for the username
+    #         cursor.execute("SELECT username FROM users WHERE id = ?", (u_id,))
+    #         result = cursor.fetchone()
             
-            # Close the connection
-            conn.close()
+    #         # Close the connection
+    #         conn.close()
             
-            # Return the username if found, otherwise None
-            return result[0] if result else None
+    #         # Return the username if found, otherwise None
+    #         return result[0] if result else None
             
-        except sqlite3.Error as e:
-            print(f"Database error: {e}")
-            return None
+    #     except sqlite3.Error as e:
+    #         print(f"Database error: {e}")
+    #         return None
 
 
     def show_credentials_section(self):
@@ -231,6 +239,7 @@ class Dashboard(QWidget):
 
     def show_applist_section(self):
         self.ShowApplist()
+        self.load_features()
         self.stacked_widget.setCurrentIndex(2)
 
     
@@ -303,11 +312,12 @@ class Dashboard(QWidget):
             print(f"Exception in loadScanData: {e}")
     
     def save_credentials(self, u_id ):
-        user_id = self.user_id_input.text().strip()
+        user_name = self.user_id_input.text().strip()
         password = self.password_input.text()
         
-        if not user_id:
-            QMessageBox.warning(self, "Input Error", "User ID cannot be empty.")
+
+        if not user_name:
+            QMessageBox.warning(self, "Input Error", "User Name cannot be empty.")
             return
         
         # if len(password) < 8:
@@ -315,29 +325,25 @@ class Dashboard(QWidget):
         #     return
         
         # If user is logged in and has an ID, use database update
-        if self.user_credentials.get("id"):
-            success = self.update_user_in_database(
-                self.user_credentials["id"],
-                user_id,
-                password
-            )
+        if self.user_credentials.get("id") and (user_name!=self.user_credentials["user_name"] or password):
+            success = self.update_user_in_database(self.user_credentials["id"],user_name,password)
             if success:
-                self.user_credentials["user_id"] = user_id
+                self.user_credentials["user_name"] = user_name
                 self.user_credentials["password"] = password
                 self.credentials_updated.emit(self.user_credentials)
                 QMessageBox.information(self, "Success", "Credentials updated successfully.")
-                self.close()
+                #self.close()
             else:
                 QMessageBox.warning(self, "Error", "Username already taken or update failed.")
         else:
             # If not logged in, just update local credentials
-            self.user_credentials = {"user_id": user_id, "password": password}
+            self.user_credentials = {"id":self.u_id,"user_name": user_name, "password": password}
             self.credentials_updated.emit(self.user_credentials)
             QMessageBox.information(self, "Success", "Your credentials have been updated successfully.")
-            self.close()
+            #self.close()
 
 
-    def update_user_in_database(self, u_id, new_username, new_password):
+    def update_user_in_database(self, u_id, new_username=None, new_password=None):
         """
         Update user credentials in the users.db database
         
@@ -357,30 +363,34 @@ class Dashboard(QWidget):
             cursor = conn.cursor()
             
             # Check if the new username already exists for a different user
-            cursor.execute("SELECT id FROM users WHERE user_id = ? AND id != ?", (new_username, u_id))
-            if cursor.fetchone():
-                conn.close()
-                return False  # Username already taken
-            
+            if new_username:
+                cursor.execute("SELECT id FROM users WHERE username = ? AND id != ?", (new_username, u_id))
+                if cursor.fetchone():
+                    conn.close()
+                    return False  # Username already taken
+                
             # Update the user with the new credentials
                 # Handle updates based on which fields are provided
             if new_username and new_password:
+                print("both")
                 # Both username and password are provided
                 cursor.execute(
                     "UPDATE users SET username = ?, password = ? WHERE id = ?", 
-                    (new_username, new_password, u_id)
+                    (new_username, self.hash_password(new_password), u_id)
                 )
             elif new_username:
+                print("only name")
                 # Only username is provided
                 cursor.execute(
                     "UPDATE users SET username = ? WHERE id = ?", 
                     (new_username, u_id)
                 )
             elif new_password:
+                print("only pass")
                 # Only password is provided
                 cursor.execute(
                     "UPDATE users SET password = ? WHERE id = ?", 
-                    (new_password, u_id)
+                    (self.hash_password(new_password), u_id)
                 )
             
             # Commit changes and close connection
@@ -393,6 +403,10 @@ class Dashboard(QWidget):
         except sqlite3.Error as e:
             print(f"Database error: {e}")
             return False
+    
+    def hash_password(self, password):
+        """Hash the password before storing it"""
+        return hashlib.sha256(password.encode()).hexdigest()
         
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -422,32 +436,33 @@ class Dashboard(QWidget):
             app_conn = sqlite3.connect('app_data.db')
             app_cursor = app_conn.cursor()
             
-            # Prepare the data for displaying
-            unique_apps = []
+            # Create a dictionary to store app information by name
+            app_dict = {}
             
             # Get app information for each unique App_ID
-            for app_id in unique_app_ids:
-                app_cursor.execute('''
+            placeholders = ','.join(['?' for _ in unique_app_ids])
+            if unique_app_ids:  # Only execute if there are app IDs
+                app_cursor.execute(f'''
                     SELECT App_ID, Name, Status
                     FROM App
-                    WHERE App_ID = ?
-                ''', (app_id,))
+                    WHERE App_ID IN ({placeholders})
+                ''', unique_app_ids)
                 
-                app_data = app_cursor.fetchone()
-                if app_data:
-                    app_id, app_name, status = app_data
-                    unique_apps.append((app_id, app_name, status))
-                else:
-                    # Handle case where App_ID doesn't have a match
-                    unique_apps.append((app_id, "Unknown", "Unknown"))
+                for app_id, name, status in app_cursor.fetchall():
+                    # Store the app info by name (will overwrite if same name appears multiple times)
+                    app_dict[name] = (app_id, status)
+            
+            # Get the unique app names (sorted)
+            unique_app_names = sorted(app_dict.keys())
             
             # Set the number of rows in the table
-            self.appTable.setRowCount(len(unique_apps))
+            self.appTable.setRowCount(len(unique_app_names))
             
             # Populate the table
-            for row, (app_id, app_name, status) in enumerate(unique_apps):
-                self.appTable.setItem(row, 0, QTableWidgetItem(str(app_id)))
-                self.appTable.setItem(row, 1, QTableWidgetItem(app_name))
+            for row, app_name in enumerate(unique_app_names):
+                app_id, status = app_dict[app_name]
+                self.appTable.setItem(row, 0, QTableWidgetItem(app_name))
+                self.appTable.setItem(row, 1, QTableWidgetItem(str(app_id)))
                 self.appTable.setItem(row, 2, QTableWidgetItem(status))
             
             # Resize columns to content
@@ -460,3 +475,131 @@ class Dashboard(QWidget):
             print(f"Database error: {e}")
         except Exception as e:
             print(f"Exception in loadScanData: {e}")
+
+    def load_features(self):
+        """Load feature names from the database"""
+        try:
+            # Save current selection if any
+            current_selection = self.feature_combo.currentText()
+            if current_selection == '-- Select a feature --':
+                current_selection = None
+                
+            # Clear the combo box but keep the placeholder
+            self.feature_combo.clear()
+            self.feature_combo.addItem('-- Select a feature --')
+            
+            # Connect to SQLite database
+            conn = sqlite3.connect('app_data.db')
+            cursor = conn.cursor()
+            
+            # Query to get distinct feature names
+            cursor.execute('SELECT DISTINCT feature_name FROM Permissions_Intents ORDER BY feature_name')
+            features = cursor.fetchall()
+            
+            # Add features to the combo box
+            for feature in features:
+                self.feature_combo.addItem(feature[0])
+                
+            # Restore previous selection if it exists
+            if current_selection and current_selection != '-- Select a feature --':
+                index = self.feature_combo.findText(current_selection)
+                if index >= 0:
+                    self.feature_combo.setCurrentIndex(index)
+            
+            # Close connection
+            conn.close()
+            
+        except sqlite3.Error as e:
+            QMessageBox.critical(self, 'Database Error', 
+                                f'Failed to load features from database: {str(e)}')
+    
+    def on_feature_selected(self):
+        """Handle the feature selection change"""
+        selected = self.feature_combo.currentText()
+        print(selected)
+        self.ShowApplistbyfeature()
+
+    def ShowApplistbyfeature(self):
+        selected_feature = self.feature_combo.currentText()
+        try:
+            # Connect to user.db for scans
+            user_conn = sqlite3.connect('users.db')
+            user_cursor = user_conn.cursor()
+            
+            # Get unique App_IDs for this user
+            user_cursor.execute('''
+                SELECT DISTINCT App_ID
+                FROM Scans 
+                WHERE User_ID = ?
+            ''', (self.u_id,))
+            unique_app_ids = [row[0] for row in user_cursor.fetchall()]
+            
+            # Connect to app_data.db for app details
+            app_conn = sqlite3.connect('app_data.db')
+            app_cursor = app_conn.cursor()
+            
+            # First, get the Feature_ID for the selected feature
+            app_cursor.execute('''
+                SELECT Feature_ID
+                FROM Permissions_Intents
+                WHERE Feature_Name = ?
+            ''', (selected_feature,))
+            feature_id_result = app_cursor.fetchone()
+            
+            if not feature_id_result:
+                # No such feature found
+                self.appTable.setRowCount(0)
+                app_conn.close()
+                user_conn.close()
+                return
+                
+            feature_id = feature_id_result[0]
+            
+            # Get App_IDs that have this feature
+            placeholders = ','.join(['?' for _ in unique_app_ids])
+            if unique_app_ids:  # Only execute if there are app IDs
+                app_cursor.execute(f'''
+                    SELECT DISTINCT App_ID
+                    FROM App_Features
+                    WHERE App_ID IN ({placeholders}) AND Feature_ID = ?
+                ''', unique_app_ids + [feature_id])
+                
+                filtered_app_ids = [row[0] for row in app_cursor.fetchall()]
+                
+                # Get app information for each filtered App_ID
+                app_dict = {}
+                if filtered_app_ids:
+                    placeholders = ','.join(['?' for _ in filtered_app_ids])
+                    app_cursor.execute(f'''
+                        SELECT App_ID, Name, Status
+                        FROM App
+                        WHERE App_ID IN ({placeholders})
+                    ''', filtered_app_ids)
+                    
+                    for app_id, name, status in app_cursor.fetchall():
+                        # Store the app info by name
+                        app_dict[name] = (app_id, status)
+            
+            # Get the unique app names (sorted)
+            unique_app_names = sorted(app_dict.keys())
+            
+            # Set the number of rows in the table
+            self.appTable.setRowCount(len(unique_app_names))
+            
+            # Populate the table
+            for row, app_name in enumerate(unique_app_names):
+                app_id, status = app_dict[app_name]
+                self.appTable.setItem(row, 0, QTableWidgetItem(app_name))
+                self.appTable.setItem(row, 1, QTableWidgetItem(str(app_id)))
+                self.appTable.setItem(row, 2, QTableWidgetItem(status))
+            
+            # Resize columns to content
+            self.appTable.resizeColumnsToContents()
+            
+            # Close the database connections
+            user_conn.close()
+            app_conn.close()
+        except sqlite3.Error as e:
+            print(f"Database error: {e}")
+        except Exception as e:
+            print(f"Exception in ShowApplist: {e}")
