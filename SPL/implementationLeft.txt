@@ -1,0 +1,10 @@
+Online Server
+Dashboard
+Report
+Analysis Result
+Training ML Model
+-Modification of database accordingly     Doing Ongoing
+Manipulating Database
+Classifying app
+Authentication through mail	Ongoing
+Database formation		Ongoing
