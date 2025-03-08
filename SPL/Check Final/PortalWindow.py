@@ -31,7 +31,7 @@ class PortalWindow(QWidget):
         title_bar_layout.setContentsMargins(10, 5, 10, 5)
         
         title_label = QLabel("Droid Scanner Portal")
-        title_label.setFont(QFont("Arial", 16, QFont.Bold))
+        title_label.setFont(QFont("Calibri", 16, QFont.Bold))
         title_label.setStyleSheet("color: #9BE5FF; padding: 5px;")
 
         minimize_button = QPushButton("-")
@@ -50,12 +50,12 @@ class PortalWindow(QWidget):
 
         # Welcome Message
         welcome_label = QLabel("Welcome to Droid Scanner")
-        welcome_label.setFont(QFont("Arial", 24, QFont.Bold))
+        welcome_label.setFont(QFont("Calibri", 24, QFont.Bold))
         welcome_label.setAlignment(Qt.AlignCenter)
         welcome_label.setStyleSheet("color: white; margin: 20px;")
         
         subtitle_label = QLabel("Select your profile to continue")
-        subtitle_label.setFont(QFont("Arial", 14))
+        subtitle_label.setFont(QFont("Calibri", 14))
         subtitle_label.setAlignment(Qt.AlignCenter)
         subtitle_label.setStyleSheet("color: white; margin-bottom: 30px;")
 
@@ -67,8 +67,7 @@ class PortalWindow(QWidget):
         options = [
             {"title": "Personal User", "desc": "For individual device scanning", "color": "#6BC8B4", "user_type": "personal"},
             {"title": "App Developer", "desc": "For corporate devices (requires organization email)", "color": "#FF6987", "user_type": "business"},
-            # {"title": "Security Admin", "desc": "Advanced features for security professionals", "color": "#D4A017", "user_type": "admin"},
-            # {"title": "Developer", "desc": "Access to API and development tools", "color": "#8467D7", "user_type": "developer"}
+
         ]
 
     
@@ -94,7 +93,7 @@ class PortalWindow(QWidget):
             
             # Title
             title = QLabel(option["title"])
-            title.setFont(QFont("Arial", 14, QFont.Bold))
+            title.setFont(QFont("Calibri", 14, QFont.Bold))
             title.setStyleSheet(f"color: {option['color']};")
             
             # Description
@@ -104,7 +103,7 @@ class PortalWindow(QWidget):
             
             # Button
             btn = QPushButton("Select")
-            btn.setFont(QFont("Arial", 11, QFont.Bold))
+            btn.setFont(QFont("Calibri", 11, QFont.Bold))
             btn.setStyleSheet(f"""
                 QPushButton {{
                     background-color: {option['color']};

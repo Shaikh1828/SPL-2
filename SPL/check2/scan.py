@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QLabel, QPushButton, QMessageBox, QComboBox, QTextEdit
 from PyQt5.QtCore import pyqtSignal
-from Database import Database
+import Database
 import subprocess
 import sqlite3
 import numpy as np
@@ -25,6 +25,7 @@ class Scan(QWidget):
     scan_result_type2 = pyqtSignal(str)
     u_id=0
     packages=[]
+    scan_id=0
     def __init__(self, u_id, parent=None):
         super().__init__()
         self.parent = parent
@@ -33,6 +34,7 @@ class Scan(QWidget):
         self.set_gradient_background()
         self.u_id = u_id
         self.init_ui()
+        self.db=Database.Database()
         
 
     def set_gradient_background(self):
@@ -162,22 +164,31 @@ class Scan(QWidget):
             QMessageBox.critical(self, "Error", "Failed to list installed packages.")
 
     def handle_extraction(self):
-        # print("handling")
         apk_path,package_name,app_version=self.extract_apk()
-        # print("apk extracted")
-        manifest_path,app_id=self.extract_manifest(apk_path,package_name)
-        self.update_version(app_id,app_version)
-        # print("manifest extracted")
-        permissions,intents=self.extract_features(manifest_path)
-        # print("feature extracted")
-        self.update_database(app_id,permissions+intents)
-        # print("database updated")
-        status=self.classify_last_apk()
-        # print("classified app")
-        print(status)
-        if status=='Malicious':
-            self.update_status(app_id)
-        print("Updated")
+        print("extraction ok")
+        existing_app,app_id =self.db.previously_scanned(package_name,app_version)
+        print(app_id)
+        if existing_app==False:
+            print("new")
+            manifest_path,appid,scan_id=self.extract_manifest(apk_path,package_name,app_version)
+            print("manifest ok")
+            permissions,intents=self.extract_features(manifest_path)
+            print("permission ok")
+            self.update_database(appid,permissions+intents)
+            print("database ok")
+            status=self.classify_last_apk(appid)
+            print(status)
+            if status=='Malicious':
+                self.update_status(appid)
+            print("Updated")
+        else:
+            print("old")
+            self.scan_id=self.db.log_scan(self.u_id,app_id)
+            print(self.scan_id)
+            features,status=self.db.get_permission_intent_status(app_id)
+            mid=len(features)//2
+            permissions=features[:mid]
+            intents=features[mid:]
         self.generateReport(package_name,permissions,intents,status,app_version)
         
     
@@ -190,11 +201,11 @@ class Scan(QWidget):
                 
                 print(f"Scanning package: {package_name}")
                 apk_path, packagename,app_version = self.extract_apk(package_name)
-                manifest_path, app_id = self.extract_manifest(apk_path, package_name)
-                self.update_version(app_id,app_version)
+                manifest_path, app_id ,scan_id= self.extract_manifest(apk_path, package_name,app_version)
+                #self.update_version(app_id,app_version)
                 permissions,intents = self.extract_features(manifest_path)
                 self.update_database(app_id, permissions+intents)
-                status = self.classify_last_apk()
+                status = self.classify_last_apk(app_id)
                 
                 if status == 'Malicious':
                     self.update_status(app_id)
@@ -278,7 +289,7 @@ class Scan(QWidget):
             os.makedirs(local_apk_dir, exist_ok=True)
             local_apk_path = os.path.join(local_apk_dir, f"{package_name}-base.apk")
             subprocess.run([ADB_PATH, "-s", selected_device, "pull", base_apk_path, local_apk_path], check=True)
-
+            
             return local_apk_path,package_name,app_version
                         
         except subprocess.CalledProcessError as e:
@@ -286,12 +297,14 @@ class Scan(QWidget):
     
 
     def generateReport(self,package_name,permissions,intents,classification,app_version="2.1.0"):
+        print("generating yes")
         scan_result = {
                         "package_name": package_name,
                         "app_version": app_version,
                         "classification": classification,
                         "permissions": permissions,
-                        "intents": intents
+                        "intents": intents,
+                        "scan_id":self.scan_id
                     }
                     
                     # Display basic info in the scan window
@@ -303,6 +316,7 @@ class Scan(QWidget):
                     
                     # Emit the signal with scan results to update the main window
         # if self.parent:
+        print("generating ok")
         self.scan_result_type1.emit(scan_result)
 
 
@@ -321,10 +335,10 @@ class Scan(QWidget):
         else:
             QMessageBox.warning(self, "Manifest Extraction Failed", str(manifest_path))
 
-    def extract_manifest(self,apk_path, package_name,output_dir="extracted_apks"):
+    def extract_manifest(self,apk_path, package_name,app_version="2.1.0",output_dir="extracted_apks"):
         if os.path.exists(apk_path):
-            app_id=Database.store_apk_in_db(apk_path, package_name)
-            Database.log_scan(self.u_id,app_id)
+            app_id=self.db.store_apk_in_db(apk_path, package_name,app_version)
+            self.scan_id=self.db.log_scan(self.u_id,app_id)
             
             temp_dir = os.path.join(output_dir, uuid.uuid4().hex)
             os.makedirs(temp_dir, exist_ok=True)
@@ -337,7 +351,7 @@ class Scan(QWidget):
                     manifest_path = os.path.join(temp_dir, "AndroidManifest.xml")
                     if os.path.exists(manifest_path):
                         self.delete_all_except(manifest_path)
-                        return manifest_path,app_id
+                        return manifest_path,app_id,self.scan_id
                     else:
                         shutil.rmtree(temp_dir)
                         return "Manifest file not found in APK."
@@ -370,10 +384,6 @@ class Scan(QWidget):
         cursor.execute("SELECT Feature_Name FROM Permissions_Intents")
         all_features = [row[0] for row in cursor.fetchall()]
         
-        # # Insert matched features into app_features table
-        # cursor.execute("INSERT INTO App_Features () VALUES (?)", (package_name,))
-        # app_id = cursor.lastrowid  # Get the last inserted app_id
-            
         for feature in extracted_features:
             if feature in all_features:
                 cursor.execute("INSERT INTO App_Features (App_ID, Feature_ID) SELECT ?, Feature_ID FROM permissions_intents WHERE Feature_Name = ?", (app_id, feature))
@@ -382,18 +392,11 @@ class Scan(QWidget):
         conn.commit()
         conn.close()
 
-    def classify_last_apk(self):
+    def classify_last_apk(self,app_id):
         # Connect to the database
         conn = sqlite3.connect('app_data.db')
         cursor = conn.cursor()
 
-        # Fetch the last inserted app_id from app_features
-        cursor.execute("SELECT App_ID FROM App_Features ORDER BY App_ID DESC LIMIT 1")
-        last_row = cursor.fetchone()
-        if not last_row:
-            conn.close()
-            return "No app data found."
-        app_id = last_row[0]
         print(app_id)
         cursor.execute("SELECT Feature_ID, Feature_Name FROM Permissions_Intents ORDER BY Feature_ID")
         features_list = cursor.fetchall()
@@ -436,13 +439,6 @@ class Scan(QWidget):
         conn.commit()
         conn.close()
     
-    def update_version(self,app_id,app_version):
-        conn = sqlite3.connect('app_data.db')
-        cursor = conn.cursor()
-        cursor.execute("UPDATE App SET Version = ? WHERE App_ID = ?", (app_version, app_id))
-        print("Version Updated Successfully")
-        conn.commit()
-        conn.close()
     
     def get_all_known_features(self):
         """Get all known features (permissions and intents) that the model was trained on.

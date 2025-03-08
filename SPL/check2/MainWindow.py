@@ -8,10 +8,12 @@ from Dashboard import Dashboard
 import sqlite3
 import scan, os,datetime
 from MLmodel import MLModel  
-
+from Report import Report
 class MainWindow(QWidget):
     u_id = 0
     user_name=""
+    result=""
+    pdf_data=""
     def __init__(self, u_id):
         super().__init__()
         self.setWindowTitle("Droid Scanner")
@@ -21,6 +23,7 @@ class MainWindow(QWidget):
         self.drag_pos = None  
         self.u_id = u_id
         self.user_name = self.get_user_name(self.u_id)
+        self.Report=Report()
 
     def init_ui(self):
         palette = QPalette()
@@ -78,21 +81,6 @@ class MainWindow(QWidget):
         self.file_path_label.setAlignment(Qt.AlignCenter)
         self.file_path_label.setStyleSheet("color: white; font-style: italic;")
 
-        # upload_button = QPushButton("Upload")
-        # # upload_button.clicked.connect()
-        # upload_button.setStyleSheet("""
-        #     QPushButton {
-        #         background-color: rgb(255, 105, 135);
-        #         color: black;
-        #         font: bold 15pt Arial;
-        #         border-radius: 10px;
-        #         padding: 8px;
-        #         margin-top: 20px;
-        #     }
-        #     QPushButton:hover {
-        #         background-color: rgb(235, 85, 115);
-        #     }
-        # """)
 
         scan_button = QPushButton("Scan Devices")
         scan_button.setStyleSheet("""
@@ -146,7 +134,7 @@ class MainWindow(QWidget):
         """)
         
         self.download_button = QPushButton("Download Report")
-        self.download_button.clicked.connect(self.download_report)
+        self.download_button.clicked.connect(lambda:self.Report.download_report())
         self.download_button.setStyleSheet("""
             QPushButton {
                 background-color: rgb(255, 105, 135);
@@ -235,10 +223,12 @@ class MainWindow(QWidget):
         if file_path:
             scan_instance=scan.Scan(self.u_id)
             self.file_path_label.setText(file_path)
-            manifest_path,app_id=scan_instance.extract_manifest(file_path,os.path.basename(file_path))
+            
+            manifest_path,app_id,scan_id=scan_instance.extract_manifest(file_path,os.path.basename(file_path))
+
             permissions,intents=scan_instance.extract_features(manifest_path)
             scan_instance.update_database(app_id,permissions+intents)
-            status=scan_instance.classify_last_apk()
+            status=scan_instance.classify_last_apk(app_id)
             print(status)
 
             if status=='Malicious':
@@ -247,89 +237,20 @@ class MainWindow(QWidget):
             scan_instance.scan_completed.connect(self.update_scan_results)
             
             classification_color = "#FF3333" if status == "Malicious" else "#33AA33"
-            result =  f"""
-            <h2>Apk Scan Report</h2>
-            <p><b>Package Name:</b> {os.path.basename(file_path)}</p>
-            <p><b>Version:</b> {"2.1.0"}</p>
-            <p><b>Classification:</b> <span style="color: {classification_color}; font-weight: bold;">{status}</span></p>
-            <p><b>Total Permissions:</b> {len(permissions)}</p>
-            <p><b>Total Intents:</b> {len(intents)}</p>
-            """
-            if status == "Malicious":
-                result += """
-                <p style="color: #FF3333; font-weight: bold;font-family: Arial, sans-serif;">This app appears to be potentially harmful. Consider the following actions:</p>
-                <ul>
-                    <li>Uninstall this application immediately</li>
-                    <li>Check your device for other suspicious apps</li>
-                    <li>Run a full system scan with an antivirus</li>
-                    <li>Monitor for unusual behavior or excessive battery/data usage</li>
-                </ul>
-                """
-            else:
-                result += """
-                <p style="color: #33AA33; font-family: Arial, sans-serif;">This app appears to be safe, but always be cautious with app permissions:</p>
-                <ul>
-                    <li>Review permissions regularly</li>
-                    <li>Consider revoking unnecessary permissions</li>
-                    <li>Keep the app updated to the latest version</li>
-                    <li>Only download apps from trusted sources</li>
-                </ul>
-                """
+            result=self.generate_result(os.path.basename(file_path),classification_color,status,len(permissions),len(intents))
+            self.result=result
+            scan_result = {
+                        "package_name": os.path.basename(file_path),
+                        "app_version": "2.1.0",
+                        "classification": status,
+                        "permissions": permissions,
+                        "intents": intents,
+                        "scan_id":scan_id
+                    }
+            html_content=self.Report.generate_report(scan_result,self.user_name)
+            
             # self.results_text.setHtml(result)
             self.show_report(result)
-
-    def download_report(self):
-        options = QFileDialog.Options()
-        file_path, _ = QFileDialog.getSaveFileName(self, "Save Report", "", "PDF Files (*.pdf);;All Files (*)", options=options)
-
-        if file_path:
-            printer = QPrinter()
-            printer.setOutputFormat(QPrinter.PdfFormat)
-            printer.setOutputFileName(file_path)
-            # Get current date
-            current_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            
-            # db = Database.Database()  # Create an instance
-            
-            
-            app_name = "Droid Scanner"
-            
-            # App Logo Path (Make sure it's accessible)
-            logo_path = os.path.abspath("logo.png")  # Ensure 'logo.png' is in the same directory
-
-            # Construct the HTML content
-            html_content = f"""
-            <html>
-            <head>
-                <style>
-                    body {{ font-family: Arial, sans-serif; margin: 20px; font-size:14px:}}
-                    .header {{ text-align: center; margin-bottom: 20px; left }}
-                    .header img {{ width: 100px; height: auto; display: block;  margin: 0 auto; }} /* Adjust logo size */
-                    .details {{ margin-bottom: 20px; }}
-                    .results {{ border-top: 2px solid #000; padding-top: 10px; }}
-                </style>
-            </head>
-            <body>
-                <div class="header">
-                    <img src="{logo_path}" alt="App Logo">
-                    <h2>{app_name} - Security Report</h2>
-                </div>
-                <div class="details">
-                    <p><strong>User ID:</strong> {self.user_name}</p>
-                    <p><strong>Date:</strong> {current_date}</p>
-                </div>
-                <div class="results">
-                    {self.results_text.toHtml()} <!-- Your analysis results -->
-                </div>
-            </body>
-            </html>
-            """
- 
-            document = QTextDocument()
-            document.setHtml(html_content)
-            document.print_(printer)
-
-            print(f"Report saved at {file_path}")
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -346,91 +267,54 @@ class MainWindow(QWidget):
         self.scan_window.scan_result_type1.connect(self.update_scan_results)
         self.scan_window.scan_result_type2.connect(self.show_report)
         self.scan_window.show()
+    
+
+    def generate_result(self,package_name,classification_color,status,permission_length,intents_length):
+        result =  f"""
+            <h2>Apk Scan Report</h2>
+            <p><b>Package Name:</b> {package_name}</p>
+            <p><b>Version:</b> {"2.1.0"}</p>
+            <p><b>Classification:</b> <span style="color: {classification_color}; font-weight: bold;">{status}</span></p>
+            <p><b>Total Permissions:</b> {permission_length}</p>
+            <p><b>Total Intents:</b> {intents_length}</p>
+            """
+        if status == "Malicious":
+                result += """
+                <p style="color: #FF3333; font-weight: bold;font-family: Arial, sans-serif;">This app appears to be potentially harmful. Consider the following actions:</p>
+                <ul>
+                    <li>Uninstall this application immediately</li>
+                    <li>Check your device for other suspicious apps</li>
+                    <li>Run a full system scan with an antivirus</li>
+                    <li>Monitor for unusual behavior or excessive battery/data usage</li>
+                </ul>
+                """
+        else:
+                result += """
+                <p style="color: #33AA33; font-family: Arial, sans-serif;">This app appears to be safe, but always be cautious with app permissions:</p>
+                <ul>
+                    <li>Review permissions regularly</li>
+                    <li>Consider revoking unnecessary permissions</li>
+                    <li>Keep the app updated to the latest version</li>
+                    <li>Only download apps from trusted sources</li>
+                </ul>
+                """
+        return result        
+
         
-
-
     def update_scan_results(self, scan_result):
-        """Update the main window with scan results"""
+        """Update the main window with scan results."""
         self.info_text.setVisible(False)
         self.results_text.setVisible(True)
-        
-        # Format the report with HTML for better presentation
-        classification_color = "#FF3333" if scan_result["classification"] == "Malicious" else "#33AA33"
-        
-        report = f"""
-        <h2>App Scan Report</h2>
-        <p><b>Package Name:</b> {scan_result["package_name"]}</p>
-        <p><b>Version:</b> {scan_result["app_version"]}</p>
-        <p><b>Classification:</b> <span style="color: {classification_color}; font-weight: bold;">{scan_result["classification"]}</span></p>
-        
-        <h3>Security Analysis</h3>
-        <p><b>Total Permissions:</b> {len(scan_result["permissions"])}</p>
-        <p><b>Total Intents:</b> {len(scan_result["intents"])}</p>
-        
-        """
-        
-        report += """
-        <h3>All Permissions</h3>
-        <ul style="color: #555555;">
-        """
-        for perm in scan_result["permissions"]:
-            report += f"<li>{perm}</li>"
-        report += "</ul>"
-        
-        # Add security recommendations based on classification
-        report += """
-        <h3>Security Recommendations</h3>
-        """
-        
-        if scan_result["classification"] == "Malicious":
-            report += """
-            <p style="color: #FF3333; font-weight: bold;">This app appears to be potentially harmful. Consider the following actions:</p>
-            <ul>
-                <li>Uninstall this application immediately</li>
-                <li>Check your device for other suspicious apps</li>
-                <li>Run a full system scan with an antivirus</li>
-                <li>Monitor for unusual behavior or excessive battery/data usage</li>
-            </ul>
-            """
-        else:
-            report += """
-            <p style="color: #33AA33;">This app appears to be safe, but always be cautious with app permissions:</p>
-            <ul>
-                <li>Review permissions regularly</li>
-                <li>Consider revoking unnecessary permissions</li>
-                <li>Keep the app updated to the latest version</li>
-                <li>Only download apps from trusted sources</li>
-            </ul>
-            """
-            
+        # Generate the HTML content using the helper function
+        report_content = self.Report.generate_report_content(scan_result)
+        # self.result=report
         # Set the formatted report to the results text area
-        self.results_text.setHtml(report)
-        self.show_report(report)
+        self.results_text.setHtml(report_content)
+        self.pdf_data =self.Report.generate_report(scan_result,self.user_name)
+        print("report saved")
+        self.show_report(report_content)
 
-    def get_permission_description(self, permission):
-        """Return a human-readable description of common Android permissions"""
-        descriptions = {
-            "android.permission.READ_CONTACTS": "Can read your contacts",
-            "android.permission.WRITE_CONTACTS": "Can modify your contacts",
-            "android.permission.ACCESS_FINE_LOCATION": "Can track your precise location",
-            "android.permission.READ_CALL_LOG": "Can read your call history",
-            "android.permission.READ_SMS": "Can read your text messages",
-            "android.permission.SEND_SMS": "Can send text messages (potentially at cost)",
-            "android.permission.RECORD_AUDIO": "Can record audio using the microphone",
-            "android.permission.CAMERA": "Can take pictures and videos",
-            "android.permission.READ_PHONE_STATE": "Can read phone status and identity",
-        }
-        return descriptions.get(permission, "May impact your privacy or security")
-
-    def get_intent_description(self, intent):
-        """Return a human-readable description of common Android intents"""
-        descriptions = {
-            "android.intent.action.BOOT_COMPLETED": "App starts automatically when device boots",
-            "android.intent.action.NEW_OUTGOING_CALL": "App can monitor outgoing calls",
-            "android.intent.action.SMS_RECEIVED": "App can monitor incoming text messages",
-        }
-        return descriptions.get(intent, "May impact your privacy or security")
-    
+          
     # Add these as new methods to your MainWindow class
     def open_dashboard(self):
         self.dashboard = Dashboard(self, self.get_user_credentials(),self.u_id)
@@ -474,9 +358,6 @@ class MainWindow(QWidget):
             self.results_text.setText(report)
             self.results_text.setVisible(True)
 
-            # Display the results in the text box
-           
-
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Failed to Show the report: {e}")
 
@@ -491,3 +372,27 @@ class MainWindow(QWidget):
         except Exception as e:
             print(f"Error getting user name: {e}")
             return None
+    
+    def get_permission_description(self, permission):
+        """Return a human-readable description of common Android permissions"""
+        descriptions = {
+            "android.permission.READ_CONTACTS": "Can read your contacts",
+            "android.permission.WRITE_CONTACTS": "Can modify your contacts",
+            "android.permission.ACCESS_FINE_LOCATION": "Can track your precise location",
+            "android.permission.READ_CALL_LOG": "Can read your call history",
+            "android.permission.READ_SMS": "Can read your text messages",
+            "android.permission.SEND_SMS": "Can send text messages (potentially at cost)",
+            "android.permission.RECORD_AUDIO": "Can record audio using the microphone",
+            "android.permission.CAMERA": "Can take pictures and videos",
+            "android.permission.READ_PHONE_STATE": "Can read phone status and identity",
+        }
+        return descriptions.get(permission, "May impact your privacy or security")
+
+    def get_intent_description(self, intent):
+        """Return a human-readable description of common Android intents"""
+        descriptions = {
+            "android.intent.action.BOOT_COMPLETED": "App starts automatically when device boots",
+            "android.intent.action.NEW_OUTGOING_CALL": "App can monitor outgoing calls",
+            "android.intent.action.SMS_RECEIVED": "App can monitor incoming text messages",
+        }
+        return descriptions.get(intent, "May impact your privacy or security")

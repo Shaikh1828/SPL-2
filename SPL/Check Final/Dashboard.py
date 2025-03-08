@@ -47,12 +47,13 @@ class Dashboard(QWidget):
         )
         
     def init_ui(self):
+        font = QFont("Calibri", 13, QFont.Bold)
         # Title Bar
         title_bar = QWidget()
         title_bar.setStyleSheet("background-color: rgb(50, 50, 50); color: white;")
         title_bar_layout = QHBoxLayout()
         title_label = QLabel("User Dashboard")
-        title_label.setFont(QFont("Arial", 16, QFont.Bold))
+        title_label.setFont(QFont(font))
         title_label.setStyleSheet("color: #9BE5FF; padding: 5px;")
 
         minimize_button = QPushButton("-")
@@ -74,13 +75,14 @@ class Dashboard(QWidget):
         section_buttons = [
             ("Profile", self.show_credentials_section),
             ("History", self.show_history_section),
-            ("AppList", self.show_applist_section),
+            ("Search", self.show_applist_section),
             ("App Lists", self.show_app_lists_section)  # Added new section button
         ]
         
         self.section_button_group = []
         for label, method in section_buttons:
             btn = QPushButton(label)
+            btn.setFont(QFont(font))
             btn.clicked.connect(method)
             btn.setStyleSheet("""
                 QPushButton {
@@ -91,7 +93,7 @@ class Dashboard(QWidget):
                     border: none;
                     padding: 10px;
                     margin: 5px;
-                    border-radius: 5px;
+                    border-radius: 10px;
                 }
                 QPushButton:hover {
                     background-color: rgb(90, 180, 160);
@@ -119,16 +121,18 @@ class Dashboard(QWidget):
         form_layout = QGridLayout()
         
         user_id_label = QLabel("User Name:")
-        user_id_label.setFont(QFont("Arial", 12))
-        user_id_label.setStyleSheet("color: #333; font-weight: bold;")
-        
+        user_id_label.setFont(QFont("Calibri", 10))
+        user_id_label.setStyleSheet("color: #333; font:12; font-weight: bold;")
+        user_id_label.setFont(QFont(font))
         self.user_id_input = QLineEdit(self.user_credentials.get("user_name"))
+        self.user_id_input.setFont(QFont(font))
         
         password_label = QLabel("Add New Password:")
-        password_label.setFont(QFont("Arial", 12))
-        password_label.setStyleSheet("color: #333; font-weight: bold;")
+        password_label.setFont(QFont("Calibri", 10))
+        password_label.setStyleSheet("color: #333; font:12; font-weight: bold;")
         
         self.password_input = QLineEdit(self.user_credentials.get("password"))
+        self.password_input.setFont(QFont(font))
         self.password_input.setEchoMode(QLineEdit.Password)
         
         self.toggle_password_btn = QPushButton("Show")
@@ -146,10 +150,14 @@ class Dashboard(QWidget):
         
         save_button = QPushButton("Save Changes")
         save_button.setStyleSheet(self.button_style())
+        save_button.setStyleSheet("background-color: #6BC8B4; color: white;")
+        save_button.setFont(QFont(font))
         save_button.clicked.connect(self.save_credentials)
         
         cancel_button = QPushButton("Cancel")
         cancel_button.setStyleSheet(self.button_style())
+        cancel_button.setStyleSheet("background-color: #6BC8B4; color: white;")
+        cancel_button.setFont(QFont(font))
         cancel_button.clicked.connect(self.close)
         
         
@@ -171,13 +179,7 @@ class Dashboard(QWidget):
         self.tableWidget.setHorizontalHeaderLabels([
             "Scan ID", "User ID", "App Name", "Status", "Scan Timestamp"
         ])
-        self.tableWidget.horizontalHeader().setSectionResizeMode(QHeaderView.Fixed)
-        self.tableWidget.setColumnWidth(0, 100)  # Scan ID column
-        self.tableWidget.setColumnWidth(1, 80)   # User ID column
-        self.tableWidget.setColumnWidth(2, 550)  # App Name column
-        self.tableWidget.setColumnWidth(3, 100)  # Status column
-        self.tableWidget.setColumnWidth(4, 550)  # Scan Timestamp column
-         # Add table to HBox layout
+        # self.tableWidget.resizeColumnToContents()
         #hbox.addWidget(self.tableWidget)
         history_layout.addWidget(self.tableWidget)
         
@@ -204,11 +206,13 @@ class Dashboard(QWidget):
 
          # Feature selection label
         label = QLabel('Select Feature to sort:')
+        label.setFont(QFont(font))
         applist_layout.addWidget(label)
         label.setStyleSheet(self.button_style())
         
         # Create dropdown (combo box)
         self.feature_combo = QComboBox()
+        self.feature_combo.setFont(QFont("Calibri", 10))
         self.feature_combo.addItem('-- Select a feature --')  # Default placeholder
         self.feature_combo.currentIndexChanged.connect(self.on_feature_selected)
         applist_layout.addWidget(self.feature_combo)
@@ -222,6 +226,22 @@ class Dashboard(QWidget):
         
         # Whitelist tab
         whitelist_tab = QWidget()
+        # whitelist_tab.setStyleSheet("""
+            
+        #     QTabWidget::pane { /* The tab widget frame */
+        #     border: 2px solid #5A5A5A;
+        #     background: white;
+        #     border-radius: 5px;
+        #     }
+        #     QTabBar::tab:selected {
+        #         background: #4A90E2;
+        #         color: white;
+        #         font-weight: bold;
+        #     }
+        #     QTabBar::tab:hover {
+        #     background: #72B2FF;
+        #     }
+        # """)
         whitelist_layout = QVBoxLayout()
         
         # Whitelist table
@@ -235,6 +255,7 @@ class Dashboard(QWidget):
         whitelist_button_layout = QHBoxLayout()
         add_to_whitelist_btn = QPushButton("Add App")
         add_to_whitelist_btn.setStyleSheet(self.button_style())
+        # self.whitelist_table.setFont(QFont(font))
         add_to_whitelist_btn.clicked.connect(self.add_to_whitelist)
         remove_from_whitelist_btn = QPushButton("Remove App")
         remove_from_whitelist_btn.setStyleSheet(self.button_style())
@@ -243,17 +264,19 @@ class Dashboard(QWidget):
         whitelist_button_layout.addWidget(add_to_whitelist_btn)
         whitelist_button_layout.addWidget(remove_from_whitelist_btn)
         
-        whitelist_layout.addWidget(QLabel("Whitelist Apps"))
+        whitelist_layout.addWidget(QLabel("Whitelist Apps").setFont(QFont("Calibri", 10)))
         whitelist_layout.addWidget(self.whitelist_table)
         whitelist_layout.addLayout(whitelist_button_layout)
         whitelist_tab.setLayout(whitelist_layout)
         
         # Blacklist tab
         blacklist_tab = QWidget()
+        # blacklist_tab.setStyleSheet(self.button_style())
         blacklist_layout = QVBoxLayout()
         
         # Blacklist table
         self.blacklist_table = QTableWidget()
+        # self.blacklist_table.setFont(QFont(font))
         self.blacklist_table.setColumnCount(2)
         self.blacklist_table.setHorizontalHeaderLabels(["App ID", "App Name"])
         self.blacklist_table.resizeColumnsToContents()
@@ -271,7 +294,7 @@ class Dashboard(QWidget):
         blacklist_button_layout.addWidget(add_to_blacklist_btn)
         blacklist_button_layout.addWidget(remove_from_blacklist_btn)
         
-        blacklist_layout.addWidget(QLabel("Blacklist Apps"))
+        blacklist_layout.addWidget(QLabel("Blacklist Apps").setFont(QFont("Calibri", 10)))
         blacklist_layout.addWidget(self.blacklist_table)
         blacklist_layout.addLayout(blacklist_button_layout)
         blacklist_tab.setLayout(blacklist_layout)

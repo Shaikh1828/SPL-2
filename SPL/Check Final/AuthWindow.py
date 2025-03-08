@@ -78,7 +78,7 @@ class AuthWindows(QWidget):
             
         self.title_label = QLabel(title_prefix)
         self.title_label.setAlignment(Qt.AlignCenter)
-        self.title_label.setFont(QFont("Arial", 16, QFont.Bold))
+        self.title_label.setFont(QFont("Calibri", 16, QFont.Bold))
         self.title_label.setStyleSheet("color: #1E90FF;")
 
         # Username Input

@@ -46,7 +46,14 @@ class Database:
                 FOREIGN KEY (User_ID) REFERENCES users(id)
                 )
             """)
-
+            cursor.execute("""
+            CREATE TABLE IF NOT EXISTS Report (
+                Report_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                Scan_ID INTEGER NOT NULL,
+                Report_File BLOB,
+                FOREIGN KEY (Scan_ID) REFERENCES Scan(Scan_ID)
+                    )        
+            """)
             conn.commit()
             conn.close()
             print("User database initialized successfully.")
@@ -345,26 +352,25 @@ class Database:
             INSERT INTO Scans(User_ID, App_ID)
             VALUES (?, ?)
         """, (user_id, app_id))
-
+        scan_id=cursor_scan.lastrowid
         conn_scan.commit()
         conn_scan.close()
+        return scan_id
 
-    def get_permission_intent_status(app_id):
+    def get_permission_intent_status(self,app_id):
+
         conn = sqlite3.connect("app_data.db")
         cursor = conn.cursor()
-                
+
         query = """SELECT pi.Feature_Name 
                FROM App_Features af
                JOIN Permissions_Intents pi ON af.Feature_ID = pi.Feature_ID
-               WHERE af.App_ID = ?;"""
-    
+               WHERE af.App_ID = ?;"""    
         cursor.execute(query, (app_id,))
         features = [row[0] for row in cursor.fetchall()]
         query = "SELECT Status FROM App WHERE App_ID = ?;"
         cursor.execute(query, (app_id,))
         status = cursor.fetchone()
           # Extract feature names
-        cursor.commit()
         cursor.close()
-
-        return features,status
+        return features,status[0]
