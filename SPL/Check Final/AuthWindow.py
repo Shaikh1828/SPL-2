@@ -188,7 +188,7 @@ class AuthWindows(QWidget):
             return
         u_id=0
         u_id= self.auth.validate_user(username, password, email, self.mode, self)
-        print(u_id)
+        # print(u_id)
         if u_id!=0:
             #QMessageBox.information(self, "Success", "Login successful!")
             self.open_main_window(u_id)

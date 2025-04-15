@@ -56,7 +56,7 @@ class Authentication:
             "exp": datetime.utcnow() + timedelta(minutes=5)
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
-        # In newer versions of PyJWT, encode returns bytes, so convert to string if needed
+        
         if isinstance(token, bytes):
             token = token.decode('utf-8')
         return token

@@ -170,13 +170,13 @@ class Scan(QWidget):
         existing_app,app_id =self.db.previously_scanned(package_name,app_version)
         print(app_id)
         if existing_app==False:
-            print("new")
+            # print("new")
             manifest_path,appid,scan_id=self.extract_manifest(apk_path,package_name,app_version)
-            print("manifest ok")
+            # print("manifest ok")
             permissions,intents=self.extract_features(manifest_path)
-            print("permission ok")
+            # print("permission ok")
             self.update_database(appid,permissions+intents)
-            print("database ok")
+            # print("database ok")
             status=self.classify_last_apk(appid)
             print(status)
             if status=='Malicious':
@@ -201,7 +201,7 @@ class Scan(QWidget):
                 
                 print(f"Scanning package: {package_name}")
                 apk_path, packagename,app_version = self.extract_apk(package_name)
-                manifest_path, app_id = self.extract_manifest(apk_path, package_name,app_version)
+                manifest_path, app_id ,scan_id= self.extract_manifest(apk_path, package_name,app_version)
                 #self.update_version(app_id,app_version)
                 permissions,intents = self.extract_features(manifest_path)
                 self.update_database(app_id, permissions+intents)
@@ -225,12 +225,11 @@ class Scan(QWidget):
             <p><b>Classification:</b> <span style="color: {classification_color}; font-weight: bold;">{status}</span></p>
             <p><b>Total Permissions:</b> {len(permissions)}</p>
             <p><b>Total Intents:</b> {len(intents)}</p>
-            
+            <p><b>   ---</p>
             """
         print("Full scan completed.")
         # MainWindow.MainWindow.show_report(report)
         self.scan_result_type2.emit(report)
-
 
     
 
@@ -297,12 +296,14 @@ class Scan(QWidget):
     
 
     def generateReport(self,package_name,permissions,intents,classification,app_version="2.1.0"):
+        print("generating yes")
         scan_result = {
                         "package_name": package_name,
                         "app_version": app_version,
                         "classification": classification,
                         "permissions": permissions,
-                        "intents": intents
+                        "intents": intents,
+                        "scan_id":self.scan_id
                     }
                     
                     # Display basic info in the scan window
@@ -314,6 +315,7 @@ class Scan(QWidget):
                     
                     # Emit the signal with scan results to update the main window
         # if self.parent:
+        print("generating ok")
         self.scan_result_type1.emit(scan_result)
 
 
@@ -436,34 +438,3 @@ class Scan(QWidget):
         conn.close()
     
     
-    def get_all_known_features(self):
-        """Get all known features (permissions and intents) that the model was trained on.
-        This is a placeholder - you should replace it with your actual features."""
-        # This should return the exact set of features your model was trained on
-        # For demonstration, we'll use a simplified list
-        try:
-            # Check if we can load features from a database
-            conn = sqlite3.connect("app_data.db")
-            cursor = conn.cursor()
-            cursor.execute("SELECT Feature_Name FROM Permissions_Intents")
-            features = [row[0] for row in cursor.fetchall()]
-            conn.close()
-            if features:
-                return features
-        except Exception as e:
-            print(f"Error loading features from database: {e}")
-            
-        # Fallback to a simplified list
-        return [
-            "android.permission.INTERNET",
-            "android.permission.ACCESS_NETWORK_STATE",
-            "android.permission.READ_EXTERNAL_STORAGE",
-            "android.permission.WRITE_EXTERNAL_STORAGE",
-            "android.permission.READ_CONTACTS",
-            "android.permission.CAMERA",
-            "android.permission.ACCESS_FINE_LOCATION",
-            "android.permission.READ_PHONE_STATE",
-            "android.intent.action.MAIN",
-            "android.intent.category.LAUNCHER",
-            "android.intent.action.BOOT_COMPLETED"
-        ]

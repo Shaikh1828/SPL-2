@@ -292,57 +292,7 @@ class Database:
             print(f"Error getting user type: {e}")
             return "personal"
 
-    
 
-    def update_user_credentials(self, user_id, new_username, new_password):
-        """Update user's username and password in the database"""
-        try:
-            # Check if new_username is already taken by another user
-            self.cursor.execute("SELECT id FROM users WHERE username = ? AND id != ?", (new_username, user_id))
-            if self.cursor.fetchone():
-                print("Username already exists!")
-                return False
-
-            hashed_password = self.hash_password(new_password)
-            self.cursor.execute(
-                "UPDATE users SET username = ?, password = ? WHERE id = ?",
-                (new_username, hashed_password, user_id)
-            )
-            self.connection.commit()
-            print("User credentials updated successfully.")
-            return True
-        except Exception as e:
-            print(f"Error updating user credentials: {e}")
-            return False
-        
-    def save_credentials(self):
-        new_username = self.user_id_input.text().strip()
-        new_password = self.password_input.text()
-        
-        # Basic validation
-        if not new_username:
-            QMessageBox.warning(self, "Input Error", "User ID cannot be empty.")
-            return
-            
-        
-        # Update credentials in the database
-        if self.database:
-            success = self.database.update_user_credentials(
-                self.user_credentials["id"],  # Use the user's database ID
-                new_username,
-                new_password
-            )
-            if success:
-                # Update local credentials and notify parent
-                self.user_credentials["user_id"] = new_username
-                self.user_credentials["password"] = new_password
-                self.credentials_updated.emit(self.user_credentials)
-                QMessageBox.information(self, "Success", "Credentials updated successfully.")
-                self.close()
-            else:
-                QMessageBox.warning(self, "Error", "Username already taken.")
-        else:
-            QMessageBox.warning(self, "Error", "Database connection not available.")
 
     def log_scan(self,user_id, app_id):
         conn_scan = sqlite3.connect("users.db")

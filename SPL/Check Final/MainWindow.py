@@ -229,7 +229,7 @@ class MainWindow(QWidget):
             permissions,intents=scan_instance.extract_features(manifest_path)
             scan_instance.update_database(app_id,permissions+intents)
             status=scan_instance.classify_last_apk(app_id)
-            print(status)
+            # print(status)
 
             if status=='Malicious':
                 scan_instance.update_status(app_id)
@@ -283,58 +283,6 @@ class MainWindow(QWidget):
                 """
         return result        
         
-    # def download_report(self):
-    #     options = QFileDialog.Options()
-    #     file_path, _ = QFileDialog.getSaveFileName(self, "Save Report", "", "PDF Files (*.pdf);;All Files (*)", options=options)
-
-    #     if file_path:
-    #         printer = QPrinter()
-    #         printer.setOutputFormat(QPrinter.PdfFormat)
-    #         printer.setOutputFileName(file_path)
-    #         # Get current date
-    #         current_date = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            
-    #         # db = Database.Database()  # Create an instance
-            
-            
-    #         app_name = "Droid Scanner"
-            
-    #         # App Logo Path (Make sure it's accessible)
-    #         logo_path = os.path.abspath("logo.png")  # Ensure 'logo.png' is in the same directory
-
-    #         # Construct the HTML content
-    #         html_content = f"""
-    #         <html>
-    #         <head>
-    #             <style>
-    #                 body {{ font-family: Calibri, sans-serif; margin: 20px; font-size:14px:}}
-    #                 .header {{ text-align: center; margin-bottom: 20px; left }}
-    #                 .header img {{ width: 100px; height: auto; display: block;  margin: 0 auto; }} /* Adjust logo size */
-    #                 .details {{ margin-bottom: 20px; }}
-    #                 .results {{ border-top: 2px solid #000; padding-top: 10px; }}
-    #             </style>
-    #         </head>
-    #         <body>
-    #             <div class="header">
-    #                 <img src="{logo_path}" alt="App Logo">
-    #                 <h2>{app_name} - Security Report</h2>
-    #             </div>
-    #             <div class="details">
-    #                 <p><strong>User ID:</strong> {self.user_name}</p>
-    #                 <p><strong>Date:</strong> {current_date}</p>
-    #             </div>
-    #             <div class="results">
-    #                 {self.results_text.toHtml()} <!-- Your analysis results -->
-    #             </div>
-    #         </body>
-    #         </html>
-    #         """
- 
-    #         document = QTextDocument()
-    #         document.setHtml(html_content)
-    #         document.print_(printer)
-
-    #         print(f"Report saved at {file_path}")
 
     def mousePressEvent(self, event):
         if event.button() == Qt.LeftButton:
@@ -364,7 +312,7 @@ class MainWindow(QWidget):
         # Set the formatted report to the results text area
         self.results_text.setHtml(report_content)
         self.pdf_data =self.Report.generate_report(scan_result,self.user_name)
-        print("report saved")
+        # print("report saved")
         self.show_report(report_content)
 
     # Add these as new methods to your MainWindow class
@@ -405,7 +353,7 @@ class MainWindow(QWidget):
 
     def show_report(self, report):
         try:
-            print(report)
+            # print(report)
             self.info_text.setVisible(False)
             self.results_text.setText(report)
             self.results_text.setVisible(True)
@@ -417,7 +365,7 @@ class MainWindow(QWidget):
         try:
             conn = sqlite3.connect("users.db")
             cursor = conn.cursor()
-            print("connected")
+            # print("connected")
             cursor.execute("SELECT username FROM users WHERE id = ?", (u_id,))
             result = cursor.fetchone()
             return result[0] if result else "Unknown User"
@@ -425,28 +373,3 @@ class MainWindow(QWidget):
             print(f"Error getting user name: {e}")
             return None
         
-
-    def get_permission_description(self, permission):
-        """Return a human-readable description of common Android permissions"""
-        descriptions = {
-            "android.permission.READ_CONTACTS": "Can read your contacts",
-            "android.permission.WRITE_CONTACTS": "Can modify your contacts",
-            "android.permission.ACCESS_FINE_LOCATION": "Can track your precise location",
-            "android.permission.READ_CALL_LOG": "Can read your call history",
-            "android.permission.READ_SMS": "Can read your text messages",
-            "android.permission.SEND_SMS": "Can send text messages (potentially at cost)",
-            "android.permission.RECORD_AUDIO": "Can record audio using the microphone",
-            "android.permission.CAMERA": "Can take pictures and videos",
-            "android.permission.READ_PHONE_STATE": "Can read phone status and identity",
-        }
-        return descriptions.get(permission, "May impact your privacy or security")
-
-    def get_intent_description(self, intent):
-        """Return a human-readable description of common Android intents"""
-        descriptions = {
-            "android.intent.action.BOOT_COMPLETED": "App starts automatically when device boots",
-            "android.intent.action.NEW_OUTGOING_CALL": "App can monitor outgoing calls",
-            "android.intent.action.SMS_RECEIVED": "App can monitor incoming text messages",
-        }
-        return descriptions.get(intent, "May impact your privacy or security")
-    
